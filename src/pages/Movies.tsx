@@ -26,7 +26,7 @@ export default function Movies() {
   console.log('Movies component rendered');
   console.log('Filtered movies:', filteredMovies);
   console.log('Selected genre:', selectedGenre);
-  console.log('Card elements will be rendered with proper visibility');
+  console.log('Movie cards should now be visible');
 
   return (
     <div className="min-h-screen py-12">
@@ -59,14 +59,13 @@ export default function Movies() {
         {/* Movies Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredMovies.map((movie, index) => {
-            console.log(`Rendering movie card ${index + 1}:`, movie.title);
+            console.log(`Rendering visible movie card ${index + 1}:`, movie.title);
             return (
               <div 
                 key={movie.id} 
-                className="animate-on-scroll opacity-100"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="opacity-100 visible"
               >
-                <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full opacity-100 visible">
+                <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
                   <Link to={`/movie/${movie.id}`} className="block">
                     <div className="aspect-[2/3] overflow-hidden bg-muted">
                       <img
