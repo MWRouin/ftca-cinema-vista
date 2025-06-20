@@ -26,6 +26,7 @@ export default function Movies() {
   console.log('Movies component rendered');
   console.log('Filtered movies:', filteredMovies);
   console.log('Selected genre:', selectedGenre);
+  console.log('Card elements will be rendered with proper visibility');
 
   return (
     <div className="min-h-screen py-12">
@@ -57,38 +58,43 @@ export default function Movies() {
 
         {/* Movies Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {filteredMovies.map((movie, index) => (
-            <div 
-              key={movie.id} 
-              className="animate-on-scroll"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <Card className="card-cinema hover-lift group overflow-hidden h-full">
-                <Link to={`/movie/${movie.id}`} className="block">
-                  <div className="aspect-[2/3] overflow-hidden">
-                    <img
-                      src={movie.image}
-                      alt={movie.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                  </div>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors">
-                      {movie.title}
-                    </CardTitle>
-                    <CardDescription className="text-sm text-primary/80">
-                      {movie.genre} • {movie.year}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="text-sm text-muted-foreground">
-                      Directed by {movie.director}
+          {filteredMovies.map((movie, index) => {
+            console.log(`Rendering movie card ${index + 1}:`, movie.title);
+            return (
+              <div 
+                key={movie.id} 
+                className="animate-on-scroll opacity-100"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full opacity-100 visible">
+                  <Link to={`/movie/${movie.id}`} className="block">
+                    <div className="aspect-[2/3] overflow-hidden bg-muted">
+                      <img
+                        src={movie.image}
+                        alt={movie.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        onLoad={() => console.log(`Image loaded for ${movie.title}`)}
+                        onError={() => console.log(`Image failed to load for ${movie.title}`)}
+                      />
                     </div>
-                  </CardContent>
-                </Link>
-              </Card>
-            </div>
-          ))}
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
+                        {movie.title}
+                      </CardTitle>
+                      <CardDescription className="text-sm text-primary/80">
+                        {movie.genre} • {movie.year}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="text-sm text-muted-foreground">
+                        Directed by {movie.director}
+                      </div>
+                    </CardContent>
+                  </Link>
+                </Card>
+              </div>
+            );
+          })}
         </div>
 
         {filteredMovies.length === 0 && (
