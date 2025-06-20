@@ -114,7 +114,7 @@ export default function Blog() {
                   Featured • {articles[0].category}
                 </Badge>
                 <CardTitle className="text-2xl md:text-3xl mb-4">
-                  <Link to={`/blog/${articles[0].id}`} className="hover:text-primary transition-colors">
+                  <Link to={`/ftca-cinema-vista/blog/${articles[0].id}`} className="hover:text-primary transition-colors">
                     {articles[0].title}
                   </Link>
                 </CardTitle>
@@ -137,7 +137,7 @@ export default function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.slice(1).map((article) => (
             <Card key={article.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <Link to={`/blog/${article.id}`}>
+              <Link to={`/ftca-cinema-vista/blog/${article.id}`}>
                 <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
                   <img
                     src={article.image}

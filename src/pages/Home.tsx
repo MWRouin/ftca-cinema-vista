@@ -81,10 +81,10 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-on-scroll-delay-4">
               <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
-                <Link to="/movies">Explore Movies</Link>
+                <Link to="/ftca-cinema-vista/movies">Explore Movies</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover-lift text-lg px-8 py-4">
-                <Link to="/events">Upcoming Events</Link>
+                <Link to="/ftca-cinema-vista/events">Upcoming Events</Link>
               </Button>
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function Home() {
           
           <div className="text-center mt-16">
             <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
-              <Link to="/movies">View All Movies</Link>
+              <Link to="/ftca-cinema-vista/movies">View All Movies</Link>
             </Button>
           </div>
         </div>
@@ -180,7 +180,7 @@ export default function Home() {
           
           <div className="text-center mt-16">
             <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
-              <Link to="/events">View All Events</Link>
+              <Link to="/ftca-cinema-vista/events">View All Events</Link>
             </Button>
           </div>
         </div>
@@ -203,10 +203,10 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
-              <Link to="/contact">Get in Touch</Link>
+              <Link to="/ftca-cinema-vista/contact">Get in Touch</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover-lift text-lg px-8 py-4">
-              <Link to="/about">Learn More</Link>
+              <Link to="/ftca-cinema-vista/about">Learn More</Link>
             </Button>
           </div>
         </div>

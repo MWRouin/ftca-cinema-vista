@@ -27,13 +27,13 @@ const App = () => (
         <BrowserRouter>
           <Layout>
             <Routes>
-              <Route path="/ftca-hammemlif/" element={<Home />} />
-              <Route path="/ftca-hammemlif/movies" element={<Movies />} />
-              <Route path="/ftca-hammemlif/movie/:id" element={<MoviePlayer />} />
-              <Route path="/ftca-hammemlif/events" element={<Events />} />
-              <Route path="/ftca-hammemlif/blog" element={<Blog />} />
-              <Route path="/ftca-hammemlif/about" element={<About />} />
-              <Route path="/ftca-hammemlif/contact" element={<Contact />} />
+              <Route path="/ftca-cinema-vista/" element={<Home />} />
+              <Route path="/ftca-cinema-vista/movies" element={<Movies />} />
+              <Route path="/ftca-cinema-vista/movie/:id" element={<MoviePlayer />} />
+              <Route path="/ftca-cinema-vista/events" element={<Events />} />
+              <Route path="/ftca-cinema-vista/blog" element={<Blog />} />
+              <Route path="/ftca-cinema-vista/about" element={<About />} />
+              <Route path="/ftca-cinema-vista/contact" element={<Contact />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

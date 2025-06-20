@@ -19,12 +19,12 @@ export function Navigation() {
   }, []);
 
   const navItems = [
-    { name: 'Home', path: '/ftca-hammemlif/' },
-    { name: 'Movies', path: '/ftca-hammemlif/movies' },
-    { name: 'Events', path: '/ftca-hammemlif/events' },
-    { name: 'Blog', path: '/ftca-hammemlif/blog' },
-    { name: 'About', path: '/ftca-hammemlif/about' },
-    { name: 'Contact', path: '/ftca-hammemlif/contact' },
+    { name: 'Home', path: '/ftca-cinema-vista/' },
+    { name: 'Movies', path: '/ftca-cinema-vista/movies' },
+    { name: 'Events', path: '/ftca-cinema-vista/events' },
+    { name: 'Blog', path: '/ftca-cinema-vista/blog' },
+    { name: 'About', path: '/ftca-cinema-vista/about' },
+    { name: 'Contact', path: '/ftca-cinema-vista/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
