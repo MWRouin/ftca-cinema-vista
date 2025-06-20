@@ -19,12 +19,12 @@ export function Navigation() {
   }, []);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Movies', path: '/movies' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/ftca-hammemlif/' },
+    { name: 'Movies', path: '/ftca-hammemlif/movies' },
+    { name: 'Events', path: '/ftca-hammemlif/events' },
+    { name: 'Blog', path: '/ftca-hammemlif/blog' },
+    { name: 'About', path: '/ftca-hammemlif/about' },
+    { name: 'Contact', path: '/ftca-hammemlif/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

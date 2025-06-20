@@ -6,11 +6,11 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Movies', path: '/movies' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/ftca-hammemlif/' },
+    { name: 'Movies', path: '/ftca-hammemlif/movies' },
+    { name: 'Events', path: '/ftca-hammemlif/events' },
+    { name: 'Blog', path: '/ftca-hammemlif/blog' },
+    { name: 'Contact', path: '/ftca-hammemlif/contact' },
   ];
 
   const socialLinks = [
