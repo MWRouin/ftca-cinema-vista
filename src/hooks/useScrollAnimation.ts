@@ -9,13 +9,29 @@ export function useScrollAnimation(threshold = 0.1) {
     const element = elementRef.current;
     if (!element) return;
 
-    // Fallback: make visible after 100ms if intersection observer fails
+    // Immediate fallback for elements above the fold
+    const isAboveFold = element.getBoundingClientRect().top < window.innerHeight;
+    if (isAboveFold) {
+      element.classList.add('in-view');
+      setHasAnimated(true);
+      return;
+    }
+
+    // Fallback timer for intersection observer failures
     const fallbackTimer = setTimeout(() => {
-      if (!hasAnimated) {
+      if (!hasAnimated && element) {
         element.classList.add('in-view', 'animate-on-scroll-fallback');
         setHasAnimated(true);
       }
-    }, 100);
+    }, 200);
+
+    // Check for intersection observer support
+    if (!('IntersectionObserver' in window)) {
+      element.classList.add('in-view', 'animate-on-scroll-fallback');
+      setHasAnimated(true);
+      clearTimeout(fallbackTimer);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,19 +40,20 @@ export function useScrollAnimation(threshold = 0.1) {
             entry.target.classList.add('in-view');
             setHasAnimated(true);
             clearTimeout(fallbackTimer);
+            observer.disconnect();
           }
         });
       },
       {
         threshold,
-        rootMargin: '0px 0px -50px 0px',
+        rootMargin: '0px 0px -10% 0px',
       }
     );
 
     observer.observe(element);
 
     return () => {
-      observer.unobserve(element);
+      observer.disconnect();
       clearTimeout(fallbackTimer);
     };
   }, [threshold, hasAnimated]);

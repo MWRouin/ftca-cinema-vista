@@ -56,28 +56,34 @@ export default function Home() {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative gradient-dark py-20 lg:py-32 animate-on-scroll overflow-hidden"
+        className="relative gradient-dark py-24 lg:py-32 animate-on-scroll overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.02"%3E%3Ccircle cx="30" cy="30" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="w-24 h-24 gradient-cinema rounded-2xl flex items-center justify-center mx-auto mb-8 animate-on-scroll-delay shadow-lg">
-              <span className="text-white font-bold text-2xl">FC</span>
+            <div className="w-28 h-28 gradient-cinema rounded-3xl flex items-center justify-center mx-auto mb-8 animate-on-scroll-delay hover-lift">
+              <span className="text-white font-bold text-3xl">FC</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent animate-on-scroll-delay-2">
-              FTCA Hammemlif
+            
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-on-scroll-delay-1">
+              <span className="text-shimmer">FTCA Hammemlif</span>
             </h1>
-            <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto font-medium animate-on-scroll-delay-3">
+            
+            <div className="text-2xl md:text-3xl text-primary mb-4 font-medium animate-on-scroll-delay-2">
               Where Cinema Comes Alive
-            </p>
-            <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto animate-on-scroll-delay-3 leading-relaxed">
+            </div>
+            
+            <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto animate-on-scroll-delay-3 leading-relaxed">
               Welcome to our passionate community of film enthusiasts. We celebrate the art of cinema through screenings, discussions, and shared experiences that bring stories to life in the darkness of the theater.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll-delay-3">
-              <Button asChild size="lg" className="gradient-cinema hover:opacity-90 transition-opacity shadow-lg">
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-on-scroll-delay-4">
+              <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
                 <Link to="/movies">Explore Movies</Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10">
+              <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover-lift text-lg px-8 py-4">
                 <Link to="/events">Upcoming Events</Link>
               </Button>
             </div>
@@ -88,32 +94,41 @@ export default function Home() {
       {/* Featured Movies */}
       <section 
         ref={moviesRef}
-        className="py-16 lg:py-24 animate-on-scroll"
+        className="py-20 lg:py-28 animate-on-scroll"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Films</h2>
-            <p className="text-lg text-muted-foreground">Discover our handpicked selection of cinematic masterpieces</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-shimmer">Featured Films</h2>
+            <div className="section-divider w-24 mx-auto mb-6"></div>
+            <p className="text-xl text-muted-foreground">Discover our handpicked selection of cinematic masterpieces</p>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredMovies.map((movie, index) => (
-              <Card key={movie.id} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm animate-on-scroll-delay-${index + 1}`}>
-                <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
-                  <img
-                    src={movie.image}
-                    alt={movie.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <CardHeader className="p-6">
-                  <CardTitle className="text-xl text-foreground">{movie.title}</CardTitle>
-                  <CardDescription className="text-primary/80">{movie.genre} • {movie.year}</CardDescription>
-                </CardHeader>
-              </Card>
+              <div key={movie.id} className={`animate-on-scroll-delay-${index + 1}`}>
+                <Card className="card-cinema hover-lift group overflow-hidden">
+                  <div className="aspect-[2/3] overflow-hidden">
+                    <img
+                      src={movie.image}
+                      alt={movie.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
+                  <CardHeader className="p-6">
+                    <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
+                      {movie.title}
+                    </CardTitle>
+                    <CardDescription className="text-primary/80">
+                      {movie.genre} • {movie.year}
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Button asChild variant="outline" className="border-primary/30 hover:bg-primary/10">
+          
+          <div className="text-center mt-16">
+            <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
               <Link to="/movies">View All Movies</Link>
             </Button>
           </div>
@@ -123,36 +138,48 @@ export default function Home() {
       {/* Featured Events */}
       <section 
         ref={eventsRef}
-        className="py-16 lg:py-24 bg-muted/30 animate-on-scroll relative"
+        className="py-20 lg:py-28 gradient-subtle animate-on-scroll relative"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"></div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Events</h2>
-            <p className="text-lg text-muted-foreground">Join us for exclusive screenings and film discussions</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-shimmer">Upcoming Events</h2>
+            <div className="section-divider w-24 mx-auto mb-6"></div>
+            <p className="text-xl text-muted-foreground">Join us for exclusive screenings and film discussions</p>
           </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featuredEvents.map((event, index) => (
-              <Card key={event.id} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm animate-on-scroll-delay-${index + 1}`}>
-                <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <CardHeader className="p-6">
-                  <CardTitle className="text-xl text-foreground">{event.title}</CardTitle>
-                  <div className="space-y-2">
-                    <div className="text-sm text-primary font-medium">{event.date}</div>
-                    <div className="text-muted-foreground">{event.description}</div>
+              <div key={event.id} className={`animate-on-scroll-delay-${index + 1}`}>
+                <Card className="card-cinema hover-lift group overflow-hidden">
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
                   </div>
-                </CardHeader>
-              </Card>
+                  <CardHeader className="p-6">
+                    <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
+                      {event.title}
+                    </CardTitle>
+                    <div className="space-y-3">
+                      <div className="text-sm text-primary font-medium bg-primary/10 px-3 py-1 rounded-full inline-block">
+                        {event.date}
+                      </div>
+                      <div className="text-muted-foreground leading-relaxed">
+                        {event.description}
+                      </div>
+                    </div>
+                  </CardHeader>
+                </Card>
+              </div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Button asChild variant="outline" className="border-primary/30 hover:bg-primary/10">
+          
+          <div className="text-center mt-16">
+            <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
               <Link to="/events">View All Events</Link>
             </Button>
           </div>
@@ -162,19 +189,23 @@ export default function Home() {
       {/* Call to Action */}
       <section 
         ref={ctaRef}
-        className="py-16 lg:py-24 animate-on-scroll relative overflow-hidden"
+        className="py-20 lg:py-28 animate-on-scroll relative overflow-hidden"
       >
         <div className="absolute inset-0 gradient-dark"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
+        
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Our Community</h2>
-          <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-shimmer">Join Our Community</h2>
+          <div className="section-divider w-24 mx-auto mb-8"></div>
+          <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
             Connect with fellow film enthusiasts and be part of memorable cinematic experiences that transcend the ordinary
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="gradient-cinema hover:opacity-90 transition-opacity shadow-lg">
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
               <Link to="/contact">Get in Touch</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10">
+            <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover-lift text-lg px-8 py-4">
               <Link to="/about">Learn More</Link>
             </Button>
           </div>
