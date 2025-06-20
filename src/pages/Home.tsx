@@ -97,7 +97,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredMovies.map((movie, index) => (
-              <Card key={movie.id} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll animate-on-scroll-delay-${index % 3 + 1} border-border/50 bg-card/50 backdrop-blur-sm`}>
+              <Card key={movie.id} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm animate-on-scroll-delay-${index + 1}`}>
                 <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
                   <img
                     src={movie.image}
@@ -133,7 +133,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featuredEvents.map((event, index) => (
-              <Card key={event.id} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll animate-on-scroll-delay-${index + 1} border-border/50 bg-card/50 backdrop-blur-sm`}>
+              <Card key={event.id} className={`group hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-border/50 bg-card/50 backdrop-blur-sm animate-on-scroll-delay-${index + 1}`}>
                 <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
                   <img
                     src={event.image}
@@ -143,8 +143,10 @@ export default function Home() {
                 </div>
                 <CardHeader className="p-6">
                   <CardTitle className="text-xl text-foreground">{event.title}</CardTitle>
-                  <CardDescription className="text-sm text-primary font-medium mb-2">{event.date}</CardDescription>
-                  <CardDescription className="text-muted-foreground">{event.description}</CardDescription>
+                  <div className="space-y-2">
+                    <div className="text-sm text-primary font-medium">{event.date}</div>
+                    <div className="text-muted-foreground">{event.description}</div>
+                  </div>
                 </CardHeader>
               </Card>
             ))}
