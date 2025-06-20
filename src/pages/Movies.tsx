@@ -23,6 +23,10 @@ export default function Movies() {
     ? movies 
     : movies.filter(movie => movie.genre === selectedGenre);
 
+  console.log('Movies component rendered');
+  console.log('Filtered movies:', filteredMovies);
+  console.log('Selected genre:', selectedGenre);
+
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,9 +34,9 @@ export default function Movies() {
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Movie Catalog</h1>
           <div className="section-divider w-24 mx-auto mb-8"></div>
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Explore our curated collection of cinematic masterpieces
-          </p>
+          </div>
           
           {/* Filter */}
           <div className="flex justify-center">
@@ -77,9 +81,9 @@ export default function Movies() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <p className="text-sm text-muted-foreground">
+                    <div className="text-sm text-muted-foreground">
                       Directed by {movie.director}
-                    </p>
+                    </div>
                   </CardContent>
                 </Link>
               </Card>
@@ -92,7 +96,7 @@ export default function Movies() {
             <div className="w-24 h-24 gradient-cinema rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
               <span className="text-white font-bold text-2xl">?</span>
             </div>
-            <p className="text-xl text-muted-foreground">No movies found for the selected genre.</p>
+            <div className="text-xl text-muted-foreground">No movies found for the selected genre.</div>
             <Button 
               onClick={() => setSelectedGenre('all')} 
               variant="outline" 
