@@ -31,17 +31,17 @@ export function Navigation() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 ${
+    <nav className={`sticky top-0 z-50 transition-all duration-300 border-b ${
       scrolled 
-        ? 'bg-background/95 backdrop-blur-xl shadow-lg border-b border-border/50' 
-        : 'bg-background/80 backdrop-blur-md'
+        ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border' 
+        : 'bg-background/90 backdrop-blur-md border-border/30'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link 
             to="/" 
-            className="flex items-center space-x-3 hover-glow group transition-all duration-300"
+            className="flex items-center space-x-3 hover-glow group transition-all duration-300 rounded-lg p-2"
           >
             <div className="hover-lift group-hover:scale-105 transition-all duration-300">
               <Logo size={40} className="drop-shadow-lg" />
@@ -57,14 +57,14 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item, index) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`nav-link px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-accent/50 focus-cinema ${
+                className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${
                   isActive(item.path) 
-                    ? 'text-primary active bg-primary/10' 
+                    ? 'text-primary active bg-primary/10 border border-primary/20' 
                     : 'text-muted-foreground hover:text-primary'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
@@ -72,7 +72,7 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <div className="ml-4">
+            <div className="ml-4 pl-4 border-l border-border">
               <ThemeToggle />
             </div>
           </div>
@@ -82,8 +82,8 @@ export function Navigation() {
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-all duration-300 hover:bg-accent focus-cinema ${
-                isOpen ? 'bg-accent' : ''
+              className={`p-2 rounded-lg transition-all duration-300 border border-border/30 hover:bg-accent hover:border-border focus-cinema ${
+                isOpen ? 'bg-accent border-border' : ''
               }`}
               aria-label="Toggle menu"
             >
@@ -96,15 +96,15 @@ export function Navigation() {
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
-          <div className="px-2 pt-2 pb-4 space-y-1 card-cinema rounded-lg mt-2 mb-4">
+          <div className="px-2 pt-2 pb-4 space-y-1 card-cinema rounded-lg mt-2 mb-4 border border-border/50">
             {navItems.map((item, index) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 border ${
                   isActive(item.path)
-                    ? 'text-primary bg-primary/10 border-l-2 border-primary'
-                    : 'text-muted-foreground hover:text-primary hover:bg-accent/50'
+                    ? 'text-primary bg-primary/10 border-primary/20'
+                    : 'text-muted-foreground hover:text-primary hover:bg-accent/50 border-transparent hover:border-border/30'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => setIsOpen(false)}
