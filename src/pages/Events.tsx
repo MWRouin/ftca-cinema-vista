@@ -95,14 +95,15 @@ export default function Events() {
   );
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Events</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Events</h1>
+          <div className="section-divider w-24 mx-auto mb-8"></div>
+          <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Join our community events, screenings, and workshops
-          </p>
+          </div>
         </div>
 
         {/* Upcoming Events */}

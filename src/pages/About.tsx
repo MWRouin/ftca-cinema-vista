@@ -30,14 +30,15 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">About FTCA Hammemlif</h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">About FTCA Hammemlif</h1>
+          <div className="section-divider w-24 mx-auto mb-8"></div>
+          <div className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             Discover our story, mission, and the passionate individuals who make our cinema club a vibrant community
-          </p>
+          </div>
         </div>
 
         {/* Mission Section */}

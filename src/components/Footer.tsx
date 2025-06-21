@@ -1,6 +1,6 @@
-
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail, Phone } from 'lucide-react';
+import { Logo } from './Logo';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -26,9 +26,7 @@ export function Footer() {
           {/* Club Info */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">FC</span>
-              </div>
+              <Logo size={40} className="drop-shadow-lg" />
               <div>
                 <h3 className="font-bold text-lg">FTCA Hammemlif</h3>
                 <p className="text-sm text-muted-foreground">Where Cinema Comes Alive</p>

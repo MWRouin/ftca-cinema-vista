@@ -1,8 +1,8 @@
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { Logo } from '@/components/Logo';
 
 export default function Home() {
   const heroRef = useScrollAnimation();
@@ -63,8 +63,10 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="w-28 h-28 gradient-cinema rounded-3xl flex items-center justify-center mx-auto mb-8 animate-on-scroll-delay hover-lift">
-              <span className="text-white font-bold text-3xl">FC</span>
+            <div className="flex justify-center mb-8">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm border border-primary/20 animate-on-scroll-delay hover-lift">
+                <Logo size={112} className="drop-shadow-2xl" />
+              </div>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-on-scroll-delay-1">
