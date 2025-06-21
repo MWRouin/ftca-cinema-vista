@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { Logo } from './Logo';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,8 +43,8 @@ export function Navigation() {
             to="/" 
             className="flex items-center space-x-3 hover-glow group transition-all duration-300"
           >
-            <div className="w-10 h-10 gradient-cinema rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-              <span className="text-white font-bold text-lg">FC</span>
+            <div className="hover-lift group-hover:scale-105 transition-all duration-300">
+              <Logo size={40} className="drop-shadow-lg" />
             </div>
             <div className="hidden sm:block">
               <span className="font-bold text-xl bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
