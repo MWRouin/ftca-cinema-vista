@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
@@ -64,8 +63,8 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="flex justify-center mb-8 animate-on-scroll-delay hover-lift">
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm border border-primary/20">
+            <div className="flex justify-center mb-8">
+              <div className="p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm border border-primary/20 animate-on-scroll-delay hover-lift">
                 <Logo size={112} className="drop-shadow-2xl" />
               </div>
             </div>
