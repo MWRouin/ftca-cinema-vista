@@ -6,11 +6,11 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Movies', path: '/movies' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/ftca-cinema-vista/' },
+    { name: 'Movies', path: '/ftca-cinema-vista/movies' },
+    { name: 'Events', path: '/ftca-cinema-vista/events' },
+    { name: 'Blog', path: '/ftca-cinema-vista/blog' },
+    { name: 'Contact', path: '/ftca-cinema-vista/contact' },
   ];
 
   const socialLinks = [

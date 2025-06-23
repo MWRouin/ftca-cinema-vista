@@ -27,13 +27,13 @@ const App = () => (
         <BrowserRouter>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/movie/:id" element={<MoviePlayer />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/ftca-cinema-vista/" element={<Home />} />
+              <Route path="/ftca-cinema-vista/movies" element={<Movies />} />
+              <Route path="/ftca-cinema-vista/movie/:id" element={<MoviePlayer />} />
+              <Route path="/ftca-cinema-vista/events" element={<Events />} />
+              <Route path="/ftca-cinema-vista/blog" element={<Blog />} />
+              <Route path="/ftca-cinema-vista/about" element={<About />} />
+              <Route path="/ftca-cinema-vista/contact" element={<Contact />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

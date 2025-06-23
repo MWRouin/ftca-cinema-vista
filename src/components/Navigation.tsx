@@ -20,12 +20,12 @@ export function Navigation() {
   }, []);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Movies', path: '/movies' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Home', path: '/ftca-cinema-vista/' },
+    { name: 'Movies', path: '/ftca-cinema-vista/movies' },
+    { name: 'Events', path: '/ftca-cinema-vista/events' },
+    { name: 'Blog', path: '/ftca-cinema-vista/blog' },
+    { name: 'About', path: '/ftca-cinema-vista/about' },
+    { name: 'Contact', path: '/ftca-cinema-vista/contact' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
