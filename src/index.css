@@ -7,33 +7,34 @@
 
 @layer base {
   :root {
-    --background: 216 15% 8%;
-    --foreground: 210 40% 98%;
+    /* Dark theme (root): mapped to provided palette */
+    --background: 205 33% 7%;            /* #0c1318 */
+    --foreground: 248 31% 95%;           /* #efeef6 */
 
-    --card: 216 15% 10%;
-    --card-foreground: 210 40% 98%;
+    --card: 205 33% 9%;                  /* slightly lighter than background */
+    --card-foreground: 248 31% 95%;
 
-    --popover: 216 15% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 205 33% 9%;
+    --popover-foreground: 248 31% 95%;
 
-    --primary: 158 70% 25%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 177 70% 23%;              /* #0a6b66 */
+    --primary-foreground: 248 31% 95%;   /* light text on primary */
 
-    --secondary: 216 15% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 177 88% 13%;            /* #043e3b */
+    --secondary-foreground: 248 31% 95%;
 
-    --muted: 216 15% 15%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 205 22% 15%;                /* neutral subdued background */
+    --muted-foreground: 215 20% 65%;     /* keep readable muted text */
 
-    --accent: 216 15% 15%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 31 61% 60%;                /* #d79b5b */
+    --accent-foreground: 205 33% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 216 15% 18%;
-    --input: 216 15% 18%;
-    --ring: 158 70% 25%;
+    --border: 205 22% 20%;               /* #223644 approx */
+    --input: 205 22% 20%;
+    --ring: 177 70% 23%;                 /* use primary hue for focus ring */
 
     --radius: 0.5rem;
 
@@ -48,42 +49,43 @@
   }
 
   .light {
-    --background: 220 18% 97%;
-    --foreground: 222.2 84% 4.9%;
+    /* Light theme mapped to light scales of provided palette */
+    --background: 202 31% 95%;           /* ~ background-50 */
+    --foreground: 240 30% 10%;           /* ~ text-900 */
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 240 30% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 240 30% 10%;
 
-    --primary: 158 70% 25%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 177 70% 23%;              /* same brand color */
+    --primary-foreground: 248 31% 95%;
 
-    --secondary: 210 25% 94%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --secondary: 205 33% 90%;            /* light neutral section bg */
+    --secondary-foreground: 240 30% 10%;
 
-    --muted: 210 25% 94%;
+    --muted: 205 25% 92%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 25% 94%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --accent: 31 61% 60%;
+    --accent-foreground: 240 30% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 86%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 158 70% 25%;
+    --border: 205 33% 86%;
+    --input: 205 33% 91%;
+    --ring: 177 70% 23%;
 
-    --sidebar-background: 220 18% 97%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-primary: 158 70% 25%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 210 25% 94%;
-    --sidebar-accent-foreground: 222.2 84% 4.9%;
-    --sidebar-border: 214.3 31.8% 86%;
-    --sidebar-ring: 158 70% 25%;
+    --sidebar-background: 202 31% 95%;
+    --sidebar-foreground: 240 30% 10%;
+    --sidebar-primary: 177 70% 23%;
+    --sidebar-primary-foreground: 248 31% 95%;
+    --sidebar-accent: 205 33% 90%;
+    --sidebar-accent-foreground: 240 30% 10%;
+    --sidebar-border: 205 33% 86%;
+    --sidebar-ring: 177 70% 23%;
   }
 }
 
@@ -95,8 +97,8 @@
   body {
     @apply bg-background text-foreground transition-colors duration-300;
     background-image: 
-      radial-gradient(circle at 25% 25%, rgba(34, 139, 34, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(34, 139, 34, 0.02) 0%, transparent 50%);
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.02) 0%, transparent 50%);
     background-attachment: fixed;
   }
 
@@ -291,7 +293,7 @@
   }
 
   .nav-link:hover {
-    background: hsl(var(--accent) / 0.7);
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--secondary) / 0.12));
   }
 
   .nav-link:hover::after,
@@ -343,7 +345,7 @@
     }
     
     .dark .nav-link:hover {
-      background: hsl(var(--accent) / 0.5);
+      background: linear-gradient(135deg, hsl(var(--primary) / 0.18), hsl(var(--secondary) / 0.18));
     }
   }
 

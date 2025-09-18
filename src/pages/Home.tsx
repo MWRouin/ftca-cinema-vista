@@ -64,11 +64,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <div className="flex justify-center mb-8">
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm border border-primary/20 animate-on-scroll-delay hover-lift">
+              {/* <div className="p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm border border-primary/20 animate-on-scroll-delay hover-lift">
                 <Logo size={112} className="drop-shadow-2xl" />
-              </div>
+              </div> */}
+            <Logo size={310} className="drop-shadow-2xl" />
             </div>
-            
             <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-on-scroll-delay-1">
               <span className="text-shimmer">FTCA Hammemlif</span>
             </h1>
@@ -83,10 +83,10 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-on-scroll-delay-4">
               <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
-                <Link to="/ftca-cinema-vista/movies">Explore Movies</Link>
+                <Link to="/movies">Explore Movies</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover-lift text-lg px-8 py-4">
-                <Link to="/ftca-cinema-vista/events">Upcoming Events</Link>
+                <Link to="/events">Upcoming Events</Link>
               </Button>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function Home() {
           
           <div className="text-center mt-16">
             <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
-              <Link to="/ftca-cinema-vista/movies">View All Movies</Link>
+              <Link to="/movies">View All Movies</Link>
             </Button>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function Home() {
           
           <div className="text-center mt-16">
             <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
-              <Link to="/ftca-cinema-vista/events">View All Events</Link>
+              <Link to="/events">View All Events</Link>
             </Button>
           </div>
         </div>
@@ -205,10 +205,10 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
-              <Link to="/ftca-cinema-vista/contact">Get in Touch</Link>
+              <Link to="/contact">Get in Touch</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 hover-lift text-lg px-8 py-4">
-              <Link to="/ftca-cinema-vista/about">Learn More</Link>
+              <Link to="/about">Learn More</Link>
             </Button>
           </div>
         </div>
