@@ -34,7 +34,7 @@ export default function MoviePlayer() {
         {/* Back Button */}
         <div className="mb-6">
           <Button asChild variant="outline">
-            <Link to="/ftca-cinema-vista/movies">← Back to Movies</Link>
+            <Link to="/movies">← Back to Movies</Link>
           </Button>
         </div>
 
@@ -100,7 +100,7 @@ export default function MoviePlayer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {relatedMovies.map((relatedMovie) => (
               <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <Link to={`/ftca-cinema-vista/movie/${relatedMovie.id}`}>
+                <Link to={`/movie/${relatedMovie.id}`}>
                   <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
                     <img
                       src={relatedMovie.image}
