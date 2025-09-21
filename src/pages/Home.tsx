@@ -69,13 +69,13 @@ export default function Home() {
               </div> */}
             <Logo size={310} className="drop-shadow-2xl" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-on-scroll-delay-1">
-              <span className="text-shimmer">FTCA Hammemlif</span>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-on-scroll-delay-1">
+              <span className="text-shimmer">Club des Cinéastes Amateurs de Hammamlif</span>
             </h1>
             
-            <div className="text-2xl md:text-3xl text-primary mb-4 font-medium animate-on-scroll-delay-2">
-              Where Cinema Comes Alive
-            </div>
+            {/* <div className="text-2xl md:text-3xl text-primary mb-4 font-medium animate-on-scroll-delay-2">
+              Club des Cinéastes Amateurs de Hammamlif
+            </div> */}
             
             <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto animate-on-scroll-delay-3 leading-relaxed">
               Welcome to our passionate community of film enthusiasts. We celebrate the art of cinema through screenings, discussions, and shared experiences that bring stories to life in the darkness of the theater.

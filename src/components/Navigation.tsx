@@ -49,11 +49,11 @@ export function Navigation() {
             </div>
             <div className="hidden sm:block">
               <span className="font-bold text-xl bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                FTCA Hammemlif
+                Club des Cinéastes Amateurs de Hammamlif
               </span>
-              <div className="text-xs text-muted-foreground tracking-wide">
+{/*               <div className="text-xs text-muted-foreground tracking-wide">
                 Where Cinema Comes Alive
-              </div>
+              </div> */}
             </div>
           </Link>
 
