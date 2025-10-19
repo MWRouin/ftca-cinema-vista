@@ -4,18 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'react-router-dom';
+import { getMovies } from '@/data/movies';
 
 export default function Movies() {
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
 
-  const movies = [
-    { id: 1, title: "The Grand Budapest Hotel", genre: "Comedy", year: 2014, director: "Wes Anderson", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&h=600&q=80" },
-    { id: 2, title: "Parasite", genre: "Thriller", year: 2019, director: "Bong Joon-ho", image: "https://images.unsplash.com/photo-1489599077873-6aa4d5b7e8f3?auto=format&fit=crop&w=400&h=600&q=80" },
-    { id: 3, title: "Moonlight", genre: "Drama", year: 2016, director: "Barry Jenkins", image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=400&h=600&q=80" },
-    { id: 4, title: "The Shape of Water", genre: "Romance", year: 2017, director: "Guillermo del Toro", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&h=600&q=80" },
-    { id: 5, title: "Mad Max: Fury Road", genre: "Action", year: 2015, director: "George Miller", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&h=600&q=80" },
-    { id: 6, title: "Her", genre: "Romance", year: 2013, director: "Spike Jonze", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&h=600&q=80" },
-  ];
+  const movies = getMovies();
 
   const genres = ['all', ...Array.from(new Set(movies.map(movie => movie.genre)))];
 

@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Logo } from '@/components/Logo';
+import { getMovies } from '@/data/movies';
 
 export default function Home() {
   const heroRef = useScrollAnimation();
@@ -10,29 +11,7 @@ export default function Home() {
   const eventsRef = useScrollAnimation();
   const ctaRef = useScrollAnimation();
 
-  const featuredMovies = [
-    {
-      id: 1,
-      title: "The Grand Budapest Hotel",
-      genre: "Comedy/Drama",
-      year: 2014,
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&h=600&q=80"
-    },
-    {
-      id: 2,
-      title: "Parasite",
-      genre: "Thriller",
-      year: 2019,
-      image: "https://images.unsplash.com/photo-1489599077873-6aa4d5b7e8f3?auto=format&fit=crop&w=400&h=600&q=80"
-    },
-    {
-      id: 3,
-      title: "Moonlight",
-      genre: "Drama",
-      year: 2016,
-      image: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=400&h=600&q=80"
-    }
-  ];
+  const featuredMovies = getMovies().slice(0, 3);
 
   const featuredEvents = [
     {
@@ -70,7 +49,7 @@ export default function Home() {
             <Logo size={310} className="drop-shadow-2xl" />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-on-scroll-delay-1">
-              <span className="text-shimmer">Club des Cinéastes Amateurs de Hammamlif</span>
+              <span className="text-shimmer">Hammam-lif Amateur Filmmakers' Club</span> {/*Club des Cinéastes Amateurs de Hammamlif*/}
             </h1>
             
             {/* <div className="text-2xl md:text-3xl text-primary mb-4 font-medium animate-on-scroll-delay-2">
@@ -78,7 +57,7 @@ export default function Home() {
             </div> */}
             
             <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto animate-on-scroll-delay-3 leading-relaxed">
-              Welcome to our passionate community of film enthusiasts. We celebrate the art of cinema through screenings, discussions, and shared experiences that bring stories to life in the darkness of the theater.
+              A filmmakers’ club based in Hammam-Lif, active since 1964 and operating under the "Fédération Tunisienne des Cinéastes Amateurs (FTCA)".
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-on-scroll-delay-4">
@@ -102,7 +81,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-shimmer">Featured Films</h2>
             <div className="section-divider w-24 mx-auto mb-6"></div>
-            <p className="text-xl text-muted-foreground">Discover our handpicked selection of cinematic masterpieces</p>
+            <p className="text-xl text-muted-foreground">Discover our Movies</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
