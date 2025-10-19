@@ -320,9 +320,16 @@
   }
 
   /* Focus states for accessibility */
-  .focus-cinema:focus {
+  /* Show focus ring only for keyboard users (focus-visible).
+     Prevents persistent outline after mouse click while keeping accessibility. */
+  .focus-cinema:focus-visible {
     outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
+  }
+
+  /* Ensure no outline for mouse-driven focus states */
+  .focus-cinema:focus:not(:focus-visible) {
+    outline: none;
   }
 
   /* Section dividers with better visibility */

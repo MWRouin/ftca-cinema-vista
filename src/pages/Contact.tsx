@@ -128,18 +128,16 @@ export default function Contact() {
               <CardContent className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-1">Email</h4>
-                  <p className="text-muted-foreground">info@ftcahammemlif.org</p>
+                  <p className="text-muted-foreground">ftca.hammamlif@gmail.com</p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Phone</h4>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                  <p className="text-muted-foreground">+216 55 466 297</p>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Address</h4>
                   <p className="text-muted-foreground">
-                    123 Cinema Boulevard<br />
-                    Hammemlif, Film District<br />
-                    FC 12345
+                    80 RN1, Hammam-Lif
                   </p>
                 </div>
               </CardContent>
@@ -152,16 +150,8 @@ export default function Contact() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-1">Weekly Screenings</h4>
-                  <p className="text-muted-foreground">Fridays at 7:00 PM</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Discussion Groups</h4>
-                  <p className="text-muted-foreground">Sundays at 3:00 PM</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Workshop Sessions</h4>
-                  <p className="text-muted-foreground">First Saturday of each month at 2:00 PM</p>
+                  <h4 className="font-semibold mb-1">Weekly Meetings</h4>
+                  <p className="text-muted-foreground">Saturday at 5:00 PM</p>
                 </div>
               </CardContent>
             </Card>
@@ -175,10 +165,9 @@ export default function Contact() {
                 <div className="space-y-2">
                   <p className="text-muted-foreground">Stay connected with our latest news and events:</p>
                   <div className="flex space-x-4">
-                    <a href="#" className="text-primary hover:underline">Facebook</a>
-                    <a href="#" className="text-primary hover:underline">Instagram</a>
-                    <a href="#" className="text-primary hover:underline">Twitter</a>
-                    <a href="#" className="text-primary hover:underline">YouTube</a>
+                    <a href="https://www.facebook.com/ftcahamhama/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Facebook</a>
+                    <a href="https://www.instagram.com/ftca.hlif/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Instagram</a>
+                    <a href="https://www.youtube.com/@ftcahammamlif" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">YouTube</a>
                   </div>
                 </div>
               </CardContent>

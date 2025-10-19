@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Mail, Phone } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { Logo } from './Logo';
 
 export function Footer() {
@@ -14,9 +14,9 @@ export function Footer() {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Youtube, href: '#', label: 'YouTube' },
+    { icon: Facebook, href: 'https://www.facebook.com/ftcahamhama/', label: 'Facebook' },
+    { icon: Instagram, href: 'https://www.instagram.com/ftca.hlif/', label: 'Instagram' },
+    { icon: Youtube, href: 'https://www.youtube.com/@ftcahammamlif', label: 'YouTube' },
   ];
 
   return (
@@ -41,6 +41,8 @@ export function Footer() {
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors group"
                   aria-label={label}
                 >
@@ -76,15 +78,19 @@ export function Footer() {
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">contact@ftcahammemlif.org</span>
+                <span className="text-sm">ftca.hammamlif@gmail.com</span>
               </a>
               <a
-                href="tel:+216-XX-XXX-XXX"
+                href="tel:+21655466297"
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span className="text-sm">+216 XX XXX XXX</span>
+                <span className="text-sm">+216 55 466 297</span>
               </a>
+              <div className="flex items-center space-x-2 text-muted-foreground">
+                <MapPin className="w-4 h-4" />
+                <span className="text-sm">80 RN1, Hammam-Lif</span>
+              </div>
             </div>
           </div>
         </div>
@@ -92,7 +98,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} FTCA Hammemlif – All rights reserved.
+            © {currentYear} Club des Cinéastes Amateurs de Hammamlif - All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground mt-2 sm:mt-0">
             Made with ❤️ for cinema lovers

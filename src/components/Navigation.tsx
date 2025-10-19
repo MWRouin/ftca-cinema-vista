@@ -25,6 +25,7 @@ export function Navigation() {
     { name: 'Events', path: '/events' },
     { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
+    { name: 'Palmarès', path: '/palmares' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -38,34 +39,23 @@ export function Navigation() {
         : 'bg-background/90 backdrop-blur-md border-border/30'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className="flex items-center space-x-3 hover-glow group transition-all duration-300 rounded-lg p-2"
-          >
-            <div className="hover-lift group-hover:scale-105 transition-all duration-300">
-              <Logo size={40} className="drop-shadow-lg" />
-            </div>
-            <div className="hidden sm:block">
-              <span className="font-bold text-xl bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
-                Club des Cinéastes Amateurs de Hammamlif
-              </span>
-{/*               <div className="text-xs text-muted-foreground tracking-wide">
-                Where Cinema Comes Alive
-              </div> */}
-            </div>
-          </Link>
+        <div className="relative h-16 flex items-center">
+          {/* Logo (left) */}
+          <div className="flex items-center p-2">
+            <Link to="/" className="flex items-center space-x-3">
+              <Logo size={50} className="drop-shadow-lg" />
+            </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Desktop Navigation (centered on md+) */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-2">
             {navItems.map((item, index) => (
               <Link
                 key={item.name}
                 to={item.path}
                 className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${
-                  isActive(item.path) 
-                    ? 'text-primary active bg-primary/10 border border-primary/20' 
+                  isActive(item.path)
+                    ? 'text-primary active' // keep underline via .active, remove bg/border
                     : 'text-muted-foreground hover:text-primary'
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
@@ -73,23 +63,28 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <div className="ml-4 pl-4 border-l border-border">
-              <ThemeToggle />
-            </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-3">
-            <ThemeToggle />
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-all duration-300 border border-border/30 hover:bg-accent hover:border-border focus-cinema ${
-                isOpen ? 'bg-accent border-border' : ''
-              }`}
-              aria-label="Toggle menu"
-            >
-              <Menu className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`} />
-            </button>
+          {/* Right side actions: Theme toggle (desktop) and mobile controls */}
+          <div className="ml-auto flex items-center space-x-3">
+            {/* Theme toggle: visible on md and hidden on small screens within this slot (mobile keeps its own toggle) */}
+            <div className="hidden md:flex">
+              <ThemeToggle />
+            </div>
+
+            {/* Mobile: Theme toggle + menu button (unchanged behavior) */}
+            <div className="md:hidden flex items-center space-x-3">
+              <ThemeToggle />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className={`p-2 rounded-lg transition-all duration-300 border border-border/30 hover:bg-accent hover:border-border focus-cinema ${
+                  isOpen ? 'bg-accent border-border' : ''
+                }`}
+                aria-label="Toggle menu"
+              >
+                <Menu className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`} />
+              </button>
+            </div>
           </div>
         </div>
 
