@@ -7,6 +7,7 @@ export default function Palmares() {
       <div className="max-w-3xl w-full text-center">
         <div className="mb-6">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">Palmarès</h1>
+          <h2 className="text-5xl md:text-4xl font-bold mb-4">(Awards & Recognitions)</h2>
           <p className="text-lg text-muted-foreground">Coming soon — stay tuned!</p>
         </div>
 

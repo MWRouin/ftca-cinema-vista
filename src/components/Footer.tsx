@@ -33,8 +33,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-muted-foreground mb-4 max-w-md">
-              A passionate community of film enthusiasts celebrating the art of cinema through 
-              screenings, discussions, and shared experiences that bring stories to life.
+              Our mission and goals are far beyond celebrating cinema as an art. We have a philosophical foundation. We use it as a medium to question, reflect, and share ideas.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -101,7 +100,7 @@ export function Footer() {
             © {currentYear} Club des Cinéastes Amateurs de Hammamlif - All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground mt-2 sm:mt-0">
-            Made with ❤️ for cinema lovers
+            Beyond art, cinema as a voice for ideas and critique.
           </p>
         </div>
       </div>
