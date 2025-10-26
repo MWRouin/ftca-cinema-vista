@@ -10,6 +10,7 @@ export default function Home() {
   const moviesRef = useScrollAnimation();
   const eventsRef = useScrollAnimation();
   const ctaRef = useScrollAnimation();
+  const BASE = import.meta.env.BASE_URL || "/";
 
   const featuredMovies = getMovies().slice(0, 3);
 
@@ -37,8 +38,13 @@ export default function Home() {
         ref={heroRef}
         className="relative gradient-dark py-24 lg:py-32 animate-on-scroll overflow-hidden"
       >
+        {/* Background SVG at 10% opacity */}
+        <div
+          className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-20 dark:opacity-20"
+          style={{ backgroundImage: `url(${BASE}Backgrounds/sun-tornado_2.svg)` }}
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.02%22%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2230%22%20r%3D%221%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
+        
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
@@ -88,21 +94,23 @@ export default function Home() {
             {featuredMovies.map((movie, index) => (
               <div key={movie.id} className={`animate-on-scroll-delay-${index + 1}`}>
                 <Card className="card-cinema hover-lift group overflow-hidden">
-                  <div className="aspect-[2/3] overflow-hidden">
-                    <img
-                      src={movie.image}
-                      alt={movie.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                  </div>
-                  <CardHeader className="p-6">
-                    <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
-                      {movie.title}
-                    </CardTitle>
-                    <CardDescription className="text-primary/80">
-                      {movie.genre} • {movie.year}
-                    </CardDescription>
-                  </CardHeader>
+                  <Link to={`/movie/${movie.id}`} className="block">
+                    <div className="aspect-[2/3] overflow-hidden">
+                      <img
+                        src={movie.image}
+                        alt={movie.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                    </div>
+                    <CardHeader className="p-6">
+                      <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
+                        {movie.title}
+                      </CardTitle>
+                      <CardDescription className="text-primary/80">
+                        {movie.genre} • {movie.year}
+                      </CardDescription>
+                    </CardHeader>
+                  </Link>
                 </Card>
               </div>
             ))}
