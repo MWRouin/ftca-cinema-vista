@@ -24,14 +24,14 @@ export const movies: Movie[] = [
         description:
             "In a confined space, a group gathers around a circular table to share a simple ritual that soon reveals the depths of human desire and control. What begins as unity slowly transforms into a reflection on power, dependence, and the fragile balance between need and domination.",
         cast: [
-            "Itaf Daghsen", 
-            "Hichem Gtari", 
-            "Khalil Said", 
-            "Siwar Ben Kileni", 
-            "Nour Ben Chiekh", 
-            "Ahmed Douiri", 
-            "Melek Ajej", 
-            "Wissem Rouin", 
+            "Itaf Daghsen",
+            "Hichem Gtari",
+            "Khalil Said",
+            "Siwar Ben Kileni",
+            "Nour Ben Chiekh",
+            "Ahmed Douiri",
+            "Melek Ajej",
+            "Wissem Rouin",
             "Wadii Klaii"],
         image: `${BASE}Posters/And_then_there_was_One.jpeg`,
         movieUrl: "https://drive.google.com/file/d/19WYQotQilhwJhS3MfkTotK-tmbWAeQTV/preview",
@@ -73,17 +73,34 @@ export const movies: Movie[] = [
             "Amine Ben Mohamed",
             "Wadii Klaii",
             "Sabrine Ghannoudi",
-            "Radhouen Khaled", 
-            "Raoua Khouildi", 
-            "Mohamed Abdi", 
+            "Radhouen Khaled",
+            "Raoua Khouildi",
+            "Mohamed Abdi",
             "Moataz Abderrahim",
-            "Wissem Rouin", 
+            "Wissem Rouin",
             "Mariem Ouertani",
-            "Rania Barkit", 
+            "Rania Barkit",
             "Hichem Gtari",
         ],
         image: `${BASE}/Posters/Sire-Ex-Machina.jpg`,
         movieUrl: "https://drive.google.com/file/d/1t2oXm3sIwbIK5nXXf7XfuNWqxnwIOyqU/preview",
+    },
+    {
+        id: "silence",
+        title: "Silence",
+        genre: "Fiction",
+        year: 2016,
+        director: "Fares Ben Khalifa",
+        duration: "10 minutes",
+        description: 
+            "",
+        cast: [
+            "Aymen Landoulsi",
+            "Amal Belhassen",
+            "Badiaa Bouhrizi"
+        ],
+        image: `${BASE}Posters/silence.jpg`,
+        movieUrl: "https://www.youtube.com/embed/LmrwjbQhByA"
     },
     {
         id: "la-gamelle",
@@ -95,34 +112,11 @@ export const movies: Movie[] = [
         description:
             "",
         cast: [
-            "Manel Karkour", 
+            "Manel Karkour",
             "Saber Zammouri"
         ],
         image: "",//`${BASE}Posters/Caged-bastards-extend.jpg`,
         movieUrl: "https://www.youtube.com/embed/cyJbwaLiU-0",
-    },
-    {
-        id: "aaa",
-        title: "aaa",
-        genre: "aaa",
-        year: 2023,
-        director: "Khalil Said & Wadii Klaii",
-        duration: "8 minutes",
-        description:
-            "In a secluded enclave, an overseer maintains control through mystery and influence. Within this tense and atmospheric world, the inhabitants struggle between survival, power, and desire.",
-        cast: [
-            "Khalil Said",
-            "Iheb Ben Fdilen",
-            "Mohamed Abdi",
-            "Rami Ben Abdallah",
-            "Hichem Gtari",
-            "Melek Ajej",
-            "Wissem Rouine",
-            "Zineddine Mlaouhi",
-            "Hassen Ben Zekri",
-        ],
-        image: `${BASE}Posters/Caged-bastards-extend.jpg`,
-        movieUrl: "https://www.youtube.com/embed/I4sbcCFHEzo",
     },
 ];
 //"https://www.youtube.com/embed/cyJbwaLiU-0"
