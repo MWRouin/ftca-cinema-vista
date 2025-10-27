@@ -10,55 +10,55 @@ export default function About() {
       name: "Khalil Said",
       role: "President",
       bio: "Mechanical engineer with a passion for filmmaking. Passionate about photography and directing.",
-      image: `${BASE}public/Members/khalil.jpg`
+      image: `${BASE}Members/khalil.jpg`
     },
     {
       name: "Safe Khiari",
       role: "General Secretary",
       bio: "French Teacher and film enthusiast, loves exploring cinema from different cultures.",
-      image: `${BASE}public/Members/safe.jpg`
+      image: `${BASE}Members/safe.jpg`
     },
     {
       name: "Seif Eddine El Arbi ",
       role: "Treasurer",
       bio: "Passionate about writing which leads to a deeper understanding of film narratives.",
-      image: `${BASE}public/Members/seif.jpg`
+      image: `${BASE}Members/seif.jpg`
     },
     {
       name: "Wadii Klaii",
       role: "Member",
       bio: "Multi-disciplinary artist with a passion for cinema. Started as a editor and now exploring directing.",
-      image: `${BASE}public/Members/wadii.jpg`
+      image: `${BASE}Members/wadii.jpg`
     },
     {
       name: "Wissem Rouine",
       role: "Member",
       bio: "Web Developer and cinema enthusiast. The creator of this website.",
-      image: `${BASE}public/Members/wissem.jpg`
+      image: `${BASE}Members/wissem.jpg`
     },
     {
       name: "Nour Ben Chiekh",
       role: "Member",
       bio: "Journalist and film lover. Enjoys analyzing films from a socio-political perspective.",
-      image: `${BASE}public/Members/nour.jpg`
+      image: `${BASE}Members/nour.jpg`
     },
     {
       name: "Aziz Baraketi",
       role: "Member",
       bio: "Film Buff and studied cinema. Started as a photographer and now he became a camera operator.",
-      image: `${BASE}public/Members/aziz.jpg`
+      image: `${BASE}Members/aziz.jpg`
     },
     {
       name: "Hichem Gtari",
       role: "Member",
       bio: "Mechanical Engineer with a passion for filmmaking. Enjoys exploring the technical aspects of film production.",
-      image: `${BASE}public/Members/hichem.jpg`
+      image: `${BASE}Members/hichem.jpg`
     },
     {
       name: "Itaf Daghsen",
       role: "Member",
       bio: "Actress and film enthusiast. Passionate about storytelling through performance.",
-      image: `${BASE}public/Members/itaf.jpg`
+      image: `${BASE}Members/itaf.jpg`
     },
   ];
 
