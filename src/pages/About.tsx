@@ -31,7 +31,7 @@ export default function About() {
       image: `${BASE}Members/wadii.jpg`
     },
     {
-      name: "Wissem Rouine",
+      name: "Wissem Rouin",
       role: "Member",
       bio: "Web Developer and cinema enthusiast. The creator of this website.",
       image: `${BASE}Members/wissem.jpg`
@@ -131,7 +131,7 @@ export default function About() {
             <div>
               <div className="rounded-lg overflow-hidden">
                 <img
-                  src={`${BASE}About/ydour.jpg`}
+                  src={`${BASE}About/ydour_web_optimized.jpg`}
                   alt="Ydour event – cinema screening"
                   className="w-full h-full object-cover"
                 />
