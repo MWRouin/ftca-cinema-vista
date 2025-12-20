@@ -117,7 +117,7 @@ export default function Home() {
           </div>
           
           <div className="text-center mt-16">
-            <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
+            <Button asChild variant="outline" className="btn-cinema text-white border-primary/30 hover:bg-primary/10 hover-lift">
               <Link to="/movies">View All Movies</Link>
             </Button>
           </div>
@@ -168,7 +168,7 @@ export default function Home() {
           </div>
           
           <div className="text-center mt-16">
-            <Button asChild variant="outline" className="btn-cinema border-primary/30 hover:bg-primary/10 hover-lift">
+            <Button asChild variant="outline" className="btn-cinema text-white border-primary/30 hover:bg-primary/10 hover-lift">
               <Link to="/events">View All Events</Link>
             </Button>
           </div>
