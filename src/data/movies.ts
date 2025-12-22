@@ -14,9 +14,23 @@ export type Movie = {
 const BASE = import.meta.env.BASE_URL || "/";
 
 export const movies: Movie[] = [
+    /*{
+        id: "0TFjx-C-c5I",
+        title: "wed trabelsia",
+        //" واد الطرابلسية "
+        genre: "test",
+        year: 1777,
+        director: "",
+        duration: "",
+        description:
+            "",
+        cast: [],
+        image: "",
+        movieUrl: "https://www.youtube.com/embed/0TFjx-C-c5I",
+    }, */
     {
-        id: "and-then-there-was-none",
-        title: "And Then There Was None",
+        id: "and-then-there-was-one",
+        title: "And Then There Was One",
         genre: "Fiction",
         year: 2024,
         director: "Khalil Said & Wadii Klaii",
@@ -92,7 +106,7 @@ export const movies: Movie[] = [
         year: 2016,
         director: "Fares Ben Khalifa",
         duration: "10 minutes",
-        description: 
+        description:
             "",
         cast: [
             "Aymen Landoulsi",
@@ -117,27 +131,14 @@ export const movies: Movie[] = [
         ],
         image: `${BASE}Posters/La-Gamelle.png`,
         movieUrl: "https://www.youtube.com/embed/cyJbwaLiU-0",
-    },/* 
+    },
     {
-        id: "0TFjx-C-c5I",
-        title: "test",
+        id: "chute-libre",
+        title: "Chute Libre",
         genre: "test",
         year: 1777,
-        director: "",
-        duration: "",
-        description:
-            "",
-        cast: [],
-        image: "",
-        movieUrl: "https://www.youtube.com/embed/0TFjx-C-c5I",
-    }, */
-    {
-        id: "3GXHpGOlZ0A",
-        title: "test",
-        genre: "test",
-        year: 1777,
-        director: "",
-        duration: "",
+        director: "Amor Sbika",
+        duration: "15:46",
         description:
             "",
         cast: [],
@@ -145,12 +146,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/3GXHpGOlZ0A",
     },
     {
-        id: "yVOap57hQlc",
-        title: "test",
+        id: "kari-for-dog",
+        title: "Kari for Dog",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "02:17",
         description:
             "",
         cast: [],
@@ -158,12 +159,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/yVOap57hQlc",
     },
     {
-        id: "J4_7A6C06fI",
-        title: "test",
+        id: "le-sifflet",
+        title: "Le Sifflet",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "22:52",
         description:
             "",
         cast: [],
@@ -171,12 +172,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/J4_7A6C06fI",
     },
     {
-        id: "BxRwxUEQRuw",
-        title: "test",
+        id: "l-eveil-2",
+        title: "L' Eveil 2",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "8:45",
         description:
             "",
         cast: [],
@@ -184,12 +185,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/BxRwxUEQRuw",
     },
     {
-        id: "IEuiFhdonZY",
-        title: "test",
+        id: "chute-libre-2",
+        title: "Chute Libre",
         genre: "test",
         year: 1777,
-        director: "",
-        duration: "",
+        director: "Amor Sbika",
+        duration: "15:46",
         description:
             "",
         cast: [],
@@ -197,12 +198,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/IEuiFhdonZY",
     },
     {
-        id: "5tTaPMYEcwk",
-        title: "test",
+        id: "avenue-des-histoires-amputees",
+        title: "Avenue des Histoires Amputées",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "17:09",
         description:
             "",
         cast: [],
@@ -210,12 +211,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/5tTaPMYEcwk",
     },
     {
-        id: "Xwc4sqBuzeM",
-        title: "test",
+        id: "thara-taieb",
+        title: "Thara Taieb",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "9:02",
         description:
             "",
         cast: [],
@@ -223,12 +224,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/Xwc4sqBuzeM",
     },
     {
-        id: "-RqITnp5Z7M",
-        title: "test",
+        id: "les-galleriens",
+        title: "Les galleriens",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "12:30",
         description:
             "",
         cast: [],
@@ -236,12 +237,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/-RqITnp5Z7M",
     },
     {
-        id: "fjLGuhgbGps",
-        title: "test",
+        id: "ذاكرة-راهينا",
+        title: "ذاكرة راهينا",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "7:37",
         description:
             "",
         cast: [],
@@ -249,12 +250,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/fjLGuhgbGps",
     },
     {
-        id: "tcf6UorlgEo",
-        title: "test",
+        id: "123-soleil",
+        title: "123 Soleil",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "4:20",
         description:
             "",
         cast: [],
@@ -262,12 +263,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/tcf6UorlgEo",
     },
     {
-        id: "HoeVNDhcDWo",
-        title: "test",
+        id: "graine-de-lait-graine-de-vie",
+        title: "Graine de Lait Graine de Vie",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "6:43",
         description:
             "",
         cast: [],
@@ -275,12 +276,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/HoeVNDhcDWo",
     },
     {
-        id: "1_Eus_4KkZI",
-        title: "test",
+        id: "v",
+        title: "V",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "2:25",
         description:
             "",
         cast: [],
@@ -288,12 +289,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/1_Eus_4KkZI",
     },
     {
-        id: "E3O6XSeZLr0",
-        title: "test",
+        id: "au-pays-des-meres-vielles",
+        title: "Au Pays des Méres Vielles",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "14:10",
         description:
             "",
         cast: [],
@@ -301,12 +302,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/E3O6XSeZLr0",
     },
     {
-        id: "tuuI6huNJ68",
-        title: "test",
+        id: "accident-de-travail",
+        title: "Accident de Travail",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "8:41",
         description:
             "",
         cast: [],
@@ -314,12 +315,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/tuuI6huNJ68",
     },
     {
-        id: "EzVzuup33Xg",
-        title: "test",
+        id: "l-araignée",
+        title: "L'Araignée",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "9:45",
         description:
             "",
         cast: [],
@@ -327,12 +328,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/EzVzuup33Xg",
     },
     {
-        id: "wSsrVYmT6BY",
-        title: "test",
+        id: "l-epingle",
+        title: "L'Épingle",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "4:20",
         description:
             "",
         cast: [],
@@ -340,25 +341,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/wSsrVYmT6BY",
     },
     {
-        id: "LmrwjbQhByA",
-        title: "test",
+        id: "home",
+        title: "Home",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
-        description:
-            "",
-        cast: [],
-        image: "",
-        movieUrl: "https://www.youtube.com/embed/LmrwjbQhByA",
-    },
-    {
-        id: "u6t1FAir0vc",
-        title: "test",
-        genre: "test",
-        year: 1777,
-        director: "",
-        duration: "",
+        duration: "5:42",
         description:
             "",
         cast: [],
@@ -366,12 +354,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/u6t1FAir0vc",
     },
     {
-        id: "nflS_EOZwX0",
-        title: "test",
+        id: "mad-ant",
+        title: "Mad Ant",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "5:57",
         description:
             "",
         cast: [],
@@ -379,12 +367,12 @@ export const movies: Movie[] = [
         movieUrl: "https://www.youtube.com/embed/nflS_EOZwX0",
     },
     {
-        id: "CSOq74FcOtE",
-        title: "test",
+        id: "3al-7it",
+        title: "3al 7it",
         genre: "test",
         year: 1777,
         director: "",
-        duration: "",
+        duration: "3:12",
         description:
             "",
         cast: [],
@@ -549,7 +537,7 @@ export const movies: Movie[] = [
     },
     {
         id: "eukOd7aTAg8",
-        title: "test",
+        title: " Des biéres et des progrés ",
         genre: "test",
         year: 1777,
         director: "",
