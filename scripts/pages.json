@@ -1,0 +1,17 @@
+{
+    "staticPages": [
+        "404",
+        "events",
+        "movies",
+        "blog",
+        "about",
+        "palmares",
+        "contact"
+    ],
+    "dynamicPages": [
+        {
+            "base": "movies/",
+            "context": ""
+        }
+    ]
+}
