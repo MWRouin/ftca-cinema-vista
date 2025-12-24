@@ -5,7 +5,6 @@ import path from 'path';
 const isString = (value) => typeof value === 'string' || value instanceof String;
 
 function assertValue(test, error = "") {
-    if (typeof test !== 'boolean') throw new Error("Wrong usage of assert: test has to be a boolean");
     if (!isString(error)) throw new Error("Wrong usage of assert: error has to be a string");
     if (!test) throw new Error("Assertion error: " + error);
 }
