@@ -17,10 +17,10 @@ export default function Movies() {
     ? movies 
     : movies.filter(movie => movie.genre === selectedGenre);
 
-  console.log('Movies component rendered');
-  console.log('Filtered movies:', filteredMovies);
-  console.log('Selected genre:', selectedGenre);
-  console.log('Movie cards should now be visible');
+  //console.log('Movies component rendered');
+  //console.log('Filtered movies:', filteredMovies);
+  //console.log('Selected genre:', selectedGenre);
+  //console.log('Movie cards should now be visible');
 
   return (
     <div className="min-h-screen py-12">
@@ -66,8 +66,8 @@ export default function Movies() {
                         src={movie.image}
                         alt={movie.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        onLoad={() => console.log(`Image loaded for ${movie.title}`)}
-                        onError={() => console.log(`Image failed to load for ${movie.title}`)}
+                        //onLoad={() => console.log(`Image loaded for ${movie.title}`)}
+                        //onError={() => console.log(`Image failed to load for ${movie.title}`)}
                       />
                     </div>
                     <CardHeader className="pb-2">
