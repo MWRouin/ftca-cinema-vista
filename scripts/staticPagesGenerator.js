@@ -65,7 +65,7 @@ async function main([nodePath, scriptPath, buildFolderPath, ...rest]) {
         promises.push(copyFile(indexPath, normPath));
     }
 
-    const moviesFolderPath = path.join(normalizedBuildFolderPath, "movies/");
+    const moviesFolderPath = path.join(normalizedBuildFolderPath, "movie/");
     const moviesIds = getMoviesIds(rawMovies);
 
     await fs.mkdir(moviesFolderPath, { recursive: true });
