@@ -1,7 +1,5 @@
 import fs from 'fs/promises';
 import fsSync from 'fs';
-import pages from './pages.json' assert { type: 'json' };
-import rawMovies from '../src/data/movies.json' assert { type: 'json' };
 import path from 'path';
 
 const isString = (value) => typeof value === 'string' || value instanceof String;
@@ -45,6 +43,15 @@ function normalizeFolderPath(rawPath) {
 
 async function main([nodePath, scriptPath, buildFolderPath, ...rest]) {
     console.log("Starting staticPagesGenerator with folder:", buildFolderPath);
+
+
+    const pages = JSON.parse(
+        await fs.readFile(new URL('./pages.json', import.meta.url), 'utf-8')
+    );
+
+    const rawMovies = JSON.parse(
+        await fs.readFile(new URL('../src/data/movies.json', import.meta.url), 'utf-8')
+    );
 
     assertValue(buildFolderPath, "Requires build folder path");
     assertValue(fsSync.existsSync(buildFolderPath), "Build folder path does not exist");
