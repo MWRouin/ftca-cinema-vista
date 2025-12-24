@@ -1,7 +1,8 @@
-const fs = require('fs').promises; // use the promise version of fs
-const fsSync = require('fs');      // Sync fs for existsSync
-const pages = require('./pages.json');
-const rawMovies = require('../src/data/movies.json');
+import fs from 'fs/promises';
+import fsSync from 'fs';
+import pages from './pages.json' assert { type: 'json' };
+import rawMovies from '../src/data/movies.json' assert { type: 'json' };
+import path from 'path';
 
 const isString = (value) => typeof value === 'string' || value instanceof String;
 
@@ -54,19 +55,17 @@ async function main([nodePath, scriptPath, buildFolderPath, ...rest]) {
     const indexPath = normalizedBuildFolderPath + "index.html";
 
     for (const pagePath of pages.staticPages) {
-        const normPath = normalizedBuildFolderPath + pagePath + '.html';
+        const normPath = path.join(normalizedBuildFolderPath, pagePath + '.html');
         promises.push(copyFile(indexPath, normPath));
     }
 
-    promises.push(copyFile(indexPath, errorPagePath));
-
-    const moviesFolderPath = normalizedBuildFolderPath + "movies/";
+    const moviesFolderPath = path.join(normalizedBuildFolderPath, "movies/");
     const moviesIds = getMoviesIds(rawMovies);
 
     await fs.mkdir(moviesFolderPath, { recursive: true });
 
     for (const movieId of moviesIds) {
-        const moviePath = moviesFolderPath + movieId;
+        const moviePath = path.join(moviesFolderPath, movieId);
         promises.push(copyFile(indexPath, moviePath));
     }
 
