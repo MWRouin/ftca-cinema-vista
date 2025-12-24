@@ -1,5 +1,5 @@
-FTCA Cinema Vista Production Branch
-===================================
+Official Website for "Club des cinéastes amateurs d'Hammam-Lif"
+=================
 
 A modern, responsive cinema club website built with Vite + React + TypeScript and shadcn/ui. It features themed UI, routing, and sample pages like Home, Movies, Events, Blog, About, and Contact.
 
