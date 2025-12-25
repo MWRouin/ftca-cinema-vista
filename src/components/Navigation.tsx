@@ -33,11 +33,10 @@ export function Navigation() {
   const isActive = (path: string) => normalize(location.pathname) === normalize(path);
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 border-b ${
-      scrolled 
-        ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border' 
-        : 'bg-background/90 backdrop-blur-md border-border/30'
-    }`}>
+    <nav className={`sticky top-0 z-50 transition-all duration-300 border-b ${scrolled
+      ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border'
+      : 'bg-background/90 backdrop-blur-md border-border/30'
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
           {/* Logo (left) */}
@@ -53,11 +52,10 @@ export function Navigation() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${
-                  isActive(item.path)
-                    ? 'text-primary active' // keep underline via .active, remove bg/border
-                    : 'text-muted-foreground hover:text-primary'
-                }`}
+                className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${isActive(item.path)
+                  ? 'text-primary active' // keep underline via .active, remove bg/border
+                  : 'text-muted-foreground hover:text-primary'
+                  }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {item.name}
@@ -77,9 +75,8 @@ export function Navigation() {
               <ThemeToggle />
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`p-2 rounded-lg transition-all duration-300 border border-border/30 hover:bg-accent hover:border-border focus-cinema ${
-                  isOpen ? 'bg-accent border-border' : ''
-                }`}
+                className={`p-2 rounded-lg transition-all duration-300 border border-border/30 hover:bg-accent hover:border-border focus-cinema ${isOpen ? 'bg-accent border-border' : ''
+                  }`}
                 aria-label="Toggle menu"
               >
                 <Menu className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`} />
@@ -89,28 +86,33 @@ export function Navigation() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="px-2 pt-2 pb-4 space-y-1 card-cinema rounded-lg mt-2 mb-4 border border-border/50">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 border ${
-                  isActive(item.path)
+        <div
+          className={
+            `md:hidden fixed left-0 right-0 top-16 z-40 transition-all duration-300 ${isOpen
+              ? 'opacity-100 pointer-events-auto'
+              : 'opacity-0 pointer-events-none'}`
+          }
+        >
+          <div className="max-h-[calc(100vh-4rem)] overflow-y-auto px-2 pt-2 pb-6">
+            <div className="space-y-1 card-cinema rounded-lg border border-border/50">
+              {navItems.map((item, index) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 border ${isActive(item.path)
                     ? 'text-primary bg-primary/10 border-primary/20'
                     : 'text-muted-foreground hover:text-primary hover:bg-accent/50 border-transparent hover:border-border/30'
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+                    }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </div>
+
         </div>
       </div>
-    </nav>
+    </nav >
   );
 }

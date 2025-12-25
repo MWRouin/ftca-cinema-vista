@@ -42,10 +42,10 @@ export function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors group"
+                  className="w-9 h-9 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 rounded-lg flex items-center justify-center transition-colors group"
                   aria-label={label}
                 >
-                  <Icon className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
+                  <Icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                 </a>
               ))}
             </div>

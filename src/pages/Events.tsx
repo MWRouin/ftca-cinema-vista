@@ -1,9 +1,11 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { PageTitle } from '@/components/customUi/page-title';
+import { CalendarX, FolderX } from 'lucide-react';
 
 export default function Events() {
-  const events = [
+  const events = [/* 
     {
       id: 1,
       title: "Classic Film Night: Casablanca",
@@ -47,17 +49,17 @@ export default function Events() {
       image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80",
       status: "past",
       category: "Festival"
-    }
+    } */
   ];
 
   const upcomingEvents = events.filter(event => event.status === 'upcoming');
   const pastEvents = events.filter(event => event.status === 'past');
 
   const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
@@ -99,7 +101,7 @@ export default function Events() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Events</h1>
+          <PageTitle title='Events' />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Join our community events, screenings, and workshops
@@ -116,21 +118,35 @@ export default function Events() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 bg-muted/50 rounded-lg">
-              <p className="text-lg text-muted-foreground">No upcoming events scheduled.</p>
-              <p className="text-sm text-muted-foreground mt-2">Check back soon for new announcements!</p>
+            <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
+              <CalendarX className="w-20 h-20 mx-auto text-muted-foreground" />
+
+              <p className="text-lg text-muted-foreground">
+                No upcoming events scheduled.
+              </p>
+
+              <p className="text-sm text-muted-foreground">
+                Check back soon for new announcements!
+              </p>
             </div>
           )}
         </section>
 
-        {/* Past Events */}
-        <section>
+        {/* Past Events */}<section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Past Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {pastEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
+          {pastEvents.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {pastEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
+              <FolderX className="w-20 h-20 mx-auto text-muted-foreground" />
+              <p className="text-lg text-muted-foreground">No past events currently.</p>
+              <p className="text-sm text-muted-foreground">Check back soon!</p>
+            </div>
+          )}
         </section>
       </div>
     </div>

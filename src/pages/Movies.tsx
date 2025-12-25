@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'react-router-dom';
 import { getMovies } from '@/data/movies';
+import { PageTitle } from '@/components/customUi/page-title';
 
 export default function Movies() {
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
@@ -13,26 +14,27 @@ export default function Movies() {
 
   const genres = ['all', ...Array.from(new Set(movies.map(movie => movie.genre)))];
 
-  const filteredMovies = selectedGenre === 'all' 
-    ? movies 
+  const filteredMovies = selectedGenre === 'all'
+    ? movies
     : movies.filter(movie => movie.genre === selectedGenre);
 
-  console.log('Movies component rendered');
-  console.log('Filtered movies:', filteredMovies);
-  console.log('Selected genre:', selectedGenre);
-  console.log('Movie cards should now be visible');
+  //console.log('Movies component rendered');
+  //console.log('Filtered movies:', filteredMovies);
+  //console.log('Selected genre:', selectedGenre);
+  //console.log('Movie cards should now be visible');
 
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Movie Catalog</h1>
+          <PageTitle title='Movie Catalog' />
+          <h1 className="text-5xl md:text-6xl font-bold mb-6"></h1>
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Explore our curated collection of cinematic masterpieces
           </div>
-          
+
           {/* Filter */}
           <div className="flex justify-center">
             <Select value={selectedGenre} onValueChange={setSelectedGenre}>
@@ -55,8 +57,8 @@ export default function Movies() {
           {filteredMovies.map((movie, index) => {
             console.log(`Rendering visible movie card ${index + 1}:`, movie.title);
             return (
-              <div 
-                key={movie.id} 
+              <div
+                key={movie.id}
                 className="opacity-100 visible"
               >
                 <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
@@ -66,8 +68,8 @@ export default function Movies() {
                         src={movie.image}
                         alt={movie.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        onLoad={() => console.log(`Image loaded for ${movie.title}`)}
-                        onError={() => console.log(`Image failed to load for ${movie.title}`)}
+                      //onLoad={() => console.log(`Image loaded for ${movie.title}`)}
+                      //onError={() => console.log(`Image failed to load for ${movie.title}`)}
                       />
                     </div>
                     <CardHeader className="pb-2">
@@ -96,9 +98,9 @@ export default function Movies() {
               <span className="text-white font-bold text-2xl">?</span>
             </div>
             <div className="text-xl text-muted-foreground">No movies found for the selected genre.</div>
-            <Button 
-              onClick={() => setSelectedGenre('all')} 
-              variant="outline" 
+            <Button
+              onClick={() => setSelectedGenre('all')}
+              variant="outline"
               className="mt-4 hover-lift"
             >
               View All Movies

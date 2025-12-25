@@ -15,6 +15,10 @@ export default function Palmares() {
         </div>
 
         <div className="text-center space-y-12">
+          {/* Cup emote */}
+          <div className="text-9xl select-none" aria-label="Trophy Cup" role="img">
+            🏆
+          </div>
 
           {/* Message */}
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">

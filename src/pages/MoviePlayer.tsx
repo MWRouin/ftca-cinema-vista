@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getMovieById, getRelatedMovies } from '@/data/movies';
+import { PageTitle } from '@/components/customUi/page-title';
 
 export default function MoviePlayer() {
   const { id } = useParams();
@@ -55,7 +56,7 @@ export default function MoviePlayer() {
           </div>
           <div className="lg:col-span-2 space-y-6">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{movie.title}</h1>
+              <PageTitle title={movie.title} />
               <div className="flex flex-wrap gap-2 mb-4">
                 <Badge>{movie.genre}</Badge>
                 <Badge variant="outline">{movie.year}</Badge>
