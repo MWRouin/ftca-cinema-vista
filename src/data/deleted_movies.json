@@ -1,0 +1,46 @@
+[
+    {
+        "id": "kari-for-dog",
+        "title": "Kari for Dog",
+        "genre": "Fiction",
+        "year": 2005,
+        "director": "Imen Nafti",
+        "duration": "02:17",
+        "description": "Dans une cellule close, un chien affamé attend. Un homme lui offre en pâture une proie inattendue.",
+        "cast": [
+            "TITOU",
+            "Ghassen Ben Slama",
+            "Khalil Khaldi",
+            "Maher Ben Khalifa"
+        ],
+        "image": "__BASE_URL__/Posters/kari_for_dog.jpg",
+        "movieUrl": "https://www.youtube.com/embed/yVOap57hQlc",
+        "public": true
+    },
+        {
+        "id": "mad-ant",
+        "title": "Mad Ant",
+        "genre": "Fiction",
+        "year": "",
+        "director": "",
+        "duration": "5:57",
+        "description": "",
+        "cast": [],
+        "image": "__BASE_URL__/Posters/mad_ant.jpg",
+        "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
+        "public": true
+    },
+        {
+        "id": "catourne",
+        "title": "Et pourtant ça tourne",
+        "genre": "Fiction",
+        "year": "",
+        "director": "",
+        "duration": "",
+        "description": "",
+        "cast": [],
+        "image": "",
+        "movieUrl": "https://www.youtube.com/embed/V2SnHlKTIjA",
+        "public": true
+    }
+]
