@@ -1,6 +1,8 @@
 
+import { PageTitle } from '@/components/customUi/page-title';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -35,12 +37,18 @@ export default function Contact() {
     alert('Thank you for your message! We\'ll get back to you soon.');
   };
 
+  const socialLinks = [
+    { icon: Facebook, href: 'https://www.facebook.com/ftcahamhama/', label: 'Facebook' },
+    { icon: Instagram, href: 'https://www.instagram.com/ftca.hlif/', label: 'Instagram' },
+    { icon: Youtube, href: 'https://www.youtube.com/@ftcahammamlif', label: 'YouTube' },
+  ];
+
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Contact Us</h1>
+          <PageTitle title='Contact Us' />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Get in touch with our team or join our community
@@ -54,7 +62,7 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
                 <CardDescription>
-                  Have questions about our events, want to suggest a film, or interested in joining? 
+                  Have questions about our events, want to suggest a film, or interested in joining?
                   We'd love to hear from you!
                 </CardDescription>
               </CardHeader>
@@ -95,7 +103,7 @@ export default function Contact() {
                       required
                       value={formData.subject}
                       onChange={handleInputChange}
-                      placeholder="What's this about?"
+                      placeholder="What is this about?"
                     />
                   </div>
                   <div>
@@ -127,15 +135,24 @@ export default function Contact() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-1">Email</h4>
+                  <div className="flex items-center space-x-2 mb-1">
+                    <Mail className="w-5 h-5 text-primary  dark:text-accent" />
+                    <h4 className="font-semibold">Email</h4>
+                  </div>
                   <p className="text-muted-foreground">ftca.hammamlif@gmail.com</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">Phone</h4>
+                  <div className="flex items-center space-x-2 mb-1">
+                    <Phone className="w-5 h-5 text-primary  dark:text-accent" />
+                    <h4 className="font-semibold">Phone</h4>
+                  </div>
                   <p className="text-muted-foreground">+216 55 466 297</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">Address</h4>
+                  <div className="flex items-center space-x-2 mb-1">
+                    <MapPin className="w-5 h-5 text-primary  dark:text-accent" />
+                    <h4 className="font-semibold">Address</h4>
+                  </div>
                   <p className="text-muted-foreground">
                     80 RN1, Hammam-Lif
                   </p>
@@ -164,11 +181,24 @@ export default function Contact() {
               <CardContent>
                 <div className="space-y-2">
                   <p className="text-muted-foreground">Stay connected with our latest news and events:</p>
-                  <div className="flex space-x-4">
-                    <a href="https://www.facebook.com/ftcahamhama/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Facebook</a>
+                  <div className="flex space-x-5">
+                    {socialLinks.map(({ icon: Icon, href, label }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        //className="w-9 h-9 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors group"
+                        className="flex items-center justify-center space-x-2 text-primary dark:text-accent hover:scale-110 transition-colors group"
+                        aria-label={label}
+                      >
+                        <Icon className="w-5 h-5 group-hover:scale-110" /> <span className="group-hover:scale-110">{label}</span>
+                      </a>
+                    ))}
+                    {/* <a href="https://www.facebook.com/ftcahamhama/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Facebook</a>
                     <a href="https://www.instagram.com/ftca.hlif/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Instagram</a>
                     <a href="https://www.youtube.com/@ftcahammamlif" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">YouTube</a>
-                  </div>
+                   */}</div>
                 </div>
               </CardContent>
             </Card>

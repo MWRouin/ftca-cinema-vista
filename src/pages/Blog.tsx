@@ -2,6 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import { PageTitle } from '@/components/customUi/page-title';
 
 export default function Blog() {
   const articles = [
@@ -92,7 +93,7 @@ export default function Blog() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Blog & Articles</h1>
+          <PageTitle title='Blog & Articles'/>
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Insights, reviews, and deep dives into the world of cinema

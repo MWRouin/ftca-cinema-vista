@@ -6,8 +6,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/0TFjx-C-c5I",
@@ -20,8 +19,7 @@
         "year": 2024,
         "director": "Khalil Said & Wadii Klaii",
         "duration": "10 minutes",
-        "description":
-            "In a confined space, a group gathers around a circular table to share a simple ritual that soon reveals the depths of human desire and control. What begins as unity slowly transforms into a reflection on power, dependence, and the fragile balance between need and domination.",
+        "description": "In a confined space, a group gathers around a circular table to share a simple ritual that soon reveals the depths of human desire and control. What begins as unity slowly transforms into a reflection on power, dependence, and the fragile balance between need and domination.",
         "cast": [
             "Itaf Daghsen",
             "Hichem Gtari",
@@ -31,7 +29,8 @@
             "Ahmed Douiri",
             "Melek Ajej",
             "Wissem Rouin",
-            "Wadii Klaii"],
+            "Wadii Klaii"
+        ],
         "image": "__BASE_URL__/Posters/And_then_there_was_One.jpeg",
         "movieUrl": "https://drive.google.com/file/d/19WYQotQilhwJhS3MfkTotK-tmbWAeQTV/preview",
         "public": true
@@ -43,8 +42,7 @@
         "year": 2023,
         "director": "Khalil Said & Wadii Klaii",
         "duration": "8 minutes",
-        "description":
-            "In a secluded enclave, an overseer maintains control through mystery and influence. Within this tense and atmospheric world, the inhabitants struggle between survival, power, and desire.",
+        "description": "In a secluded enclave, an overseer maintains control through mystery and influence. Within this tense and atmospheric world, the inhabitants struggle between survival, power, and desire.",
         "cast": [
             "Khalil Said",
             "Iheb Ben Fdilen",
@@ -67,21 +65,27 @@
         "year": 2023,
         "director": "Safa Khiari",
         "duration": "10 minutes",
-        "description":
-            "",
+        "description": "Dans une usine en ruine, des ouvriers s’acharnent à produire l’absurde sous l’autorité d’un maître qui exploite et rejette sans cesse leur labeur. Jusqu’au jour où l’un d’eux fabrique un objet différent. Trop différent.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Dans une usine en ruine, des ouvriers s’acharnent à produire l’absurde sous l’autorité d’un maître qui exploite et rejette sans cesse leur labeur. Jusqu’au jour où l’un d’eux fabrique un objet différent. Trop différent.",
+                "en": "Dans une usine en ruine, des ouvriers s’acharnent à produire l’absurde sous l’autorité d’un maître qui exploite et rejette sans cesse leur labeur. Jusqu’au jour où l’un d’eux fabrique un objet différent. Trop différent."
+            }
+        },
         "cast": [
             "Khalil Said",
-            "Amine Ben Mohamed",
-            "Wadii Klaii",
             "Sabrine Ghannoudi",
-            "Radhouen Khaled",
-            "Raoua Khouildi",
-            "Mohamed Abdi",
-            "Moataz Abderrahim",
+            "Mohamed Amine Ben Mohamed",
+            "Wadii Klaii",
+            "Hichem Gtari",
             "Wissem Rouin",
+            "Mohamed Abdi",
+            "Raoua Khouildi",
+            "Radhouen Khaled",
+            "Moataz Abderahim",
             "Mariem Ouertani",
-            "Rania Barkit",
-            "Hichem Gtari"
+            "Rania Barkit"
         ],
         "image": "__BASE_URL__/Posters/Sire-Ex-Machina.jpg",
         "movieUrl": "https://drive.google.com/file/d/1t2oXm3sIwbIK5nXXf7XfuNWqxnwIOyqU/preview",
@@ -94,8 +98,7 @@
         "year": 2016,
         "director": "Fares Ben Khalifa",
         "duration": "10 minutes",
-        "description":
-            "",
+        "description": "",
         "cast": [
             "Aymen Landoulsi",
             "Amal Belhassen",
@@ -112,8 +115,7 @@
         "year": 2010,
         "director": "Meher Ben Khlifa",
         "duration": "9 minutes",
-        "description":
-            "Behind closed doors, a prisoner attempts to stop the flow of torture.",
+        "description": "Behind closed doors, a prisoner attempts to stop the flow of torture.",
         "cast": [
             "Manel Karkour",
             "Saber Zammouri"
@@ -124,13 +126,12 @@
     },
     {
         "id": "chute-libre",
-        "title": "Chute Libre",
+        "title": "Chute libre - أحلام مستحيلة",
         "genre": "test",
-        "year": 1777,
+        "year": 2008,
         "director": "Amor Sbika",
         "duration": "15:46",
-        "description":
-            "",
+        "description": "Des hommes et des femmes parlent de leurs rêves, puis de ce qu’ils sont devenus. Entre aspirations étouffées et fatigue économique, leurs voix révèlent une réalité qui sape peu à peu l’élan, la culture, et l’avenir qu’ils imaginaient .",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/3GXHpGOlZ0A",
@@ -140,12 +141,13 @@
         "id": "kari-for-dog",
         "title": "Kari for Dog",
         "genre": "test",
-        "year": 1777,
+        "year": 2005,
         "director": "",
         "duration": "02:17",
-        "description":
-            "",
-        "cast": [],
+        "description": "Dans une cellule close, un chien affamé attend. Un homme lui offre en pâture une proie inattendue.",
+        "cast": [
+            "Ghassen Jamia"
+        ],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/yVOap57hQlc",
         "public": true
@@ -155,24 +157,22 @@
         "title": "Le Sifflet",
         "genre": "test",
         "year": 1777,
-        "director": "",
+        "director": "Ridha Ben Halima",
         "duration": "22:52",
-        "description":
-            "",
+        "description": "Le Sifflet raconte l’histoire de femmes confrontées à l’exploitation au travail. À travers leurs témoignages, le film montre leur lutte, leur solidarité et leur détermination à faire entendre leur voix.",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/J4_7A6C06fI",
         "public": true
     },
     {
-        "id": "l-eveil-2",
-        "title": "L' Eveil 2",
+        "id": "l-eveil",
+        "title": "L' Eveil",
         "genre": "test",
-        "year": 1968,
+        "year": 1967,
         "director": "Salma Baccar",
         "duration": "8:45",
-        "description":
-            "",
+        "description": "Diplômée du baccalauréat, une jeune femme tente d’accéder au monde du travail. Elle se confronte à une réalité brutale marquée par l’emprise masculine sur ses choix et son corps.",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/BxRwxUEQRuw",
@@ -185,8 +185,7 @@
         "year": 1777,
         "director": "Amor Sbika",
         "duration": "15:46",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/IEuiFhdonZY",
@@ -199,8 +198,7 @@
         "year": 2010,
         "director": "Amor Sbika & Anis Tounsi",
         "duration": "17:09",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/5tTaPMYEcwk",
@@ -210,11 +208,10 @@
         "id": "thara-taieb",
         "title": "Thara Taieb",
         "genre": "test",
-        "year": 1777,
-        "director": "",
+        "year": 1987,
+        "director": "Réalisation collective",
         "duration": "9:02",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/Xwc4sqBuzeM",
@@ -227,22 +224,20 @@
         "year": 1969,
         "director": "Hamadi Ghelala",
         "duration": "12:30",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/-RqITnp5Z7M",
         "public": true
     },
     {
-        "id": "ذاكرة-راهينا",
-        "title": "ذاكرة راهينا",
+        "id": "ذاكرة-رهينة",
+        "title": "ذاكرة رهينة",
         "genre": "test",
-        "year": 1777,
-        "director": "",
+        "year": 1995,
+        "director": "Omar Sbika",
         "duration": "7:37",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/fjLGuhgbGps",
@@ -255,9 +250,15 @@
         "year": 2005,
         "director": "Imen Nafti",
         "duration": "4:20",
-        "description":
-            "",
-        "cast": [],
+        "description": "",
+        "cast": [
+            "Hamed",
+            "Amine",
+            "Mouna",
+            "Mariam",
+            "Farouk",
+            "Ahmed"
+        ],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/tcf6UorlgEo",
         "public": true
@@ -269,8 +270,7 @@
         "year": 2006,
         "director": "",
         "duration": "6:43",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/HoeVNDhcDWo",
@@ -283,8 +283,7 @@
         "year": 2013,
         "director": "Fares Ben Khalifa",
         "duration": "2:25",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/1_Eus_4KkZI",
@@ -297,8 +296,7 @@
         "year": 1777,
         "director": "",
         "duration": "14:10",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/E3O6XSeZLr0",
@@ -311,8 +309,7 @@
         "year": 1777,
         "director": "",
         "duration": "8:41",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/tuuI6huNJ68",
@@ -325,8 +322,7 @@
         "year": 1777,
         "director": "",
         "duration": "9:45",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/EzVzuup33Xg",
@@ -339,8 +335,7 @@
         "year": 1777,
         "director": "",
         "duration": "4:20",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/wSsrVYmT6BY",
@@ -353,9 +348,10 @@
         "year": 2016,
         "director": "Ines Ben Halima",
         "duration": "5:42",
-        "description":
-            "",
-        "cast": ["Youssef El Behi"],
+        "description": "",
+        "cast": [
+            "Youssef El Behi"
+        ],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/u6t1FAir0vc",
         "public": true
@@ -367,8 +363,7 @@
         "year": 1777,
         "director": "",
         "duration": "5:57",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
@@ -381,8 +376,7 @@
         "year": 1777,
         "director": "",
         "duration": "3:12",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/CSOq74FcOtE",
@@ -395,8 +389,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/IwgBUO4ytPg",
@@ -409,8 +402,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/exchuf6B5wo",
@@ -423,8 +415,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/z4QYI_pfS8k",
@@ -437,8 +428,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/o-sYF4R-kwM",
@@ -451,8 +441,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/I4sbcCFHEzo",
@@ -465,8 +454,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/V2SnHlKTIjA",
@@ -479,8 +467,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/oBFUiVaU_ls",
@@ -493,8 +480,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/FuywJo34B1Y",
@@ -507,8 +493,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/R2eAdk96RTU",
@@ -521,8 +506,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/sMg0arZ7lPM",
@@ -535,8 +519,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/8JKJnARlwgI",
@@ -549,8 +532,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/Oz9AcNMuUZw",
@@ -563,8 +545,7 @@
         "year": 1777,
         "director": "",
         "duration": "",
-        "description":
-            "",
+        "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/eukOd7aTAg8",

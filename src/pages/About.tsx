@@ -1,4 +1,5 @@
 
+import { PageTitle } from '@/components/customUi/page-title';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function About() {
@@ -67,7 +68,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Our Story</h1>
+          <PageTitle title='Our Story'/>
           <div className="section-divider w-24 mx-auto mb-8"></div>
           {/* <div className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             Discover our story, mission, and the passionate individuals who make our cinema club a vibrant community
