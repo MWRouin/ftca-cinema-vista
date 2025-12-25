@@ -40,8 +40,8 @@ export default function Home() {
       >
         {/* Background SVG at 10% opacity */}
         <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-20 dark:opacity-20"
-          style={{ backgroundImage: `url(${BASE}Backgrounds/sun-tornado_2.svg)` }}
+          className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-15 dark:opacity-15"
+          style={{ backgroundImage: `url(https://acte.tn/sites/default/files/2021-09/hammam%20lif.jpg)` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3"></div>
 
