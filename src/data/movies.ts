@@ -4,7 +4,7 @@ export type Movie = {
     id: string;
     title: string;
     genre: string;
-    year: number;
+    year: number | '-';
     director: string;
     image: string;
     duration?: string;
@@ -26,6 +26,7 @@ function MovieFromJsonObject(jsonObject: any): Movie {
         ...jsonObject,
         image: jsonObject.image ? ResolveAssetUrl(jsonObject.image) : "",
         public: jsonObject.public ? jsonObject.public : false,
+        year: typeof jsonObject.year === 'number' ? jsonObject.year : ''
     };
 }
 

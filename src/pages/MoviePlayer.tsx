@@ -15,12 +15,19 @@ export default function MoviePlayer() {
 
   if (!movie) {
     return (
-      <div className="min-h-screen py-12">
-        <div className="max-w-3xl mx-auto px-4">
-          <Card>
+      <div className="min-h-screen py-12 flex items-center">
+        <div className="max-w-3xl mx-auto px-4 w-full">
+          <Card className="text-center">
             <CardHeader>
+              <img
+                src="/cinema-film-remove-svgrepo-com.svg"
+                alt="Movie not found"
+                className="mx-auto mb-6 h-48 opacity-80"
+              />
               <CardTitle>Movie not found</CardTitle>
-              <CardDescription>The movie you are looking for does not exist.</CardDescription>
+              <CardDescription>
+                The movie you are looking for does not exist.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline">
@@ -56,7 +63,7 @@ export default function MoviePlayer() {
           </div>
           <div className="lg:col-span-2 space-y-6">
             <div>
-              <PageTitle title={movie.title} />
+              <PageTitle title={movie.title} titleLevel={2} />
               <div className="flex flex-wrap gap-2 mb-4">
                 <Badge>{movie.genre}</Badge>
                 <Badge variant="outline">{movie.year}</Badge>

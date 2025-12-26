@@ -29,7 +29,6 @@ export default function Movies() {
         {/* Header */}
         <div className="text-center mb-16">
           <PageTitle title='Movie Catalog' />
-          <h1 className="text-5xl md:text-6xl font-bold mb-6"></h1>
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Explore our curated collection of cinematic masterpieces
