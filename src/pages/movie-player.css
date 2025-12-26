@@ -1,0 +1,11 @@
+/* Language toggle styles for movie detail page */
+
+button[aria-pressed="true"] {
+  outline: 2px solid rgba(255,255,255,0.12);
+  outline-offset: 2px;
+}
+
+/* Ensure movie detail description is not clamped */
+.movie-description-full {
+  display: block;
+}

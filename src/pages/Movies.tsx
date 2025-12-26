@@ -10,6 +10,7 @@ import { PageTitle } from '@/components/customUi/page-title';
 export default function Movies() {
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
 
+
   const movies = getMovies();
 
   const genres = ['all', ...Array.from(new Set(movies.map(movie => movie.genre)))];

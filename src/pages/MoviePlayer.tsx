@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import './movie-player.css';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getMovieById, getRelatedMoviesByDirector, getRelatedMoviesByGenre } from '@/data/movies';
@@ -10,9 +11,8 @@ import { cn } from '@/lib/utils';
 export default function MoviePlayer() {
   const { id } = useParams();
   const movie = getMovieById(id);
-
   const relatedMoviesByDirector = movie ? getRelatedMoviesByDirector(movie, 3) : [];
-  const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : [];
+  const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : []; 
 
   /* ---------- Language handling ---------- */
   const availableLanguages = movie?.description
@@ -91,8 +91,29 @@ export default function MoviePlayer() {
                 <Badge variant="outline">{movie.year}</Badge>
                 {movie.duration && <Badge variant="outline">{movie.duration}</Badge>}
               </div>
-              {movie.description && (
-                <p className="text-lg text-muted-foreground mb-6">{movie.description}</p>
+
+              {/* Language toggle for this movie (FR / EN) */}
+              <div className="flex items-center gap-2 mb-4">
+                <button
+                  type="button"
+                  onClick={() => setLang('fr')}
+                  className={`px-3 py-1 rounded ${lang === 'fr' ? 'bg-primary text-white' : 'bg-muted hover:bg-muted/80'}`}
+                  aria-pressed={lang === 'fr'}
+                >
+                  FR
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('en')}
+                  className={`px-3 py-1 rounded ${lang === 'en' ? 'bg-primary text-white' : 'bg-muted hover:bg-muted/80'}`}
+                  aria-pressed={lang === 'en'}
+                >
+                  EN
+                </button>
+              </div>
+
+              {( (movie as any).descriptions?.data?.[lang] ?? movie.description) && (
+                <p className="text-lg text-muted-foreground mb-6">{(movie as any).descriptions?.data?.[lang] ?? movie.description}</p>
               )}
             </div>
 
