@@ -1,19 +1,37 @@
-
 import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getMovieById, getRelatedMoviesByDirector, getRelatedMoviesByGenre } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
+import { cn } from '@/lib/utils';
 
 export default function MoviePlayer() {
   const { id } = useParams();
+  const movie = getMovieById(id);
 
-  const movieId = id;
-  const movie = getMovieById(movieId);
   const relatedMoviesByDirector = movie ? getRelatedMoviesByDirector(movie, 3) : [];
   const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : [];
 
+  /* ---------- Language handling ---------- */
+  const availableLanguages = movie?.description
+    ? Object.keys(movie.description)
+    : [];
+
+  const [lang, setLang] = useState<string>(availableLanguages[0]);
+
+  useEffect(() => {
+    if (availableLanguages.length) {
+      setLang(availableLanguages[0]);
+    }
+  }, [movie]);
+
+  const description =
+    movie?.description?.[lang] ??
+    movie?.description?.[availableLanguages[0]];
+
+  /* ---------- Not found ---------- */
   if (!movie) {
     return (
       <div className="min-h-screen py-12 flex items-center">
@@ -44,6 +62,7 @@ export default function MoviePlayer() {
   return (
     <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Back Button */}
         <div className="mb-6">
           <Button asChild variant="outline">
@@ -62,9 +81,11 @@ export default function MoviePlayer() {
               />
             </div>
           </div>
+
           <div className="lg:col-span-2 space-y-6">
             <div>
               <PageTitle title={movie.title} titleLevel={2} />
+
               <div className="flex flex-wrap gap-2 mb-4">
                 <Badge>{movie.genre}</Badge>
                 <Badge variant="outline">{movie.year}</Badge>
@@ -93,14 +114,13 @@ export default function MoviePlayer() {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">Watch Now</CardTitle>
-              <CardDescription></CardDescription>
             </CardHeader>
             <CardContent>
               <div className="aspect-video bg-muted rounded-lg overflow-hidden">
                 {movie.movieUrl ? (
                   <iframe
                     src={movie.movieUrl}
-                    title={`${movie.title}`}
+                    title={movie.title}
                     className="w-full h-full"
                     allowFullScreen
                   />
@@ -114,8 +134,8 @@ export default function MoviePlayer() {
           </Card>
         </section>
 
-        {/* Related Movies by director */}
-        {relatedMoviesByDirector.length > 0 ?
+        {/* Related sections unchanged */}
+        {relatedMoviesByDirector.length > 0 && (
           <section>
             <h2 className="text-3xl font-bold mb-8">More from {movie.director}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -138,10 +158,9 @@ export default function MoviePlayer() {
               ))}
             </div>
           </section>
-          : ""}
+        )}
 
-        {/* Related Movies by genre */}
-        {relatedMoviesByDirector. length == 0 && relatedMoviesByGenre.length > 0 ?
+        {relatedMoviesByDirector.length === 0 && relatedMoviesByGenre.length > 0 && (
           <section>
             <h2 className="text-3xl font-bold mb-8">More like "{movie.title}"</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -164,7 +183,8 @@ export default function MoviePlayer() {
               ))}
             </div>
           </section>
-          : ""}
+        )}
+
       </div>
     </div>
   );
