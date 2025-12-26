@@ -42,7 +42,7 @@ export function Navigation() {
           {/* Logo (left) */}
           <div className="flex items-center p-2">
             <Link to="/" className="flex items-center space-x-3">
-              <Logo size={50} className="drop-shadow-lg" />
+              <Logo size={50} className="hover:scale-110 transition-transform drop-shadow-lg" />
             </Link>
           </div>
 
