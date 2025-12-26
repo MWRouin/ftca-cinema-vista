@@ -9,3 +9,19 @@ button[aria-pressed="true"] {
 .movie-description-full {
   display: block;
 }
+
+/* Animation for language switch: fades and slides the new text in */
+.lang-fade-enter {
+  animation: langFadeIn .32s cubic-bezier(.2,.9,.3,1);
+  will-change: opacity, transform;
+}
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .lang-fade-enter { animation: none !important; }
+}

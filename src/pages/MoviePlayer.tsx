@@ -19,12 +19,14 @@ export default function MoviePlayer() {
     ? Object.keys(movie.description)
     : [];
 
-  const [lang, setLang] = useState<string>(availableLanguages[0]);
+  //const [lang, setLang] = useState<string>(availableLanguages[0] || 'en');
+  const [lang, setLang] = useState<string>('en');
 
   useEffect(() => {
-    if (availableLanguages.length) {
+    /*if (availableLanguages.length) {
       setLang(availableLanguages[0]);
-    }
+    }*/
+    setLang('en');
   }, [movie]);
 
   const description =
@@ -92,30 +94,30 @@ export default function MoviePlayer() {
                 {movie.duration && <Badge variant="outline">{movie.duration}</Badge>}
               </div>
 
-              {/* Language toggle for this movie (FR / EN) */}
+              {( (movie as any).descriptions?.data?.[lang] ?? movie.description) && (
+                <p key={lang} className="text-lg text-muted-foreground mb-6 lang-fade-enter" aria-live="polite">{(movie as any).descriptions?.data?.[lang] ?? movie.description}</p>
+              )}
+            </div>
+
+                          {/* Language toggle for this movie (FR / EN) */}
               <div className="flex items-center gap-2 mb-4">
-                <button
-                  type="button"
-                  onClick={() => setLang('fr')}
-                  className={`px-3 py-1 rounded ${lang === 'fr' ? 'bg-primary text-white' : 'bg-muted hover:bg-muted/80'}`}
-                  aria-pressed={lang === 'fr'}
-                >
-                  FR
-                </button>
-                <button
+                                <button
                   type="button"
                   onClick={() => setLang('en')}
-                  className={`px-3 py-1 rounded ${lang === 'en' ? 'bg-primary text-white' : 'bg-muted hover:bg-muted/80'}`}
+                  className={`px-1 py-1 rounded text-xs leading-none ${lang === 'en' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
                   aria-pressed={lang === 'en'}
                 >
                   EN
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setLang('fr')}
+                  className={`px-1 py-1 rounded text-xs leading-none ${lang === 'fr' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
+                  aria-pressed={lang === 'fr'}
+                >
+                  FR
+                </button>
               </div>
-
-              {( (movie as any).descriptions?.data?.[lang] ?? movie.description) && (
-                <p className="text-lg text-muted-foreground mb-6">{(movie as any).descriptions?.data?.[lang] ?? movie.description}</p>
-              )}
-            </div>
 
             <div className="space-y-4">
               <div>
