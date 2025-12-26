@@ -41,17 +41,14 @@ export default function Home() {
       >
         {/* Background SVG at 10% opacity */}
         <div
-          className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-15 dark:opacity-15"
-          style={{ backgroundImage: `url(/Backgrounds/sun-tornado_2.svg)` }}
+          className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-40 dark:opacity-30"
+          style={{ backgroundImage: `url(/Backgrounds/hero-image-hlif.jpg)` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/20"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <div className="flex justify-center mb-8">
-              {/* <div className="p-6 rounded-3xl bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm border border-primary/20 animate-on-scroll-delay hover-lift">
-                <Logo size={112} className="drop-shadow-2xl" />
-              </div> */}
               <Logo size={310} className="drop-shadow-2xl" />
             </div>
             <PageTitle title="Hammam-lif Amateur Filmmakers' Club" />
