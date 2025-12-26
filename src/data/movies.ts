@@ -30,9 +30,15 @@ function MovieFromJsonObject(jsonObject: any): Movie {
     };
 }
 
+function CompareMoviesProductionYear(movie1: Movie, movie2: Movie) {
+    if (movie1.year === '-') return 1;
+    if (movie2.year === '-') return -1;
+    return (movie2.year as number) - (movie1.year as number);
+}
+
 function IsMoviePublic(movie: Movie): boolean { return movie.public; }
 
-const movies: Movie[] = rawMovies.map(MovieFromJsonObject).filter(IsMoviePublic);
+const movies: Movie[] = rawMovies.map(MovieFromJsonObject).filter(IsMoviePublic).sort(CompareMoviesProductionYear);
 
 export const getMovies = () => movies;
 
