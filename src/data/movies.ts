@@ -44,9 +44,13 @@ export const getMovies = () => movies;
 
 export const getMovieById = (id: string) => movies.find((m) => m.id === id);
 
-export const getRelatedMovies = (movie: Movie, count = 3) => {
+export const getRelatedMoviesByDirector = (movie: Movie, count = 3) => {
     // Prefer same director; fallback to same genre; exclude the current movie
     const sameDirector = movies.filter((m) => m.director === movie.director && m.id !== movie.id);
-    const pool = sameDirector.length ? sameDirector : movies.filter((m) => m.genre === movie.genre && m.id !== movie.id);
-    return pool.slice(0, count);
+    return sameDirector.slice(0, count);
 };
+
+export const getRelatedMoviesByGenre = (movie: Movie, count = 3) => {
+    const pool = movies.filter((m) => m.genre === movie.genre && m.id !== movie.id);
+    return pool.slice(0, count);
+}

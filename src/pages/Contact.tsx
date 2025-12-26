@@ -27,6 +27,14 @@ export default function Contact() {
     e.preventDefault();
     // Handle form submission here
     //console.log('Form submitted:', formData);
+    const { name, email, subject, message } = formData;
+    const mailto = `mailto:ftca.hammamlif@gmail.com
+    ?subject=${encodeURIComponent(subject)}
+    &body=${encodeURIComponent(
+      `${message}\n\nName: ${name}`
+    )}`;
+
+    window.location.href = mailto;
     // Reset form
     setFormData({
       name: '',
@@ -34,7 +42,8 @@ export default function Contact() {
       subject: '',
       message: ''
     });
-    alert('Thank you for your message! We\'ll get back to you soon.');
+
+    /* alert('Thank you for your message! We\'ll get back to you soon.'); */
   };
 
   const socialLinks = [
@@ -68,34 +77,34 @@ export default function Contact() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/*<div className="grid grid-cols-1 md:grid-cols-2 gap-4">*/}
                     <div>
                       <Label htmlFor="name">Full Name</Label>
                       <Input
                         id="name"
                         name="name"
                         type="text"
-                        required
+                        //required
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Your full name"
                       />
                     </div>
-                    <div>
+                    {/* <div>
                       <Label htmlFor="email">Email Address</Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
-                        required
+                        //required
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="your.email@example.com"
                       />
-                    </div>
-                  </div>
+                    </div> */}
+                  {/* </div> */}
                   <div>
-                    <Label htmlFor="subject">Subject</Label>
+                    <Label htmlFor="subject">Subject *</Label>
                     <Input
                       id="subject"
                       name="subject"
@@ -107,7 +116,7 @@ export default function Contact() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
                       name="message"
@@ -212,9 +221,10 @@ export default function Contact() {
                 <p className="text-muted-foreground mb-4">
                   Interested in becoming a member? We welcome new film enthusiasts of all levels!
                 </p>
-                <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
+                <p>Stay tuned</p>
+                {/* <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
                   Learn About Membership
-                </Button>
+                </Button> */}
               </CardContent>
             </Card>
           </div>

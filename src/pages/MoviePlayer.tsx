@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { getMovieById, getRelatedMovies } from '@/data/movies';
+import { getMovieById, getRelatedMoviesByDirector, getRelatedMoviesByGenre } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 
 export default function MoviePlayer() {
@@ -11,7 +11,8 @@ export default function MoviePlayer() {
 
   const movieId = id;
   const movie = getMovieById(movieId);
-  const relatedMovies = movie ? getRelatedMovies(movie, 3) : [];
+  const relatedMoviesByDirector = movie ? getRelatedMoviesByDirector(movie, 3) : [];
+  const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : [];
 
   if (!movie) {
     return (
@@ -113,29 +114,57 @@ export default function MoviePlayer() {
           </Card>
         </section>
 
-        {/* Related Movies */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8">More from {movie.director}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedMovies.map((relatedMovie) => (
-              <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <Link to={`/movie/${relatedMovie.id}`}>
-                  <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
-                    <img
-                      src={relatedMovie.image}
-                      alt={relatedMovie.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
-                    <CardDescription>Directed by {relatedMovie.director}</CardDescription>
-                  </CardHeader>
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </section>
+        {/* Related Movies by director */}
+        {relatedMoviesByDirector.length > 0 ?
+          <section>
+            <h2 className="text-3xl font-bold mb-8">More from {movie.director}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedMoviesByDirector.map((relatedMovie) => (
+                <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <Link to={`/movie/${relatedMovie.id}`}>
+                    <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
+                      <img
+                        src={relatedMovie.image}
+                        alt={relatedMovie.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardHeader>
+                      <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
+                      <CardDescription>Directed by {relatedMovie.director}</CardDescription>
+                    </CardHeader>
+                  </Link>
+                </Card>
+              ))}
+            </div>
+          </section>
+          : ""}
+
+        {/* Related Movies by genre */}
+        {relatedMoviesByDirector. length == 0 && relatedMoviesByGenre.length > 0 ?
+          <section>
+            <h2 className="text-3xl font-bold mb-8">More like "{movie.title}"</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedMoviesByGenre.map((relatedMovie) => (
+                <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <Link to={`/movie/${relatedMovie.id}`}>
+                    <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
+                      <img
+                        src={relatedMovie.image}
+                        alt={relatedMovie.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardHeader>
+                      <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
+                      <CardDescription>Directed by {relatedMovie.director}</CardDescription>
+                    </CardHeader>
+                  </Link>
+                </Card>
+              ))}
+            </div>
+          </section>
+          : ""}
       </div>
     </div>
   );

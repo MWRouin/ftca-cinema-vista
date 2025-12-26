@@ -42,10 +42,9 @@ export default function Home() {
         {/* Background SVG at 10% opacity */}
         <div
           className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-15 dark:opacity-15"
-          style={{ backgroundImage: `url(https://acte.tn/sites/default/files/2021-09/hammam%20lif.jpg)` }}
+          style={{ backgroundImage: `url(/Backgrounds/sun-tornado_2.svg)` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/20"></div>
-
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
