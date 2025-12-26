@@ -3,9 +3,9 @@
         "id": "wed-trabelsia",
         "title": "واد الطرابلسية",
         "genre": "Fiction",
-        "year": "",
-        "director": "",
-        "duration": "",
+        "year": 2025,
+        "director": "Wadii Klaii",
+        "duration": "30 minutes",
         "description": "",
         "cast": [],
         "image": "",
@@ -31,7 +31,7 @@
             "Wissem Rouin",
             "Wadii Klaii"
         ],
-        "image": "__BASE_URL__/Posters/And_then_there_was_One.jpeg",
+        "image": "/Posters/And_then_there_was_One.jpeg",
         "movieUrl": "https://drive.google.com/file/d/19WYQotQilhwJhS3MfkTotK-tmbWAeQTV/preview",
         "public": true
     },
@@ -54,7 +54,7 @@
             "Zineddine Mlaouhi",
             "Hassen Ben Zekri"
         ],
-        "image": "__BASE_URL__/Posters/Caged-bastards-extend.jpg",
+        "image": "/Posters/Caged-bastards-extend.jpg",
         "movieUrl": "https://drive.google.com/file/d/1CoyNf3HyVwy5YQjPNw3pxtJ9zT82hqeQ/preview",
         "public": true
     },
@@ -87,7 +87,7 @@
             "Mariem Ouertani",
             "Rania Barkit"
         ],
-        "image": "__BASE_URL__/Posters/Sire-Ex-Machina.jpg",
+        "image": "/Posters/Sire-Ex-Machina.jpg",
         "movieUrl": "https://drive.google.com/file/d/1t2oXm3sIwbIK5nXXf7XfuNWqxnwIOyqU/preview",
         "public": true
     },
@@ -104,7 +104,7 @@
             "Amal Belhassen",
             "Badiaa Bouhrizi"
         ],
-        "image": "__BASE_URL__/Posters/silence.jpg",
+        "image": "/Posters/silence.jpg",
         "movieUrl": "https://www.youtube.com/embed/LmrwjbQhByA",
         "public": true
     },
@@ -120,7 +120,7 @@
             "Manel Karkour",
             "Saber Zammouri"
         ],
-        "image": "__BASE_URL__/Posters/La-Gamelle.png",
+        "image": "/Posters/La-Gamelle.png",
         "movieUrl": "https://www.youtube.com/embed/cyJbwaLiU-0",
         "public": true
     },
@@ -133,7 +133,7 @@
         "duration": "15:46",
         "description": "Des hommes et des femmes parlent de leurs rêves, puis de ce qu’ils sont devenus. Entre aspirations étouffées et fatigue économique, leurs voix révèlent une réalité qui sape peu à peu l’élan, la culture, et l’avenir qu’ils imaginaient .",
         "cast": [],
-        "image": "__BASE_URL__/Posters/Chute_libre.jpg",
+        "image": "/Posters/Chute_libre.jpg",
         "movieUrl": "https://www.youtube.com/embed/3GXHpGOlZ0A",
         "public": true
     },
@@ -141,12 +141,12 @@
         "id": "le-sifflet",
         "title": "Le Sifflet",
         "genre": "Documentary",
-        "year": "",
+        "year": "nan",
         "director": "Ridha Ben Halima",
         "duration": "22:52",
         "description": "Le Sifflet raconte l’histoire de femmes confrontées à l’exploitation au travail. À travers leurs témoignages, le film montre leur lutte, leur solidarité et leur détermination à faire entendre leur voix.",
         "cast": [],
-        "image": "__BASE_URL__/Posters/Le_Sifflet.jpg",
+        "image": "/Posters/Le_Sifflet.jpg",
         "movieUrl": "https://www.youtube.com/embed/J4_7A6C06fI",
         "public": true
     },
@@ -159,7 +159,7 @@
         "duration": "8:45",
         "description": "Diplômée du baccalauréat, une jeune femme tente d’accéder au monde du travail. Elle se confronte à une réalité brutale marquée par l’emprise masculine sur ses choix et son corps.",
         "cast": [],
-        "image": "__BASE_URL__/Posters/l_eveil.jpg",
+        "image": "/Posters/l_eveil.jpg",
         "movieUrl": "https://www.youtube.com/embed/BxRwxUEQRuw",
         "public": true
     },
@@ -178,7 +178,7 @@
             "Amal Bibani",
             "Ali Belarbi"
         ],
-        "image": "__BASE_URL__/Posters/Av_des_histoires.jpg",
+        "image": "/Posters/Av_des_histoires.jpg",
         "movieUrl": "https://www.youtube.com/embed/5tTaPMYEcwk",
         "public": true
     },
@@ -191,7 +191,7 @@
         "duration": "9:02",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/thara-taieb.jpg",
+        "image": "/Posters/thara-taieb.jpg",
         "movieUrl": "https://www.youtube.com/embed/Xwc4sqBuzeM",
         "public": true
     },
@@ -204,7 +204,7 @@
         "duration": "12:30",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/les-galleriens.jpg",
+        "image": "/Posters/les-galleriens.jpg",
         "movieUrl": "https://www.youtube.com/embed/-RqITnp5Z7M",
         "public": true
     },
@@ -217,7 +217,7 @@
         "duration": "7:37",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/Captive-Memory.jpg",
+        "image": "/Posters/Captive-Memory.jpg",
         "movieUrl": "https://www.youtube.com/embed/fjLGuhgbGps",
         "public": true
     },
@@ -237,7 +237,7 @@
             "Farouk",
             "Ahmed"
         ],
-        "image": "__BASE_URL__/Posters/123_soleil.jpg",
+        "image": "/Posters/123_soleil.jpg",
         "movieUrl": "https://www.youtube.com/embed/tcf6UorlgEo",
         "public": true
     },
@@ -255,7 +255,7 @@
             "Molka Ajili",
             "Nour Ajili"
         ],
-        "image": "__BASE_URL__/Posters/graine-de-lait-graine-de-vie.jpg",
+        "image": "/Posters/graine-de-lait-graine-de-vie.jpg",
         "movieUrl": "https://www.youtube.com/embed/HoeVNDhcDWo",
         "public": true
     },
@@ -268,15 +268,15 @@
         "duration": "2:25",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/V.jpg",
+        "image": "/Posters/V.jpg",
         "movieUrl": "https://www.youtube.com/embed/1_Eus_4KkZI",
         "public": true
     },
     {
         "id": "au-pays-des-meres-vielles",
         "title": "Au Pays des Méres Vielles",
-        "genre": "Fiction",
-        "year": "",
+        "genre": "Documentary",
+        "year": "2013",
         "director": "Wissem Rebah",
         "duration": "14:10",
         "description": "",
@@ -284,7 +284,7 @@
             "Zina",
             "Zarmouha"
         ],
-        "image": "__BASE_URL__/Posters/au-pays-des-meres-vielles.jpg",
+        "image": "/Posters/au-pays-des-meres-vielles.jpg",
         "movieUrl": "https://www.youtube.com/embed/E3O6XSeZLr0",
         "public": true
     },
@@ -304,7 +304,7 @@
             "Amani Karkour",
             "Rahma Ben Mbarek"
         ],
-        "image": "__BASE_URL__/Posters/accident-de-travail.jpg",
+        "image": "/Posters/accident-de-travail.jpg",
         "movieUrl": "https://www.youtube.com/embed/tuuI6huNJ68",
         "public": true
     },
@@ -319,7 +319,7 @@
         "cast": [
             "Mohamed Ben Tabib"
         ],
-        "image": "__BASE_URL__/Posters/l-araignee.jpg",
+        "image": "/Posters/l-araignee.jpg",
         "movieUrl": "https://www.youtube.com/embed/EzVzuup33Xg",
         "public": true
     },
@@ -327,12 +327,12 @@
         "id": "l-epingle",
         "title": "L'Épingle",
         "genre": "Fiction",
-        "year": "",
+        "year": "nan",
         "director": "",
         "duration": "4:20",
         "description": "Eya Riahi",
         "cast": [],
-        "image": "__BASE_URL__/Posters/l-epingle.jpg",
+        "image": "/Posters/l-epingle.jpg",
         "movieUrl": "https://www.youtube.com/embed/wSsrVYmT6BY",
         "public": true
     },
@@ -347,7 +347,7 @@
         "cast": [
             "Youssef El Behi"
         ],
-        "image": "__BASE_URL__/Posters/home.jpg",
+        "image": "/Posters/home.jpg",
         "movieUrl": "https://www.youtube.com/embed/u6t1FAir0vc",
         "public": true
     },
@@ -363,7 +363,7 @@
         "cast": [
             "Jamel"
         ],
-        "image": "__BASE_URL__/Posters/3al7it.jpg",
+        "image": "/Posters/3al7it.jpg",
         "movieUrl": "https://www.youtube.com/embed/CSOq74FcOtE",
         "public": true
     },
@@ -379,7 +379,7 @@
         "duration": "",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/mur.jpg",
+        "image": "/Posters/mur.jpg",
         "movieUrl": "https://www.youtube.com/embed/IwgBUO4ytPg",
         "public": true
     },
@@ -392,7 +392,7 @@
         "duration": "",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/nasibi.jpg",
+        "image": "/Posters/nasibi.jpg",
         "movieUrl": "https://www.youtube.com/embed/z4QYI_pfS8k",
         "public": true
     },
@@ -405,7 +405,7 @@
         "duration": "15:15",
         "description": "",
         "cast": [],
-        "image": "__BASE_URL__/Posters/travailleur.jpg",
+        "image": "/Posters/travailleur.jpg",
         "movieUrl": "https://www.youtube.com/embed/o-sYF4R-kwM",
         "public": true
     },
@@ -422,7 +422,7 @@
             "Hichem Toumi",
             "Rami Toumi"
         ],
-        "image": "__BASE_URL__/Posters/temp-mort.jpg",
+        "image": "/Posters/temp-mort.jpg",
         "movieUrl": "https://www.youtube.com/embed/FuywJo34B1Y",
         "public": true
     },
@@ -439,7 +439,7 @@
             "Arousi El Zebidi",
             "Imen Yahyeoui"
         ],
-        "image": "__BASE_URL__/Posters/3syen.jpg",
+        "image": "/Posters/3syen.jpg",
         "movieUrl": "https://www.youtube.com/embed/sMg0arZ7lPM",
         "public": true
     },
@@ -466,7 +466,7 @@
             "Hammouda Chouchene",
             "Mehdi Ben Farhat"
         ],
-        "image": "__BASE_URL__/Posters/trip.jpg",
+        "image": "/Posters/trip.jpg",
         "movieUrl": "https://www.youtube.com/embed/8JKJnARlwgI",
         "public": true
     },
@@ -474,26 +474,81 @@
         "id": "Oz9AcNMuUZw",
         "title": "test",
         "genre": "Fiction",
-        "year": "",
+        "year": "nan",
         "director": "",
         "duration": "",
         "description": "",
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/Oz9AcNMuUZw",
+        "public": false
+    },
+    {
+        "id": "des-bieres-et-des-progres",
+        "title": "Des biéres et des progrés",
+        "genre": "Fiction",
+        "year": "2018",
+        "director": "Wiem Rebah",
+        "duration": "7 mins",
+        "description": "",
+        "cast": [
+            "Issam Mouelhi",
+            "Skander Ben Rhaiem",
+            "Naoures Rouissi",
+            "Abderrahman El Mejri",
+            "Nadhir Chahtour",
+            "Mohamed Bechir",
+            "Oussema Ben Chouikha",
+            "Rassil Jouini",
+            "Wissem Rebah",
+            "Hichem Toumi"
+        ],
+        "image": "/Posters/des-bieres-et-des-progres.jpg",
+        "movieUrl": "https://www.youtube.com/embed/eukOd7aTAg8",
         "public": true
     },
     {
-        "id": "eukOd7aTAg8",
-        "title": " Des biéres et des progrés ",
+        "id": "kari-for-dog",
+        "title": "Kari for Dog",
         "genre": "Fiction",
-        "year": "",
+        "year": 2005,
+        "director": "Imen Nafti",
+        "duration": "02:17",
+        "description": "Dans une cellule close, un chien affamé attend. Un homme lui offre en pâture une proie inattendue.",
+        "cast": [
+            "TITOU",
+            "Ghassen Ben Slama",
+            "Khalil Khaldi",
+            "Maher Ben Khalifa"
+        ],
+        "image": "/Posters/kari_for_dog.jpg",
+        "movieUrl": "https://www.youtube.com/embed/yVOap57hQlc",
+        "public": false
+    },
+        {
+        "id": "mad-ant",
+        "title": "Mad Ant",
+        "genre": "Fiction",
+        "year": "nan",
+        "director": "",
+        "duration": "5:57",
+        "description": "",
+        "cast": [],
+        "image": "/Posters/mad_ant.jpg",
+        "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
+        "public": false
+    },
+        {
+        "id": "ca-tourne",
+        "title": "Et pourtant ça tourne",
+        "genre": "Fiction",
+        "year": "nan",
         "director": "",
         "duration": "",
         "description": "",
         "cast": [],
         "image": "",
-        "movieUrl": "https://www.youtube.com/embed/eukOd7aTAg8",
-        "public": true
+        "movieUrl": "https://www.youtube.com/embed/V2SnHlKTIjA",
+        "public": false
     }
 ]
