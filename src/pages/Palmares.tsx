@@ -1,3 +1,4 @@
+import { PageTitle } from '@/components/customUi/page-title'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
 
@@ -7,7 +8,7 @@ export default function Palmares() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-shimmer">Palmarès</h1>
+          <PageTitle title='Palmarès'/>
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             Awards & Recognitions

@@ -87,6 +87,10 @@
     --sidebar-border: 205 33% 86%;
     --sidebar-ring: 177 70% 23%;
   }
+
+  .dark {
+    --primary: 177 83% 31%;   
+  }
 }
 
 @layer base {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Logo } from '@/components/Logo';
 import { getMovies } from '@/data/movies';
+import { PageTitle } from '@/components/customUi/page-title';
 
 export default function Home() {
   const heroRef = useScrollAnimation();
@@ -43,7 +44,7 @@ export default function Home() {
           className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-15 dark:opacity-15"
           style={{ backgroundImage: `url(https://acte.tn/sites/default/files/2021-09/hammam%20lif.jpg)` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/20"></div>
 
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -54,9 +55,7 @@ export default function Home() {
               </div> */}
               <Logo size={310} className="drop-shadow-2xl" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-on-scroll-delay-1">
-              <span className="text-shimmer">Hammam-lif Amateur Filmmakers' Club</span> {/*Club des Cinéastes Amateurs de Hammamlif*/}
-            </h1>
+            <PageTitle title="Hammam-lif Amateur Filmmakers' Club" />
 
             {/* <div className="text-2xl md:text-3xl text-primary mb-4 font-medium animate-on-scroll-delay-2">
               Club des Cinéastes Amateurs de Hammamlif
@@ -85,7 +84,7 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-shimmer">Featured Films</h2>
+            <PageTitle title="Featured Films" titleLevel={2} />
             <div className="section-divider w-24 mx-auto mb-6"></div>
             <p className="text-xl text-muted-foreground">Discover our Movies</p>
           </div>
@@ -134,7 +133,7 @@ export default function Home() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-shimmer">Upcoming Events</h2>
+              <PageTitle title="Upcoming Events" titleLevel={2} />
               <div className="section-divider w-24 mx-auto mb-6"></div>
               <p className="text-xl text-muted-foreground">Join us for exclusive screenings and film discussions</p>
             </div>
@@ -186,7 +185,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
 
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-shimmer">Join Our Community</h2>
+          <PageTitle title="Join Our Community" titleLevel={2} />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
             Connect with fellow film enthusiasts and be part of memorable cinematic experiences that transcend the ordinary
