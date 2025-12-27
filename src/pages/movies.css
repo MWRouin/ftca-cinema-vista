@@ -1,0 +1,12 @@
+.movie-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Small helper to make the language buttons accessible and visually consistent */
+button[aria-pressed="true"] {
+  outline: 2px solid rgba(255,255,255,0.12);
+  outline-offset: 2px;
+}

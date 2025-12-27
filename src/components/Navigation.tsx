@@ -34,7 +34,7 @@ export function Navigation() {
 
   return (
     <nav className={`sticky top-0 z-50 transition-all duration-300 border-b ${scrolled
-      ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border'
+      ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border/30'
       : 'bg-background/90 backdrop-blur-md border-border/30'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

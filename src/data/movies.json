@@ -7,6 +7,13 @@
         "director": "Wadii Klaii",
         "duration": "30 minutes",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/0TFjx-C-c5I",
@@ -20,6 +27,13 @@
         "director": "Khalil Said & Wadii Klaii",
         "duration": "10 minutes",
         "description": "In a confined space, a group gathers around a circular table to share a simple ritual that soon reveals the depths of human desire and control. What begins as unity slowly transforms into a reflection on power, dependence, and the fragile balance between need and domination.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Dans un espace clos, un groupe se rassemble autour d’une table circulaire pour partager un rituel simple qui révèle bientôt les profondeurs du désir et du contrôle humains. Ce qui commence comme une unité se transforme progressivement en une réflexion sur le pouvoir, la dépendance et le fragile équilibre entre besoin et domination.",
+                "en": "In a confined space, a group gathers around a circular table to share a simple ritual that soon reveals the depths of human desire and control. What begins as unity slowly transforms into a reflection on power, dependence, and the fragile balance between need and domination."
+            }
+        },
         "cast": [
             "Itaf Daghsen",
             "Hichem Gtari",
@@ -43,6 +57,13 @@
         "director": "Khalil Said & Wadii Klaii",
         "duration": "8 minutes",
         "description": "In a secluded enclave, an overseer maintains control through mystery and influence. Within this tense and atmospheric world, the inhabitants struggle between survival, power, and desire.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Dans une enclave isolée, un surveillant maintient son emprise par le mystère et l’influence. Dans ce monde tendu et atmosphérique, les habitants luttent entre survie, pouvoir et désir.",
+                "en": "In a secluded enclave, an overseer maintains control through mystery and influence. Within this tense and atmospheric world, the inhabitants struggle between survival, power, and desire."
+            }
+        },
         "cast": [
             "Khalil Said",
             "Iheb Ben Fdilen",
@@ -65,12 +86,12 @@
         "year": 2023,
         "director": "Safa Khiari",
         "duration": "10 minutes",
-        "description": "Dans une usine en ruine, des ouvriers s’acharnent à produire l’absurde sous l’autorité d’un maître qui exploite et rejette sans cesse leur labeur. Jusqu’au jour où l’un d’eux fabrique un objet différent. Trop différent.",
+        "description": "In a decaying factory, workers relentlessly toil to produce the absurd under the authority of a master who exploits their labor and discards it without mercy. Day after day, their efforts are crushed, until one of them creates something different. Too different.",
         "descriptions": {
             "defaultLang": "fr",
             "data": {
                 "fr": "Dans une usine en ruine, des ouvriers s’acharnent à produire l’absurde sous l’autorité d’un maître qui exploite et rejette sans cesse leur labeur. Jusqu’au jour où l’un d’eux fabrique un objet différent. Trop différent.",
-                "en": "Dans une usine en ruine, des ouvriers s’acharnent à produire l’absurde sous l’autorité d’un maître qui exploite et rejette sans cesse leur labeur. Jusqu’au jour où l’un d’eux fabrique un objet différent. Trop différent."
+                "en": "In a decaying factory, workers relentlessly toil to produce the absurd under the authority of a master who exploits their labor and discards it without mercy. Day after day, their efforts are crushed, until one of them creates something different. Too different."
             }
         },
         "cast": [
@@ -92,6 +113,48 @@
         "public": true
     },
     {
+        "id": "athena",
+        "title": "Athena",
+        "genre": "Fiction",
+        "year": 2019,
+        "director": "Youssef Elbehi & Mehdi Hammemi",
+        "duration": "12 minutes",
+        "description": "A scene of a daily life in a barracks under the eyes of war.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Une scène de la vie quotidienne dans une caserne sous le regard de la guerre.",
+                "en": "A scene of a daily life in a barracks under the eyes of war."
+            }
+        },
+        "cast": [
+            "Amira Ben Abdallah",
+            "Mehdi Hammemi",
+            "Slim Ben Romdhan",
+            "Maher Ben Khalifa",
+            "Ines Siala",
+            "Yasmine Abdeljaouad",
+            "Amal Ayachi",
+            "Marwen Badri",
+            "Aziz Baraketi",
+            "Mohamed Bechir",
+            "Oussema Ben Chouikha",
+            "Fethi Ben Slema",
+            "Nadhir Chahtour",
+            "Mahdi Daldoul",
+            "Ahmed El Kadhi",
+            "Meriam Kadri",
+            "Manel Karkour",
+            "Seif Eddine Larbi",
+            "Safouan Néji",
+            "Khalil Said",
+            "Helmi Zouari"
+        ],
+        "image": "__BASE_URL__/Posters/athena.jpg",
+        "movieUrl": "https://www.youtube.com/embed/e6tCvt7AT9U",
+        "public": true
+    },
+    {
         "id": "silence",
         "title": "Silence",
         "genre": "Fiction",
@@ -99,6 +162,13 @@
         "director": "Fares Ben Khalifa",
         "duration": "10 minutes",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Aymen Landoulsi",
             "Amal Belhassen",
@@ -116,6 +186,13 @@
         "director": "Meher Ben Khlifa",
         "duration": "9 minutes",
         "description": "Behind closed doors, a prisoner attempts to stop the flow of torture.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "À huis clos, un prisonnier tente d’endiguer le flot de la torture.",
+                "en": "Behind closed doors, a prisoner attempts to stop the flow of torture."
+            }
+        },
         "cast": [
             "Manel Karkour",
             "Saber Zammouri"
@@ -132,6 +209,13 @@
         "director": "Amor Sbika",
         "duration": "15:46",
         "description": "Des hommes et des femmes parlent de leurs rêves, puis de ce qu’ils sont devenus. Entre aspirations étouffées et fatigue économique, leurs voix révèlent une réalité qui sape peu à peu l’élan, la culture, et l’avenir qu’ils imaginaient .",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Des hommes et des femmes parlent de leurs rêves, puis de ce qu’ils sont devenus. Entre aspirations étouffées et fatigue économique, leurs voix révèlent une réalité qui sape peu à peu l’élan, la culture, et l’avenir qu’ils imaginaient.",
+                "en": "Men and women speak about their dreams, and what became of them. Between stifled aspirations and economic fatigue, their voices reveal a reality that gradually undermines the momentum, culture, and future they once imagined."
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/Chute_libre.jpg",
         "movieUrl": "https://www.youtube.com/embed/3GXHpGOlZ0A",
@@ -145,6 +229,13 @@
         "director": "Ridha Ben Halima",
         "duration": "22:52",
         "description": "Le Sifflet raconte l’histoire de femmes confrontées à l’exploitation au travail. À travers leurs témoignages, le film montre leur lutte, leur solidarité et leur détermination à faire entendre leur voix.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Le Sifflet raconte l’histoire de femmes confrontées à l’exploitation au travail. À travers leurs témoignages, le film montre leur lutte, leur solidarité et leur détermination à faire entendre leur voix.",
+                "en": "The Whistle tells the story of women facing exploitation at work. Through their testimonies, the film shows their struggle, solidarity, and determination to make their voices heard."
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/Le_Sifflet.jpg",
         "movieUrl": "https://www.youtube.com/embed/J4_7A6C06fI",
@@ -158,6 +249,13 @@
         "director": "Salma Baccar",
         "duration": "8:45",
         "description": "Diplômée du baccalauréat, une jeune femme tente d’accéder au monde du travail. Elle se confronte à une réalité brutale marquée par l’emprise masculine sur ses choix et son corps.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Diplômée du baccalauréat, une jeune femme tente d’accéder au monde du travail. Elle se confronte à une réalité brutale marquée par l’emprise masculine sur ses choix et son corps.",
+                "en": "Having just passed her baccalaureate, a young woman tries to enter the workforce. She faces a harsh reality marked by male dominance over her choices and her body."
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/l_eveil.jpg",
         "movieUrl": "https://www.youtube.com/embed/BxRwxUEQRuw",
@@ -171,6 +269,13 @@
         "director": "Amor Sbika & Anis Tounsi",
         "duration": "17:09",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Yemina Souli",
             "Ridha Souli",
@@ -187,9 +292,16 @@
         "title": "Thara Taieb",
         "genre": "Fiction",
         "year": 1987,
-        "director": "Réalisation collective",
+        "director": "Collective direction",
         "duration": "9:02",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/thara-taieb.jpg",
         "movieUrl": "https://www.youtube.com/embed/Xwc4sqBuzeM",
@@ -203,6 +315,13 @@
         "director": "Hamadi Ghelala",
         "duration": "12:30",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/les-galleriens.jpg",
         "movieUrl": "https://www.youtube.com/embed/-RqITnp5Z7M",
@@ -216,6 +335,13 @@
         "director": "Omar Sbika",
         "duration": "7:37",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/Captive-Memory.jpg",
         "movieUrl": "https://www.youtube.com/embed/fjLGuhgbGps",
@@ -229,6 +355,13 @@
         "director": "Imen Nafti",
         "duration": "4:20",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Hamed",
             "Amine",
@@ -246,9 +379,16 @@
         "title": "Graine de Lait Graine de Vie",
         "genre": "Fiction",
         "year": 2006,
-        "director": "",
+        "director": "Imen Nafti",
         "duration": "6:43",
-        "description": "Imen Nafti",
+        "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Ayda Msaabia",
             "Hamed Ben Mbarek",
@@ -267,6 +407,13 @@
         "director": "Fares Ben Khalifa",
         "duration": "2:25",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/V.jpg",
         "movieUrl": "https://www.youtube.com/embed/1_Eus_4KkZI",
@@ -280,6 +427,13 @@
         "director": "Wissem Rebah",
         "duration": "14:10",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Zina",
             "Zarmouha"
@@ -296,6 +450,13 @@
         "director": "Maysa Ezzine",
         "duration": "8:41",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Maha Ezzine",
             "Ghassen Hammouda",
@@ -316,6 +477,13 @@
         "director": "Fares Ben Khalifa",
         "duration": "9:45",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Mohamed Ben Tabib"
         ],
@@ -328,9 +496,16 @@
         "title": "L'Épingle",
         "genre": "Fiction",
         "year": "nan",
-        "director": "",
+        "director": "Eya Riahi",
         "duration": "4:20",
-        "description": "Eya Riahi",
+        "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/l-epingle.jpg",
         "movieUrl": "https://www.youtube.com/embed/wSsrVYmT6BY",
@@ -344,6 +519,13 @@
         "director": "Ines Ben Halima",
         "duration": "5:42",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Youssef El Behi"
         ],
@@ -351,7 +533,6 @@
         "movieUrl": "https://www.youtube.com/embed/u6t1FAir0vc",
         "public": true
     },
-
     {
         "id": "3al-7it",
         "title": "3al 7it",
@@ -360,6 +541,13 @@
         "director": "Fares Ben Khalifa",
         "duration": "3:12",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Jamel"
         ],
@@ -372,12 +560,16 @@
         "title": "الجدار",
         "genre": "Fiction",
         "year": 2004,
-        "director": [
-            "Fathi Ben Slama",
-            ", Ghassen Jamia"
-        ],
+        "director": "Fathi Ben Slama & Ghassen Jamia",
         "duration": "",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/mur.jpg",
         "movieUrl": "https://www.youtube.com/embed/IwgBUO4ytPg",
@@ -391,6 +583,13 @@
         "director": "Taieb Ben Aameur",
         "duration": "",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/nasibi.jpg",
         "movieUrl": "https://www.youtube.com/embed/z4QYI_pfS8k",
@@ -404,6 +603,13 @@
         "director": "Amor Sbika",
         "duration": "15:15",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/travailleur.jpg",
         "movieUrl": "https://www.youtube.com/embed/o-sYF4R-kwM",
@@ -417,6 +623,13 @@
         "director": "Maysa Ezzine",
         "duration": "12:44",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Abbes Ahmed Zakaria",
             "Hichem Toumi",
@@ -434,6 +647,13 @@
         "director": "Omar Sbika",
         "duration": "15:06",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Taieb Oueslati",
             "Arousi El Zebidi",
@@ -451,6 +671,13 @@
         "director": "Mostapha Haouem",
         "duration": "12:43",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Nidhal Shili",
             "Talel Ayoub",
@@ -478,6 +705,13 @@
         "director": "",
         "duration": "",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/Oz9AcNMuUZw",
@@ -491,6 +725,13 @@
         "director": "Wiem Rebah",
         "duration": "7 mins",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [
             "Issam Mouelhi",
             "Skander Ben Rhaiem",
@@ -515,6 +756,13 @@
         "director": "Imen Nafti",
         "duration": "02:17",
         "description": "Dans une cellule close, un chien affamé attend. Un homme lui offre en pâture une proie inattendue.",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "Dans une cellule close, un chien affamé attend. Un homme lui offre en pâture une proie inattendue.",
+                "en": "In a closed cell, a hungry dog waits. A man offers it an unexpected prey as fodder."
+            }
+        },
         "cast": [
             "TITOU",
             "Ghassen Ben Slama",
@@ -525,7 +773,7 @@
         "movieUrl": "https://www.youtube.com/embed/yVOap57hQlc",
         "public": false
     },
-        {
+    {
         "id": "mad-ant",
         "title": "Mad Ant",
         "genre": "Fiction",
@@ -533,12 +781,19 @@
         "director": "",
         "duration": "5:57",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "__BASE_URL__/Posters/mad_ant.jpg",
         "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
         "public": false
     },
-        {
+    {
         "id": "ca-tourne",
         "title": "Et pourtant ça tourne",
         "genre": "Fiction",
@@ -546,6 +801,13 @@
         "director": "",
         "duration": "",
         "description": "",
+        "descriptions": {
+            "defaultLang": "fr",
+            "data": {
+                "fr": "",
+                "en": ""
+            }
+        },
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/V2SnHlKTIjA",

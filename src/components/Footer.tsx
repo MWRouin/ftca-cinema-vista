@@ -86,10 +86,14 @@ export function Footer() {
                 <Phone className="w-4 h-4" />
                 <span className="text-sm">+216 55 466 297</span>
               </a>
-              <div className="flex items-center space-x-2 text-muted-foreground">
+              <a
+                href="https://www.google.com/maps/place/80+RN1,+Hammam-Lif/@36.7269597,10.3343537,636m/data=!3m1!1e3!4m6!3m5!1s0x12fd492504981c43:0x7772fc5d93b2f677!8m2!3d36.7270195!4d10.336157!16s%2Fg%2F11bw43n7d7?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D"
+                target="_blank"
+                className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
+              >
                 <MapPin className="w-4 h-4" />
                 <span className="text-sm">80 RN1, Hammam-Lif</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>

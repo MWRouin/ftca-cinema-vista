@@ -1,0 +1,27 @@
+/* Language toggle styles for movie detail page */
+
+button[aria-pressed="true"] {
+  outline: 2px solid rgba(255,255,255,0.12);
+  outline-offset: 2px;
+}
+
+/* Ensure movie detail description is not clamped */
+.movie-description-full {
+  display: block;
+}
+
+/* Animation for language switch: fades and slides the new text in */
+.lang-fade-enter {
+  animation: langFadeIn .32s cubic-bezier(.2,.9,.3,1);
+  will-change: opacity, transform;
+}
+
+@keyframes langFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .lang-fade-enter { animation: none !important; }
+}
