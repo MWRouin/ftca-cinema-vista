@@ -2,6 +2,7 @@
     "staticPages": [
         "404",
         "events",
+        "events/ydour",
         "movies",
         "blog",
         "about",
@@ -11,6 +12,10 @@
     "dynamicPages": [
         {
             "base": "movies/",
+            "context": ""
+        },
+        {
+            "base": "events/",
             "context": ""
         }
     ]
