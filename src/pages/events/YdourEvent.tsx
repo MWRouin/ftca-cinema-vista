@@ -4,10 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { PageTitle } from "@/components/customUi/page-title";
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 
 export default function YdourEvent() {
     const event = {
-        title: "Ydour",
+        title: "Ydour - يدور",
         category: "Screening & Discussion",
         status: "Past Event",
         date: "February 22, 2025",
@@ -17,12 +19,11 @@ export default function YdourEvent() {
 
         overview: `
 YDOUR exists to bring together the amateur cinema community and cinema lovers.
+
 We noticed a lack of regular events that allow people to gather, watch films, and exchange ideas outside traditional screening rooms.
 
 There are important moments when the community comes together, such as FIFAK, where screenings and debates create a strong sense of collective experience. However, these opportunities happen only once a year. While FIFAK may be the biggest amateur cinema event, it shouldn’t be the only space where this community exists.
-
-By choosing a coffeeshop as a space for projection and discussion, YDOUR aims to reclaim cinema as a shared ritual accessible to everyone and rooted in everyday life.
-    `,
+`,
 
         retrospective: `
 The discussion following the screening focused on Casablanca’s layered narrative,
@@ -44,18 +45,32 @@ particularly in its themes of sacrifice, exile, and resistance.
         },
 
         gallery: [
-            "https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=800&q=80",
-            "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=800&q=80",
+            "/events/ydour/gal1.jpg",
+            "/events/ydour/gal2.jpg",
+            "/events/ydour/gal3.jpg",
+            "/events/ydour/gal4.jpg",
+            "/events/ydour/gal5.jpg",
+            "/events/ydour/gal6.jpg",
+            "/events/ydour/gal7.jpg",
+            "/events/ydour/gal8.jpg",
+            "/events/ydour/gal9.jpg",
+            "/events/ydour/gal10.jpg",
         ],
     };
 
     const media = [
         {
+            type: "image",
+            src: "/About/ydour_web_optimized.jpg",
+            title: "Screening",
+            caption: "By choosing a coffeeshop as a space for projection and discussion, YDOUR aims to reclaim cinema as a shared ritual accessible to everyone and rooted in everyday life."
+        },
+        {
             type: "video",
             src: "/events/ydour/talk.webm",
             title: "Post-Screening Discussion",
             caption: "Each film opened the door to conversation. Once the credits rolled, participants engaged in open discussions, exchanging perspectives, interpretations, and emotions. These dialogues created a collective rhythm for the evening, turning YDOUR into a space where cinema was not only watched, but actively experienced and reflected upon together."
-        }
+        },
     ];
 
 
@@ -102,9 +117,9 @@ particularly in its themes of sacrifice, exile, and resistance.
 
                 {/* Overview */}
                 <Card className="mb-8">
-                    <CardHeader>
-                        <CardTitle>Why Ydour</CardTitle>
-                    </CardHeader>
+                    {/* <CardHeader>
+                        <CardTitle>Ydour - يدور</CardTitle>
+                    </CardHeader> */}
                     <CardContent>
                         <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                             {event.overview}
@@ -116,17 +131,22 @@ particularly in its themes of sacrifice, exile, and resistance.
                     {media.map((item, i) => (
                         <div
                             key={i}
-                            className={`grid md:grid-cols-2 gap-8 items-center ${i % 2 ? "md:flex-row-reverse" : ""
-                                }`}
+                            className="grid md:grid-cols-2 gap-8 items-center"
                         >
-
                             {/* Text */}
-                            <div className="text-muted-foreground">
+                            <div
+                                className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"
+                                    }`}
+                            >
                                 <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
                                 <p>{item.caption}</p>
                             </div>
+
                             {/* Media */}
-                            <div className="overflow-hidden rounded-xl">
+                            <div
+                                className={`overflow-hidden rounded-xl ${i % 2 === 0 ? "md:order-1" : "md:order-2"
+                                    }`}
+                            >
                                 {item.type === "image" ? (
                                     <img
                                         src={item.src}
@@ -146,6 +166,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                         </div>
                     ))}
                 </section>
+
 
 
                 <br />
@@ -178,6 +199,40 @@ particularly in its themes of sacrifice, exile, and resistance.
                     </CardContent>
                 </Card> */}
 
+                {/* Gallery */}
+
+                {/* <section>
+                    <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                    <EventGallerySlider images={event.gallery} />
+                </section> */}
+
+
+                {/* <section>
+                    <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {event.gallery.map((img, i) => (
+                            <div
+                                key={i}
+                                className="aspect-[16/9] overflow-hidden rounded-lg"
+                            >
+                                <img
+                                    src={img}
+                                    alt={`Event photo ${i + 1}`}
+                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </section> */}
+
+                <br />
+
+                <section>
+                    <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                    <EventGallerySlider images={event.gallery} />
+                </section>
+
+                <br />
 
 
                 {/* Footer of event and call to action */}
@@ -227,25 +282,6 @@ particularly in its themes of sacrifice, exile, and resistance.
 
                     </CardContent>
                 </Card>
-
-                {/* Gallery */}
-                {/* <section>
-                    <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {event.gallery.map((img, i) => (
-                            <div
-                                key={i}
-                                className="aspect-[16/9] overflow-hidden rounded-lg"
-                            >
-                                <img
-                                    src={img}
-                                    alt={`Event photo ${i + 1}`}
-                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </section> */}
             </div>
         </div >
     );

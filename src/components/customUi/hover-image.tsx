@@ -1,4 +1,4 @@
-import React from "react"
+/* import React from "react"
 
 interface hoverImageProps {
     src: string
@@ -6,7 +6,7 @@ interface hoverImageProps {
     alt?: string;
 }
 
-export default function HoverImage({ src, size = 40, alt = "photo" }: hoverImageProps) {
+export default function HoverPlayImage({ src, size = 40, alt = "photo" }: hoverImageProps) {
     const ref = React.useRef<HTMLImageElement>(null)
 
     function handleMouseMove(e: React.MouseEvent) {
@@ -40,4 +40,4 @@ export default function HoverImage({ src, size = 40, alt = "photo" }: hoverImage
             className="transition-transform duration-200 ease-out"
         />
     )
-}
+} */
