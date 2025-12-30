@@ -93,10 +93,10 @@ export default function Events() {
           </div>
           <CardTitle className="text-xl">{event.title}</CardTitle>
           <CardDescription className="space-y-1">
-            <div className="text-amber-600 dark:text-amber-400 font-medium">
+            <div className="font-medium">
               {formatDate(event.date)} at {event.time}
             </div>
-            <div className="text-sm">📍 {event.location}</div>
+            <div className="text-sm text-amber-600 dark:text-amber-400">📍 {event.location}</div>
           </CardDescription>
         </CardHeader>
 
@@ -144,7 +144,8 @@ export default function Events() {
           )}
         </section>}
 
-        {/* Past Events */}<section className="mb-16">
+        {/* Past Events */}
+        <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Past Events</h2>
           {pastEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

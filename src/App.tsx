@@ -1,7 +1,7 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+//import { Toaster } from "@/components/ui/toaster";
+//import { Toaster as Sonner } from "@/components/ui/sonner";
+//import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -28,29 +28,29 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
-      <TooltipProvider>
+      {/* <TooltipProvider>
         <Toaster />
-        <Sonner />
-        <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
-          <ScrollToTopOnLocationChange />
-          <Layout>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/movies/:id" element={<MoviePlayer />} />
-                <Route path="/movies" element={<Movies />} />
-                {/* <Route path="/events/test" element={<EventTest />} /> */}
-                <Route path="/events/ydour" element={<YdourEvent />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/palmares" element={<Palmares />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes></Suspense>
-          </Layout>
-        </BrowserRouter>
-      </TooltipProvider>
+        <Sonner /> */}
+      <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
+        <ScrollToTopOnLocationChange />
+        <Layout>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/movies/:id" element={<MoviePlayer />} />
+              <Route path="/movies" element={<Movies />} />
+              {/* <Route path="/events/test" element={<EventTest />} /> */}
+              <Route path="/events/ydour" element={<YdourEvent />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/palmares" element={<Palmares />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes></Suspense>
+        </Layout>
+      </BrowserRouter>
+      {/* </TooltipProvider> */}
     </ThemeProvider>
   </QueryClientProvider>
 );
