@@ -40,7 +40,7 @@ particularly in its themes of sacrifice, exile, and resistance.
         ],
 
         quote: {
-            text: "YDOUR will return. Stay tuned for the next edition.",
+            text: "Stay tuned for the next edition!",
             callToAction: "Follow us to get the lates news!",
         },
 
@@ -62,14 +62,26 @@ particularly in its themes of sacrifice, exile, and resistance.
         {
             type: "image",
             src: "/About/ydour_web_optimized.jpg",
-            title: "Screening",
-            caption: "By choosing a coffeeshop as a space for projection and discussion, YDOUR aims to reclaim cinema as a shared ritual accessible to everyone and rooted in everyday life."
+            title: "The Experience",
+            caption: `The screening went smoothly. We expected a chill coffeeshop session, some people interacting with the film and discussion, others simply having a coffee with friends and passing by.
+
+Instead, the event quickly filled up. The café was full before the projection even started, and many people couldn’t find a place. We didn’t expect this number of attendees. `
+        },
+        {
+            type: "image",
+            src: "/events/ydour/theplace.jpg",
+            title: "The Place",
+            caption: `Café Culturel Liberthé, located in Lafayette, downtown Tunis, has long been a gathering point for cultural events.
+
+Thanks to its history and active community, Liberthé attracts an audience that is curious, engaged, and always up to date with cultural initiatives. The café has been hosting events for years, and successfully so, making it the perfect place for an event like YDOUR.`
         },
         {
             type: "video",
             src: "/events/ydour/talk.webm",
             title: "Post-Screening Discussion",
-            caption: "Each film opened the door to conversation. Once the credits rolled, participants engaged in open discussions, exchanging perspectives, interpretations, and emotions. These dialogues created a collective rhythm for the evening, turning YDOUR into a space where cinema was not only watched, but actively experienced and reflected upon together."
+            caption: `We initially worried that attendees might feel timid during the debate, but the discussions exceeded our expectations. Many people actively engaged, creating thoughtful and meaningful exchanges.
+
+From the start, we had structured the screening into three parts, each followed by a discussion. While intended to deepen engagement, this format gradually slowed the event. As the evening went on, some attendees showed signs of fatigue and distraction, slowly leaving. This highlighted that the structure, rather than the debate itself, should be reconsidered for future editions.`
         },
     ];
 
@@ -139,7 +151,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                                     }`}
                             >
                                 <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                                <p>{item.caption}</p>
+                                <p className="whitespace-pre-line">{item.caption}</p>
                             </div>
 
                             {/* Media */}
@@ -234,6 +246,24 @@ particularly in its themes of sacrifice, exile, and resistance.
 
                 <br />
 
+                <section className="space-y-12">
+
+                    <div className="items-center">
+                        {/* Text */}
+                        <div
+                            className="text-muted-foreground">
+                            <h3 className="text-xl font-semibold mb-3">{/* item.title */}</h3>
+                            <p className="whitespace-pre-line text-center">
+                                Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
+                                <br/>Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
+                                <br/>Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <br />
+
 
                 {/* Footer of event and call to action */}
                 <Card className="mb-10">
@@ -241,10 +271,15 @@ particularly in its themes of sacrifice, exile, and resistance.
 
                         {/* Quote */}
                         <div className="flex items-start justify-center gap-4">
-                            <Clock className="w-6 h-6 text-muted-foreground mt-1" />
-                            <blockquote className="italic text-xl leading-relaxed text-foreground">
+                            {<Clock className="w-6 h-6 text-muted-foreground mt-1" />}
+                            { <blockquote className="italic text-xl leading-relaxed text-foreground">
                                 “{event.quote.text}”
-                            </blockquote>
+                            </blockquote>}
+                            {/* <p className="text-lg leading-relaxed text-center text-muted-foreground">
+                                Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
+                                <br /><br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
+                                <br /><br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
+                            </p> */}
                         </div>
 
                         {/* Divider */}
