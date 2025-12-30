@@ -3,20 +3,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { PageTitle } from '@/components/customUi/page-title';
 import { CalendarX, FolderX } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 export default function Events() {
-  const events = [/* 
+  const events = [
     {
-      id: 1,
-      title: "Classic Film Night: Casablanca",
-      date: "2024-03-15",
-      time: "19:00",
-      location: "Main Theater",
-      description: "Join us for a screening of the timeless classic Casablanca, followed by a discussion about its cultural impact.",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80",
-      status: "upcoming",
-      category: "Screening"
-    },
+      id: 'ydour',
+      title: "Ydour",
+      date: "2025-02-22",
+      time: "18:30",
+      location: "Café culturel LIBER'THÉ",
+      description: "YDOUR exists to bring together the amateur cinema community and cinema lovers.",
+      image: "/events/ydour/ydour-title.jpg",
+      status: "past",
+      category: "Screening & Discussion"
+    },/* 
     {
       id: 2,
       title: "Director Spotlight: Akira Kurosawa",
@@ -65,36 +66,47 @@ export default function Events() {
   };
 
   const EventCard = ({ event }: { event: typeof events[0] }) => (
-    <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-      </div>
-      <CardHeader>
-        <div className="flex justify-between items-start mb-2">
-          <Badge variant={event.status === 'upcoming' ? 'default' : 'secondary'}>
-            {event.category}
-          </Badge>
-          <Badge variant={event.status === 'upcoming' ? 'default' : 'outline'}>
-            {event.status === 'upcoming' ? 'Upcoming' : 'Past Event'}
-          </Badge>
+    <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+
+      {/* Clickable overlay */}
+      <Link
+        to={`/events/${event.id}`}
+        aria-label={`Open event ${event.title}`}
+      >
+
+        <div className="aspect-[16/9] overflow-hidden rounded-t-lg relative z-20">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
-        <CardTitle className="text-xl">{event.title}</CardTitle>
-        <CardDescription className="space-y-1">
-          <div className="text-amber-600 dark:text-amber-400 font-medium">
-            {formatDate(event.date)} at {event.time}
+
+        <CardHeader className="relative z-20">
+          <div className="flex justify-between items-start mb-2">
+            <Badge variant={event.status === 'upcoming' ? 'default' : 'secondary'}>
+              {event.category}
+            </Badge>
+            <Badge variant={event.status === 'upcoming' ? 'default' : 'outline'}>
+              {event.status === 'upcoming' ? 'Upcoming' : 'Past Event'}
+            </Badge>
           </div>
-          <div className="text-sm">📍 {event.location}</div>
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground">{event.description}</p>
-      </CardContent>
+          <CardTitle className="text-xl">{event.title}</CardTitle>
+          <CardDescription className="space-y-1">
+            <div className="text-amber-600 dark:text-amber-400 font-medium">
+              {formatDate(event.date)} at {event.time}
+            </div>
+            <div className="text-sm">📍 {event.location}</div>
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="relative z-20">
+          <p className="text-muted-foreground">{event.description}</p>
+        </CardContent>
+      </Link>
     </Card>
   );
+
 
   return (
     <div className="min-h-screen py-12">
@@ -109,7 +121,7 @@ export default function Events() {
         </div>
 
         {/* Upcoming Events */}
-        <section className="mb-16">
+        {upcomingEvents.length > 0 && <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Upcoming Events</h2>
           {upcomingEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -130,7 +142,7 @@ export default function Events() {
               </p>
             </div>
           )}
-        </section>
+        </section>}
 
         {/* Past Events */}<section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Past Events</h2>

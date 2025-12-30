@@ -6,16 +6,22 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Layout } from "@/components/Layout";
-import Home from "./pages/Home";
-import Movies from "./pages/Movies";
-import MoviePlayer from "./pages/MoviePlayer";
-import Events from "./pages/Events";
-import Blog from "./pages/Blog";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
-import Palmares from "./pages/Palmares";
+import { lazy, Suspense } from "react";
+
 import ScrollToTopOnLocationChange from "./lib/router/ScrollToTop";
+import NotFound from "./pages/NotFound";
+import PageLoader from "./pages/PageLoader";
+import Home from "./pages/Home";
+
+const Movies = lazy(() => import("./pages/Movies"));
+const MoviePlayer = lazy(() => import("./pages/MoviePlayer"));
+const Events = lazy(() => import("./pages/Events"));
+const YdourEvent = lazy(() => import("./pages/events/YdourEvent"));
+const Blog = lazy(() => import("./pages/Blog"));
+const About = lazy(() => import("./pages/About"));
+const Palmares = lazy(() => import("./pages/Palmares"));
+const Contact = lazy(() => import("./pages/Contact"));
+
 
 const queryClient = new QueryClient();
 
@@ -28,17 +34,20 @@ const App = () => (
         <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
           <ScrollToTopOnLocationChange />
           <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/movie/:id" element={<MoviePlayer />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/palmares" element={<Palmares />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/movies/:id" element={<MoviePlayer />} />
+                <Route path="/movies" element={<Movies />} />
+                {/* <Route path="/events/test" element={<EventTest />} /> */}
+                <Route path="/events/ydour" element={<YdourEvent />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/palmares" element={<Palmares />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes></Suspense>
           </Layout>
         </BrowserRouter>
       </TooltipProvider>

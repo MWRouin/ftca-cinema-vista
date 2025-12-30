@@ -62,7 +62,7 @@ export default function Movies() {
                 className="opacity-100 visible"
               >
                 <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
-                  <Link to={`/movie/${movie.id}`} className="block">
+                  <Link to={`/movies/${movie.id}`} className="block">
                     <div className="aspect-[2/3] overflow-hidden bg-muted">
                       <img
                         src={movie.image}
