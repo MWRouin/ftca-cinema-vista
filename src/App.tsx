@@ -11,8 +11,8 @@ import { lazy, Suspense } from "react";
 import ScrollToTopOnLocationChange from "./lib/router/ScrollToTop";
 import NotFound from "./pages/NotFound";
 import PageLoader from "./pages/PageLoader";
-import Home from "./pages/Home";
 
+const Home = lazy(() => import("./pages/Home"));
 const Movies = lazy(() => import("./pages/Movies"));
 const MoviePlayer = lazy(() => import("./pages/MoviePlayer"));
 const Events = lazy(() => import("./pages/Events"));
