@@ -89,7 +89,7 @@ export default function Home() {
             {featuredMovies.map((movie, index) => (
               <div key={movie.id} className={`animate-on-scroll-delay-${index + 1}`}>
                 <Card className="card-cinema hover-lift group overflow-hidden">
-                  <Link to={`/movie/${movie.id}`} className="block">
+                  <Link to={`/movies/${movie.id}`} className="block">
                     <div className="aspect-[2/3] overflow-hidden">
                       <img
                         src={movie.image}

@@ -255,8 +255,8 @@ From the start, we had structured the screening into three parts, each followed 
                             <h3 className="text-xl font-semibold mb-3">{/* item.title */}</h3>
                             <p className="whitespace-pre-line text-center">
                                 Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
-                                <br/>Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
-                                <br/>Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
+                                <br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
+                                <br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
                             </p>
                         </div>
                     </div>
@@ -275,11 +275,6 @@ From the start, we had structured the screening into three parts, each followed 
                             { <blockquote className="italic text-xl leading-relaxed text-foreground">
                                 “{event.quote.text}”
                             </blockquote>}
-                            {/* <p className="text-lg leading-relaxed text-center text-muted-foreground">
-                                Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
-                                <br /><br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
-                                <br /><br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
-                            </p> */}
                         </div>
 
                         {/* Divider */}

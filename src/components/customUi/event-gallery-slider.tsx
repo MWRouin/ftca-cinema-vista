@@ -23,14 +23,14 @@ export function EventGallerySlider({ images }: { images: string[] }) {
 
       {/* Controls */}
       <button
-        onClick={() => emblaApi?.scrollPrev()}
+        onClick={() => emblaApi.scrollPrev()}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
       >
         <ChevronLeft />
       </button>
 
       <button
-        onClick={() => emblaApi?.scrollNext()}
+        onClick={() => emblaApi.scrollNext()}
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
       >
         <ChevronRight />
