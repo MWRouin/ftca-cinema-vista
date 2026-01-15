@@ -40,7 +40,7 @@ export default function Home() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative gradient-dark py-24 lg:py-32 animate-on-scroll overflow-hidden"
+          className="relative gradient-dark h-[calc(100vh-4rem)] min-h-[calc(100svh-4rem)] flex items-center justify-center  py-24 lg:py-32 animate-on-scroll overflow-hidden"
         >
           {/* Background SVG at 10% opacity */}
           <div
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center">
               <div className="flex justify-center mb-8">
-                <Logo size={310} className="drop-shadow-2xl" />
+                <Logo size={310} className="drop-shadow-2xl max-w-[calc(100vw/2)]" />
               </div>
               <PageTitle title="Hammam-lif Amateur Filmmakers' Club" />
 
