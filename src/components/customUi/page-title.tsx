@@ -37,7 +37,7 @@ interface PageTitleProps {
     useInAnimation?: boolean;
 }
 
-const defaultClassName: string = 'inline-block bg-gradient-to-br py-2 -my-2 from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent ';
+const defaultClassName: string = 'inline-block bg-gradient-to-br py-2 -my-2 max-h-[calc(100vh/4)] from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent ';
 const inAnimationClassName: string = 'animate-in fade-in slide-in-from-bottom-3 ';
 
 const getSizeClassName = (titleLevel: 1 | 2 | 3 | 4) => `text-${6 - titleLevel}xl md:text-${7 - titleLevel}xl mb-6 `;

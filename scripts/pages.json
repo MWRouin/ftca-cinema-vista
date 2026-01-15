@@ -9,7 +9,7 @@
         "palmares",
         "contact"
     ],
-    "dynamicPages": [
+    "entityPages": [
         {
             "base": "movies/",
             "context": ""

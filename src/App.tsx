@@ -7,8 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Layout } from "@/components/Layout";
 import { lazy, Suspense } from "react";
-
-import ScrollToTopOnLocationChange from "./lib/router/ScrollToTop";
+import MetaHeaderProvider from "./lib/metadata/meta-header-provider";
+import ScrollToTopOnLocationChange from "./lib/router/scroll-to-top";
 import NotFound from "./pages/NotFound";
 import PageLoader from "./pages/PageLoader";
 
@@ -31,25 +31,28 @@ const App = () => (
       {/* <TooltipProvider>
         <Toaster />
         <Sonner /> */}
-      <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
-        <ScrollToTopOnLocationChange />
-        <Layout>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/movies/:id" element={<MoviePlayer />} />
-              <Route path="/movies" element={<Movies />} />
-              {/* <Route path="/events/test" element={<EventTest />} /> */}
-              <Route path="/events/ydour" element={<YdourEvent />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/palmares" element={<Palmares />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes></Suspense>
-        </Layout>
-      </BrowserRouter>
+      <MetaHeaderProvider>
+        <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
+          <ScrollToTopOnLocationChange />
+          <Layout>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/movies/:id" element={<MoviePlayer />} />
+                <Route path="/movies" element={<Movies />} />
+                {/* <Route path="/events/test" element={<EventTest />} /> */}
+                <Route path="/events/ydour" element={<YdourEvent />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/palmares" element={<Palmares />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+        </BrowserRouter>
+      </MetaHeaderProvider>
       {/* </TooltipProvider> */}
     </ThemeProvider>
   </QueryClientProvider>
