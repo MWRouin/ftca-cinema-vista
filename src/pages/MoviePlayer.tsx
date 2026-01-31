@@ -6,32 +6,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { getMovieById, getRelatedMoviesByDirector, getRelatedMoviesByGenre } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
-import { cn } from '@/lib/utils';
+import { getCurrentLang } from '@/lib/metadata/html-lang';
 
 export default function MoviePlayer() {
   const { id } = useParams();
   const movie = getMovieById(id);
   const relatedMoviesByDirector = movie ? getRelatedMoviesByDirector(movie, 3) : [];
-  const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : []; 
+  const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : [];
 
   /* ---------- Language handling ---------- */
-  const availableLanguages = movie?.description
-    ? Object.keys(movie.description)
-    : [];
 
   //const [lang, setLang] = useState<string>(availableLanguages[0] || 'en');
-  const [lang, setLang] = useState<string>('en');
+  const [lang, setLang] = useState<string>(getCurrentLang() ?? 'en');
 
   useEffect(() => {
     /*if (availableLanguages.length) {
       setLang(availableLanguages[0]);
     }*/
-    setLang('en');
+    setLang(getCurrentLang() ?? 'en');
   }, [movie]);
-
-  const description =
-    movie?.description?.[lang] ??
-    movie?.description?.[availableLanguages[0]];
 
   /* ---------- Not found ---------- */
   if (!movie) {
@@ -94,30 +87,30 @@ export default function MoviePlayer() {
                 {movie.duration && <Badge variant="outline">{movie.duration}</Badge>}
               </div>
 
-              {( (movie as any).descriptions?.data?.[lang] ?? movie.description) && (
-                <p key={lang} className="text-lg text-muted-foreground mb-6 lang-fade-enter" aria-live="polite">{(movie as any).descriptions?.data?.[lang] ?? movie.description}</p>
+              {((movie as any).descriptions?.data?.[lang] ?? movie.description) && (
+                <p key={lang} lang={lang} className="text-lg text-muted-foreground mb-6 lang-fade-enter" aria-live="polite">{(movie as any).descriptions?.data?.[lang] ?? movie.description}</p>
               )}
             </div>
 
-                          {/* Language toggle for this movie (FR / EN) */}
-              <div className="flex items-center gap-2 mb-4">
-                                <button
-                  type="button"
-                  onClick={() => setLang('en')}
-                  className={`px-1 py-1 rounded text-xs leading-none ${lang === 'en' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
-                  aria-pressed={lang === 'en'}
-                >
-                  EN
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLang('fr')}
-                  className={`px-1 py-1 rounded text-xs leading-none ${lang === 'fr' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
-                  aria-pressed={lang === 'fr'}
-                >
-                  FR
-                </button>
-              </div>
+            {/* Language toggle for this movie (FR / EN) */}
+            <div className="flex items-center gap-2 mb-4">
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                className={`px-1 py-1 rounded text-xs leading-none ${lang === 'en' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
+                aria-pressed={lang === 'en'}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('fr')}
+                className={`px-1 py-1 rounded text-xs leading-none ${lang === 'fr' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
+                aria-pressed={lang === 'fr'}
+              >
+                FR
+              </button>
+            </div>
 
             <div className="space-y-4">
               <div>

@@ -5,7 +5,7 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Logo } from '@/components/Logo';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
-import MetaHeader from '@/lib/metadata/meta-header';
+import MetaHeader from '@/lib/metadata/metadata';
 
 export default function Home() {
   const heroRef = useScrollAnimation();

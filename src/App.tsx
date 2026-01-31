@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Layout } from "@/components/Layout";
 import { lazy, Suspense } from "react";
-import MetaHeaderProvider from "./lib/metadata/meta-header-provider";
+import { MetadataProvider } from "./lib/metadata/metadata-provider";
 import ScrollToTopOnLocationChange from "./lib/router/scroll-to-top";
 import NotFound from "./pages/NotFound";
 import PageLoader from "./pages/PageLoader";
@@ -31,7 +31,7 @@ const App = () => (
       {/* <TooltipProvider>
         <Toaster />
         <Sonner /> */}
-      <MetaHeaderProvider>
+      <MetadataProvider>
         <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
           <ScrollToTopOnLocationChange />
           <Layout>
@@ -52,7 +52,7 @@ const App = () => (
             </Suspense>
           </Layout>
         </BrowserRouter>
-      </MetaHeaderProvider>
+      </MetadataProvider>
       {/* </TooltipProvider> */}
     </ThemeProvider>
   </QueryClientProvider>

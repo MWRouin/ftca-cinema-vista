@@ -1,3 +1,3 @@
 import { HelmetProvider } from "react-helmet-async";
 
-export default HelmetProvider;
+export { HelmetProvider as MetadataProvider };
