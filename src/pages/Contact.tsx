@@ -28,7 +28,7 @@ export default function Contact() {
     // Handle form submission here
     //console.log('Form submitted:', formData);
     const { name, email, subject, message } = formData;
-    const mailto = `mailto:ftca.hammamlif@gmail.com
+    const mailto = `mailto:contact@cineamateur-hlif.com
     ?subject=${encodeURIComponent(subject)}
     &body=${encodeURIComponent(
       `${message}\n\nName: ${name}`
@@ -148,7 +148,7 @@ export default function Contact() {
                     <Mail className="w-5 h-5 text-primary  dark:text-accent" />
                     <h4 className="font-semibold">Email</h4>
                   </div>
-                  <p className="text-muted-foreground">ftca.hammamlif@gmail.com</p>
+                  <p className="text-muted-foreground">contact@cineamateur-hlif.com</p>
                 </div>
                 <div>
                   <div className="flex items-center space-x-2 mb-1">

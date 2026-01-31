@@ -1,6 +1,61 @@
 
 import { PageTitle } from '@/components/customUi/page-title';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState } from 'react';
+
+function TeamSection({ teamMembers }) {
+  const [showAll, setShowAll] = useState(false);
+
+  // Decide which members to show based on showAll state
+  const membersToShow = showAll ? teamMembers : teamMembers.slice(0, 12);
+
+  return (
+    <section>
+      <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {membersToShow.map((member, index) => (
+          <Card key={index} className="text-center">
+            <CardHeader>
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardTitle className="text-xl">{member.name}</CardTitle>
+              <CardDescription className="text-amber-600 dark:text-amber-400 font-medium">
+                {member.role}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="text-sm">{member.bio}</CardDescription>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Show button only if more than 12 members */}
+      {teamMembers.length > 12 && (
+        <div className="mt-8 text-center">
+
+          {/*           <div className="space-x-4">
+            <Button asChild>
+              <Link to="/">← Back to Home</Link>
+            </Button>
+          </div> */}
+          <Button
+            onClick={() => setShowAll(!showAll)}
+            className="min-w-[120px]"
+          >
+            {showAll ? "Show Less" : "Show All"}
+          </Button>
+        </div>
+      )}
+    </section>
+  );
+}
 
 export default function About() {
 
@@ -14,7 +69,7 @@ export default function About() {
       image: `${BASE}Members/khalil.jpg`
     },
     {
-      name: "Safe Khiari",
+      name: "Safa Khiari",
       role: "General Secretary",
       bio: "French Teacher and film enthusiast, loves exploring cinema from different cultures.",
       image: `${BASE}Members/safe.jpg`
@@ -61,6 +116,300 @@ export default function About() {
       bio: "Actress and film enthusiast. Passionate about storytelling through performance.",
       image: `${BASE}Members/itaf.jpg`
     },
+    {
+      name: "Hihem Toumi",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/hichemToumi.jpg`
+    },
+    {
+      name: "Ghassen Jemaia",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Tayeb ben ameur",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Fares Ben Khelifa",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ghassen Ben Slema",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Halim Jerbi",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ines Ben Halima",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ines Siala",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Maha Ezzine",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Maher Ben Khelifa",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Mayssa Ezzine",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Mehdi Ben Farhat",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Youssef El Behi",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Zeyneb Ben Ghachem",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Kamel Staali",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Abdelkader Chikhawi",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Amor Sbika",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ridha Ben Hlima",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Mourad Mahjbi",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Imen Nafti",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Rachiq Meddeb",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Mohamed Ali Bahroun",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Khaled Tounsi",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Walid Chebbi",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Yassine Bhar",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Mehdi Mokrani",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Slim Fassatoui",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Walid Mattar",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Yahya Gabous",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Mohamed Khiri",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ridha Achour",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Chaffai Zaafouri",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ahmed Ben Amor",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Jalel Ben Dana",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Lotfi Moudoud",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Lotfi Trabelsi",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Moncef Ben Mrad",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Said Ben Sedrine",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Ridha Baccar",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Salma Baccar",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Najet Mabouj",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Raouf Ben Mosly",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Hamadi Ghelella",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Rafik Staali",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Meher Harrazi",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Yosra Nefti",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Akrem Tliba",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Fethi Ben Slema",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    },
+    {
+      name: "Manel Karkour",
+      role: "Honorary Member",
+      bio: "",
+      image: `${BASE}Members/user.png`
+    }
   ];
 
   return (
@@ -68,7 +417,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <PageTitle title='Our Story'/>
+          <PageTitle title='Our Story' />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           {/* <div className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             Discover our story, mission, and the passionate individuals who make our cinema club a vibrant community
@@ -187,33 +536,7 @@ export default function About() {
         </section>
 
         {/* Team Section */}
-        <section>
-          <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="text-center">
-                <CardHeader>
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                  <CardDescription className="text-amber-600 dark:text-amber-400 font-medium">
-                    {member.role}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-sm">
-                    {member.bio}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
+        <TeamSection teamMembers={teamMembers} />
       </div>
     </div>
   );

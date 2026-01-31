@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import { OgType, CharSet } from "./meta-header-types";
+import { OgType, CharSet } from "./metadata-types";
+import { useHtmlLanguage } from "./html-lang";
 
 interface MetaHeaderProps {
-    charSet?: CharSet;
+    lang?: string;
     title?: string;
     description?: string;
     author?: string;
@@ -19,7 +20,7 @@ interface MetaHeaderProps {
 //description "Club des cinéastes amateurs d'Hammam-Lif - FTCA Hammemlif - A passionate community of film enthusiasts. Beyond celebrating cinema as an art. We use it as a medium to question, reflect, and share ideas."
 
 export default function MetaHeader({
-    charSet = "UTF-8",
+    lang,
     title = "Club des cinéastes amateurs d'Hammam-Lif",
     description,
     author,
@@ -28,9 +29,13 @@ export default function MetaHeader({
     pageUrl,
     ogType = "website"
 }: MetaHeaderProps) {
+
+    useHtmlLanguage(lang);
+
+    const ogLocale = lang?.replace("-", "_") ?? "en_US";
+
     return (
         <Helmet>
-            <meta charSet={charSet} />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>{title}</title>
             <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -42,7 +47,7 @@ export default function MetaHeader({
             <meta name="robots" content="index, follow" />
 
             {/* openGraph */}
-            <meta property="og:locale" content="en_US" />
+            <meta property="og:locale" content={ogLocale} />
             <meta property="og:title" content={title} />
             <meta property="og:site_name" content="Club des cinéastes amateurs d'Hammam-Lif" />
             {pageUrl && <meta property="og:url" content={pageUrl} />}

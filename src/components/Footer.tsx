@@ -73,11 +73,11 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Contact</h4>
             <div className="space-y-2">
               <a
-                href="mailto:ftca.hammamlif@gmail.com"
+                href="mailto:contact@cineamateur-hlif.com"
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">ftca.hammamlif@gmail.com</span>
+                <span className="text-sm">contact@cineamateur-hlif.com</span>
               </a>
               <a
                 href="tel:+21655466297"
