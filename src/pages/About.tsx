@@ -39,12 +39,6 @@ function TeamSection({ teamMembers }) {
       {/* Show button only if more than 12 members */}
       {teamMembers.length > 12 && (
         <div className="mt-8 text-center">
-
-          {/*           <div className="space-x-4">
-            <Button asChild>
-              <Link to="/">← Back to Home</Link>
-            </Button>
-          </div> */}
           <Button
             onClick={() => setShowAll(!showAll)}
             className="min-w-[120px]"

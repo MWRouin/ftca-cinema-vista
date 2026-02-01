@@ -6,66 +6,85 @@ import { PageTitle } from "@/components/customUi/page-title";
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 
-export default function YdourEvent() {
+export default function FilmsDeHammamLifEvent() {
     const event = {
-        title: "Ydour - يدور",
-        category: "Screening & Discussion",
+        title: "Films de Hammam-Lif",
+        category: "Screening & Exhibition",
         status: "Past Event",
-        date: "February 22, 2025",
-        location: "Café culturel LIBER'THÉ",
-        image:
-            "/events/ydour/ydour-title.jpg",
+        date: "December 27, 2025",
+        location: "Complexe Culturel Ali Ben Ayed",
+        image: "/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg",
 
         overview: `
-YDOUR exists to bring together the amateur cinema community and cinema lovers.
+"Films de Hammam-Lif" was held on December 27, 2025, at the Complexe Culturel Ali Ben Ayed in Hammam-Lif.
 
-We noticed a lack of regular events that allow people to gather, watch films, and exchange ideas outside traditional screening rooms.
+The event was conceived as a tribute to the once-vibrant cinematic culture of Hammam-Lif, a culture that has faded over the years as cinemas closed and cultural activity slowly disappeared.
 
-There are important moments when the community comes together, such as FIFAK, where screenings and debates create a strong sense of collective experience. However, these opportunities happen only once a year. While FIFAK may be the biggest amateur cinema event, it shouldn’t be the only space where this community exists.`,
+Through this gathering, we invited former FTCA members and longtime cineastes from Hammam-Lif to watch films produced by our FTCA Hammam-Lif club.
 
+The goal was to revive, even briefly, a spirit that had been dormant for years, and perhaps spark something new among the younger generation of "Hammamlifois", who have grown increasingly distant from cinema clubs and cultural initiatives. `,
         quote: {
-            text: "Stay tuned for the next edition!",
+            text: "Stay tuned to discover upcoming events!",
             callToAction: "Follow us to get the lates news!",
         },
 
         gallery: [
-            "/events/ydour/gal1.jpg",
-            "/events/ydour/gal2.jpg",
-            "/events/ydour/gal3.jpg",
-            "/events/ydour/gal4.jpg",
-            "/events/ydour/gal5.jpg",
-            "/events/ydour/gal6.jpg",
-            "/events/ydour/gal7.jpg",
-            "/events/ydour/gal8.jpg",
-            "/events/ydour/gal9.jpg",
-            "/events/ydour/gal10.jpg",
+            "/events/FilmsDeHammamLif/gal1.jpg",
+            "/events/FilmsDeHammamLif/gal2.jpg",
+            "/events/FilmsDeHammamLif/gal3.jpg",
+            "/events/FilmsDeHammamLif/gal4.jpg",
+            "/events/FilmsDeHammamLif/gal5.jpg",
+            "/events/FilmsDeHammamLif/gal6.jpg",
+            "/events/FilmsDeHammamLif/gal7.jpg",
+            "/events/FilmsDeHammamLif/gal8.jpg",
+            "/events/FilmsDeHammamLif/gal9.jpg",
+            "/events/FilmsDeHammamLif/gal10.jpg",
+            "/events/FilmsDeHammamLif/gal11.jpg",
+            "/events/FilmsDeHammamLif/gal12.jpg",
+            "/events/FilmsDeHammamLif/gal13.jpg",
+            "/events/FilmsDeHammamLif/gal14.jpg",
+            "/events/FilmsDeHammamLif/gal15.jpg",
+            "/events/FilmsDeHammamLif/gal16.jpg",
+            "/events/FilmsDeHammamLif/gal17.jpg",
         ],
     };
 
     const media = [
         {
             type: "image",
-            src: "/About/ydour_web_optimized.jpg",
+            src: "/events/FilmsDeHammamLif/theExperience.jpg",
             title: "The Experience",
-            caption: `The screening went smoothly. We expected a chill coffeeshop session, some people interacting with the film and discussion, others simply having a coffee with friends and passing by.
+            caption: `The turnout exceeded our expectations.
+Even though the venue can hold over 300 people, welcoming more than 100 attendees felt like a real milestone, especially because many "Hammamlifois" were joined by people who traveled from outside the city just to attend the event.
+The atmosphere leaned towards the official side, but overall the energy was positive and supportive.
 
-Instead, the event quickly filled up. The café was full before the projection even started, and many people couldn’t find a place. We didn’t expect this number of attendees. `
+There were also some challenges. The projection quality was weak, the scaling wasn't adjusted to the screen.
+The projector itself altered the film’s colors. These issues made us realize the need for a proper projection booth workshop to learn how to handle screenings in a more professional way.`
         },
         {
             type: "image",
-            src: "/events/ydour/theplace.jpg",
+            src: "/events/FilmsDeHammamLif/thePlace.jpg",
             title: "The Place",
-            caption: `Café Culturel Liberthé, located in Lafayette, downtown Tunis, has long been a gathering point for cultural events.
-
-Thanks to its history and active community, Liberthé attracts an audience that is curious, engaged, and always up to date with cultural initiatives. The café has been hosting events for years, and successfully so, making it the perfect place for an event like YDOUR.`
+            caption: `The Complexe Culturel Ali Ben Ayed proved to be an ideal venue for this event. Its size, history, and location give it the potential for much more than a one-day screening.
+Being inside such a significant cultural space highlighted the possibility of future, larger initiatives, maybe even a festival or parallel programs like live music events or extended screenings.`
         },
         {
-            type: "video",
-            src: "/events/ydour/talk.webm",
+            type: "image",
+            src: "/events/FilmsDeHammamLif/postScreening.jpg",
             title: "Post-Screening Discussion",
-            caption: `We initially worried that attendees might feel timid during the debate, but the discussions exceeded our expectations. Many people actively engaged, creating thoughtful and meaningful exchanges.
+            caption: `The debate did not unfold as we had hoped. The hall was simply too large to create a close, interactive atmosphere, and as a team, we struggled to animate the discussion in a space of that scale. We’re not yet used to managing such a big room, so the exchanges felt distant and didn’t develop the way we imagined.
 
-From the start, we had structured the screening into three parts, each followed by a discussion. While intended to deepen engagement, this format gradually slowed the event. As the evening went on, some attendees showed signs of fatigue and distraction, slowly leaving. This highlighted that the structure, rather than the debate itself, should be reconsidered for future editions.`
+Despite this, the older cineastes appreciated the initiative. Some have shared memories with each other and connected with the younger generation. It became clear that the desire for more opportunities like this still exists, and that the format just needs to be adapted.`
+        },
+        {
+            type: "image",
+            src: "/events/FilmsDeHammamLif/clubExhibition.jpg",
+            title: "Club Exhibition",
+            caption: `The club exhibition was one of the strongest moments of the event. Those who visited were genuinely surprised and impressed. From the outside, the club may look like a simple garage, but once inside, visitors discovered its long and rich history dating back to 1964.
+
+People asked questions, explored the archives, and engaged with the space with real curiosity. For many young attendees, it was their first time encountering this cultural legacy up close. For the older cineastes, it felt like a return to a place filled with memories.
+
+This encounter between generations made us realize something important: the club still has the power to bring people together. The success of the exhibition showed us that we need to make use of this space more often, through exhibitions, screenings, open days, and any initiative that keeps its heritage alive.`
         },
     ];
 
@@ -160,6 +179,8 @@ From the start, we had structured the screening into three parts, each followed 
                     ))}
                 </section>
 
+
+
                 <br />
 
                 <br />
@@ -167,23 +188,6 @@ From the start, we had structured the screening into three parts, each followed 
                 <section>
                     <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
                     <EventGallerySlider images={event.gallery} />
-                </section>
-
-                <br />
-
-                <section className="space-y-12">
-
-                    <div className="items-center">
-                        {/* Text */}
-                        <div
-                            className="text-muted-foreground">
-                            <p className="whitespace-pre-line text-center">
-                                Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
-                                <br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
-                                <br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
-                            </p>
-                        </div>
-                    </div>
                 </section>
 
                 <br />
@@ -196,7 +200,7 @@ From the start, we had structured the screening into three parts, each followed 
                         {/* Quote */}
                         <div className="flex items-start justify-center gap-4">
                             {<Clock className="w-6 h-6 text-muted-foreground mt-1" />}
-                            {<blockquote className="italic text-xl leading-relaxed text-foreground">
+                            { <blockquote className="italic text-xl leading-relaxed text-foreground">
                                 “{event.quote.text}”
                             </blockquote>}
                         </div>

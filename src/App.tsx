@@ -11,6 +11,7 @@ import { MetadataProvider } from "./lib/metadata/metadata-provider";
 import ScrollToTopOnLocationChange from "./lib/router/scroll-to-top";
 import NotFound from "./pages/NotFound";
 import PageLoader from "./pages/PageLoader";
+import FilmsDeHammamLifEvent from "./pages/events/FilmsDeHammamLifEvent";
 
 const Home = lazy(() => import("./pages/Home"));
 const Movies = lazy(() => import("./pages/Movies"));
@@ -40,8 +41,8 @@ const App = () => (
                 <Route path="/" element={<Home />} />
                 <Route path="/movies/:id" element={<MoviePlayer />} />
                 <Route path="/movies" element={<Movies />} />
-                {/* <Route path="/events/test" element={<EventTest />} /> */}
                 <Route path="/events/ydour" element={<YdourEvent />} />
+                <Route path="/events/films-de-hammamlif" element={<FilmsDeHammamLifEvent />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/about" element={<About />} />

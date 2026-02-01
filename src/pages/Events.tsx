@@ -17,6 +17,17 @@ export default function Events() {
       image: "/events/ydour/ydour-title.jpg",
       status: "past",
       category: "Screening & Discussion"
+    },
+    {
+      id: 'films-de-hammamlif',
+      title: "Films de Hammam-Lif",
+      date: "2025-12-27",
+      time: "16:30",
+      location: "Complexe Culturel Ali Ben Ayed",
+      description: "\"Films de Hammam-Lif\" aims to revive this lost spirit and inspire a new generation’s connection to cinema and culture.",
+      image: "/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg",
+      status: "past",
+      category: "Screening & Exhibition"
     },/* 
     {
       id: 2,
