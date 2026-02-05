@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,33 +7,44 @@
 @layer base {
   :root {
     /* Dark theme (root): mapped to provided palette */
-    --background: 205 33% 7%;            /* #0c1318 */
-    --foreground: 248 31% 95%;           /* #efeef6 */
+    --background: 205 33% 7%;
+    /* #0c1318 */
+    --foreground: 248 31% 95%;
+    /* #efeef6 */
 
-    --card: 205 33% 9%;                  /* slightly lighter than background */
+    --card: 205 33% 9%;
+    /* slightly lighter than background */
     --card-foreground: 248 31% 95%;
 
     --popover: 205 33% 9%;
     --popover-foreground: 248 31% 95%;
 
-    --primary: 177 70% 23%;              /* #0a6b66 */
-    --primary-foreground: 248 31% 95%;   /* light text on primary */
+    --primary: 177 70% 23%;
+    /* #0a6b66 */
+    --primary-foreground: 248 31% 95%;
+    /* light text on primary */
 
-    --secondary: 177 88% 13%;            /* #043e3b */
+    --secondary: 177 88% 13%;
+    /* #043e3b */
     --secondary-foreground: 248 31% 95%;
 
-    --muted: 205 22% 15%;                /* neutral subdued background */
-    --muted-foreground: 215 20% 65%;     /* keep readable muted text */
+    --muted: 205 22% 15%;
+    /* neutral subdued background */
+    --muted-foreground: 215 20% 65%;
+    /* keep readable muted text */
 
-    --accent: 31 61% 60%;                /* #d79b5b */
+    --accent: 31 61% 60%;
+    /* #d79b5b */
     --accent-foreground: 205 33% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 205 22% 20%;               /* #223644 approx */
+    --border: 205 22% 20%;
+    /* #223644 approx */
     --input: 205 22% 20%;
-    --ring: 177 70% 23%;                 /* use primary hue for focus ring */
+    --ring: 177 70% 23%;
+    /* use primary hue for focus ring */
 
     --radius: 0.5rem;
 
@@ -50,8 +60,10 @@
 
   .light {
     /* Light theme mapped to light scales of provided palette */
-    --background: 202 31% 95%;           /* ~ background-50 */
-    --foreground: 240 30% 10%;           /* ~ text-900 */
+    --background: 202 31% 95%;
+    /* ~ background-50 */
+    --foreground: 240 30% 10%;
+    /* ~ text-900 */
 
     --card: 0 0% 100%;
     --card-foreground: 240 30% 10%;
@@ -59,10 +71,12 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 30% 10%;
 
-    --primary: 177 70% 23%;              /* same brand color */
+    --primary: 177 70% 23%;
+    /* same brand color */
     --primary-foreground: 248 31% 95%;
 
-    --secondary: 205 33% 90%;            /* light neutral section bg */
+    --secondary: 205 33% 90%;
+    /* light neutral section bg */
     --secondary-foreground: 240 30% 10%;
 
     --muted: 205 25% 92%;
@@ -89,7 +103,7 @@
   }
 
   .dark {
-    --primary: 177 83% 31%;   
+    --primary: 177 83% 31%;
   }
 }
 
@@ -100,14 +114,19 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    background-image: 
+    background-image:
       radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.02) 0%, transparent 50%);
     background-attachment: fixed;
   }
 
   /* Cinematic typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-weight: 600;
     letter-spacing: -0.025em;
@@ -227,8 +246,15 @@
   }
 
   @keyframes shimmer {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   /* Button enhancements */
@@ -252,7 +278,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.5s ease;
   }
 
@@ -313,8 +339,13 @@
   }
 
   @keyframes loading-shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
   }
 
   /* Fallback visibility for animation elements */
@@ -350,11 +381,11 @@
       border: 1px solid hsl(var(--border) / 0.6);
       box-shadow: 0 4px 12px hsl(var(--background) / 0.8);
     }
-    
+
     .dark .gradient-subtle {
       background: linear-gradient(135deg, hsl(var(--card) / 0.8) 0%, hsl(var(--muted) / 0.3) 100%);
     }
-    
+
     .dark .nav-link:hover {
       background: linear-gradient(135deg, hsl(var(--primary) / 0.18), hsl(var(--secondary) / 0.18));
     }
@@ -365,8 +396,18 @@
     background: linear-gradient(135deg, hsl(var(--card) / 0.9) 0%, hsl(var(--secondary) / 0.7) 100%);
     border: 1px solid hsl(var(--border) / 0.6);
   }
-  
+
   .light .gradient-dark {
     background: linear-gradient(135deg, hsl(var(--secondary) / 0.3) 0%, hsl(var(--muted) / 0.5) 100%);
+  }
+
+  /* globals.css */
+  .bg-texture {
+    background-image: url("/confetti-doodles.svg");
+    background-attachment: scroll;
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 100%;
+    /* if baked into SVG */
   }
 }

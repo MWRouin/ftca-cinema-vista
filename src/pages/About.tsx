@@ -10,6 +10,10 @@ function TeamSection({ teamMembers }) {
   // Decide which members to show based on showAll state
   const membersToShow = showAll ? teamMembers : teamMembers.slice(0, 12);
 
+  const BASE = import.meta.env.BASE_URL || "/";
+
+  const defaultUserImage = `${BASE}Members/user.png`;
+
   return (
     <section>
       <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
@@ -19,7 +23,7 @@ function TeamSection({ teamMembers }) {
             <CardHeader>
               <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                 <img
-                  src={member.image}
+                  src={member.image ? member.image : defaultUserImage}
                   alt={member.name}
                   className="w-full h-full object-cover"
                 />
@@ -120,289 +124,289 @@ export default function About() {
       name: "Ghassen Jemaia",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Tayeb ben ameur",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Fares Ben Khelifa",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ghassen Ben Slema",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Halim Jerbi",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ines Ben Halima",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ines Siala",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Maha Ezzine",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Maher Ben Khelifa",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Mayssa Ezzine",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Mehdi Ben Farhat",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Youssef El Behi",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Zeyneb Ben Ghachem",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Kamel Staali",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Abdelkader Chikhawi",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Amor Sbika",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ridha Ben Hlima",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Mourad Mahjbi",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Imen Nafti",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Rachiq Meddeb",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Mohamed Ali Bahroun",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Khaled Tounsi",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Walid Chebbi",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Yassine Bhar",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Mehdi Mokrani",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Slim Fassatoui",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Walid Mattar",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Yahya Gabous",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Mohamed Khiri",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ridha Achour",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Chaffai Zaafouri",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ahmed Ben Amor",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Jalel Ben Dana",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Lotfi Moudoud",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Lotfi Trabelsi",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Moncef Ben Mrad",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Said Ben Sedrine",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Ridha Baccar",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Salma Baccar",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Najet Mabouj",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Raouf Ben Mosly",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Hamadi Ghelella",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Rafik Staali",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Meher Harrazi",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Yosra Nefti",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Akrem Tliba",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Fethi Ben Slema",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     },
     {
       name: "Manel Karkour",
       role: "Honorary Member",
       bio: "",
-      image: `${BASE}Members/user.png`
+      image: ""
     }
   ];
 
