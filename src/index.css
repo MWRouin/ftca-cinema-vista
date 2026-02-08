@@ -403,10 +403,10 @@
 
   /* globals.css */
   .bg-texture {
-    background-image: url("/confetti-doodles.svg");
+    background-image: url("/cinema-doodle-set_160308-188.svg");
     background-attachment: scroll;
     background-repeat: repeat;
-    background-position: center;
+    background-position: top;
     background-size: 100%;
     /* if baked into SVG */
   }

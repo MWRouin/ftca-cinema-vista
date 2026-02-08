@@ -61,28 +61,34 @@ export default function About() {
 
   const teamMembers = [
     {
-      name: "Khalil Said",
+      name: "Wadii Klaii",
       role: "President",
+      bio: "Multi-disciplinary artist with a passion for cinema. Started as a editor and now exploring directing.",
+      image: `${BASE}Members/wadii.jpg`
+    },
+    {
+      name: "Seif Eddine Larbi",
+      role: "General Secretary",
+      bio: "Passionate about writing which leads to a deeper understanding of film narratives.",
+      image: `${BASE}Members/seif.jpg`
+    },
+    {
+      name: "Hichem Gtari",
+      role: "Treasurer",
+      bio: "Mechanical Engineer with a passion for filmmaking. Enjoys exploring the technical aspects of film production.",
+      image: `${BASE}Members/hichem.jpg`
+    },
+    {
+      name: "Khalil Said",
+      role: "Member",
       bio: "Mechanical engineer with a passion for filmmaking. Passionate about photography and directing.",
       image: `${BASE}Members/khalil.jpg`
     },
     {
       name: "Safa Khiari",
-      role: "General Secretary",
+      role: "Member",
       bio: "French Teacher and film enthusiast, loves exploring cinema from different cultures.",
       image: `${BASE}Members/safe.jpg`
-    },
-    {
-      name: "Seif Eddine El Arbi ",
-      role: "Treasurer",
-      bio: "Passionate about writing which leads to a deeper understanding of film narratives.",
-      image: `${BASE}Members/seif.jpg`
-    },
-    {
-      name: "Wadii Klaii",
-      role: "Member",
-      bio: "Multi-disciplinary artist with a passion for cinema. Started as a editor and now exploring directing.",
-      image: `${BASE}Members/wadii.jpg`
     },
     {
       name: "Wissem Rouin",
@@ -103,16 +109,16 @@ export default function About() {
       image: `${BASE}Members/aziz.jpg`
     },
     {
-      name: "Hichem Gtari",
-      role: "Member",
-      bio: "Mechanical Engineer with a passion for filmmaking. Enjoys exploring the technical aspects of film production.",
-      image: `${BASE}Members/hichem.jpg`
-    },
-    {
       name: "Itaf Daghsen",
       role: "Member",
       bio: "Actress and film enthusiast. Passionate about storytelling through performance.",
       image: `${BASE}Members/itaf.jpg`
+    },
+    {
+      name: "Salma Bel Hadj Aissa",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/salmabelhadjaissa.jpg`
     },
     {
       name: "Hihem Toumi",
