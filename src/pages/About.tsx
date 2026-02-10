@@ -156,10 +156,10 @@ export default function About() {
       name: "Ghassen Jemaia",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/ghassen.jpg`
     },
     {
-      name: "Tayeb ben ameur",
+      name: "Taieb ben ameur",
       role: "Member",
       bio: "",
       image: ""
@@ -180,7 +180,7 @@ export default function About() {
       name: "Halim Jerbi",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/halim.jpg`
     },
     {
       name: "Ines Ben Halima",
@@ -201,16 +201,16 @@ export default function About() {
       image: ""
     },
     {
-      name: "Maher Ben Khelifa",
-      role: "Member",
-      bio: "",
-      image: ""
-    },
-    {
       name: "Mayssa Ezzine",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/mayssa.jpg`
+    },
+    {
+      name: "Maher Ben Khelifa",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/maher.jpg`
     },
     {
       name: "Mehdi Ben Farhat",
@@ -222,7 +222,7 @@ export default function About() {
       name: "Youssef El Behi",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/youssef.jpg`
     },
     {
       name: "Zeyneb Ben Ghachem",
