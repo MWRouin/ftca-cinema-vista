@@ -28,34 +28,36 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider>
-      {/* <TooltipProvider>
+    <Suspense fallback={<PageLoader />}>
+      <ThemeProvider>
+        {/* <TooltipProvider>
         <Toaster />
         <Sonner /> */}
-      <MetadataProvider>
-        <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
-          <ScrollToTopOnLocationChange />
-          <Layout>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/movies/:id" element={<MoviePlayer />} />
-                <Route path="/movies" element={<Movies />} />
-                <Route path="/events/ydour" element={<YdourEvent />} />
-                <Route path="/events/films-de-hammamlif" element={<FilmsDeHammamLifEvent />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/palmares" element={<Palmares />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </Layout>
-        </BrowserRouter>
-      </MetadataProvider>
-      {/* </TooltipProvider> */}
-    </ThemeProvider>
+        <MetadataProvider>
+          <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
+            <ScrollToTopOnLocationChange />
+            <Layout>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/movies/:id" element={<MoviePlayer />} />
+                  <Route path="/movies" element={<Movies />} />
+                  <Route path="/events/ydour" element={<YdourEvent />} />
+                  <Route path="/events/films-de-hammamlif" element={<FilmsDeHammamLifEvent />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/palmares" element={<Palmares />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </Layout>
+          </BrowserRouter>
+        </MetadataProvider>
+        {/* </TooltipProvider> */}
+      </ThemeProvider>
+    </Suspense>
   </QueryClientProvider>
 );
 

@@ -78,19 +78,19 @@ export default function Contact() {
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/*<div className="grid grid-cols-1 md:grid-cols-2 gap-4">*/}
-                    <div>
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        //required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="Your full name"
-                      />
-                    </div>
-                    {/* <div>
+                  <div>
+                    <Label htmlFor="name">Full Name</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      //required
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Your full name"
+                    />
+                  </div>
+                  {/* <div>
                       <Label htmlFor="email">Email Address</Label>
                       <Input
                         id="email"
@@ -221,10 +221,12 @@ export default function Contact() {
                 <p className="text-muted-foreground mb-4">
                   Interested in becoming a member? We welcome new film enthusiasts of all levels!
                 </p>
-                <p>Stay tuned</p>
-                {/* <Button className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
-                  Learn About Membership
-                </Button> */}
+                {/* <p>Stay tuned</p> */}
+                <a href='https://docs.google.com/forms/d/e/1FAIpQLScuvfikqSpUKanyxrXSs_TZzn4MTAdVmcy3Hvswp7Ux_p3pYQ/viewform'><Button className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
+                  
+                    Join us now
+                 
+                </Button> </a>
               </CardContent>
             </Card>
           </div>
