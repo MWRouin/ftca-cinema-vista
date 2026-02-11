@@ -40,7 +40,7 @@ export default function Home() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative gradient-dark h-[calc(100vh-4rem)] min-h-[calc(100svh-4rem)] flex items-center justify-center  py-24 lg:py-32 animate-on-scroll overflow-hidden"
+          className="relative min-h-[calc(100svh-4rem)] flex items-center justify-center  py-24 lg:py-32 animate-on-scroll overflow-hidden bg-background"
         >
           {/* Background SVG at 10% opacity */}
           <div

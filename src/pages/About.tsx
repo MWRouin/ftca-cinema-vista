@@ -55,6 +55,38 @@ function TeamSection({ teamMembers }) {
   );
 }
 
+function OldMembersSection({ oldMembers }) {
+  return (
+    <section className="py-12">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">Honorary Members</h2>
+          <div className="section-divider w-16 mx-auto"></div>
+          <p className="text-muted-foreground mt-4">Celebrating those who have contributed to our legacy</p>
+        </div>
+        
+        <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-xl p-8 lg:p-12 border border-muted/30">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
+            {oldMembers.map((member, index) => (
+              <li 
+                key={index} 
+                className="group cursor-pointer transition-all duration-300 hover:translate-y-[-2px]"
+              >
+                <div className="flex items-start space-x-3">
+                  <div className="flex-shrink-0 w-1 h-6 bg-gradient-to-b from-amber-600 to-amber-400 dark:from-amber-400 dark:to-amber-500 rounded-full mt-1 group-hover:h-8 transition-all duration-300"></div>
+                  <span className="text-base font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300">
+                    {member.name}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function About() {
 
   const BASE = import.meta.env.BASE_URL || "/";
@@ -115,12 +147,6 @@ export default function About() {
       image: `${BASE}Members/itaf.jpg`
     },
     {
-      name: "Salma Bel Hadj Aissa",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/salmabelhadjaissa.jpg`
-    },
-    {
       name: "Hihem Toumi",
       role: "Member",
       bio: "",
@@ -130,10 +156,10 @@ export default function About() {
       name: "Ghassen Jemaia",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/ghassen.jpg`
     },
     {
-      name: "Tayeb ben ameur",
+      name: "Taieb ben ameur",
       role: "Member",
       bio: "",
       image: ""
@@ -154,7 +180,7 @@ export default function About() {
       name: "Halim Jerbi",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/halim.jpg`
     },
     {
       name: "Ines Ben Halima",
@@ -175,16 +201,16 @@ export default function About() {
       image: ""
     },
     {
-      name: "Maher Ben Khelifa",
-      role: "Member",
-      bio: "",
-      image: ""
-    },
-    {
       name: "Mayssa Ezzine",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/mayssa.jpg`
+    },
+    {
+      name: "Maher Ben Khelifa",
+      role: "Member",
+      bio: "",
+      image: `${BASE}Members/maher.jpg`
     },
     {
       name: "Mehdi Ben Farhat",
@@ -196,14 +222,16 @@ export default function About() {
       name: "Youssef El Behi",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/youssef.jpg`
     },
     {
       name: "Zeyneb Ben Ghachem",
       role: "Member",
       bio: "",
       image: ""
-    },
+    }
+  ];
+    const oldMembers = [
     {
       name: "Kamel Staali",
       role: "Honorary Member",
@@ -541,6 +569,11 @@ export default function About() {
 
         {/* Team Section */}
         <TeamSection teamMembers={teamMembers} />
+
+        {/* Old Members Section */}
+        <section className="mt-16">
+          <OldMembersSection oldMembers={oldMembers} />
+        </section>
       </div>
     </div>
   );

@@ -465,7 +465,7 @@
             "Amani Karkour",
             "Rahma Ben Mbarek"
         ],
-        "image": "__BASE_URL__/Posters/accident-de-travail.jpg",
+        "image": "__BASE_URL__/Posters/accident-de-travail.jpeg",
         "movieUrl": "https://www.youtube.com/embed/tuuI6huNJ68",
         "public": true
     },
@@ -529,7 +529,7 @@
         "cast": [
             "Youssef El Behi"
         ],
-        "image": "__BASE_URL__/Posters/home.jpg",
+        "image": "__BASE_URL__/Posters/home.jpeg",
         "movieUrl": "https://www.youtube.com/embed/u6t1FAir0vc",
         "public": true
     },
@@ -635,7 +635,7 @@
             "Hichem Toumi",
             "Rami Toumi"
         ],
-        "image": "__BASE_URL__/Posters/temp-mort.jpg",
+        "image": "__BASE_URL__/Posters/temp-mort.jpeg",
         "movieUrl": "https://www.youtube.com/embed/FuywJo34B1Y",
         "public": true
     },
@@ -693,7 +693,7 @@
             "Hammouda Chouchene",
             "Mehdi Ben Farhat"
         ],
-        "image": "__BASE_URL__/Posters/trip.jpg",
+        "image": "__BASE_URL__/Posters/trip.jpeg",
         "movieUrl": "https://www.youtube.com/embed/8JKJnARlwgI",
         "public": true
     },
