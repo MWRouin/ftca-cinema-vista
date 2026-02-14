@@ -2,6 +2,7 @@
 //import { Toaster } from "@/components/ui/toaster";
 //import { Toaster as Sonner } from "@/components/ui/sonner";
 //import { TooltipProvider } from "@/components/ui/tooltip";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -23,15 +24,11 @@ const About = lazy(() => import("./pages/About"));
 const Palmares = lazy(() => import("./pages/Palmares"));
 const Contact = lazy(() => import("./pages/Contact"));
 
-
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
-      {/* <TooltipProvider>
-        <Toaster />
-        <Sonner /> */}
       <MetadataProvider>
         <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
           <ScrollToTopOnLocationChange />
@@ -54,7 +51,6 @@ const App = () => (
           </Layout>
         </BrowserRouter>
       </MetadataProvider>
-      {/* </TooltipProvider> */}
     </ThemeProvider>
   </QueryClientProvider>
 );
