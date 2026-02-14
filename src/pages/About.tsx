@@ -64,12 +64,12 @@ function OldMembersSection({ oldMembers }) {
           <div className="section-divider w-16 mx-auto"></div>
           <p className="text-muted-foreground mt-4">Celebrating those who have contributed to our legacy</p>
         </div>
-        
+
         <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-xl p-8 lg:p-12 border border-muted/30">
           <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
             {oldMembers.map((member, index) => (
-              <li 
-                key={index} 
+              <li
+                key={index}
                 className="group cursor-pointer transition-all duration-300 hover:translate-y-[-2px]"
               >
                 <div className="flex items-start space-x-3">
@@ -125,7 +125,7 @@ export default function About() {
     {
       name: "Wissem Rouin",
       role: "Member",
-      bio: "Web Developer and cinema enthusiast. The creator of this website.",
+      bio: "Web Developer and cinema enthusiast.",
       image: `${BASE}Members/wissem.jpg`
     },
     {
@@ -159,22 +159,22 @@ export default function About() {
       image: `${BASE}Members/ghassen.jpg`
     },
     {
-      name: "Taieb ben ameur",
+      name: "Taieb Ben Ameur",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/taiebbenameur.jpg`
     },
     {
       name: "Fares Ben Khelifa",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/faresbenkhelifa.jpg`
     },
     {
       name: "Ghassen Ben Slema",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/ghassenbenslama.jpg`
     },
     {
       name: "Halim Jerbi",
@@ -186,19 +186,13 @@ export default function About() {
       name: "Ines Ben Halima",
       role: "Member",
       bio: "",
-      image: ""
-    },
-    {
-      name: "Ines Siala",
-      role: "Member",
-      bio: "",
-      image: ""
+      image: `${BASE}Members/inesbenhalima.jpg`
     },
     {
       name: "Maha Ezzine",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/mahaezzine.png`
     },
     {
       name: "Mayssa Ezzine",
@@ -216,7 +210,7 @@ export default function About() {
       name: "Mehdi Ben Farhat",
       role: "Member",
       bio: "",
-      image: ""
+      image: `${BASE}Members/mahdi.jpg`
     },
     {
       name: "Youssef El Behi",
@@ -231,9 +225,15 @@ export default function About() {
       image: ""
     }
   ];
-    const oldMembers = [
+  const oldMembers = [
     {
       name: "Kamel Staali",
+      role: "Honorary Member",
+      bio: "",
+      image: ""
+    },
+    {
+      name: "Wissem Rebah",
       role: "Honorary Member",
       bio: "",
       image: ""
