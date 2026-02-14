@@ -210,7 +210,7 @@ export default function About() {
       name: "Mehdi Ben Farhat",
       role: "Member",
       bio: "",
-      image: `${BASE}Members/mehdibenfarhat.png`
+      image: `${BASE}Members/mahdi.jpg`
     },
     {
       name: "Youssef El Behi",
