@@ -17,7 +17,7 @@ function TeamSection({ teamMembers }) {
   return (
     <section>
       <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-4 md:gap-6 lg:gap-8">
         {membersToShow.map((member, index) => (
           <Card key={index} className="text-center">
             <CardHeader>
@@ -66,7 +66,7 @@ function OldMembersSection({ oldMembers }) {
         </div>
 
         <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-xl p-8 lg:p-12 border border-muted/30">
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
+          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 list-none">
             {oldMembers.map((member, index) => (
               <li
                 key={index}
