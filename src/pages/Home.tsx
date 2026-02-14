@@ -14,7 +14,7 @@ export default function Home() {
   const ctaRef = useScrollAnimation();
   const BASE = import.meta.env.BASE_URL || "/";
 
-  const featuredMovies = getMovies().slice(0, 3);
+  const featuredMovies = getMovies().slice(0, 4);
 
   const featuredEvents = [
     /* {
@@ -88,26 +88,36 @@ export default function Home() {
               <p className="text-xl text-muted-foreground">Discover our Movies</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {featuredMovies.map((movie, index) => (
-                <div key={movie.id} className={`animate-on-scroll-delay-${index + 1}`}>
-                  <Card className="card-cinema hover-lift group overflow-hidden">
+                <div
+                  key={movie.id}
+                  className="opacity-100 visible"
+                >
+                  <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
                     <Link to={`/movies/${movie.id}`} className="block">
-                      <div className="aspect-[2/3] overflow-hidden">
+                      <div className="aspect-[2/3] overflow-hidden bg-muted">
                         <img
                           src={movie.image}
                           alt={movie.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        //onLoad={() => console.log(`Image loaded for ${movie.title}`)}
+                        //onError={() => console.log(`Image failed to load for ${movie.title}`)}
                         />
                       </div>
-                      <CardHeader className="p-6">
-                        <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
                           {movie.title}
                         </CardTitle>
-                        <CardDescription className="text-primary/80">
+                        <CardDescription className="text-sm text-primary/80">
                           {movie.genre} • {movie.year}
                         </CardDescription>
                       </CardHeader>
+                      <CardContent className="pt-0">
+                        <div className="text-sm text-muted-foreground">
+                          Directed by {movie.director}
+                        </div>
+                      </CardContent>
                     </Link>
                   </Card>
                 </div>

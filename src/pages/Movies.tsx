@@ -19,11 +19,6 @@ export default function Movies() {
     ? movies
     : movies.filter(movie => movie.genre === selectedGenre);
 
-  //console.log('Movies component rendered');
-  //console.log('Filtered movies:', filteredMovies);
-  //console.log('Selected genre:', selectedGenre);
-  //console.log('Movie cards should now be visible');
-
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,43 +48,40 @@ export default function Movies() {
         </div>
 
         {/* Movies Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {filteredMovies.map((movie, index) => {
-            console.log(`Rendering visible movie card ${index + 1}:`, movie.title);
-            return (
-              <div
-                key={movie.id}
-                className="opacity-100 visible"
-              >
-                <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
-                  <Link to={`/movies/${movie.id}`} className="block">
-                    <div className="aspect-[2/3] overflow-hidden bg-muted">
-                      <img
-                        src={movie.image}
-                        alt={movie.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      //onLoad={() => console.log(`Image loaded for ${movie.title}`)}
-                      //onError={() => console.log(`Image failed to load for ${movie.title}`)}
-                      />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
+          {filteredMovies.map((movie, index) => (
+            <div
+              key={movie.id}
+              className="opacity-100 visible"
+            >
+              <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
+                <Link to={`/movies/${movie.id}`} className="block">
+                  <div className="aspect-[2/3] overflow-hidden bg-muted">
+                    <img
+                      src={movie.image}
+                      alt={movie.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    //onLoad={() => console.log(`Image loaded for ${movie.title}`)}
+                    //onError={() => console.log(`Image failed to load for ${movie.title}`)}
+                    />
+                  </div>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
+                      {movie.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm text-primary/80">
+                      {movie.genre} • {movie.year}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="text-sm text-muted-foreground">
+                      Directed by {movie.director}
                     </div>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
-                        {movie.title}
-                      </CardTitle>
-                      <CardDescription className="text-sm text-primary/80">
-                        {movie.genre} • {movie.year}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="text-sm text-muted-foreground">
-                        Directed by {movie.director}
-                      </div>
-                    </CardContent>
-                  </Link>
-                </Card>
-              </div>
-            );
-          })}
+                  </CardContent>
+                </Link>
+              </Card>
+            </div>
+          ))}
         </div>
 
         {filteredMovies.length === 0 && (
