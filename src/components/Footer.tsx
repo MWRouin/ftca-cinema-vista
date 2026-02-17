@@ -99,9 +99,9 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col lg:flex-row justify-between items-center text-center lg:text-left">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Club des Cinéastes Amateurs de Hammamlif - All rights reserved.
+            © {currentYear} - Club des Cinéastes Amateurs de Hammamlif - All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground mt-2 sm:mt-0">
             Beyond art, cinema as a voice for ideas and critique.

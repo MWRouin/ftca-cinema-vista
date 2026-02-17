@@ -66,8 +66,10 @@ export default function MoviePlayer() {
         </div>
 
         {/* Movie Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-3 md:grid-cols-3 gap-8 mb-12">
+
+          {/* Poster */}
+          <div className="col-span-1 md:row-span-3">
             <div className="aspect-[2/3] overflow-hidden rounded-lg">
               <img
                 src={movie.image}
@@ -77,36 +79,47 @@ export default function MoviePlayer() {
             </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-6">
-            <div>
-              <PageTitle title={movie.title} titleLevel={2} />
-
-              <div className="flex flex-wrap gap-2 mb-4">
-                <Badge>{movie.genre}</Badge>
-                <Badge variant="outline">{movie.year}</Badge>
-                {movie.duration && <Badge variant="outline">{movie.duration}</Badge>}
-              </div>
-
-              {((movie as any).descriptions?.data?.[lang] ?? movie.description) && (
-                <p key={lang} lang={lang} className="text-lg text-muted-foreground mb-6 lang-fade-enter" aria-live="polite">{(movie as any).descriptions?.data?.[lang] ?? movie.description}</p>
-              )}
+          {/* Title + Badges */}
+          <div className="col-span-2 space-y-4">
+            <PageTitle title={movie.title} titleLevel={2} />
+            <div className="flex flex-wrap gap-2">
+              <Badge>{movie.genre}</Badge>
+              <Badge variant="outline">{movie.year}</Badge>
+              {movie.duration && <Badge variant="outline">{movie.duration}</Badge>}
             </div>
+          </div>
 
-            {/* Language toggle for this movie (FR / EN) */}
-            <div className="flex items-center gap-2 mb-4">
+          {/* Description + Language + Details */}
+          <div className="col-span-3 md:col-span-2 space-y-6">
+            {((movie as any).descriptions?.data?.[lang] ?? movie.description) && (
+              <p
+                key={lang}
+                lang={lang}
+                className="text-lg text-muted-foreground lang-fade-enter"
+                aria-live="polite"
+              >
+                {(movie as any).descriptions?.data?.[lang] ?? movie.description}
+              </p>
+            )}
+
+            <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setLang('en')}
-                className={`px-1 py-1 rounded text-xs leading-none ${lang === 'en' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
-                aria-pressed={lang === 'en'}
+                className={`px-2 py-1 rounded text-xs ${lang === 'en'
+                    ? 'bg-accent text-white'
+                    : 'bg-muted hover:bg-muted/80'
+                  }`}
               >
                 EN
               </button>
               <button
                 type="button"
                 onClick={() => setLang('fr')}
-                className={`px-1 py-1 rounded text-xs leading-none ${lang === 'fr' ? 'bg-accent text-white' : 'bg-muted hover:bg-muted/80'}`}
-                aria-pressed={lang === 'fr'}
+                className={`px-2 py-1 rounded text-xs ${lang === 'fr'
+                    ? 'bg-accent text-white'
+                    : 'bg-muted hover:bg-muted/80'
+                  }`}
               >
                 FR
               </button>
@@ -119,7 +132,9 @@ export default function MoviePlayer() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2">Cast</h3>
-                <p className="text-muted-foreground">{movie.cast?.join(", ") || '—'}</p>
+                <p className="text-muted-foreground">
+                  {movie.cast?.join(", ") || '—'}
+                </p>
               </div>
             </div>
           </div>

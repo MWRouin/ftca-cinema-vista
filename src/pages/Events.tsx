@@ -104,10 +104,12 @@ export default function Events() {
           </div>
           <CardTitle className="text-xl">{event.title}</CardTitle>
           <CardDescription className="space-y-1">
-            <div className="font-medium">
+            <span className="block font-medium">
               {formatDate(event.date)} at {event.time}
-            </div>
-            <div className="text-sm text-amber-600 dark:text-amber-400">📍 {event.location}</div>
+            </span>
+            <span className="block text-sm text-amber-600 dark:text-amber-400">
+              📍 {event.location}
+            </span>
           </CardDescription>
         </CardHeader>
 
