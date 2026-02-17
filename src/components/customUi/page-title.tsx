@@ -37,27 +37,21 @@ interface PageTitleProps {
     useInAnimation?: boolean;
 }
 
-const defaultClassName: string = 'inline-block bg-gradient-to-br py-2 -my-2 max-h-[calc(100vh/4)] from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent ';
+const defaultClassName: string = 'text-5xl sm:text-5xl md:text-6xl 2xl:text-7xl mb-6 inline-block bg-gradient-to-br py-2 -my-2 from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent ';
 const inAnimationClassName: string = 'animate-in fade-in slide-in-from-bottom-3 ';
 
-const getSizeClassName = (titleLevel: 1 | 2 | 3 | 4) => `text-${6 - titleLevel}xl md:text-${7 - titleLevel}xl mb-6 `;
-
-const getClassName = (titleLevel: 1 | 2 | 3 | 4, useInAnimation: boolean) => {
-    const baseClassName = defaultClassName + getSizeClassName(titleLevel);
+const getClassName = (useInAnimation: boolean) => {
+    const baseClassName = defaultClassName;
     if (!useInAnimation) return baseClassName;
     return baseClassName + inAnimationClassName;
 }
 
-const getTitleTag = (titleLevel: 1 | 2 | 3 | 4) => `h${titleLevel}` as keyof JSX.IntrinsicElements;
-
 export function PageTitle({
     title,
-    titleLevel = 1,
     useInAnimation = true,
 }: PageTitleProps) {
-    const HTag = getTitleTag(titleLevel);
 
-    const className = getClassName(titleLevel, useInAnimation);
+    const className = getClassName(useInAnimation);
 
-    return <HTag className={className}>{title}</HTag>;
+    return <h1 className={className}>{title}</h1>;
 }
