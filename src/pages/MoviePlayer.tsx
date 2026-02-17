@@ -169,7 +169,7 @@ export default function MoviePlayer() {
         {relatedMoviesByDirector.length > 0 && (
           <section>
             <h2 className="text-3xl font-bold mb-8">More from {movie.director}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {relatedMoviesByDirector.map((relatedMovie) => (
                 <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <Link to={`/movies/${relatedMovie.id}`}>
@@ -194,7 +194,7 @@ export default function MoviePlayer() {
         {relatedMoviesByDirector.length === 0 && relatedMoviesByGenre.length > 0 && (
           <section>
             <h2 className="text-3xl font-bold mb-8">More like "{movie.title}"</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {relatedMoviesByGenre.map((relatedMovie) => (
                 <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <Link to={`/movies/${relatedMovie.id}`}>
