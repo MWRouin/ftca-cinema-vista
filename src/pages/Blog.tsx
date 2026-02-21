@@ -36,11 +36,11 @@ export default function Blog() {
     And bear in mind: "independent" is not a synonym for "amateur." An independent filmmaker might be free from major studios, which gives them integrity, but they lack the Right to Abandon. An independent lives off their art. They owe themselves to the future revenue their movie has to generate, which brings inevitable concessions to appease the viewers.
 
     A true amateur doesn't care what the viewers think. A true amateur creates art in its purest form. And art in its purest form can only speak the truth.`,
-      author: "Sarah Chen",
+      author: "Youssef El Behi",
       date: "2026-02-21",
       category: "Blog",
       readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
+      image: "/blogs/youssef_blog.JPG"
     },
     {
       id: 2,
@@ -103,11 +103,11 @@ And in this place of ancient metamorphosis, a modern one continues.`,
     Club Hammam-Lif was built by those who came before, is held by those standing today, and waits for those who will come next.
 
     The cycle continues. The fire still burns. And the garage door remains open.`,
-      author: "Marcus Rodriguez",
+      author: "Nour Ben Cheikh",
       date: "2026-02-21",
       category: "Blog",
       readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
+      image: "/blogs/blog_2.jpg"
     },
     {
       id: 3,
@@ -138,11 +138,11 @@ And in this place of ancient metamorphosis, a modern one continues.`,
 
 والنادي… مستمر. فلكل جيل دوره، ولكل مرحلة إضافتها، وما زالت الحكاية تُكتب، صورةً بعد صورة.
   `,
-      author: "Elena Petrov",
+      author: "Ghassen Jamieia",
       date: "2026-02-21",
-      category: "Article",
+      category: "Blog",
       readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
+      image: "/blogs/ghasen_blog.jpg"
     }
   ];
 
