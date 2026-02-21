@@ -62,9 +62,9 @@ And in this place of ancient metamorphosis, a modern one continues.`,
     
     ## The Garage
 
-    This garage is unremarkable from the outside with no marquee nor grand entrance. It was offered by the Municipality of Hammam Lif (ken andkom date zidouh). Inside, film enthusiasts gather. Not in a fancy theater or a well-funded studio, but here, in this simple space where the concrete walls have absorbed decades of voices, dreams, ideas, and productions.
+    This garage is unremarkable from the outside with no marquee nor grand entrance. It was offered by the Municipality of Hammam Lif. Inside, film enthusiasts gather. Not in a fancy theater or a well-funded studio, but here, in this simple space where the concrete walls have absorbed decades of voices, dreams, ideas, and productions.
 
-    This is the Hammam-Lif Amateur Filmmakers Club. (ki ktebtha hammam-lif club hasitou 3ibara night club idk)
+    This is the Hammam-Lif Amateur Filmmakers Club.
 
     For generations, this humble garage has been a creative incubator. But to call it just that would barely scratch the surface.
 
@@ -141,7 +141,7 @@ And in this place of ancient metamorphosis, a modern one continues.`,
       author: "Elena Petrov",
       date: "2026-02-21",
       category: "Article",
-      readTime: "1 min read",
+      readTime: "5 min read",
       image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80"
     }
   ];
