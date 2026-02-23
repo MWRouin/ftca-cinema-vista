@@ -410,4 +410,81 @@
     background-size: 100%;
     /* if baked into SVG */
   }
+
+  @keyframes fadeSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes grain {
+
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+
+    25% {
+      transform: translate(-2%, -3%);
+    }
+
+    50% {
+      transform: translate(1%, 2%);
+    }
+
+    75% {
+      transform: translate(3%, -1%);
+    }
+  }
+
+  @keyframes scrollPulse {
+
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scaleY(1);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scaleY(1.15);
+    }
+  }
+
+  /* light mode: dark text → light/white contour */
+  .dark .nav-link {
+    text-shadow: 0 0 4px rgba(50, 50, 50, 0.7);
+  }
+
+  .nav-link {
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+  }
+
+  .dark .nav-link:hover,
+  .dark .nav-link.active {
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  }
 }

@@ -54,7 +54,7 @@ export function Navigation() {
                 to={item.path}
                 className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${isActive(item.path)
                   ? 'text-primary active' // keep underline via .active, remove bg/border
-                  : 'text-foreground/90 hover:text-primary'
+                  : 'text-foreground/80 hover:text-primary'
                   }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
