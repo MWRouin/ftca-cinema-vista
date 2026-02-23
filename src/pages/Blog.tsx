@@ -6,6 +6,7 @@ import { PageTitle } from '@/components/customUi/page-title';
 import { Inbox } from 'lucide-react';
 import ArticleModal from '@/components/customUi/article-modal';
 import { useSearchParams } from 'react-router-dom'
+import { LazyImage } from '@/components/customUi/lazy-image';
 
 export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState<null | any>(null)
@@ -192,7 +193,7 @@ And in this place of ancient metamorphosis, a modern one continues.`,
             <Card className="group hover:shadow-lg transition-all duration-300">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 <div className="aspect-[16/9] lg:aspect-auto overflow-hidden rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none">
-                  <img
+                  <LazyImage
                     src={articles[0].image}
                     alt={articles[0].title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -256,7 +257,7 @@ And in this place of ancient metamorphosis, a modern one continues.`,
                 tabIndex={0}
               >
                 <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
-                  <img
+                  <LazyImage
                     src={article.image}
                     alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

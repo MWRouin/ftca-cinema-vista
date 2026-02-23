@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
+import { LazyImage } from '@/components/customUi/lazy-image';
 
 export default function Home() {
   const heroRef = useScrollAnimation();
@@ -97,7 +98,7 @@ export default function Home() {
                   <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
                     <Link to={`/movies/${movie.id}`} className="block">
                       <div className="aspect-[2/3] overflow-hidden bg-muted">
-                        <img
+                        <LazyImage
                           src={movie.image}
                           alt={movie.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"

@@ -1,4 +1,5 @@
 
+import { LazyImage } from '@/components/customUi/lazy-image';
 import { PageTitle } from '@/components/customUi/page-title';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,7 +23,7 @@ function TeamSection({ teamMembers }) {
           <Card key={index} className="text-center">
             <CardHeader>
               <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
-                <img
+                <LazyImage
                   src={member.image ? member.image : defaultUserImage}
                   alt={member.name}
                   className="w-full h-full object-cover"
@@ -512,7 +513,7 @@ export default function About() {
             </div>
             <div>
               <div className="rounded-lg overflow-hidden">
-                <img
+                <LazyImage
                   src={`${BASE}About/ydour_web_optimized.jpg`}
                   alt="Ydour event – cinema screening"
                   className="w-full h-full object-cover"
