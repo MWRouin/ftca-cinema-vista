@@ -9,6 +9,7 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export function LazyImage({
   loaderSize = 24,
   className,
+  alt,
   ...props
 }: LazyImageProps) {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ export function LazyImage({
     <div className={cn("relative", className)}>
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Loader size={loaderSize} />
+          <Loader size={loaderSize} text={alt} />
         </div>
       )}
 

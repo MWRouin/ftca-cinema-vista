@@ -61,6 +61,7 @@ export default function Movies() {
                     <LazyImage
                       src={movie.image}
                       alt={movie.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     //onLoad={() => console.log(`Image loaded for ${movie.title}`)}
                     //onError={() => console.log(`Image failed to load for ${movie.title}`)}
