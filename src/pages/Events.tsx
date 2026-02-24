@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { PageTitle } from '@/components/customUi/page-title';
 import { CalendarX, FolderX } from 'lucide-react';
 import { Link } from "react-router-dom";
+import { LazyImage } from '@/components/customUi/lazy-image';
 
 export default function Events() {
   const events = [
@@ -86,7 +87,7 @@ export default function Events() {
       >
 
         <div className="aspect-[16/9] overflow-hidden rounded-t-lg relative z-20">
-          <img
+          <LazyImage
             src={event.image}
             alt={event.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

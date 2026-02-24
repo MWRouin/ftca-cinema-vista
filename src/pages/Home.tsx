@@ -6,12 +6,15 @@ import { Logo } from '@/components/Logo';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
+import { LazyImage } from '@/components/customUi/lazy-image';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function Home() {
   const heroRef = useScrollAnimation();
   const moviesRef = useScrollAnimation();
   const eventsRef = useScrollAnimation();
   const ctaRef = useScrollAnimation();
+  const { theme } = useTheme()
   const BASE = import.meta.env.BASE_URL || "/";
 
   const featuredMovies = getMovies().slice(0, 4);
@@ -40,35 +43,107 @@ export default function Home() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative min-h-[calc(100svh-4rem)] flex items-center justify-center  py-24 lg:py-32 animate-on-scroll overflow-hidden bg-background"
+          className="relative min-h-[calc(100svh-4rem)] flex items-center justify-center py-24 lg:py-32 animate-on-scroll overflow-hidden bg-background"
+          style={{ backgroundColor: theme === "dark" ? "#1b1614" : "#9eb2c2" }}
         >
-          {/* Background SVG at 10% opacity */}
+          {/* Background image */}
           <div
-            className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-40 dark:opacity-30"
+            className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-40"
             style={{ backgroundImage: `url(/Backgrounds/hero-image-hlif.jpg)` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/20"></div>
 
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary/20" />
+
+          {/* Vignette */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                theme === "dark"
+                  ? "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)"
+                  : "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.60) 100%)",
+            }}
+          />
+
+          {/* Film grain overlay */}
+          {/* <div
+            className="absolute pointer-events-none opacity-[0.4] mix-blend-overlay"
+            style={{
+              inset: "-200px",
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+              backgroundRepeat: "repeat",
+              backgroundSize: "128px 128px",
+              animation: "grain 1s steps(2) infinite",
+            }}
+          /> */}
+
+          {/* Scanlines */}
+          {/* <div
+            className="absolute inset-0 pointer-events-none opacity-[0.01]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 4px)",
+            }}
+          /> */}
+
+          {/* Content */}
           <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center">
-              <div className="flex justify-center mb-8">
-                <Logo size={310} className="drop-shadow-2xl max-w-[calc(100vw/2)]" />
+
+              {/* Logo */}
+              <div
+                className="flex justify-center mb-8"
+                style={{ animation: "fadeSlideDown 0.9s ease both" }}
+              >
+                <Logo
+                  size={310}
+                  className="drop-shadow-2xl max-w-[calc(100vw/2)]"
+                />
               </div>
-              <PageTitle title="Hammam-lif Amateur Filmmakers' Club" />
 
-              {/* <div className="text-2xl md:text-3xl text-primary mb-4 font-medium animate-on-scroll-delay-2">
-              Club des Cinéastes Amateurs de Hammamlif
-            </div> */}
+              {/* Title */}
+              <div style={{ animation: "fadeSlideUp 0.9s ease 0.15s both" }}>
+                <PageTitle title="Hammam-lif Amateur Filmmakers' Club" />
+              </div>
 
-              <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-                A filmmakers’ club based in Hammam-Lif, active since 1964 and operating under the "Fédération Tunisienne des Cinéastes Amateurs (FTCA)".
+              {/* Decorative divider */}
+              <div
+                className="flex items-center justify-center gap-3 my-6"
+                style={{ animation: "fadeSlideUp 0.9s ease 0.25s both" }}
+              >
+                <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
+                <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+                <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/50" />
+              </div>
+
+              {/* Description */}
+              <p
+                className="text-lg text-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
+                style={{ animation: "fadeSlideUp 0.9s ease 0.35s both" }}
+              >
+                A filmmakers' club based in Hammam-Lif, active since 1964 and operating
+                under the "Fédération Tunisienne des Cinéastes Amateurs (FTCA)".
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
+              {/* Buttons */}
+              <div
+                className="flex flex-col sm:flex-row gap-6 justify-center"
+                style={{ animation: "fadeSlideUp 0.9s ease 0.45s both" }}
+              >
+                <Button
+                  asChild
+                  size="lg"
+                  className="btn-cinema hover-lift text-lg px-10 py-4"
+                >
                   <Link to="/movies">Explore Movies</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="border-primary/30 hover:bg-secondary/80 hover-lift text-lg px-8 py-4">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-primary/30 hover:bg-secondary/80 hover-lift text-lg px-8 py-4"
+                >
                   <Link to="/events">Upcoming Events</Link>
                 </Button>
               </div>
@@ -83,7 +158,7 @@ export default function Home() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <PageTitle title="Featured Films" titleLevel={2} />
+              <PageTitle title="Featured Films" />
               <div className="section-divider w-24 mx-auto mb-6"></div>
               <p className="text-xl text-muted-foreground">Discover our Movies</p>
             </div>
@@ -97,7 +172,7 @@ export default function Home() {
                   <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
                     <Link to={`/movies/${movie.id}`} className="block">
                       <div className="aspect-[2/3] overflow-hidden bg-muted">
-                        <img
+                        <LazyImage
                           src={movie.image}
                           alt={movie.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -140,7 +215,7 @@ export default function Home() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="text-center mb-16">
-                <PageTitle title="Upcoming Events" titleLevel={2} />
+                <PageTitle title="Upcoming Events" />
                 <div className="section-divider w-24 mx-auto mb-6"></div>
                 <p className="text-xl text-muted-foreground">Join us for exclusive screenings and film discussions</p>
               </div>
@@ -192,7 +267,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
 
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-            <PageTitle title="Join Our Community" titleLevel={2} />
+            <PageTitle title="Join Our Community" />
             <div className="section-divider w-24 mx-auto mb-8"></div>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
               Connect with fellow film enthusiasts and be part of memorable cinematic experiences that transcend the ordinary
