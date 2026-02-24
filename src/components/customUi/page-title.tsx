@@ -31,10 +31,10 @@
 interface PageTitleProps {
     /** Text content of the heading */
     title: string;
-    /** Heading level, from 1 to 4 (h5 and h6 not supperted) */
-    titleLevel?: 1 | 2 | 3 | 4;
     /** Whether to apply entrance animation */
     useInAnimation?: boolean;
+    darkmode?: boolean;
+    lightmode?: boolean;
 }
 
 const defaultClassName: string = 'text-5xl sm:text-5xl md:text-6xl 2xl:text-7xl mb-6 inline-block bg-gradient-to-br py-2 -my-2 from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent ';
@@ -49,9 +49,15 @@ const getClassName = (useInAnimation: boolean) => {
 export function PageTitle({
     title,
     useInAnimation = true,
+    darkmode = false,
+    lightmode = false
 }: PageTitleProps) {
 
-    const className = getClassName(useInAnimation);
+    let className = getClassName(useInAnimation);
+
+    if (darkmode) className = "dark " + className;
+
+    if (lightmode) className = "light " + className;
 
     return <h1 className={className}>{title}</h1>;
 }

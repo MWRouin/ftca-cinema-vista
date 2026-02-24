@@ -7,12 +7,14 @@ import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { LazyImage } from '@/components/customUi/lazy-image';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function Home() {
   const heroRef = useScrollAnimation();
   const moviesRef = useScrollAnimation();
   const eventsRef = useScrollAnimation();
   const ctaRef = useScrollAnimation();
+  const { theme } = useTheme()
   const BASE = import.meta.env.BASE_URL || "/";
 
   const featuredMovies = getMovies().slice(0, 4);
@@ -41,8 +43,8 @@ export default function Home() {
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="dark relative min-h-[calc(100svh-4rem)] flex items-center justify-center py-24 lg:py-32 animate-on-scroll overflow-hidden bg-background"
-          style={{ backgroundColor: "#111111" }}
+          className="relative min-h-[calc(100svh-4rem)] flex items-center justify-center py-24 lg:py-32 animate-on-scroll overflow-hidden bg-background"
+          style={{ backgroundColor: theme === "dark" ? "#1b1614" : "#9eb2c2" }}
         >
           {/* Background image */}
           <div
@@ -51,36 +53,39 @@ export default function Home() {
           />
 
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-secondary/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary/20" />
 
           {/* Vignette */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%)",
+                theme === "dark"
+                  ? "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)"
+                  : "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.60) 100%)",
             }}
           />
 
           {/* Film grain overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-overlay"
+          {/* <div
+            className="absolute pointer-events-none opacity-[0.4] mix-blend-overlay"
             style={{
+              inset: "-200px",
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
               backgroundRepeat: "repeat",
               backgroundSize: "128px 128px",
-              animation: "grain 0.5s steps(2) infinite",
+              animation: "grain 1s steps(2) infinite",
             }}
-          />
+          /> */}
 
           {/* Scanlines */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          {/* <div
+            className="absolute inset-0 pointer-events-none opacity-[0.01]"
             style={{
               backgroundImage:
-                "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 4px)",
+                "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 4px)",
             }}
-          />
+          /> */}
 
           {/* Content */}
           <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -114,7 +119,7 @@ export default function Home() {
 
               {/* Description */}
               <p
-                className="text-lg text-neutral-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+                className="text-lg text-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
                 style={{ animation: "fadeSlideUp 0.9s ease 0.35s both" }}
               >
                 A filmmakers' club based in Hammam-Lif, active since 1964 and operating
@@ -129,7 +134,7 @@ export default function Home() {
                 <Button
                   asChild
                   size="lg"
-                  className="btn-cinema hover-lift text-lg px-8 py-4"
+                  className="btn-cinema hover-lift text-lg px-10 py-4"
                 >
                   <Link to="/movies">Explore Movies</Link>
                 </Button>
@@ -153,7 +158,7 @@ export default function Home() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <PageTitle title="Featured Films" titleLevel={2} />
+              <PageTitle title="Featured Films" />
               <div className="section-divider w-24 mx-auto mb-6"></div>
               <p className="text-xl text-muted-foreground">Discover our Movies</p>
             </div>
@@ -210,7 +215,7 @@ export default function Home() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
               <div className="text-center mb-16">
-                <PageTitle title="Upcoming Events" titleLevel={2} />
+                <PageTitle title="Upcoming Events" />
                 <div className="section-divider w-24 mx-auto mb-6"></div>
                 <p className="text-xl text-muted-foreground">Join us for exclusive screenings and film discussions</p>
               </div>
@@ -262,7 +267,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
 
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-            <PageTitle title="Join Our Community" titleLevel={2} />
+            <PageTitle title="Join Our Community" />
             <div className="section-divider w-24 mx-auto mb-8"></div>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
               Connect with fellow film enthusiasts and be part of memorable cinematic experiences that transcend the ordinary
