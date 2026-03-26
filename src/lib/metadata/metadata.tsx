@@ -1,73 +1,101 @@
 import { Helmet } from "react-helmet-async";
-import { OgType, CharSet } from "./metadata-types";
+import type { OgType } from "./metadata-types";
 import { useHtmlLanguage } from "./html-lang";
+import {
+    SITE_NAME,
+    SITE_NAME_FULL,
+    DEFAULT_OG_IMAGE,
+    DEFAULT_OG_IMAGE_ALT,
+    DEFAULT_DESCRIPTION,
+    DEFAULT_LANG,
+    TWITTER_HANDLE,
+    SITE_URL,
+    buildPageUrl,
+    buildPageTitle,
+} from "./seo-constants";
 
 interface MetaHeaderProps {
-    lang?: string;
+    /** Page title (without the " | FTCA Hammam‑Lif" suffix — that's appended automatically). */
     title?: string;
     description?: string;
-    author?: string;
-    imageUrl?: string;
-    imageAlt?: string;
+    /** Route pathname, e.g. "events/ydour". Omit leading slash. */
+    pagePathname?: string;
+    /** Absolute URL — overrides pagePathname when set. */
     pageUrl?: string;
     ogType?: OgType;
-};
-
-// img "https://opengraph.b-cdn.net/production/images/e889e93c-a333-49e9-bb70-4d0506d588ff.jpg?token=Fbd-173Wg4scri1OkZIVXQEUGc9atCOObfuZX-GRquE&height=1200&width=1200&expires=33286675221"
-
-// img alt "Club des cinéastes amateurs d'Hammam-Lif – FTCA Hammemlif"
-
-//description "Club des cinéastes amateurs d'Hammam-Lif - FTCA Hammemlif - A passionate community of film enthusiasts. Beyond celebrating cinema as an art. We use it as a medium to question, reflect, and share ideas."
+    imageUrl?: string;
+    imageAlt?: string;
+    lang?: string;
+    /** JSON-LD structured data object(s). */
+    jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+    /** Article publish date (ISO 8601). */
+    articlePublishedTime?: string;
+    /** Don't index this page. */
+    noindex?: boolean;
+}
 
 export default function MetaHeader({
-    lang,
-    title = "Club des cinéastes amateurs d'Hammam-Lif",
-    description,
-    author,
-    imageUrl,
-    imageAlt,
+    title,
+    description = DEFAULT_DESCRIPTION,
     pageUrl,
-    ogType = "website"
+    pagePathname,
+    ogType = "website",
+    imageUrl = DEFAULT_OG_IMAGE,
+    imageAlt = DEFAULT_OG_IMAGE_ALT,
+    lang = DEFAULT_LANG,
+    jsonLd,
+    articlePublishedTime,
+    noindex = false,
 }: MetaHeaderProps) {
-
     useHtmlLanguage(lang);
 
-    const ogLocale = lang?.replace("-", "_") ?? "en_US";
+    const resolvedUrl = pageUrl || (pagePathname != null ? buildPageUrl(pagePathname) : SITE_URL);
+    const resolvedTitle = buildPageTitle(title);
+    const robots = noindex
+        ? "noindex, nofollow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+
+    const jsonLdScripts = jsonLd
+        ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((data, i) => (
+            <script key={i} type="application/ld+json">
+                {JSON.stringify(data)}
+            </script>
+        ))
+        : null;
 
     return (
         <Helmet>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>{title}</title>
-            <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-            {pageUrl && <link rel="canonical" href={pageUrl} />}
-            {description && <meta name="description" content={description} />}
-            {author && <meta name="author" content={author} />}
-            <meta name="theme-color" content="#000000" />
-            <meta name="robots" content="index, follow" />
+            <html lang={lang} />
+            <title>{resolvedTitle}</title>
+            <link rel="canonical" href={resolvedUrl} />
+            <meta name="description" content={description} />
+            <meta name="robots" content={robots} />
 
-            {/* openGraph */}
-            <meta property="og:locale" content={ogLocale} />
-            <meta property="og:title" content={title} />
-            <meta property="og:site_name" content="Club des cinéastes amateurs d'Hammam-Lif" />
-            {pageUrl && <meta property="og:url" content={pageUrl} />}
-            {description && <meta property="og:description" content={description} />}
+            {/* Open Graph */}
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:title" content={resolvedTitle} />
+            <meta property="og:site_name" content={SITE_NAME} />
+            <meta property="og:url" content={resolvedUrl} />
+            <meta property="og:description" content={description} />
             <meta property="og:type" content={ogType} />
-            {imageUrl && <meta property="og:image" content={imageUrl} />}
+            <meta property="og:image" content={imageUrl} />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="1200" />
-            {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
-            <meta property="fb:pages" content="PAGE_ID" />
+            <meta property="og:image:alt" content={imageAlt} />
 
-            {/* twitter */}
+            {articlePublishedTime && (
+                <meta property="article:published_time" content={articlePublishedTime} />
+            )}
+
+            {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={title} />
-            {pageUrl && <meta name="twitter:url" content={pageUrl} />}
-            {imageUrl && <meta name="twitter:image" content={imageUrl} />}
-            {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
-            {description && <meta name="twitter:description" content={description} />}
-            <meta name="twitter:site" content="@ftcahammemlif" />
-            <meta name="twitter:creator" content="@ftcahammemlif" />
+            <meta name="twitter:title" content={resolvedTitle} />
+            <meta name="twitter:description" content={description} />
+            <meta name="twitter:image" content={imageUrl} />
+            <meta name="twitter:site" content={TWITTER_HANDLE} />
+
+            {/* JSON-LD */}
+            {jsonLdScripts}
         </Helmet>
     );
 }
