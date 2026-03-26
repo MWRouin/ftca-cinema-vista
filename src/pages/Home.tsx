@@ -279,7 +279,7 @@ export default function Home() {
                 <Link to="/contact">Get in Touch</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-primary/30 hover-lift text-lg px-8 py-4">
-                <Link to="/about">Learn More</Link>
+                <Link to="/about">Learn More About Us</Link>
               </Button>
             </div>
           </div>
