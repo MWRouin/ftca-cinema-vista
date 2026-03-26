@@ -166,6 +166,7 @@ This encounter between generations made us realize something important: the club
                                 {item.type === "image" ? (
                                     <img
                                         src={item.src}
+                                        alt={item.title || `Event highlight ${i + 1}`}
                                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     />
                                 ) : (
@@ -221,6 +222,8 @@ This encounter between generations made us realize something important: the club
                                 <a
                                     href="https://www.facebook.com/ftcahamhama/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Facebook"
                                     className="hover:scale-125 w-10 h-10 transition-transform"
                                 >
                                     <Facebook className="w-7 h-7 text-[#0866ff]" />
@@ -228,6 +231,8 @@ This encounter between generations made us realize something important: the club
                                 <a
                                     href="https://www.instagram.com/ftca.hlif/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Instagram"
                                     className="hover:scale-125 w-10 h-10 transition-transform"
                                 >
                                     <Instagram className="w-7 h-7 text-[#e7009a]" />
@@ -235,6 +240,8 @@ This encounter between generations made us realize something important: the club
                                 <a
                                     href="https://www.youtube.com/@ftcahammamlif/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="YouTube"
                                     className="hover:scale-125 w-10 h-10 transition-transform"
                                 >
                                     <Youtube className="w-7 h-7 text-[#ff0033]" />

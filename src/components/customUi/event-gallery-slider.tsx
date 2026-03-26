@@ -13,6 +13,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
               <div className="aspect-[16/9] overflow-hidden rounded-lg">
                 <img
                   src={img}
+                  alt={`Event gallery photo ${i + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -24,6 +25,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
       {/* Controls */}
       <button
         onClick={() => emblaApi.scrollPrev()}
+        aria-label="Previous image"
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
       >
         <ChevronLeft />
@@ -31,6 +33,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
 
       <button
         onClick={() => emblaApi.scrollNext()}
+        aria-label="Next image"
         className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
       >
         <ChevronRight />
