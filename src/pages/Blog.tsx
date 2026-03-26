@@ -7,6 +7,8 @@ import { Inbox } from 'lucide-react';
 import ArticleModal from '@/components/customUi/article-modal';
 import { useSearchParams } from 'react-router-dom'
 import { LazyImage } from '@/components/customUi/lazy-image';
+import MetaHeader from '@/lib/metadata/metadata';
+import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState<null | any>(null)
@@ -177,6 +179,8 @@ And in this place of ancient metamorphosis, a modern one continues.`,
   }, [searchParams])
 
   return (
+    <>
+      <MetaHeader {...PAGE_SEO.blog} />
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -302,5 +306,6 @@ And in this place of ancient metamorphosis, a modern one continues.`,
         ) : null}
       </div>
     </div>
+    </>
   );
 }

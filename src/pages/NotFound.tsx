@@ -1,5 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import MetaHeader from '@/lib/metadata/metadata';
+import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,6 +14,8 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
+    <>
+      <MetaHeader {...PAGE_SEO["404"]} />
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
@@ -21,6 +25,7 @@ const NotFound = () => {
         </Link>
       </div>
     </div>
+    </>
   );
 };
 
