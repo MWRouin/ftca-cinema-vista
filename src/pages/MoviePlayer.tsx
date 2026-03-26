@@ -141,6 +141,10 @@ export default function MoviePlayer() {
         </div>
 
         {/* Video Player */}
+        {/*
+
+        *****************Lecteur na7ineh (commented)******************
+
         <section className="mb-12">
           <Card>
             <CardHeader>
@@ -164,6 +168,8 @@ export default function MoviePlayer() {
             </CardContent>
           </Card>
         </section>
+
+        */}
 
         {/* Related sections unchanged */}
         {relatedMoviesByDirector.length > 0 && (
