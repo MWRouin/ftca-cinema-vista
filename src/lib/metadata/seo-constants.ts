@@ -48,7 +48,7 @@ export function buildPageTitle(pageTitle?: string): string {
 export interface PageSeo {
   title: string;
   description: string;
-  pathname: string;
+  pagePathname: string;
   ogType?: OgType;
   noindex?: boolean;
   /** JSON-LD structured data (only used client-side) */
@@ -64,7 +64,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Home",
     description:
       "Hammam-Lif Amateur Filmmakers Club (FTCA) – A passionate community of amateur filmmakers in Tunisia. Discover our films, events, screenings and discussions.",
-    pathname: "",
+    pagePathname: "",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -78,7 +78,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Movies",
     description:
       "Explore the amateur film collection of the Hammam-Lif Filmmakers Club. Short films, fiction and documentaries produced by FTCA members.",
-    pathname: "movies",
+    pagePathname: "movies",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -91,7 +91,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Events",
     description:
       "Discover events by the Hammam-Lif Amateur Filmmakers Club: screenings, discussions, workshops and gatherings in Tunisia.",
-    pathname: "events",
+    pagePathname: "events",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -104,7 +104,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Ydour – يدور",
     description:
       "Ydour: screening & discussion organised by the Hammam-Lif Amateur Filmmakers Club. A gathering for the amateur cinema community, Café culturel LIBER'THÉ, February 2025.",
-    pathname: "events/ydour",
+    pagePathname: "events/ydour",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "Event",
@@ -136,7 +136,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Films de Hammam-Lif",
     description:
       "Films de Hammam-Lif: screening & exhibition at Complexe Culturel Ali Ben Ayed. A tribute to Hammam-Lif's cinematic culture by FTCA, December 2025.",
-    pathname: "events/films-de-hammamlif",
+    pagePathname: "events/films-de-hammamlif",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "Event",
@@ -168,14 +168,14 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Blog & Articles",
     description:
       "Articles, reflections and insights on amateur cinema from members of the FTCA Hammam-Lif club.",
-    pathname: "blog",
+    pagePathname: "blog",
     ogType: "blog",
   },
   about: {
     title: "About – Our Story",
     description:
       "Discover the history of the Hammam-Lif Amateur Filmmakers Club, our passionate team and our mission to promote amateur cinema in Tunisia.",
-    pathname: "about",
+    pagePathname: "about",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "AboutPage",
@@ -188,13 +188,13 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     title: "Palmarès",
     description:
       "Awards & recognitions of the Hammam-Lif Amateur Filmmakers Club. Prizes and achievements in amateur cinema.",
-    pathname: "palmares",
+    pagePathname: "palmares",
   },
   contact: {
     title: "Contact",
     description:
       "Get in touch with the Hammam-Lif Amateur Filmmakers Club. Join our community, submit a film or ask about our events.",
-    pathname: "contact",
+    pagePathname: "contact",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "ContactPage",
@@ -205,7 +205,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
   "404": {
     title: "Page Not Found",
     description: "The page you are looking for does not exist.",
-    pathname: "404",
+    pagePathname: "404",
     noindex: true,
   },
 };

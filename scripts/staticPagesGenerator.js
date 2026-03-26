@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import fsSync from 'fs';
 import path from 'path';
-import { SITE_URL, SITE_NAME, PAGE_SEO } from '../src/lib/metadata/seo-constants.ts';
+import { SITE_URL, SITE_NAME, PAGE_SEO, buildPageTitle } from '../src/lib/metadata/seo-constants.ts';
 
 /* ------------------ utils ------------------ */
 
@@ -24,6 +24,28 @@ function normalizeFolderPath(rawPath) {
     return rawPath.endsWith('/') ? rawPath : rawPath + '/';
 }
 
+function escapeHtml(value = "") {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function replaceOrInsertCanonical(html, pageUrl) {
+    const canonicalTag = `<link rel="canonical" href="${escapeHtml(pageUrl)}" data-rh="true" />`;
+
+    if (/<link[^>]*rel="canonical"[^>]*>/i.test(html)) {
+        return html.replace(/<link[^>]*rel="canonical"[^>]*>/i, canonicalTag);
+    }
+
+    if (/<link[^>]*rel="manifest"[^>]*>/i.test(html)) {
+        return html.replace(/(<link[^>]*rel="manifest"[^>]*>)/i, `$1\n  ${canonicalTag}`);
+    }
+
+    return html.replace(/<head>/i, `<head>\n  ${canonicalTag}`);
+}
+
 /* ------------------ SEO injection ------------------ */
 
 /**
@@ -32,37 +54,56 @@ function normalizeFolderPath(rawPath) {
  */
 function injectSeoMeta(html, pagePath, seo) {
     const pageUrl = pagePath ? `${SITE_URL}/${pagePath}` : `${SITE_URL}/`;
-    const title = seo?.title || SITE_NAME;
+    const title = buildPageTitle(seo?.title || SITE_NAME);
     const description = seo?.description || "";
     const robots = seo?.noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-    return html
-        .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
-        .replace(/<meta name="description"\s+content="[^"]*"\s*\/?>/,
-            `<meta name="description" content="${description}" />`)
-        .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/,
-            `<link rel="canonical" href="${pageUrl}" />`)
-        .replace(/<meta name="robots" content="[^"]*"\s*\/?>/,
-            `<meta name="robots" content="${robots}" />`)
-        .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/,
-            `<meta property="og:title" content="${title}" />`)
-        .replace(/<meta property="og:description" content="[^"]*"\s*\/?>/,
-            `<meta property="og:description" content="${description}" />`)
-        .replace(/<meta property="og:url" content="[^"]*"\s*\/?>/,
-            `<meta property="og:url" content="${pageUrl}" />`)
-        .replace(/<meta name="twitter:title" content="[^"]*"\s*\/?>/,
-            `<meta name="twitter:title" content="${title}" />`)
-        .replace(/<meta name="twitter:description" content="[^"]*"\s*\/?>/,
-            `<meta name="twitter:description" content="${description}" />`);
+    return replaceOrInsertCanonical(html, pageUrl)
+        .replace(/<title[^>]*>[^<]*<\/title>/,
+            `<title data-rh="true">${escapeHtml(title)}</title>`)
+        .replace(/<meta[^>]*name="description"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta name="description" content="${escapeHtml(description)}" />`)
+        .replace(/<meta[^>]*name="robots"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta name="robots" content="${escapeHtml(robots)}" />`)
+        .replace(/<meta[^>]*property="og:title"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta property="og:title" content="${escapeHtml(title)}" />`)
+        .replace(/<meta[^>]*property="og:description"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta property="og:description" content="${escapeHtml(description)}" />`)
+        .replace(/<meta[^>]*property="og:url"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta property="og:url" content="${escapeHtml(pageUrl)}" />`)
+        .replace(/<meta[^>]*name="twitter:title"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
+        .replace(/<meta[^>]*name="twitter:description"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta name="twitter:description" content="${escapeHtml(description)}" />`);
 }
 
-async function writePageHtml(indexHtml, pagePath, targetFilePath) {
+async function writeRouteVariants(buildFolderPath, pagePath, html) {
+    const flatTargetPath = pagePath
+        ? path.join(buildFolderPath, `${pagePath}.html`)
+        : path.join(buildFolderPath, 'index.html');
+
+    const writes = [fs.writeFile(flatTargetPath, html, 'utf-8')];
+
+    if (pagePath) {
+        const nestedTargetPath = path.join(buildFolderPath, pagePath, 'index.html');
+        await fs.mkdir(path.dirname(nestedTargetPath), { recursive: true });
+        writes.push(fs.writeFile(nestedTargetPath, html, 'utf-8'));
+        await Promise.all(writes);
+        console.log(`✔ Generated → ${flatTargetPath}`);
+        console.log(`✔ Generated → ${nestedTargetPath}`);
+        return;
+    }
+
+    await Promise.all(writes);
+    console.log(`✔ Generated → ${flatTargetPath}`);
+}
+
+async function writePageHtml(indexHtml, buildFolderPath, pagePath) {
     const seo = PAGE_SEO[pagePath] || { title: SITE_NAME, description: "" };
     const html = injectSeoMeta(indexHtml, pagePath, seo);
-    await fs.writeFile(targetFilePath, html, 'utf-8');
-    console.log(`✔ Generated → ${targetFilePath}`);
+    await writeRouteVariants(buildFolderPath, pagePath, html);
 }
 
 /* ------------------ generic helpers ------------------ */
@@ -78,15 +119,13 @@ async function generateEntityPages({ data, entityName, basePath, indexHtml }) {
 
     for (const id of getPublicIds(data, entityName)) {
         const pagePath = `${entityName}/${id}`;
-        const targetPath = path.join(folderPath, `${id}.html`);
         const item = data.find(i => i.id === id);
         const seo = PAGE_SEO[pagePath] || {
-            title: `${item?.title || id} | ${SITE_NAME}`,
+            title: item?.title || id,
             description: item?.description || `${item?.title || id} – ${SITE_NAME}`,
         };
         const html = injectSeoMeta(indexHtml, pagePath, seo);
-        await fs.writeFile(targetPath, html, 'utf-8');
-        console.log(`✔ Generated → ${targetPath}`);
+        await writeRouteVariants(basePath, pagePath, html);
     }
 }
 
@@ -107,10 +146,7 @@ async function main([, , buildFolderPath]) {
         await fs.readFile(new URL('./pages.json', import.meta.url), 'utf-8')
     );
     await Promise.all(
-        pages.staticPages.map(pagePath => {
-            const target = path.join(normalizedBuildFolderPath, `${pagePath}.html`);
-            return writePageHtml(indexHtml, pagePath, target);
-        })
+        pages.staticPages.map(pagePath => writePageHtml(indexHtml, normalizedBuildFolderPath, pagePath))
     );
 
     /* ---------- movies ---------- */
@@ -121,7 +157,7 @@ async function main([, , buildFolderPath]) {
         const pagePath = `movies/${movie.id}`;
         if (!PAGE_SEO[pagePath]) {
             PAGE_SEO[pagePath] = {
-                title: `${movie.title} | ${SITE_NAME}`,
+                title: movie.title,
                 description: movie.description || `${movie.title} – amateur film by ${movie.director}. ${SITE_NAME}.`,
             };
         }

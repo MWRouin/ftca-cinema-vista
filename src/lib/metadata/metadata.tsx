@@ -1,15 +1,13 @@
-import { Helmet } from "react-helmet-async";
+import { useLayoutEffect } from "react";
 import type { OgType } from "./metadata-types";
 import { useHtmlLanguage } from "./html-lang";
 import {
     SITE_NAME,
-    SITE_NAME_FULL,
     DEFAULT_OG_IMAGE,
     DEFAULT_OG_IMAGE_ALT,
     DEFAULT_DESCRIPTION,
     DEFAULT_LANG,
     TWITTER_HANDLE,
-    SITE_URL,
     buildPageUrl,
     buildPageTitle,
 } from "./seo-constants";
@@ -34,6 +32,69 @@ interface MetaHeaderProps {
     noindex?: boolean;
 }
 
+const MANAGED_ATTR = "data-ftca-seo";
+
+function getCurrentPathname(): string {
+    if (typeof window === "undefined") return "";
+
+    return window.location.pathname.replace(/^\/+|\/+$/g, "");
+}
+
+function ensureSingleHeadElement<T extends HTMLElement>(
+    selector: string,
+    createElement: () => T,
+): T {
+    const existing = Array.from(document.head.querySelectorAll<T>(selector));
+    const element = existing.shift() ?? createElement();
+
+    existing.forEach((node) => node.remove());
+
+    if (!element.isConnected) {
+        document.head.appendChild(element);
+    }
+
+    return element;
+}
+
+function setMetaTag(attributeName: "name" | "property", key: string, content?: string) {
+    const selector = `meta[${attributeName}="${key}"]`;
+
+    if (!content) {
+        document.head.querySelectorAll(selector).forEach((node) => node.remove());
+        return;
+    }
+
+    const meta = ensureSingleHeadElement(selector, () => document.createElement("meta"));
+    meta.setAttribute(attributeName, key);
+    meta.setAttribute("content", content);
+    meta.setAttribute(MANAGED_ATTR, "true");
+}
+
+function setCanonicalLink(href: string) {
+    const link = ensureSingleHeadElement('link[rel="canonical"]', () => document.createElement("link"));
+    link.setAttribute("rel", "canonical");
+    link.setAttribute("href", href);
+    link.setAttribute(MANAGED_ATTR, "true");
+}
+
+function syncJsonLdScripts(jsonLd?: Record<string, unknown> | Record<string, unknown>[]) {
+    document.head
+        .querySelectorAll(`script[${MANAGED_ATTR}="json-ld"]`)
+        .forEach((node) => node.remove());
+
+    if (!jsonLd) return;
+
+    const items = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+
+    items.forEach((data) => {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.setAttribute(MANAGED_ATTR, "json-ld");
+        script.textContent = JSON.stringify(data);
+        document.head.appendChild(script);
+    });
+}
+
 export default function MetaHeader({
     title,
     description = DEFAULT_DESCRIPTION,
@@ -49,53 +110,49 @@ export default function MetaHeader({
 }: MetaHeaderProps) {
     useHtmlLanguage(lang);
 
-    const resolvedUrl = pageUrl || (pagePathname != null ? buildPageUrl(pagePathname) : SITE_URL);
+    const resolvedUrl = pageUrl || buildPageUrl(pagePathname ?? getCurrentPathname());
     const resolvedTitle = buildPageTitle(title);
     const robots = noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-    const jsonLdScripts = jsonLd
-        ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).map((data, i) => (
-            <script key={i} type="application/ld+json">
-                {JSON.stringify(data)}
-            </script>
-        ))
-        : null;
+    useLayoutEffect(() => {
+        document.title = resolvedTitle;
+        setCanonicalLink(resolvedUrl);
 
-    return (
-        <Helmet>
-            <html lang={lang} />
-            <title>{resolvedTitle}</title>
-            <link rel="canonical" href={resolvedUrl} />
-            <meta name="description" content={description} />
-            <meta name="robots" content={robots} />
+        setMetaTag("name", "description", description);
+        setMetaTag("name", "robots", robots);
 
-            {/* Open Graph */}
-            <meta property="og:locale" content="en_US" />
-            <meta property="og:title" content={resolvedTitle} />
-            <meta property="og:site_name" content={SITE_NAME} />
-            <meta property="og:url" content={resolvedUrl} />
-            <meta property="og:description" content={description} />
-            <meta property="og:type" content={ogType} />
-            <meta property="og:image" content={imageUrl} />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="1200" />
-            <meta property="og:image:alt" content={imageAlt} />
+        setMetaTag("property", "og:locale", "en_US");
+        setMetaTag("property", "og:title", resolvedTitle);
+        setMetaTag("property", "og:site_name", SITE_NAME);
+        setMetaTag("property", "og:url", resolvedUrl);
+        setMetaTag("property", "og:description", description);
+        setMetaTag("property", "og:type", ogType);
+        setMetaTag("property", "og:image", imageUrl);
+        setMetaTag("property", "og:image:width", "1200");
+        setMetaTag("property", "og:image:height", "1200");
+        setMetaTag("property", "og:image:alt", imageAlt);
+        setMetaTag("property", "article:published_time", articlePublishedTime);
 
-            {articlePublishedTime && (
-                <meta property="article:published_time" content={articlePublishedTime} />
-            )}
+        setMetaTag("name", "twitter:card", "summary_large_image");
+        setMetaTag("name", "twitter:title", resolvedTitle);
+        setMetaTag("name", "twitter:description", description);
+        setMetaTag("name", "twitter:image", imageUrl);
+        setMetaTag("name", "twitter:site", TWITTER_HANDLE);
 
-            {/* Twitter */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={resolvedTitle} />
-            <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={imageUrl} />
-            <meta name="twitter:site" content={TWITTER_HANDLE} />
+        syncJsonLdScripts(jsonLd);
+    }, [
+        articlePublishedTime,
+        description,
+        imageAlt,
+        imageUrl,
+        jsonLd,
+        ogType,
+        resolvedTitle,
+        resolvedUrl,
+        robots,
+    ]);
 
-            {/* JSON-LD */}
-            {jsonLdScripts}
-        </Helmet>
-    );
+    return null;
 }
