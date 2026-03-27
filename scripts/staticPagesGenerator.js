@@ -54,6 +54,17 @@ function replaceOrInsertCanonical(html, pageUrl) {
     return html.replace(/<head>/i, `<head>\n  ${canonicalTag}`);
 }
 
+function replaceOrInsertMetaTag(html, attributeName, key, content) {
+    const selector = new RegExp(`<meta[^>]*${attributeName}="${key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*\/?>`, 'i');
+    const metaTag = `<meta ${attributeName}="${key}" content="${escapeHtml(content)}" />`;
+
+    if (selector.test(html)) {
+        return html.replace(selector, metaTag);
+    }
+
+    return html.replace(/<\/head>/i, `  ${metaTag}\n</head>`);
+}
+
 /* ------------------ SEO injection ------------------ */
 
 /**
@@ -66,11 +77,12 @@ function injectSeoMeta(html, pagePath, seo) {
     const description = seo?.description || "";
     const imageUrl = seo?.imageUrl || DEFAULT_OG_IMAGE;
     const imageAlt = seo?.imageAlt || DEFAULT_OG_IMAGE_ALT;
+    const author = seo?.author;
     const robots = seo?.noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-    return replaceOrInsertCanonical(html, pageUrl)
+    let result = replaceOrInsertCanonical(html, pageUrl)
         .replace(/<title[^>]*>[^<]*<\/title>/,
             `<title data-rh="true">${escapeHtml(title)}</title>`)
         .replace(/<meta[^>]*name="description"[^>]*content="[^"]*"[^>]*\/?>/,
@@ -93,6 +105,15 @@ function injectSeoMeta(html, pagePath, seo) {
             `<meta name="twitter:image" content="${escapeHtml(imageUrl)}" />`)
         .replace(/<meta[^>]*name="twitter:description"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta name="twitter:description" content="${escapeHtml(description)}" />`);
+
+    if (author) {
+        result = replaceOrInsertMetaTag(result, 'name', 'author', author);
+        result = replaceOrInsertMetaTag(result, 'property', 'article:author', author);
+        result = replaceOrInsertMetaTag(result, 'name', 'twitter:label1', 'Written by');
+        result = replaceOrInsertMetaTag(result, 'name', 'twitter:data1', author);
+    }
+
+    return result;
 }
 
 async function writeRouteVariants(buildFolderPath, pagePath, html) {
@@ -201,6 +222,7 @@ async function main([, , buildFolderPath]) {
             description: article.excerpt,
             imageUrl: article.image ? `${SITE_URL}${article.image}` : DEFAULT_OG_IMAGE,
             imageAlt: article.title || DEFAULT_OG_IMAGE_ALT,
+            author: article.author,
         });
         await writeRouteVariants(normalizedBuildFolderPath, pagePath, html);
     }

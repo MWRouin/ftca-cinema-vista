@@ -52,6 +52,7 @@ export interface PageSeo {
   ogType?: OgType;
   imageUrl?: string;
   imageAlt?: string;
+  author?: string;
   noindex?: boolean;
   /** JSON-LD structured data (only used client-side) */
   jsonLd?: Record<string, unknown>;
