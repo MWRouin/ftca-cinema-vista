@@ -89,7 +89,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                         <Badge variant="outline">{event.status}</Badge>
                     </div>
 
-                    <PageTitle title={event.title} titleLevel={2} />
+                    <PageTitle title={event.title} />
 
                     <div className="mt-4 flex items-center gap-4 text-muted-foreground">
                         <div className="flex items-center gap-2">
