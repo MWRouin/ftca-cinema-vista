@@ -9,6 +9,7 @@ import {
     DEFAULT_OG_IMAGE,
     DEFAULT_OG_IMAGE_ALT,
 } from '../src/lib/metadata/seo-constants.ts';
+import { getBlogArticles } from '../src/data/blog.ts';
 
 /* ------------------ utils ------------------ */
 
@@ -190,6 +191,19 @@ async function main([, , buildFolderPath]) {
         data: events, entityName: "events",
         basePath: normalizedBuildFolderPath, indexHtml,
     });
+
+    /* ---------- blog ---------- */
+    const blogArticles = getBlogArticles();
+    for (const article of blogArticles) {
+        const pagePath = `blog/${article.slug}`;
+        const html = injectSeoMeta(indexHtml, pagePath, {
+            title: article.title,
+            description: article.excerpt,
+            imageUrl: article.image ? `${SITE_URL}${article.image}` : DEFAULT_OG_IMAGE,
+            imageAlt: article.title || DEFAULT_OG_IMAGE_ALT,
+        });
+        await writeRouteVariants(normalizedBuildFolderPath, pagePath, html);
+    }
 
     console.log("✅ All files generated successfully!");
 }

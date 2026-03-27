@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import fsSync from 'fs';
 import path from 'path';
 import { SITE_URL } from '../src/lib/metadata/seo-constants.ts';
+import { getBlogArticles } from '../src/data/blog.ts';
 
 /**
  * Post-build script: generates a dynamic sitemap.xml from pages.json, movies.json, and events.json.
@@ -77,6 +78,16 @@ async function main([, , buildFolderPath]) {
         urls.push(urlEntry(
             `${SITE_URL}/events/${event.id}`,
             lastmod,
+            "monthly",
+            "0.7"
+        ));
+    }
+
+    // Blog articles
+    for (const article of getBlogArticles()) {
+        urls.push(urlEntry(
+            `${SITE_URL}/blog/${article.slug}`,
+            article.date || today,
             "monthly",
             "0.7"
         ));
