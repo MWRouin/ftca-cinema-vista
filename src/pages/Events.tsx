@@ -5,6 +5,8 @@ import { PageTitle } from '@/components/customUi/page-title';
 import { CalendarX, FolderX } from 'lucide-react';
 import { Link } from "react-router-dom";
 import { LazyImage } from '@/components/customUi/lazy-image';
+import MetaHeader from '@/lib/metadata/metadata';
+import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function Events() {
   const events = [
@@ -123,6 +125,8 @@ export default function Events() {
 
 
   return (
+    <>
+      <MetaHeader {...PAGE_SEO.events} />
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -177,5 +181,6 @@ export default function Events() {
         </section>
       </div>
     </div>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
+import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { useTheme } from '@/components/ThemeProvider';
 
@@ -38,7 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <MetaHeader />
+      <MetaHeader {...PAGE_SEO[""]} />
       <div className="min-h-screen">
         {/* Hero Section */}
         <section
@@ -278,7 +279,7 @@ export default function Home() {
                 <Link to="/contact">Get in Touch</Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-primary/30 hover-lift text-lg px-8 py-4">
-                <Link to="/about">Learn More</Link>
+                <Link to="/about">Learn More About Us</Link>
               </Button>
             </div>
           </div>
