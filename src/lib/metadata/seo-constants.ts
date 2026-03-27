@@ -50,6 +50,8 @@ export interface PageSeo {
   description: string;
   pagePathname: string;
   ogType?: OgType;
+  imageUrl?: string;
+  imageAlt?: string;
   noindex?: boolean;
   /** JSON-LD structured data (only used client-side) */
   jsonLd?: Record<string, unknown>;
@@ -92,6 +94,8 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       "Discover events by the Hammam-Lif Amateur Filmmakers Club: screenings, discussions, workshops and gatherings in Tunisia.",
     pagePathname: "events",
+    imageUrl: `${SITE_URL}/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg`,
+    imageAlt: "Films de Hammam-Lif event poster",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -105,6 +109,8 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       "Ydour: screening & discussion organised by the Hammam-Lif Amateur Filmmakers Club. A gathering for the amateur cinema community, Café culturel LIBER'THÉ, February 2025.",
     pagePathname: "events/ydour",
+    imageUrl: `${SITE_URL}/events/ydour/ydour-title.jpg`,
+    imageAlt: "Ydour event poster",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "Event",
@@ -137,6 +143,8 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       "Films de Hammam-Lif: screening & exhibition at Complexe Culturel Ali Ben Ayed. A tribute to Hammam-Lif's cinematic culture by FTCA, December 2025.",
     pagePathname: "events/films-de-hammamlif",
+    imageUrl: `${SITE_URL}/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg`,
+    imageAlt: "Films de Hammam-Lif event poster",
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "Event",
@@ -170,6 +178,8 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       "Articles, reflections and insights on amateur cinema from members of the FTCA Hammam-Lif club.",
     pagePathname: "blog",
     ogType: "blog",
+    imageUrl: `${SITE_URL}/blogs/youssef_blog.JPG`,
+    imageAlt: "Featured blog article cover image",
   },
   about: {
     title: "About – Our Story",

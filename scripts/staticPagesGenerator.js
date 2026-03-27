@@ -1,7 +1,14 @@
 import fs from 'fs/promises';
 import fsSync from 'fs';
 import path from 'path';
-import { SITE_URL, SITE_NAME, PAGE_SEO, buildPageTitle } from '../src/lib/metadata/seo-constants.ts';
+import {
+    SITE_URL,
+    SITE_NAME,
+    PAGE_SEO,
+    buildPageTitle,
+    DEFAULT_OG_IMAGE,
+    DEFAULT_OG_IMAGE_ALT,
+} from '../src/lib/metadata/seo-constants.ts';
 
 /* ------------------ utils ------------------ */
 
@@ -56,6 +63,8 @@ function injectSeoMeta(html, pagePath, seo) {
     const pageUrl = pagePath ? `${SITE_URL}/${pagePath}` : `${SITE_URL}/`;
     const title = buildPageTitle(seo?.title || SITE_NAME);
     const description = seo?.description || "";
+    const imageUrl = seo?.imageUrl || DEFAULT_OG_IMAGE;
+    const imageAlt = seo?.imageAlt || DEFAULT_OG_IMAGE_ALT;
     const robots = seo?.noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
@@ -73,8 +82,14 @@ function injectSeoMeta(html, pagePath, seo) {
             `<meta property="og:description" content="${escapeHtml(description)}" />`)
         .replace(/<meta[^>]*property="og:url"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta property="og:url" content="${escapeHtml(pageUrl)}" />`)
+        .replace(/<meta[^>]*property="og:image"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta property="og:image" content="${escapeHtml(imageUrl)}" />`)
+        .replace(/<meta[^>]*property="og:image:alt"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />`)
         .replace(/<meta[^>]*name="twitter:title"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta name="twitter:title" content="${escapeHtml(title)}" />`)
+        .replace(/<meta[^>]*name="twitter:image"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta name="twitter:image" content="${escapeHtml(imageUrl)}" />`)
         .replace(/<meta[^>]*name="twitter:description"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta name="twitter:description" content="${escapeHtml(description)}" />`);
 }
