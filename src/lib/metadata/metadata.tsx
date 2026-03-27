@@ -30,6 +30,7 @@ interface MetaHeaderProps {
     /** Article publish date (ISO 8601). */
     articlePublishedTime?: string;
     author?: string;
+    authorLabel?: string;
     /** Don't index this page. */
     noindex?: boolean;
 }
@@ -109,6 +110,7 @@ export default function MetaHeader({
     jsonLd,
     articlePublishedTime,
     author,
+    authorLabel,
     noindex = false,
 }: MetaHeaderProps) {
     useHtmlLanguage(lang);
@@ -137,7 +139,7 @@ export default function MetaHeader({
         setMetaTag("property", "og:image:width", "1200");
         setMetaTag("property", "og:image:height", "1200");
         setMetaTag("property", "og:image:alt", imageAlt);
-        setMetaTag("property", "article:author", author);
+        setMetaTag("property", "article:author", ogType === "article" ? author : undefined);
         setMetaTag("property", "article:published_time", articlePublishedTime);
 
         setMetaTag("name", "twitter:card", "summary_large_image");
@@ -145,13 +147,14 @@ export default function MetaHeader({
         setMetaTag("name", "twitter:description", description);
         setMetaTag("name", "twitter:image", imageUrl);
         setMetaTag("name", "twitter:site", TWITTER_HANDLE);
-        setMetaTag("name", "twitter:label1", author ? "Written by" : undefined);
+        setMetaTag("name", "twitter:label1", author ? (authorLabel || "Written by") : undefined);
         setMetaTag("name", "twitter:data1", author);
 
         syncJsonLdScripts(jsonLd);
     }, [
         articlePublishedTime,
         author,
+        authorLabel,
         description,
         imageAlt,
         imageUrl,

@@ -65,6 +65,8 @@ export default function MoviePlayer() {
         ogType="video.movie"
         imageUrl={movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${movie.image}`}
         imageAlt={`${movie.title} – poster`}
+        author={movie.director}
+        authorLabel="Directed by"
         lang={lang}
         jsonLd={{
           "@context": "https://schema.org",

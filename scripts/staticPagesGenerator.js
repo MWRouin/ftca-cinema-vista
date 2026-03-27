@@ -40,6 +40,11 @@ function escapeHtml(value = "") {
         .replace(/"/g, '&quot;');
 }
 
+function resolveAssetUrl(url = "") {
+    if (!url) return "";
+    return url.replace("__BASE_URL__/", "/");
+}
+
 function replaceOrInsertCanonical(html, pageUrl) {
     const canonicalTag = `<link rel="canonical" href="${escapeHtml(pageUrl)}" data-rh="true" />`;
 
@@ -78,6 +83,7 @@ function injectSeoMeta(html, pagePath, seo) {
     const imageUrl = seo?.imageUrl || DEFAULT_OG_IMAGE;
     const imageAlt = seo?.imageAlt || DEFAULT_OG_IMAGE_ALT;
     const author = seo?.author;
+    const authorLabel = seo?.authorLabel || 'Written by';
     const robots = seo?.noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
@@ -93,6 +99,8 @@ function injectSeoMeta(html, pagePath, seo) {
             `<meta property="og:title" content="${escapeHtml(title)}" />`)
         .replace(/<meta[^>]*property="og:description"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta property="og:description" content="${escapeHtml(description)}" />`)
+        .replace(/<meta[^>]*property="og:type"[^>]*content="[^"]*"[^>]*\/?>/,
+            `<meta property="og:type" content="${escapeHtml(seo?.ogType || 'website')}" />`)
         .replace(/<meta[^>]*property="og:url"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta property="og:url" content="${escapeHtml(pageUrl)}" />`)
         .replace(/<meta[^>]*property="og:image"[^>]*content="[^"]*"[^>]*\/?>/,
@@ -108,8 +116,10 @@ function injectSeoMeta(html, pagePath, seo) {
 
     if (author) {
         result = replaceOrInsertMetaTag(result, 'name', 'author', author);
-        result = replaceOrInsertMetaTag(result, 'property', 'article:author', author);
-        result = replaceOrInsertMetaTag(result, 'name', 'twitter:label1', 'Written by');
+        if (seo?.ogType === 'article') {
+            result = replaceOrInsertMetaTag(result, 'property', 'article:author', author);
+        }
+        result = replaceOrInsertMetaTag(result, 'name', 'twitter:label1', authorLabel);
         result = replaceOrInsertMetaTag(result, 'name', 'twitter:data1', author);
     }
 
@@ -196,6 +206,11 @@ async function main([, , buildFolderPath]) {
             PAGE_SEO[pagePath] = {
                 title: movie.title,
                 description: movie.description || `${movie.title} – amateur film by ${movie.director}. ${SITE_NAME}.`,
+                imageUrl: movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${resolveAssetUrl(movie.image)}`,
+                imageAlt: `${movie.title} – poster`,
+                author: movie.director,
+                authorLabel: 'Directed by',
+                ogType: 'video.movie',
             };
         }
     }
@@ -223,6 +238,8 @@ async function main([, , buildFolderPath]) {
             imageUrl: article.image ? `${SITE_URL}${article.image}` : DEFAULT_OG_IMAGE,
             imageAlt: article.title || DEFAULT_OG_IMAGE_ALT,
             author: article.author,
+            authorLabel: 'Written by',
+            ogType: 'article',
         });
         await writeRouteVariants(normalizedBuildFolderPath, pagePath, html);
     }

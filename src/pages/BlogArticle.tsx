@@ -59,6 +59,7 @@ export default function BlogArticle() {
         imageAlt={article.title}
         lang={article.lang ?? 'en'}
         author={article.author}
+        authorLabel="Written by"
         articlePublishedTime={new Date(article.date).toISOString()}
         jsonLd={{
           '@context': 'https://schema.org',
