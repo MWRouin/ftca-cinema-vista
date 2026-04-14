@@ -1,13 +1,9 @@
 import { PageTitle } from '@/components/customUi/page-title'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
-import MetaHeader from '@/lib/metadata/metadata'
-import { PAGE_SEO } from '@/lib/metadata/seo-constants'
 
 export default function Palmares() {
   return (
-    <>
-      <MetaHeader {...PAGE_SEO.palmares} />
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -43,6 +39,5 @@ export default function Palmares() {
         </div>
       </div>
     </div>
-    </>
   )
 }

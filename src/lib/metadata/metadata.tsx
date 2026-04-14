@@ -1,169 +1,73 @@
-import { useLayoutEffect } from "react";
-import type { OgType } from "./metadata-types";
+import { Helmet } from "react-helmet-async";
+import { OgType, CharSet } from "./metadata-types";
 import { useHtmlLanguage } from "./html-lang";
-import {
-    SITE_NAME,
-    SITE_NAME_FULL,
-    DEFAULT_OG_IMAGE,
-    DEFAULT_OG_IMAGE_ALT,
-    DEFAULT_DESCRIPTION,
-    DEFAULT_LANG,
-    TWITTER_HANDLE,
-    buildPageUrl,
-    buildPageTitle,
-} from "./seo-constants";
 
 interface MetaHeaderProps {
-    /** Page title (without the " | FTCA Hammam‑Lif" suffix — that's appended automatically). */
+    lang?: string;
     title?: string;
     description?: string;
-    /** Route pathname, e.g. "events/ydour". Omit leading slash. */
-    pagePathname?: string;
-    /** Absolute URL — overrides pagePathname when set. */
-    pageUrl?: string;
-    ogType?: OgType;
+    author?: string;
     imageUrl?: string;
     imageAlt?: string;
-    lang?: string;
-    /** JSON-LD structured data object(s). */
-    jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-    /** Article publish date (ISO 8601). */
-    articlePublishedTime?: string;
-    author?: string;
-    authorLabel?: string;
-    /** Don't index this page. */
-    noindex?: boolean;
-}
+    pageUrl?: string;
+    ogType?: OgType;
+};
 
-const MANAGED_ATTR = "data-ftca-seo";
+// img "https://opengraph.b-cdn.net/production/images/e889e93c-a333-49e9-bb70-4d0506d588ff.jpg?token=Fbd-173Wg4scri1OkZIVXQEUGc9atCOObfuZX-GRquE&height=1200&width=1200&expires=33286675221"
 
-function getCurrentPathname(): string {
-    if (typeof window === "undefined") return "";
+// img alt "Club des cinéastes amateurs d'Hammam-Lif – FTCA Hammemlif"
 
-    return window.location.pathname.replace(/^\/+|\/+$/g, "");
-}
-
-function ensureSingleHeadElement<T extends HTMLElement>(
-    selector: string,
-    createElement: () => T,
-): T {
-    const existing = Array.from(document.head.querySelectorAll<T>(selector));
-    const element = existing.shift() ?? createElement();
-
-    existing.forEach((node) => node.remove());
-
-    if (!element.isConnected) {
-        document.head.appendChild(element);
-    }
-
-    return element;
-}
-
-function setMetaTag(attributeName: "name" | "property", key: string, content?: string) {
-    const selector = `meta[${attributeName}="${key}"]`;
-
-    if (!content) {
-        document.head.querySelectorAll(selector).forEach((node) => node.remove());
-        return;
-    }
-
-    const meta = ensureSingleHeadElement(selector, () => document.createElement("meta"));
-    meta.setAttribute(attributeName, key);
-    meta.setAttribute("content", content);
-    meta.setAttribute(MANAGED_ATTR, "true");
-}
-
-function setCanonicalLink(href: string) {
-    const link = ensureSingleHeadElement('link[rel="canonical"]', () => document.createElement("link"));
-    link.setAttribute("rel", "canonical");
-    link.setAttribute("href", href);
-    link.setAttribute(MANAGED_ATTR, "true");
-}
-
-function syncJsonLdScripts(jsonLd?: Record<string, unknown> | Record<string, unknown>[]) {
-    document.head
-        .querySelectorAll(`script[${MANAGED_ATTR}="json-ld"]`)
-        .forEach((node) => node.remove());
-
-    if (!jsonLd) return;
-
-    const items = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
-
-    items.forEach((data) => {
-        const script = document.createElement("script");
-        script.type = "application/ld+json";
-        script.setAttribute(MANAGED_ATTR, "json-ld");
-        script.textContent = JSON.stringify(data);
-        document.head.appendChild(script);
-    });
-}
+//description "Club des cinéastes amateurs d'Hammam-Lif - FTCA Hammemlif - A passionate community of film enthusiasts. Beyond celebrating cinema as an art. We use it as a medium to question, reflect, and share ideas."
 
 export default function MetaHeader({
-    title,
-    description = DEFAULT_DESCRIPTION,
-    pageUrl,
-    pagePathname,
-    ogType = "website",
-    imageUrl = DEFAULT_OG_IMAGE,
-    imageAlt = DEFAULT_OG_IMAGE_ALT,
-    lang = DEFAULT_LANG,
-    jsonLd,
-    articlePublishedTime,
+    lang,
+    title = "Club des cinéastes amateurs d'Hammam-Lif",
+    description,
     author,
-    authorLabel,
-    noindex = false,
+    imageUrl,
+    imageAlt,
+    pageUrl,
+    ogType = "website"
 }: MetaHeaderProps) {
+
     useHtmlLanguage(lang);
 
-    const resolvedUrl = pageUrl || buildPageUrl(pagePathname ?? getCurrentPathname());
-    const resolvedTitle = buildPageTitle(title);
-    const robots = noindex
-        ? "noindex, nofollow"
-        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+    const ogLocale = lang?.replace("-", "_") ?? "en_US";
 
-    useLayoutEffect(() => {
-        document.title = resolvedTitle;
-        setCanonicalLink(resolvedUrl);
+    return (
+        <Helmet>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>{title}</title>
+            <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+            <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+            {pageUrl && <link rel="canonical" href={pageUrl} />}
+            {description && <meta name="description" content={description} />}
+            {author && <meta name="author" content={author} />}
+            <meta name="theme-color" content="#000000" />
+            <meta name="robots" content="index, follow" />
 
-        setMetaTag("name", "description", description);
-        setMetaTag("name", "author", author || SITE_NAME_FULL);
-        setMetaTag("name", "robots", robots);
+            {/* openGraph */}
+            <meta property="og:locale" content={ogLocale} />
+            <meta property="og:title" content={title} />
+            <meta property="og:site_name" content="Club des cinéastes amateurs d'Hammam-Lif" />
+            {pageUrl && <meta property="og:url" content={pageUrl} />}
+            {description && <meta property="og:description" content={description} />}
+            <meta property="og:type" content={ogType} />
+            {imageUrl && <meta property="og:image" content={imageUrl} />}
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="1200" />
+            {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+            <meta property="fb:pages" content="PAGE_ID" />
 
-        setMetaTag("property", "og:locale", "en_US");
-        setMetaTag("property", "og:title", resolvedTitle);
-        setMetaTag("property", "og:site_name", SITE_NAME);
-        setMetaTag("property", "og:url", resolvedUrl);
-        setMetaTag("property", "og:description", description);
-        setMetaTag("property", "og:type", ogType);
-        setMetaTag("property", "og:image", imageUrl);
-        setMetaTag("property", "og:image:width", "1200");
-        setMetaTag("property", "og:image:height", "1200");
-        setMetaTag("property", "og:image:alt", imageAlt);
-        setMetaTag("property", "article:author", ogType === "article" ? author : undefined);
-        setMetaTag("property", "article:published_time", articlePublishedTime);
-
-        setMetaTag("name", "twitter:card", "summary_large_image");
-        setMetaTag("name", "twitter:title", resolvedTitle);
-        setMetaTag("name", "twitter:description", description);
-        setMetaTag("name", "twitter:image", imageUrl);
-        setMetaTag("name", "twitter:site", TWITTER_HANDLE);
-        setMetaTag("name", "twitter:label1", author ? (authorLabel || "Written by") : undefined);
-        setMetaTag("name", "twitter:data1", author);
-
-        syncJsonLdScripts(jsonLd);
-    }, [
-        articlePublishedTime,
-        author,
-        authorLabel,
-        description,
-        imageAlt,
-        imageUrl,
-        jsonLd,
-        ogType,
-        resolvedTitle,
-        resolvedUrl,
-        robots,
-    ]);
-
-    return null;
+            {/* twitter */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={title} />
+            {pageUrl && <meta name="twitter:url" content={pageUrl} />}
+            {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+            {imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+            {description && <meta name="twitter:description" content={description} />}
+            <meta name="twitter:site" content="@ftcahammemlif" />
+            <meta name="twitter:creator" content="@ftcahammemlif" />
+        </Helmet>
+    );
 }

@@ -4,8 +4,6 @@ import { PageTitle } from '@/components/customUi/page-title';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 function TeamSection({ teamMembers }) {
   const [showAll, setShowAll] = useState(false);
@@ -448,8 +446,6 @@ export default function About() {
   ];
 
   return (
-    <>
-      <MetaHeader {...PAGE_SEO.about} />
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -581,6 +577,5 @@ export default function About() {
         </section>
       </div>
     </div>
-    </>
   );
 }
