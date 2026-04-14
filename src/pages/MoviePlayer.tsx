@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { getMovieById, getRelatedMoviesByDirector, getRelatedMoviesByGenre } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import { getCurrentLang } from '@/lib/metadata/html-lang';
+import MetaHeader from '@/lib/metadata/metadata';
+import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
 
 export default function MoviePlayer() {
   const { id } = useParams();
@@ -55,6 +57,34 @@ export default function MoviePlayer() {
   }
 
   return (
+    <>
+      <MetaHeader
+        title={movie.title}
+        description={movie.description?.[lang] || movie.description || `${movie.title} – Amateur film by ${movie.director}. ${SITE_NAME}.`}
+        pagePathname={`movies/${movie.id}`}
+        ogType="video.movie"
+        imageUrl={movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${movie.image}`}
+        imageAlt={`${movie.title} – poster`}
+        author={movie.director}
+        authorLabel="Directed by"
+        lang={lang}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Movie",
+          "name": movie.title,
+          "description": movie.description?.[lang] || movie.description,
+          "director": { "@type": "Person", "name": movie.director },
+          "dateCreated": String(movie.year),
+          "genre": movie.genre,
+          "duration": movie.duration,
+          "url": `${SITE_URL}/movies/${movie.id}`,
+          "image": movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${movie.image}`,
+          "productionCompany": {
+            "@type": "Organization",
+            "name": SITE_NAME_FULL
+          }
+        }}
+      />
     <div className="min-h-screen py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -81,7 +111,7 @@ export default function MoviePlayer() {
 
           {/* Title + Badges */}
           <div className="col-span-2 space-y-4">
-            <PageTitle title={movie.title} titleLevel={2} />
+            <PageTitle title={movie.title} />
             <div className="flex flex-wrap gap-2">
               <Badge>{movie.genre}</Badge>
               <Badge variant="outline">{movie.year}</Badge>
@@ -224,5 +254,6 @@ export default function MoviePlayer() {
 
       </div>
     </div>
+    </>
   );
 }

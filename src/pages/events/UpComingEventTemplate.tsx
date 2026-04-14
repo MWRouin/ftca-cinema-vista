@@ -54,7 +54,7 @@ this evening is a celebration of cinema at its finest.
             <Badge variant="outline">{event.status}</Badge>
           </div>
 
-          <PageTitle title={event.title} titleLevel={2} />
+          <PageTitle title={event.title} />
         </div>
 
         {/* Event Info */}

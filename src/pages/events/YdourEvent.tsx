@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { PageTitle } from "@/components/customUi/page-title";
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
+import MetaHeader from '@/lib/metadata/metadata';
+import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function YdourEvent() {
     const event = {
@@ -71,6 +73,8 @@ From the start, we had structured the screening into three parts, each followed 
 
 
     return (
+        <>
+        <MetaHeader {...PAGE_SEO["events/ydour"]} />
         <div className="min-h-screen py-12">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -97,7 +101,7 @@ From the start, we had structured the screening into three parts, each followed 
                         <Badge variant="outline">{event.status}</Badge>
                     </div>
 
-                    <PageTitle title={event.title} titleLevel={2} />
+                    <PageTitle title={event.title} />
 
                     <div className="mt-4 flex items-center gap-4 text-muted-foreground">
                         <div className="flex items-center gap-2">
@@ -143,6 +147,7 @@ From the start, we had structured the screening into three parts, each followed 
                                 {item.type === "image" ? (
                                     <img
                                         src={item.src}
+                                        alt={item.title || `Event highlight ${i + 1}`}
                                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     />
                                 ) : (
@@ -213,6 +218,8 @@ From the start, we had structured the screening into three parts, each followed 
                                 <a
                                     href="https://www.facebook.com/ftcahamhama/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Facebook"
                                     className="hover:scale-125 w-10 h-10 transition-transform"
                                 >
                                     <Facebook className="w-7 h-7 text-[#0866ff]" />
@@ -220,6 +227,8 @@ From the start, we had structured the screening into three parts, each followed 
                                 <a
                                     href="https://www.instagram.com/ftca.hlif/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Instagram"
                                     className="hover:scale-125 w-10 h-10 transition-transform"
                                 >
                                     <Instagram className="w-7 h-7 text-[#e7009a]" />
@@ -227,6 +236,8 @@ From the start, we had structured the screening into three parts, each followed 
                                 <a
                                     href="https://www.youtube.com/@ftcahammamlif/"
                                     target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="YouTube"
                                     className="hover:scale-125 w-10 h-10 transition-transform"
                                 >
                                     <Youtube className="w-7 h-7 text-[#ff0033]" />
@@ -238,5 +249,6 @@ From the start, we had structured the screening into three parts, each followed 
                 </Card>
             </div>
         </div >
+        </>
     );
 }
