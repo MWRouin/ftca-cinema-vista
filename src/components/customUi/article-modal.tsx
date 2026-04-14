@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { X, Copy, Share2 } from 'lucide-react'
 
 type Article = {
-	slug: string
+	id: number
 	title: string
 	excerpt: string
 	author: string
@@ -76,7 +76,7 @@ export function ArticleModal({
 				<div className="p-6 md:p-8">
 					<div className="flex items-start justify-between">
 						<div>
-							<h2 className={"text-2xl md:text-3xl mb-2 font-semibold"}>
+							<h2 className={"text-2xl md:text-3xl mb-2 " + (article.id === 2 ? 'font-extrabold' : 'font-semibold') }>
 								{article.title}
 							</h2>
 							<div className="text-sm text-muted-foreground">

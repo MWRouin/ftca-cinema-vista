@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import { LazyImage } from '@/components/customUi/lazy-image';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function Movies() {
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
@@ -23,8 +21,6 @@ export default function Movies() {
     : movies.filter(movie => movie.genre === selectedGenre);
 
   return (
-    <>
-      <MetaHeader {...PAGE_SEO.movies} />
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -107,6 +103,5 @@ export default function Movies() {
         )}
       </div>
     </div>
-    </>
   );
 }

@@ -1,18 +1,9 @@
 [
   {
     "id": "ydour",
-    "title": "Ydour – يدور",
-    "description": "Projection et discussion – un rassemblement pour la communauté du cinéma amateur à Tunis.",
-    "date": "2025-02-22",
+    "title": "Ydour Event",
+    "date": "2025-2-22",
     "location": "Café culturel LIBER'THÉ",
-    "public": true
-  },
-  {
-    "id": "films-de-hammamlif",
-    "title": "Films de Hammam-Lif",
-    "description": "Projection et exposition – hommage à la culture cinématographique de Hammam-Lif au Complexe Culturel Ali Ben Ayed.",
-    "date": "2025-12-27",
-    "location": "Complexe Culturel Ali Ben Ayed",
     "public": true
   }
 ]

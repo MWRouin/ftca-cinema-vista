@@ -24,7 +24,6 @@ export function LazyImage({
 
       <img
         {...props}
-        alt={alt}
         className={cn(
           "w-full h-full object-cover transition-opacity duration-300",
           loading ? "opacity-0" : "opacity-100"

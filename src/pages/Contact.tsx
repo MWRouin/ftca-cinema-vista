@@ -7,8 +7,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -55,8 +53,6 @@ export default function Contact() {
   ];
 
   return (
-    <>
-      <MetaHeader {...PAGE_SEO.contact} />
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -237,6 +233,5 @@ export default function Contact() {
         </div>
       </div>
     </div>
-    </>
   );
 }
