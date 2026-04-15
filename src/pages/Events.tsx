@@ -12,7 +12,7 @@ export default function Events() {
   const events = [
     {
       id: 'ydour',
-      title: "Ydour",
+      title: "Ydour - يدور",
       date: "2025-02-22",
       time: "18:30",
       location: "Café culturel LIBER'THÉ",
@@ -26,11 +26,22 @@ export default function Events() {
       title: "Films de Hammam-Lif",
       date: "2025-12-27",
       time: "16:30",
-      location: "Complexe Culturel Ali Ben Ayed",
+      location: "Complexe culturel Ali Ben Ayed",
       description: "\"Films de Hammam-Lif\" aims to revive this lost spirit and inspire a new generation’s connection to cinema and culture.",
       image: "/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg",
       status: "past",
       category: "Screening & Exhibition"
+    },
+    {
+      id: 'ydour-v2',
+      title: "Ydour - يدور (2nd Edition)",
+      date: "2026-05-15",
+      time: "18:00",
+      location: "Espace culturel L'Écurie",
+      description: "Second edition of YDOUR: a space for amateur cinema.",
+      image: "/events/ydour2/ydour2_2.jpg",
+      status: "upcoming",
+      category: "Screening, Discussion, and more.."
     },/* 
     {
       id: 2,
@@ -67,8 +78,31 @@ export default function Events() {
     } */
   ];
 
-  const upcomingEvents = events.filter(event => event.status === 'upcoming');
-  const pastEvents = events.filter(event => event.status === 'past');
+  const upcomingEvents = events.filter(event => event.status === 'upcoming')
+    .sort(event => {
+      const date = new Date(event.date)
+
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth();
+      const day = date.getUTCDate();
+
+      const datediff = year * 31 * 12 + month * 31 + day
+
+      return datediff;
+    });
+
+  const pastEvents = events.filter(event => event.status === 'past')
+    .sort(event => {
+      const date = new Date(event.date)
+
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth();
+      const day = date.getUTCDate();
+
+      const datediff = year * 31 * 12 + month * 31 + day
+
+      return -datediff;
+    });
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
@@ -80,7 +114,7 @@ export default function Events() {
   };
 
   const EventCard = ({ event }: { event: typeof events[0] }) => (
-    <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 max-w-[720px]">
 
       {/* Clickable overlay */}
       <Link
@@ -98,7 +132,7 @@ export default function Events() {
 
         <CardHeader className="relative z-20">
           <div className="flex justify-between items-start mb-2">
-            <Badge variant={event.status === 'upcoming' ? 'default' : 'secondary'}>
+            <Badge variant='secondary'>
               {event.category}
             </Badge>
             <Badge variant={event.status === 'upcoming' ? 'default' : 'outline'}>
@@ -127,60 +161,60 @@ export default function Events() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.events} />
-    <div className="min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <PageTitle title='Events' />
-          <div className="section-divider w-24 mx-auto mb-8"></div>
-          <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Join our community events, screenings, and workshops
+      <div className="min-h-screen py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <PageTitle title='Events' />
+            <div className="section-divider w-24 mx-auto mb-8"></div>
+            <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+              Join our community events, screenings, and workshops
+            </div>
           </div>
+
+          {/* Upcoming Events */}
+          {upcomingEvents.length > 0 && <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8">Upcoming Events</h2>
+            {upcomingEvents.length > 0 ? (
+              <div className="grid grid-cols-1 gap-8">
+                {upcomingEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
+                <CalendarX className="w-20 h-20 mx-auto text-muted-foreground" />
+
+                <p className="text-lg text-muted-foreground">
+                  No upcoming events scheduled.
+                </p>
+
+                <p className="text-sm text-muted-foreground">
+                  Check back soon for new announcements!
+                </p>
+              </div>
+            )}
+          </section>}
+
+          {/* Past Events */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8">Past Events</h2>
+            {pastEvents.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {pastEvents.map((event) => (
+                  <EventCard key={event.id} event={event} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
+                <FolderX className="w-20 h-20 mx-auto text-muted-foreground" />
+                <p className="text-lg text-muted-foreground">No events.</p>
+                <p className="text-sm text-muted-foreground">Check back soon!</p>
+              </div>
+            )}
+          </section>
         </div>
-
-        {/* Upcoming Events */}
-        {upcomingEvents.length > 0 && <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Upcoming Events</h2>
-          {upcomingEvents.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {upcomingEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
-              <CalendarX className="w-20 h-20 mx-auto text-muted-foreground" />
-
-              <p className="text-lg text-muted-foreground">
-                No upcoming events scheduled.
-              </p>
-
-              <p className="text-sm text-muted-foreground">
-                Check back soon for new announcements!
-              </p>
-            </div>
-          )}
-        </section>}
-
-        {/* Past Events */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Past Events</h2>
-          {pastEvents.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {pastEvents.map((event) => (
-                <EventCard key={event.id} event={event} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
-              <FolderX className="w-20 h-20 mx-auto text-muted-foreground" />
-              <p className="text-lg text-muted-foreground">No past events currently.</p>
-              <p className="text-sm text-muted-foreground">Check back soon!</p>
-            </div>
-          )}
-        </section>
       </div>
-    </div>
     </>
   );
 }
