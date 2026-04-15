@@ -17,6 +17,7 @@ const Movies = lazy(() => import("./pages/Movies"));
 const MoviePlayer = lazy(() => import("./pages/MoviePlayer"));
 const Events = lazy(() => import("./pages/Events"));
 const YdourEvent = lazy(() => import("./pages/events/YdourEvent"));
+const YdourEventV2 = lazy(() => import("./pages/events/YdourEventV2"));
 const FilmsDeHammamLifEvent = lazy(() => import("./pages/events/FilmsDeHammamLifEvent"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
@@ -38,6 +39,7 @@ const App = () => (
               <Route path="/movies/:id" element={<MoviePlayer />} />
               <Route path="/movies" element={<Movies />} />
               <Route path="/events/ydour" element={<YdourEvent />} />
+              <Route path="/events/ydour-v2" element={<YdourEventV2 />} />
               <Route path="/events/films-de-hammamlif" element={<FilmsDeHammamLifEvent />} />
               <Route path="/events" element={<Events />} />
               <Route path="/blog/:slug" element={<BlogArticle />} />
