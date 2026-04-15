@@ -80,7 +80,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
 
     return (
         <>
-            <MetaHeader {...PAGE_SEO["events/ydour"]} />
+            <MetaHeader {...PAGE_SEO["events/ydour-v2"]} />
             <div className="min-h-screen py-12">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 

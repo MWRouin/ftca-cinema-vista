@@ -140,6 +140,40 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       url: `${SITE_URL}/events/ydour`,
     },
   },
+  "events/ydour-v2": {
+    title: "Ydour – يدور v2",
+    description:
+      "Second edition of YDOUR: a space for amateur cinema. Screenings, Workshops, Exhibition, Music. Espace culturel L'Écurie",
+    pagePathname: "events/ydour-v2",
+    imageUrl: `${SITE_URL}/events/ydour2/ydour2_2.jpg`,
+    imageAlt: "Ydour event poster",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: "Ydour – يدور",
+      description:
+        "Screening, discussion and more.. – a gathering for the amateur cinema community.",
+      startDate: "2025-05-15T18:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode:
+        "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Espace culturel L'Écurie",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Tunis",
+          addressCountry: "TN",
+        },
+      },
+      organizer: {
+        "@type": "Organization",
+        name: SITE_NAME_FULL,
+        url: SITE_URL,
+      },
+      url: `${SITE_URL}/events/ydour`,
+    },
+  },
   "events/films-de-hammamlif": {
     title: "Films de Hammam-Lif",
     description:

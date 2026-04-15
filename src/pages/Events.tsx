@@ -12,7 +12,7 @@ export default function Events() {
   const events = [
     {
       id: 'ydour',
-      title: "Ydour",
+      title: "Ydour - يدور",
       date: "2025-02-22",
       time: "18:30",
       location: "Café culturel LIBER'THÉ",
@@ -34,7 +34,7 @@ export default function Events() {
     },
     {
       id: 'ydour-v2',
-      title: "Ydour",
+      title: "Ydour - يدور (2nd Edition)",
       date: "2026-05-15",
       time: "18:00",
       location: "Espace culturel L'Écurie",
