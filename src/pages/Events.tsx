@@ -39,7 +39,7 @@ export default function Events() {
       time: "18:00",
       location: "Espace culturel L'Écurie",
       description: "Second edition of YDOUR: a space for amateur cinema.",
-      image: "/events/ydour2/ydour2_2.jpg",
+      image: "/events/ydour2/ydour2.webp",
       status: "upcoming",
       category: "Screening, Discussion, and more.."
     },/* 
