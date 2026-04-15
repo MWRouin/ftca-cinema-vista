@@ -145,7 +145,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       "Second edition of YDOUR: a space for amateur cinema. Screenings, Workshops, Exhibition, Music. Espace culturel L'Écurie",
     pagePathname: "events/ydour-v2",
-    imageUrl: `${SITE_URL}/events/ydour2/ydour2_2.jpg`,
+    imageUrl: `${SITE_URL}/events/ydour2/ydour2.webp`,
     imageAlt: "Ydour event poster",
     jsonLd: {
       "@context": "https://schema.org",
