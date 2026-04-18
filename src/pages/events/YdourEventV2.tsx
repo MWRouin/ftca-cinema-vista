@@ -9,6 +9,7 @@ import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { X } from "lucide-react";
 import { useState } from "react";
+import { LazyImage } from "@/components/customUi/lazy-image";
 
 
 export default function YdourEventV2() {
@@ -173,7 +174,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                                             className="cursor-zoom-in"
                                             onClick={() => setLightboxSrc(item.src)}
                                         >
-                                            <img
+                                            <LazyImage
                                                 src={item.src}
                                                 alt={item.title || `Event highlight ${i + 1}`}
                                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
