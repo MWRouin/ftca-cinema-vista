@@ -6,6 +6,7 @@ import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO, SITE_URL } from '@/lib/metadata/seo-constants';
 import { getBlogArticleBySlug } from '@/data/blog';
+import { LazyImage } from '@/components/customUi/lazy-image';
 
 export default function BlogArticle() {
   const { slug } = useParams();
@@ -93,7 +94,7 @@ export default function BlogArticle() {
 
           {article.image ? (
             <div className="aspect-[16/8] overflow-hidden rounded-xl mb-10">
-              <img
+              <LazyImage
                 src={article.image}
                 alt={article.title}
                 className="w-full h-full object-cover"

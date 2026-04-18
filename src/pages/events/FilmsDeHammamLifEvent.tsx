@@ -7,6 +7,7 @@ import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-re
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
+import { LazyImage } from "@/components/customUi/lazy-image";
 
 export default function FilmsDeHammamLifEvent() {
     const event = {
@@ -164,7 +165,7 @@ This encounter between generations made us realize something important: the club
                                     }`}
                             >
                                 {item.type === "image" ? (
-                                    <img
+                                    <LazyImage
                                         src={item.src}
                                         alt={item.title || `Event highlight ${i + 1}`}
                                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
