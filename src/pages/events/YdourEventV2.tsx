@@ -12,15 +12,13 @@ import { useState } from "react";
 
 
 export default function YdourEventV2() {
-    // inside your component:
-    const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
     const event = {
         title: "Ydour - يدور (2nd Edition)",
         category: "Screenings • Workshops • Exhibition • Music",
         status: "Upcoming Event",
         date: "May 15–17, 2026",
         location: "L’Écurie, Lafayette – Tunis",
-        image: "/events/ydour2/ydour2_2.jpg",
+        image: "/events/ydour2/ydour2Hero.jpg",
 
         overview: `
 We are back again with the second edition of YDOUR / يدور.
@@ -77,6 +75,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
         },
     ];
 
+    const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
     return (
         <>

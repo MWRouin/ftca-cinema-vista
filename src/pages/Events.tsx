@@ -33,6 +33,17 @@ export default function Events() {
       category: "Screening & Exhibition"
     },
     {
+      id: 'afterwork-movienight',
+      title: "Afterwork - Movie Night",
+      date: "2026-01-28",
+      time: "19:00",
+      location: "Espace culturel DayOne",
+      description: "Intimate film screenings and discussions with filmmakers at Day One. A space to explore the ideas and process behind each film.",
+      image: "/events/afterworkMovienight/hero.jpg",
+      status: "past",
+      category: "Screening & Discussion"
+    },
+    {
       id: 'ydour-v2',
       title: "Ydour - يدور (2nd Edition)",
       date: "2026-05-15",
@@ -88,7 +99,7 @@ export default function Events() {
 
       const datediff = year * 31 * 12 + month * 31 + day
 
-      return datediff;
+      return -datediff;
     });
 
   const pastEvents = events.filter(event => event.status === 'past')
@@ -101,7 +112,7 @@ export default function Events() {
 
       const datediff = year * 31 * 12 + month * 31 + day
 
-      return -datediff;
+      return datediff;
     });
 
   const formatDate = (dateString: string) => {
