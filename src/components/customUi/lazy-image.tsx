@@ -29,6 +29,7 @@ export function LazyImage({
           "w-full h-full object-cover transition-opacity duration-300",
           loading ? "opacity-0" : "opacity-100"
         )}
+        loading="lazy"
         onLoad={() => setLoading(false)}
         onError={() => setLoading(false)}
       />

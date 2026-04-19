@@ -16,6 +16,14 @@
     "public": true
   },
   {
+    "id": "afterwork-movienight",
+    "title": "Afterwork - Movie Night",
+    "description": "An intimate film screening and discussion experience by the Hammam-Lif Amateur Filmmakers' Club at Day One. A space to explore the ideas and process behind each film.",
+    "date": "2026-01-28",
+    "location": "Espace culturel DayOne",
+    "public": true
+  },
+  {
     "id": "ydour-v2",
     "title": "Ydour - يدور (2nd Edition)",
     "description": "Second edition of YDOUR: a space for amateur cinema. Screenings, Workshops, Exhibition, Music.",
