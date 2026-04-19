@@ -174,6 +174,40 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       url: `${SITE_URL}/events/ydour`,
     },
   },
+  "events/afterwork-movienight": {
+    title: "Afterwork - Movie Night",
+    description:
+      "Intimate film screenings and discussions with filmmakers at Day One by the Hammam-Lif Amateur Filmmakers' Club. A space to explore the ideas and process behind each film.",
+    pagePathname: "events/afterwork-movienight",
+    imageUrl: `${SITE_URL}/events/afterworkMovienight/hero.jpg`,
+    imageAlt: "Afterwork - Movie Night event poster",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      name: "Afterwork - Movie Night",
+      description:
+        "an intimate film screening and discussion experience by the Hammam-Lif Amateur Filmmakers' Club at Day One. A space to explore the ideas and process behind each film.",
+      startDate: "2026-01-28T19:00:00+01:00",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode:
+        "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Espace culturel DayOne",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Tunis",
+          addressCountry: "TN",
+        },
+      },
+      organizer: {
+        "@type": "Organization",
+        name: SITE_NAME_FULL,
+        url: SITE_URL,
+      },
+      url: `${SITE_URL}/events/afterwork-movienight`,
+    },
+  },
   "events/films-de-hammamlif": {
     title: "Films de Hammam-Lif",
     description:

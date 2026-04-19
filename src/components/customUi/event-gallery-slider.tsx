@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useState } from "react";
+import { LazyImage } from "./lazy-image";
 
 export function EventGallerySlider({ images }: { images: string[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -29,7 +30,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
                   className="aspect-[16/9] overflow-hidden rounded-lg cursor-zoom-in"
                   onClick={() => openLightbox(i)}
                 >
-                  <img
+                  <LazyImage
                     src={img}
                     alt={`Event gallery photo ${i + 1}`}
                     className="w-full h-full object-cover"
@@ -82,7 +83,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
           </button>
 
           {/* Image */}
-          <img
+          <LazyImage
             src={images[lightboxIndex]}
             alt={`Event gallery photo ${lightboxIndex + 1}`}
             className="max-w-full max-h-full object-contain select-none"
