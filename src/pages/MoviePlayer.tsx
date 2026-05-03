@@ -5,10 +5,10 @@ import './movie-player.css';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getMovieById, getRelatedMoviesByDirector, getRelatedMoviesByGenre } from '@/data/movies';
-import { PageTitle } from '@/components/customUi/page-title';
 import { getCurrentLang } from '@/lib/metadata/html-lang';
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
+import { ElementTitle } from '@/components/customUi/element-title';
 
 export default function MoviePlayer() {
   const { id } = useParams();
@@ -111,7 +111,7 @@ export default function MoviePlayer() {
 
           {/* Title + Badges */}
           <div className="col-span-2 space-y-4">
-            <PageTitle title={movie.title} />
+            <ElementTitle title={movie.title} />
             <div className="flex flex-wrap gap-2">
               <Badge>{movie.genre}</Badge>
               <Badge variant="outline">{movie.year}</Badge>

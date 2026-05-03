@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PageTitle } from "@/components/customUi/page-title";
+import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, MapPin, Quote } from "lucide-react";
 
 export default function EventTest() {
@@ -89,7 +89,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                         <Badge variant="outline">{event.status}</Badge>
                     </div>
 
-                    <PageTitle title={event.title} />
+                    <ElementTitle title={event.title} />
 
                     <div className="mt-4 flex items-center gap-4 text-muted-foreground">
                         <div className="flex items-center gap-2">
