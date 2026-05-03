@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PageTitle } from "@/components/customUi/page-title";
+import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, Clock, MapPin } from "lucide-react";
 
 export default function UpComingEventTemplate() {
@@ -54,7 +54,7 @@ this evening is a celebration of cinema at its finest.
             <Badge variant="outline">{event.status}</Badge>
           </div>
 
-          <PageTitle title={event.title} />
+          <ElementTitle title={event.title} />
         </div>
 
         {/* Event Info */}

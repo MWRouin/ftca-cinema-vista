@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PageTitle } from "@/components/customUi/page-title";
+import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
@@ -121,7 +121,7 @@ This encounter between generations made us realize something important: the club
                         <Badge variant="outline">{event.status}</Badge>
                     </div>
 
-                    <PageTitle title={event.title} />
+                    <ElementTitle title={event.title} />
 
                     <div className="mt-4 flex items-center gap-4 text-muted-foreground">
                         <div className="flex items-center gap-2">
