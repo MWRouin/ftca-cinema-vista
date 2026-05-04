@@ -1,3 +1,4 @@
+import { Check, Link, Share2 } from "lucide-react";
 import { useState } from "react";
 
 type ShareActionsProps = {
@@ -30,6 +31,7 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
+        text = text ? `${title}\n\n${text}\n\n${url}` : `${title}\n\n${url}`;
         await navigator.share({
           title,
           text,
@@ -49,15 +51,26 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
     <div className="flex items-center gap-3">
       <button
         onClick={handleCopy}
-        className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center hover:bg-muted transition"
+        className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center gap-2 hover:bg-muted transition"
       >
-        {copied ? "Copied!" : "Copy link"}
+        {copied ? (
+          <>
+            <Check color="green" className="w-4 h-4" />
+            <span className="text-green-600">Copied</span>
+          </>
+        ) : (
+          <>
+            <Link className="w-4 h-4" />
+            Copy link
+          </>
+        )}
       </button>
 
       <button
         onClick={handleShare}
-        className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center hover:bg-muted transition"
+        className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center gap-2 hover:bg-muted transition"
       >
+        <Share2 className="w-4 h-4" />
         Share
       </button>
 
