@@ -13,10 +13,6 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
 
   const url = typeof window !== "undefined" ? window.location.href : "";
 
-  /* TODO: Investigate comportement */
-  text = text ? `${title}\n\n${text}\n\n${url}` : `${title}\n\n${url}`;
-  console.log("ShareActions text:", text);
-
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
