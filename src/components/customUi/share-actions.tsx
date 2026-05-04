@@ -2,29 +2,29 @@ import { useState } from "react";
 
 type ShareActionsProps = {
   title: string;
+  text?: string;
 };
 
-export default function ShareActions({ title }: ShareActionsProps) {
+export default function ShareActions({ title, text }: ShareActionsProps) {
   const [copied, setCopied] = useState(false);
+  const [fallbackHint, setFallbackHint] = useState(false);
 
   const url = typeof window !== "undefined" ? window.location.href : "";
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 5000);
     } catch {
-      // fallback
       const textarea = document.createElement("textarea");
       textarea.value = url;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand("copy");
       document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 5000);
     }
+
+    setCopied(true);
+    setTimeout(() => setCopied(false), 4000);
   };
 
   const handleShare = async () => {
@@ -32,31 +32,41 @@ export default function ShareActions({ title }: ShareActionsProps) {
       try {
         await navigator.share({
           title,
+          text,
           url,
         });
       } catch {
-        // user cancelled, ignore
+        // user cancelled → do nothing
       }
     } else {
-      handleCopy();
+      await handleCopy();
+      setFallbackHint(true);
+      setTimeout(() => setFallbackHint(false), 4000);
     }
   };
 
   return (
-    <div className="flex items-center gap-3 mt-4">
+    <div className="flex items-center gap-3">
       <button
         onClick={handleCopy}
-        className="text-sm px-3 py-1.5 rounded-lg border hover:bg-muted transition"
+        className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center hover:bg-muted transition"
       >
         {copied ? "Copied!" : "Copy link"}
       </button>
 
       <button
         onClick={handleShare}
-        className="text-sm px-3 py-1.5 rounded-lg border hover:bg-muted transition"
+        className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center hover:bg-muted transition"
       >
         Share
       </button>
+
+      {/* subtle fallback hint */}
+      {fallbackHint && (
+        <span className="text-xs text-muted-foreground animate-fade-in">
+          Link copied
+        </span>
+      )}
     </div>
   );
 }
