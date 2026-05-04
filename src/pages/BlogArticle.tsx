@@ -1,12 +1,13 @@
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+//import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO, SITE_URL } from '@/lib/metadata/seo-constants';
 import { getBlogArticleBySlug } from '@/data/blog';
 import { LazyImage } from '@/components/customUi/lazy-image';
+import ShareActions from '@/components/customUi/share-actions';
 
 export default function BlogArticle() {
   const { slug } = useParams();
@@ -85,7 +86,7 @@ export default function BlogArticle() {
         }}
       />
       <div className="min-h-screen py-12">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl 2xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <Button asChild variant="outline">
               <Link to="/blog">← Back to Blog</Link>
@@ -103,10 +104,20 @@ export default function BlogArticle() {
           ) : null}
 
           <header className="mb-10">
-            {/* <Badge className="mb-4">{article.category}</Badge> */}
             <ElementTitle title={article.title} useInAnimation={false} />
-            <div className="text-sm text-muted-foreground mt-2">
-              By {article.author} • {formatDate(article.date)} • {article.readTime}
+
+            <div className="flex flex-col gap-3 mt-2 sm:flex-row sm:items-center sm:justify-between">
+
+              {/* Meta (always first) */}
+              <div className="text-sm text-muted-foreground">
+                By {article.author} • {formatDate(article.date)} • {article.readTime}
+              </div>
+
+              {/* Actions */}
+              <div className="self-start sm:self-auto">
+                <ShareActions title={article.title} />
+              </div>
+
             </div>
           </header>
 
