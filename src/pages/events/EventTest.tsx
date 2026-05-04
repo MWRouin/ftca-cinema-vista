@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, MapPin, Quote } from "lucide-react";
+import ShareActions from "@/components/customUi/share-actions";
 
 export default function EventTest() {
     const event = {
@@ -91,14 +92,21 @@ particularly in its themes of sacrifice, exile, and resistance.
 
                     <ElementTitle title={event.title} />
 
-                    <div className="mt-4 flex items-center gap-4 text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            {event.date}
+                    <div className="flex flex-col gap-3 mt-2 sm:flex-row sm:items-center sm:justify-between">
+                        <div className="mt-4 flex items-center gap-4 text-muted-foreground">
+                            <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4" />
+                                {event.date}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <MapPin className="w-4 h-4" />
+                                {event.location}
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4" />
-                            {event.location}
+
+                        {/* Actions */}
+                        <div className="self-start sm:self-auto">
+                            <ShareActions title={event.title} />
                         </div>
                     </div>
                 </div>

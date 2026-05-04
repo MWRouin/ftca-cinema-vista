@@ -8,6 +8,7 @@ import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LazyImage } from "@/components/customUi/lazy-image";
+import ShareActions from "@/components/customUi/share-actions";
 
 export default function YdourEvent() {
     const event = {
@@ -75,181 +76,188 @@ From the start, we had structured the screening into three parts, each followed 
 
     return (
         <>
-        <MetaHeader {...PAGE_SEO["events/ydour"]} />
-        <div className="min-h-screen py-12">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <MetaHeader {...PAGE_SEO["events/ydour"]} />
+            <div className="min-h-screen py-12">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                {/* Back */}
-                <div className="mb-6">
-                    <Button asChild variant="outline">
-                        <Link to="/events">← Back to Events</Link>
-                    </Button>
-                </div>
-
-                {/* Hero */}
-                <div className="aspect-[16/9] overflow-hidden rounded-xl mb-10">
-                    <img
-                        src={event.image}
-                        alt={event.title}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-
-                {/* Header */}
-                <div className="mb-10">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                        <Badge variant="secondary">{event.category}</Badge>
-                        <Badge variant="outline">{event.status}</Badge>
+                    {/* Back */}
+                    <div className="mb-6">
+                        <Button asChild variant="outline">
+                            <Link to="/events">← Back to Events</Link>
+                        </Button>
                     </div>
 
-                    <ElementTitle title={event.title} />
+                    {/* Hero */}
+                    <div className="aspect-[16/9] overflow-hidden rounded-xl mb-10">
+                        <img
+                            src={event.image}
+                            alt={event.title}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
 
-                    <div className="mt-4 flex items-center gap-4 text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4" />
-                            {event.date}
+                    {/* Header */}
+                    <div className="mb-10">
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            <Badge variant="secondary">{event.category}</Badge>
+                            <Badge variant="outline">{event.status}</Badge>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4" />
-                            {event.location}
+
+                        <ElementTitle title={event.title} />
+
+                        <div className="flex flex-col gap-3 mt-2 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="mt-4 flex items-center gap-4 text-muted-foreground">
+                                <div className="flex items-center gap-2">
+                                    <Calendar className="w-4 h-4" />
+                                    {event.date}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <MapPin className="w-4 h-4" />
+                                    {event.location}
+                                </div>
+                            </div>
+
+                            {/* Actions */}
+                            <div className="self-start sm:self-auto">
+                                <ShareActions title={event.title} />
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Overview */}
-                <Card className="mb-8">
-                    <CardContent>
-                        <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
-                            {event.overview}
-                        </p>
-                    </CardContent>
-                </Card>
+                    {/* Overview */}
+                    <Card className="mb-8">
+                        <CardContent>
+                            <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
+                                {event.overview}
+                            </p>
+                        </CardContent>
+                    </Card>
 
-                <section className="space-y-12">
-                    {media.map((item, i) => (
-                        <div
-                            key={i}
-                            className="grid md:grid-cols-2 gap-8 items-center"
-                        >
+                    <section className="space-y-12">
+                        {media.map((item, i) => (
+                            <div
+                                key={i}
+                                className="grid md:grid-cols-2 gap-8 items-center"
+                            >
+                                {/* Text */}
+                                <div
+                                    className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"
+                                        }`}
+                                >
+                                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                                    <p className="whitespace-pre-line">{item.caption}</p>
+                                </div>
+
+                                {/* Media */}
+                                <div
+                                    className={`overflow-hidden rounded-xl ${i % 2 === 0 ? "md:order-1" : "md:order-2"
+                                        }`}
+                                >
+                                    {item.type === "image" ? (
+                                        <LazyImage
+                                            src={item.src}
+                                            alt={item.title || `Event highlight ${i + 1}`}
+                                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                        />
+                                    ) : (
+                                        <video
+                                            src={item.src}
+                                            autoPlay
+                                            muted
+                                            loop
+                                            playsInline
+                                            className="w-full rounded-xl"
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </section>
+
+                    <br />
+
+                    <br />
+
+                    <section>
+                        <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                        <EventGallerySlider images={event.gallery} />
+                    </section>
+
+                    <br />
+
+                    <section className="space-y-12">
+
+                        <div className="items-center">
                             {/* Text */}
                             <div
-                                className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"
-                                    }`}
-                            >
-                                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                                <p className="whitespace-pre-line">{item.caption}</p>
-                            </div>
-
-                            {/* Media */}
-                            <div
-                                className={`overflow-hidden rounded-xl ${i % 2 === 0 ? "md:order-1" : "md:order-2"
-                                    }`}
-                            >
-                                {item.type === "image" ? (
-                                    <LazyImage
-                                        src={item.src}
-                                        alt={item.title || `Event highlight ${i + 1}`}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                    />
-                                ) : (
-                                    <video
-                                        src={item.src}
-                                        autoPlay
-                                        muted
-                                        loop
-                                        playsInline
-                                        className="w-full rounded-xl"
-                                    />
-                                )}
+                                className="text-muted-foreground">
+                                <p className="whitespace-pre-line text-center">
+                                    Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
+                                    <br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
+                                    <br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
+                                </p>
                             </div>
                         </div>
-                    ))}
-                </section>
+                    </section>
 
-                <br />
-
-                <br />
-
-                <section>
-                    <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
-                    <EventGallerySlider images={event.gallery} />
-                </section>
-
-                <br />
-
-                <section className="space-y-12">
-
-                    <div className="items-center">
-                        {/* Text */}
-                        <div
-                            className="text-muted-foreground">
-                            <p className="whitespace-pre-line text-center">
-                                Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
-                                <br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
-                                <br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <br />
+                    <br />
 
 
-                {/* Footer of event and call to action */}
-                <Card className="mb-10">
-                    <CardContent className="pt-10 pb-8 space-y-8">
+                    {/* Footer of event and call to action */}
+                    <Card className="mb-10">
+                        <CardContent className="pt-10 pb-8 space-y-8">
 
-                        {/* Quote */}
-                        <div className="flex items-start justify-center gap-4">
-                            {<Clock className="w-6 h-6 text-muted-foreground mt-1" />}
-                            {<blockquote className="italic text-xl leading-relaxed text-foreground">
-                                “{event.quote.text}”
-                            </blockquote>}
-                        </div>
-
-                        {/* Divider */}
-                        <div className="h-px bg-border" />
-
-                        <div className="text-center space-y-4 py-6">
-                            <p className="text-lg font-semibold tracking-wide text-foreground">
-                                {event.quote.callToAction}
-                            </p>
-
-                            <div className="flex justify-center gap-6">
-                                <a
-                                    href="https://www.facebook.com/ftcahamhama/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Facebook"
-                                    className="hover:scale-125 w-10 h-10 transition-transform"
-                                >
-                                    <Facebook className="w-7 h-7 text-[#0866ff]" />
-                                </a>
-                                <a
-                                    href="https://www.instagram.com/ftca.hlif/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Instagram"
-                                    className="hover:scale-125 w-10 h-10 transition-transform"
-                                >
-                                    <Instagram className="w-7 h-7 text-[#e7009a]" />
-                                </a>
-                                <a
-                                    href="https://www.youtube.com/@ftcahammamlif/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="YouTube"
-                                    className="hover:scale-125 w-10 h-10 transition-transform"
-                                >
-                                    <Youtube className="w-7 h-7 text-[#ff0033]" />
-                                </a>
+                            {/* Quote */}
+                            <div className="flex items-start justify-center gap-4">
+                                {<Clock className="w-6 h-6 text-muted-foreground mt-1" />}
+                                {<blockquote className="italic text-xl leading-relaxed text-foreground">
+                                    “{event.quote.text}”
+                                </blockquote>}
                             </div>
-                        </div>
 
-                    </CardContent>
-                </Card>
-            </div>
-        </div >
+                            {/* Divider */}
+                            <div className="h-px bg-border" />
+
+                            <div className="text-center space-y-4 py-6">
+                                <p className="text-lg font-semibold tracking-wide text-foreground">
+                                    {event.quote.callToAction}
+                                </p>
+
+                                <div className="flex justify-center gap-6">
+                                    <a
+                                        href="https://www.facebook.com/ftcahamhama/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Facebook"
+                                        className="hover:scale-125 w-10 h-10 transition-transform"
+                                    >
+                                        <Facebook className="w-7 h-7 text-[#0866ff]" />
+                                    </a>
+                                    <a
+                                        href="https://www.instagram.com/ftca.hlif/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Instagram"
+                                        className="hover:scale-125 w-10 h-10 transition-transform"
+                                    >
+                                        <Instagram className="w-7 h-7 text-[#e7009a]" />
+                                    </a>
+                                    <a
+                                        href="https://www.youtube.com/@ftcahammamlif/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="YouTube"
+                                        className="hover:scale-125 w-10 h-10 transition-transform"
+                                    >
+                                        <Youtube className="w-7 h-7 text-[#ff0033]" />
+                                    </a>
+                                </div>
+                            </div>
+
+                        </CardContent>
+                    </Card>
+                </div>
+            </div >
         </>
     );
 }
