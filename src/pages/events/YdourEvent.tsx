@@ -119,7 +119,7 @@ From the start, we had structured the screening into three parts, each followed 
 
                             {/* Actions */}
                             <div className="self-start sm:self-auto">
-                                <ShareActions title={event.title} />
+                                <ShareActions title={event.title} text={event.overview} />
                             </div>
                         </div>
                     </div>

@@ -115,7 +115,7 @@ export default function BlogArticle() {
 
               {/* Actions */}
               <div className="self-start sm:self-auto">
-                <ShareActions title={article.title} />
+                <ShareActions title={article.title} text={article.excerpt} />
               </div>
 
             </div>

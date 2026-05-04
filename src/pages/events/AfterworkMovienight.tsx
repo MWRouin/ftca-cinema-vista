@@ -143,7 +143,7 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
 
                             {/* Actions */}
                             <div className="self-start sm:self-auto">
-                                <ShareActions title={event.title} />
+                                <ShareActions title={event.title} text={event.overview}/>
                             </div>
                         </div>
                     </div>

@@ -7,10 +7,15 @@ type ShareActionsProps = {
 };
 
 export default function ShareActions({ title, text }: ShareActionsProps) {
+
   const [copied, setCopied] = useState(false);
   const [fallbackHint, setFallbackHint] = useState(false);
 
   const url = typeof window !== "undefined" ? window.location.href : "";
+
+  /* TODO: Investigate comportement */
+  text = text ? `${title}\n\n${text}\n\n${url}` : `${title}\n\n${url}`;
+  console.log("ShareActions text:", text);
 
   const handleCopy = async () => {
     try {
@@ -31,7 +36,6 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
   const handleShare = async () => {
     if (navigator.share) {
       try {
-        text = text ? `${title}\n\n${text}\n\n${url}` : `${title}\n\n${url}`;
         await navigator.share({
           title,
           text,
