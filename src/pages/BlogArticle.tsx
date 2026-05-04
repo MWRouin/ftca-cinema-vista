@@ -103,7 +103,7 @@ export default function BlogArticle() {
           ) : null}
 
           <header className="mb-10">
-            <Badge className="mb-4">{article.category}</Badge>
+            {/* <Badge className="mb-4">{article.category}</Badge> */}
             <ElementTitle title={article.title} useInAnimation={false} />
             <div className="text-sm text-muted-foreground mt-2">
               By {article.author} • {formatDate(article.date)} • {article.readTime}
