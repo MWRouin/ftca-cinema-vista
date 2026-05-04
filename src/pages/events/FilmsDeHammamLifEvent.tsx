@@ -138,7 +138,7 @@ This encounter between generations made us realize something important: the club
 
                             {/* Actions */}
                             <div className="self-start sm:self-auto">
-                                <ShareActions title={event.title} />
+                                <ShareActions title={event.title} text={event.overview} />
                             </div>
                         </div>
                     </div>

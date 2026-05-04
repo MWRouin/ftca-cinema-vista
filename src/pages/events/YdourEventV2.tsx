@@ -124,7 +124,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
 
                             {/* Actions */}
                             <div className="self-start sm:self-auto">
-                                <ShareActions title={event.title} />
+                                <ShareActions title={event.title} text={event.overview} />
                             </div>
                         </div>
                     </div>

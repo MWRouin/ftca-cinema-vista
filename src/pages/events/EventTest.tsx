@@ -106,7 +106,7 @@ particularly in its themes of sacrifice, exile, and resistance.
 
                         {/* Actions */}
                         <div className="self-start sm:self-auto">
-                            <ShareActions title={event.title} />
+                            <ShareActions title={event.title} text={event.overview} />
                         </div>
                     </div>
                 </div>
