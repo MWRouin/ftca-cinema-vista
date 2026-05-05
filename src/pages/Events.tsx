@@ -90,27 +90,37 @@ export default function Events() {
   ];
 
   const upcomingEvents = events.filter(event => event.status === 'upcoming')
-    .sort(event => {
-      const date = new Date(event.date)
+    .sort((event1, event2) => {
+      const date1 = new Date(event1.date)
+      const date2 = new Date(event2.date)
 
-      const year = date.getUTCFullYear();
-      const month = date.getUTCMonth();
-      const day = date.getUTCDate();
+      const year1 = date1.getUTCFullYear();
+      const month1 = date1.getUTCMonth();
+      const day1 = date1.getUTCDate();
 
-      const datediff = year * 31 * 12 + month * 31 + day
+      const year2 = date2.getUTCFullYear();
+      const month2 = date2.getUTCMonth();
+      const day2 = date2.getUTCDate();
 
-      return -datediff;
+      const datediff = (year1 - year2) * 31 * 12 + (month1 - month2) * 31 + (day1 - day2);
+
+      return datediff;
     });
 
   const pastEvents = events.filter(event => event.status === 'past')
-    .sort(event => {
-      const date = new Date(event.date)
+    .sort((event1, event2) => {
+      const date1 = new Date(event1.date)
+      const date2 = new Date(event2.date)
 
-      const year = date.getUTCFullYear();
-      const month = date.getUTCMonth();
-      const day = date.getUTCDate();
+      const year1 = date1.getUTCFullYear();
+      const month1 = date1.getUTCMonth();
+      const day1 = date1.getUTCDate();
 
-      const datediff = year * 31 * 12 + month * 31 + day
+      const year2 = date2.getUTCFullYear();
+      const month2 = date2.getUTCMonth();
+      const day2 = date2.getUTCDate();
+
+      const datediff = (year2 - year1) * 31 * 12 + (month2 - month1) * 31 + (day2 - day1);
 
       return datediff;
     });
