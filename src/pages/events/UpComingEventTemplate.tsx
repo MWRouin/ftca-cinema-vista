@@ -39,7 +39,7 @@ this evening is a celebration of cinema at its finest.
         </div>
 
         {/* Hero Image */}
-        <div className="aspect-[16/9] overflow-hidden rounded-xl mb-10">
+        <div className="aspect-[16/9] overflow-hidden rounded-lg mb-10">
           <img
             src={event.image}
             alt={event.title}

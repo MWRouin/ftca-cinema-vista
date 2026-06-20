@@ -94,7 +94,7 @@ export default function BlogArticle() {
           </div>
 
           {article.image ? (
-            <div className="aspect-[16/8] overflow-hidden rounded-xl mb-10">
+            <div className="aspect-[16/8] overflow-hidden rounded-lg mb-10">
               <LazyImage
                 src={article.image}
                 alt={article.title}

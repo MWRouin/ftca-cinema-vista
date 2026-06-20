@@ -150,10 +150,10 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     jsonLd: {
       "@context": "https://schema.org",
       "@type": "Event",
-      name: "Ydour – يدور",
+      name: "Ydour – يدور (2nd Edition)",
       description:
         "Screening, discussion and more.. – a gathering for the amateur cinema community.",
-      startDate: "2025-05-15T18:00:00+01:00",
+      startDate: "2026-05-15T18:00:00+01:00",
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode:
         "https://schema.org/OfflineEventAttendanceMode",
@@ -171,7 +171,7 @@ export const PAGE_SEO: Record<string, PageSeo> = {
         name: SITE_NAME_FULL,
         url: SITE_URL,
       },
-      url: `${SITE_URL}/events/ydour`,
+      url: `${SITE_URL}/events/ydour-v2`,
     },
   },
   "events/afterwork-movienight": {

@@ -29,12 +29,10 @@ export default function Contact() {
     e.preventDefault();
     // Handle form submission here
     //console.log('Form submitted:', formData);
-    const { name, email, subject, message } = formData;
-    const mailto = `mailto:contact@cineamateur-hlif.com
-    ?subject=${encodeURIComponent(subject)}
-    &body=${encodeURIComponent(
-      `${message}\n\nName: ${name}`
-    )}`;
+    const { name, subject, message } = formData;
+    const mailto = `mailto:contact@cineamateur-hlif.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(`${message}\n\nName: ${name}`)}`;
 
     window.location.href = mailto;
     // Reset form

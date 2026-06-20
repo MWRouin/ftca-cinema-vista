@@ -28,7 +28,7 @@ export function Footer() {
             <Link to="/" className="flex items-center space-x-3 mb-4">
               <Logo size={40} className="drop-shadow-lg" />
               <div>
-                <h3 className="font-bold text-lg">FTCA Hammemlif</h3>
+                <h3 className="font-bold text-lg">Club des Cinéastes Amateurs de Hammamlif</h3>
                 <p className="text-sm text-muted-foreground">Where Cinema Comes Alive</p>
               </div>
             </Link>

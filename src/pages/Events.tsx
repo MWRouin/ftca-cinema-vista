@@ -51,79 +51,18 @@ export default function Events() {
       location: "Espace culturel L'Écurie",
       description: "Second edition of YDOUR: a space for amateur cinema.",
       image: "/events/ydour2/ydour2.webp",
-      status: "upcoming",
+      status: "past",
       category: "Screening, Discussion, and more.."
-    },/* 
-    {
-      id: 2,
-      title: "Director Spotlight: Akira Kurosawa",
-      date: "2024-03-28",
-      time: "18:30",
-      location: "Conference Room A",
-      description: "An in-depth exploration of Kurosawa's filmmaking techniques and his influence on modern cinema.",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80",
-      status: "upcoming",
-      category: "Workshop"
-    },
-    {
-      id: 3,
-      title: "Film Analysis Workshop",
-      date: "2024-02-20",
-      time: "17:00",
-      location: "Study Hall",
-      description: "Interactive workshop on analyzing cinematography, narrative structure, and visual storytelling.",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80",
-      status: "past",
-      category: "Workshop"
-    },
-    {
-      id: 4,
-      title: "International Cinema Festival",
-      date: "2024-02-10",
-      time: "14:00",
-      location: "Main Theater",
-      description: "A celebration of world cinema featuring films from various countries and cultures.",
-      image: "https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&w=600&h=400&q=80",
-      status: "past",
-      category: "Festival"
-    } */
+    }
   ];
 
-  const upcomingEvents = events.filter(event => event.status === 'upcoming')
-    .sort((event1, event2) => {
-      const date1 = new Date(event1.date)
-      const date2 = new Date(event2.date)
+  const upcomingEvents = events
+    .filter(event => event.status === 'upcoming')
+    .sort((event1, event2) => new Date(event1.date).getTime() - new Date(event2.date).getTime());
 
-      const year1 = date1.getUTCFullYear();
-      const month1 = date1.getUTCMonth();
-      const day1 = date1.getUTCDate();
-
-      const year2 = date2.getUTCFullYear();
-      const month2 = date2.getUTCMonth();
-      const day2 = date2.getUTCDate();
-
-      const datediff = (year1 - year2) * 31 * 12 + (month1 - month2) * 31 + (day1 - day2);
-
-      return datediff;
-    });
-
-  const pastEvents = events.filter(event => event.status === 'past')
-    .sort((event1, event2) => {
-      const date1 = new Date(event1.date)
-      const date2 = new Date(event2.date)
-
-      const year1 = date1.getUTCFullYear();
-      const month1 = date1.getUTCMonth();
-      const day1 = date1.getUTCDate();
-
-      const year2 = date2.getUTCFullYear();
-      const month2 = date2.getUTCMonth();
-      const day2 = date2.getUTCDate();
-
-      const datediff = (year2 - year1) * 31 * 12 + (month2 - month1) * 31 + (day2 - day1);
-
-      return datediff;
-    });
+  const pastEvents = events
+    .filter(event => event.status === 'past')
+    .sort((event1, event2) => new Date(event2.date).getTime() - new Date(event1.date).getTime());
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {

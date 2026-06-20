@@ -5,6 +5,7 @@ import MetaHeader from '@/lib/metadata/metadata'
 import { PAGE_SEO } from '@/lib/metadata/seo-constants'
 
 export default function Palmares() {
+  const BASE = import.meta.env.BASE_URL || "/"
   return (
     <>
       <MetaHeader {...PAGE_SEO.palmares} />
@@ -20,10 +21,14 @@ export default function Palmares() {
         </div>
 
         <div className="text-center space-y-12">
-          {/* Cup emote */}
-          <div className="text-9xl select-none" aria-label="Trophy Cup" role="img">
-            🏆
-          </div>
+          {/* Trophy — Twemoji SVG (same image across all browsers) */}
+          <img
+            src={`${BASE}palmares-trophy.svg`}
+            alt="Trophy"
+            className="w-44 h-44 mx-auto drop-shadow-md"
+            width={176}
+            height={176}
+          />
 
           {/* Message */}
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">

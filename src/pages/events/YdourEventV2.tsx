@@ -93,7 +93,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                     </div>
 
                     {/* Hero */}
-                    <div className="aspect-[16/9] overflow-hidden rounded-xl mb-10">
+                    <div className="aspect-[16/9] overflow-hidden rounded-lg mb-10">
                         <img
                             src={event.image}
                             alt={event.title}
@@ -175,7 +175,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
 
                                 {/* Media */}
                                 <div
-                                    className={`overflow-hidden rounded-xl ${i % 2 === 0 ? "md:order-1" : "md:order-2"}`}
+                                    className={`overflow-hidden rounded-lg ${i % 2 === 0 ? "md:order-1" : "md:order-2"}`}
                                 >
                                     {item.type === "image" ? (
                                         <div
@@ -195,7 +195,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                                             muted
                                             loop
                                             playsInline
-                                            className="w-full rounded-xl"
+                                            className="w-full rounded-lg"
                                         />
                                     )}
                                 </div>

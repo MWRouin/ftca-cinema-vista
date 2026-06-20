@@ -75,7 +75,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                 </div>
 
                 {/* Hero */}
-                <div className="aspect-[16/9] overflow-hidden rounded-xl mb-10">
+                <div className="aspect-[16/9] overflow-hidden rounded-lg mb-10">
                     <img
                         src={event.image}
                         alt={event.title}
@@ -124,7 +124,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                 </Card>
 
                 {/* Hero2 */}
-                <div className="relative aspect-[16/9] overflow-hidden rounded-xl mb-10">
+                <div className="relative aspect-[16/9] overflow-hidden rounded-lg mb-10">
                     <video
                         src="/videos/Athena2019.mp4"
                         autoPlay
@@ -153,7 +153,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                                 }`}
                         >
                             {/* Media */}
-                            <div className="overflow-hidden rounded-xl">
+                            <div className="overflow-hidden rounded-lg">
                                 {item.type === "image" ? (
                                     <img
                                         src={item.src}
@@ -163,7 +163,7 @@ particularly in its themes of sacrifice, exile, and resistance.
                                     <video
                                         src={item.src}
                                         controls
-                                        className="w-full rounded-xl"
+                                        className="w-full rounded-lg"
                                     />
                                 )}
                             </div>

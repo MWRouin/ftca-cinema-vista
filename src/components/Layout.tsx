@@ -1,5 +1,6 @@
 
 import { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Navigation } from './Navigation';
 import { Footer } from './Footer';
 
@@ -8,10 +9,13 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+  // The navbar is fixed (out of flow). The home hero sits under it full-bleed,
+  // every other page needs top padding so content clears the navbar.
+  const isHome = useLocation().pathname === '/';
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col ">
       <Navigation />
-      <main className="flex-1">{/* <main className="flex-1 bg-texture"> */}
+      <main className={`flex-1 ${isHome ? '' : 'pt-16'}`}>
         {children}
       </main>
       <Footer />
