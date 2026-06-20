@@ -6,104 +6,101 @@
 
 @layer base {
   :root {
-    /* Dark theme (root): mapped to provided palette */
-    --background: 205 33% 7%;
-    /* #0c1318 */
-    --foreground: 248 31% 95%;
-    /* #efeef6 */
+    /* Dark theme (root): mapped to the editorial hero palette
+       (deep teal-green + warm sand accent on a green-ink ground). */
+    --background: 162 40% 6%;
+    /* green-tinted ink, ~ hero --ink #07150f */
+    --foreground: 40 30% 94%;
+    /* warm cream, ~ hero --cream #f8f4ec */
 
-    --card: 205 33% 9%;
-    /* slightly lighter than background */
-    --card-foreground: 248 31% 95%;
+    --card: 162 32% 9%;
+    --card-foreground: 40 30% 94%;
 
-    --popover: 205 33% 9%;
-    --popover-foreground: 248 31% 95%;
+    --popover: 162 32% 9%;
+    --popover-foreground: 40 30% 94%;
 
-    --primary: 177 70% 23%;
-    /* #0a6b66 */
-    --primary-foreground: 248 31% 95%;
-    /* light text on primary */
+    --primary: 167 58% 28%;
+    /* hero --green #1f6b5c */
+    --primary-foreground: 40 35% 95%;
 
-    --secondary: 177 88% 13%;
-    /* #043e3b */
-    --secondary-foreground: 248 31% 95%;
+    --secondary: 167 55% 12%;
+    /* deep green section bg */
+    --secondary-foreground: 40 30% 94%;
 
-    --muted: 205 22% 15%;
-    /* neutral subdued background */
-    --muted-foreground: 215 20% 65%;
-    /* keep readable muted text */
+    --muted: 162 18% 15%;
+    --muted-foreground: 150 12% 64%;
 
-    --accent: 31 61% 60%;
-    /* #d79b5b */
-    --accent-foreground: 205 33% 10%;
+    --accent: 41 45% 70%;
+    /* hero --sand #d9c8a2 */
+    --accent-foreground: 162 40% 10%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 40 30% 96%;
 
-    --border: 205 22% 20%;
-    /* #223644 approx */
-    --input: 205 22% 20%;
-    --ring: 177 70% 23%;
-    /* use primary hue for focus ring */
+    --border: 162 20% 19%;
+    --input: 162 20% 19%;
+    --ring: 167 58% 32%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 216 15% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 158 70% 25%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 216 15% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 216 15% 18%;
-    --sidebar-ring: 158 70% 25%;
+    --sidebar-background: 162 34% 8%;
+    --sidebar-foreground: 40 30% 94%;
+    --sidebar-primary: 167 55% 30%;
+    --sidebar-primary-foreground: 40 35% 95%;
+    --sidebar-accent: 162 20% 15%;
+    --sidebar-accent-foreground: 40 30% 94%;
+    --sidebar-border: 162 20% 18%;
+    --sidebar-ring: 167 55% 32%;
   }
 
   .light {
-    /* Light theme mapped to light scales of provided palette */
-    --background: 202 31% 95%;
-    /* ~ background-50 */
-    --foreground: 240 30% 10%;
-    /* ~ text-900 */
+    /* Light theme: warm cream ground + same green/sand from the hero */
+    --background: 42 44% 95%;
+    /* warm cream, ~ hero --cream #f8f4ec */
+    --foreground: 162 38% 10%;
+    /* green-ink text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 30% 10%;
+    --card: 44 50% 98%;
+    --card-foreground: 162 38% 10%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 30% 10%;
+    --popover: 44 50% 98%;
+    --popover-foreground: 162 38% 10%;
 
-    --primary: 177 70% 23%;
-    /* same brand color */
-    --primary-foreground: 248 31% 95%;
+    --primary: 167 60% 27%;
+    /* hero --green #1f6b5c */
+    --primary-foreground: 40 40% 96%;
 
-    --secondary: 205 33% 90%;
-    /* light neutral section bg */
-    --secondary-foreground: 240 30% 10%;
+    --secondary: 42 34% 89%;
+    /* warm neutral section bg */
+    --secondary-foreground: 162 38% 12%;
 
-    --muted: 205 25% 92%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 42 30% 90%;
+    --muted-foreground: 160 12% 38%;
 
-    --accent: 31 61% 60%;
-    --accent-foreground: 240 30% 10%;
+    --accent: 41 52% 62%;
+    /* deeper sand for contrast on cream */
+    --accent-foreground: 162 40% 12%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 40 40% 98%;
 
-    --border: 205 33% 86%;
-    --input: 205 33% 91%;
-    --ring: 177 70% 23%;
+    --border: 42 26% 84%;
+    --input: 42 26% 88%;
+    --ring: 167 60% 30%;
 
-    --sidebar-background: 202 31% 95%;
-    --sidebar-foreground: 240 30% 10%;
-    --sidebar-primary: 177 70% 23%;
-    --sidebar-primary-foreground: 248 31% 95%;
-    --sidebar-accent: 205 33% 90%;
-    --sidebar-accent-foreground: 240 30% 10%;
-    --sidebar-border: 205 33% 86%;
-    --sidebar-ring: 177 70% 23%;
+    --sidebar-background: 42 44% 95%;
+    --sidebar-foreground: 162 38% 10%;
+    --sidebar-primary: 167 60% 27%;
+    --sidebar-primary-foreground: 40 40% 96%;
+    --sidebar-accent: 42 34% 89%;
+    --sidebar-accent-foreground: 162 38% 12%;
+    --sidebar-border: 42 26% 84%;
+    --sidebar-ring: 167 60% 30%;
   }
 
   .dark {
-    --primary: 177 83% 31%;
+    /* slightly brighter green so it pops on the dark ground */
+    --primary: 165 55% 36%;
   }
 }
 

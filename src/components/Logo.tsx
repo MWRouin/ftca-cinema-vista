@@ -13,7 +13,7 @@ export function Logo({
   size = 40,
   alt = "FTCA Hammemlif logo",
   colorBack = "#3b4b44",
-  colorMain = "#0a6b66",
+  colorMain = "#1f6b5c",
   colorFront = "#6a786d",
 }: LogoProps) {
   return (

@@ -32,7 +32,7 @@ function TeamSection({ teamMembers }) {
                 />
               </div>
               <CardTitle className="text-xl">{member.name}</CardTitle>
-              <CardDescription className="text-amber-600 dark:text-amber-400 font-medium">
+              <CardDescription className="text-primary font-medium">
                 {member.role}
               </CardDescription>
             </CardHeader>
@@ -71,13 +71,10 @@ function OldMembersSection({ oldMembers }) {
         <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-lg p-8 lg:p-12 border border-muted/30">
           <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 list-none">
             {oldMembers.map((member, index) => (
-              <li
-                key={index}
-                className="group cursor-pointer transition-all duration-300 hover:translate-y-[-2px]"
-              >
+              <li key={index} className="group">
                 <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-1 h-6 bg-gradient-to-b from-amber-600 to-amber-400 dark:from-amber-400 dark:to-amber-500 rounded-full mt-1 group-hover:h-8 transition-all duration-300"></div>
-                  <span className="text-base font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300">
+                  <div className="flex-shrink-0 w-1 h-6 bg-gradient-to-b from-primary to-primary/50 rounded-full mt-1"></div>
+                  <span className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">
                     {member.name}
                   </span>
                 </div>
@@ -463,35 +460,39 @@ export default function About() {
 
         {/* History Section */}
         <section className="mb-16">
-          {/* <h2 className="text-3xl font-bold mb-6 text-center">Our Story</h2> */}
-          <div className="max-w-4xl mx-auto space-y-6 text-lg text-muted-foreground">
-            <p>
+          <div className="max-w-4xl mx-auto">
+            {/* Lead — sets the scene and anchors the section under the title */}
+            <p
+              className="text-2xl sm:text-3xl italic leading-snug text-foreground border-l-2 border-primary/60 pl-5 sm:pl-6 mb-10"
+              style={{ fontFamily: '"Cormorant Garamond", serif' }}
+            >
               Between sea and mountains, Hammam Lif was once a cultural destination.
             </p>
 
-            <p>
-              In 1964, our cinema club was born. We emerged during the golden era of Tunisia's ciné-club movement,
-              aiming to promote cinematographic culture in Tunisia.
-              However, things began to slowly fade: cinemas closed one by one, and film posters started to yellow.
-            </p>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                In <span className="text-primary font-semibold">1964</span>, our cinema club was born. We emerged during the golden era of Tunisia's ciné-club movement,
+                aiming to promote cinematographic culture in Tunisia.
+                However, things began to slowly fade: cinemas closed one by one, and film posters started to yellow.
+              </p>
 
-            <p>
-              Taking place in the heart of Hammam Lif, our space brought together high school students and university scholars.
-              Cinema enthusiasts came from different ages and with different backgrounds and political views,
-              all united by their passion.
-            </p>
+              <p>
+                Taking place in the heart of Hammam Lif, our space brought together high school students and university scholars.
+                Cinema enthusiasts came from different ages and with different backgrounds and political views,
+                all united by their passion.
+              </p>
 
-            <p>
-              From one generation to another, our club has created remarkable and impactful works:<br />
-              short films, documentaries, photographs, and screenplays that have won prizes and
-              sparked social, cultural, and political change.
-            </p>
+              <p>
+                From one generation to another, our club has created remarkable and impactful works:
+                short films, documentaries, photographs, and screenplays that have won prizes and
+                sparked social, cultural, and political change.
+              </p>
 
-            <p>
-              Today, those who remember look back with pride, as we continue forward with one driving motive:
-              to be a voice for those who have none.
-            </p>
-
+              <p className="text-foreground font-medium">
+                Today, those who remember look back with pride, as we continue forward with one driving motive:
+                to be a voice for those who have none.
+              </p>
+            </div>
           </div>
         </section>
 
