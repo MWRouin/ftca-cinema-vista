@@ -68,7 +68,7 @@ function OldMembersSection({ oldMembers }) {
           <p className="text-muted-foreground mt-4">Celebrating those who have contributed to our legacy</p>
         </div>
 
-        <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-xl p-8 lg:p-12 border border-muted/30">
+        <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-lg p-8 lg:p-12 border border-muted/30">
           <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 list-none">
             {oldMembers.map((member, index) => (
               <li

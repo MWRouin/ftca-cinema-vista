@@ -54,6 +54,7 @@ export default function Home() {
 
               <h1>
                 <span className="line">Hammam-Lif</span>
+                <span className="line">Amateur</span>
                 <span className="line accent">Filmmakers' Club</span>
               </h1>
 

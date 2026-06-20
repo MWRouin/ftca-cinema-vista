@@ -46,7 +46,7 @@
     --ring: 177 70% 23%;
     /* use primary hue for focus ring */
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
     --sidebar-background: 216 15% 8%;
     --sidebar-foreground: 210 40% 98%;
@@ -306,7 +306,7 @@
   .nav-link {
     position: relative;
     transition: all 0.3s ease;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 8px 16px;
   }
 
@@ -317,7 +317,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: hsl(var(--primary));
+    background: currentColor;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateX(-50%);
   }
@@ -486,5 +486,16 @@
   .nav-link:hover,
   .nav-link.active {
     text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  }
+
+  /* Force the dark-theme overlay nav-link look regardless of app theme
+     (used by the mobile dropdown, which always sits on dark glass). */
+  .nav-link-dark {
+    text-shadow: 0 0 4px rgba(50, 50, 50, 0.7);
+  }
+
+  .nav-link-dark:hover,
+  .nav-link-dark.active {
+    text-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
   }
 }
