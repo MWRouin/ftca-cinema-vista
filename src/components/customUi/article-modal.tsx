@@ -23,9 +23,9 @@ export function ArticleModal({
 	open: boolean
 	onClose: () => void
 }) {
-	if (!open || !article) return null
-
 	const [copied, setCopied] = useState(false)
+
+	if (!open || !article) return null
 
 	const formatDate = (dateString: string) => {
 		const options: Intl.DateTimeFormatOptions = {

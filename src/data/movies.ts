@@ -26,7 +26,7 @@ function MovieFromJsonObject(jsonObject: any): Movie {
         ...jsonObject,
         image: jsonObject.image ? ResolveAssetUrl(jsonObject.image) : "",
         public: jsonObject.public ? jsonObject.public : false,
-        year: typeof jsonObject.year === 'number' ? jsonObject.year : ''
+        year: typeof jsonObject.year === 'number' ? jsonObject.year : '-'
     };
 }
 

@@ -24,6 +24,9 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "@typescript-eslint/no-unused-vars": "off",
+      // typescript-eslint@8.11 + eslint@9.36 crash loading this rule
+      // (Cannot read 'allowShortCircuit'). Disable until deps are bumped.
+      "@typescript-eslint/no-unused-expressions": "off",
     },
   }
 );

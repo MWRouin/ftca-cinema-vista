@@ -2,20 +2,17 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Logo } from '@/components/Logo';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LazyImage } from '@/components/customUi/lazy-image';
-import { useTheme } from '@/components/ThemeProvider';
+import './home-hero.css';
 
 export default function Home() {
-  const heroRef = useScrollAnimation();
   const moviesRef = useScrollAnimation();
   const eventsRef = useScrollAnimation();
   const ctaRef = useScrollAnimation();
-  const { theme } = useTheme()
   const BASE = import.meta.env.BASE_URL || "/";
 
   const featuredMovies = getMovies().slice(0, 4);
@@ -43,112 +40,61 @@ export default function Home() {
       <div className="min-h-screen">
         {/* Hero Section */}
         <section
-          ref={heroRef}
-          className="relative min-h-[calc(100svh-4rem)] flex items-center justify-center py-24 lg:py-32 animate-on-scroll overflow-hidden bg-background"
-          style={{ backgroundColor: theme === "dark" ? "#1b1614" : "#9eb2c2" }}
+          className="editorial-hero"
+          style={{
+            ["--hero-bg-image" as string]: `url(${BASE}Backgrounds/hero-image-hlif.jpg)`,
+          }}
         >
-          {/* Background image */}
-          <div
-            className="absolute inset-0 bg-center bg-cover bg-no-repeat opacity-40"
-            style={{ backgroundImage: `url(/Backgrounds/hero-image-hlif.jpg)` }}
-          />
+          <div className="grain"></div>
 
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary/20" />
+          <div className="container">
+            <div className="content">
 
-          {/* Vignette */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                theme === "dark"
-                  ? "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)"
-                  : "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.60) 100%)",
-            }}
-          />
+              <div className="eyebrow">Amateur Cinema · Active Since 1964</div>
 
-          {/* Film grain overlay */}
-          {/* <div
-            className="absolute pointer-events-none opacity-[0.4] mix-blend-overlay"
-            style={{
-              inset: "-200px",
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-              backgroundRepeat: "repeat",
-              backgroundSize: "128px 128px",
-              animation: "grain 1s steps(2) infinite",
-            }}
-          /> */}
+              <h1>
+                <span className="line">Hammam-Lif</span>
+                <span className="line accent">Filmmakers' Club</span>
+              </h1>
 
-          {/* Scanlines */}
-          {/* <div
-            className="absolute inset-0 pointer-events-none opacity-[0.01]"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,1) 2px, rgba(255,255,255,1) 4px)",
-            }}
-          /> */}
-
-          {/* Content */}
-          <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center">
-
-              {/* Logo */}
-              <div
-                className="flex justify-center mb-8"
-                style={{ animation: "fadeSlideDown 0.9s ease both" }}
-              >
-                <Logo
-                  size={310}
-                  className="drop-shadow-2xl max-w-[calc(100vw/2)]"
-                />
-              </div>
-
-              {/* Title */}
-              <div style={{ animation: "fadeSlideUp 0.9s ease 0.15s both" }}>
-                <PageTitle title="Hammam-lif Amateur Filmmakers' Club" />
-              </div>
-
-              {/* Decorative divider */}
-              <div
-                className="flex items-center justify-center gap-3 my-6"
-                style={{ animation: "fadeSlideUp 0.9s ease 0.25s both" }}
-              >
-                <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
-                <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
-                <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/50" />
-              </div>
-
-              {/* Description */}
-              <p
-                className="text-lg text-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
-                style={{ animation: "fadeSlideUp 0.9s ease 0.35s both" }}
-              >
-                A filmmakers' club based in Hammam-Lif, active since 1964 and operating
-                under the "Fédération Tunisienne des Cinéastes Amateurs (FTCA)".
+              <p className="tagline">
+                A home where cinema becomes memory, thought, and shared imagination.
               </p>
 
-              {/* Buttons */}
-              <div
-                className="flex flex-col sm:flex-row gap-6 justify-center"
-                style={{ animation: "fadeSlideUp 0.9s ease 0.45s both" }}
-              >
-                <Button
-                  asChild
-                  size="lg"
-                  className="btn-cinema hover-lift text-lg px-10 py-4"
-                >
-                  <Link to="/movies">Explore Movies</Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-primary/30 hover:bg-secondary/80 hover-lift text-lg px-8 py-4"
-                >
-                  <Link to="/events">Upcoming Events</Link>
-                </Button>
+              <p className="description">
+                Founded in <strong>1964</strong> and operating under the{" "}
+                <strong>Fédération Tunisienne des Cinéastes Amateurs (FTCA)</strong>,
+                our club in Hammam-Lif explores cinema not only as an art form,
+                but as a way to question reality, reflect together, and give shape to ideas.
+              </p>
+
+              <div className="quote">
+                We use film to observe the world with tenderness,
+                curiosity, and a deep desire to understand.
               </div>
+
+              <div className="actions">
+                <Link to="/about" className="btn btn-primary">
+                  Discover Our Story <span className="arrow">&rarr;</span>
+                </Link>
+                <Link to="/movies" className="btn btn-secondary">
+                  Explore Our Films <span className="arrow">&rarr;</span>
+                </Link>
+              </div>
+
             </div>
+
+            <div className="side-note">
+              Creation • Reflection • Resistance • Cinema
+            </div>
+          </div>
+
+          <div className="credits">
+            <span className="key">1964</span>
+            <span>Hammam-Lif</span>
+            <span>Tunisia</span>
+            <span>FTCA</span>
+            <span>60+ Years of Independent Cinema</span>
           </div>
         </section>
 

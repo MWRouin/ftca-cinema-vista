@@ -7,17 +7,23 @@ import { Logo } from './Logo';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const location = useLocation();
 
-  // Handle scroll effect
+  // Track scroll position
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrollY(window.scrollY);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isHome = location.pathname === '/';
+  const scrolled = scrollY > 20;
+  // On the home page the navbar overlays the hero transparently until the
+  // hero has mostly scrolled out of view.
+  const overlay =
+    isHome && scrollY < (typeof window !== 'undefined' ? window.innerHeight * 0.75 : 600);
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -33,9 +39,11 @@ export function Navigation() {
   const isActive = (path: string) => normalize(location.pathname) === normalize(path);
 
   return (
-    <nav className={`sticky top-0 z-50 transition-all duration-300 border-b ${scrolled
-      ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border/30'
-      : 'bg-background/90 backdrop-blur-md border-border/30'
+    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${overlay
+      ? 'bg-transparent text-white'
+      : scrolled
+        ? 'bg-background/98 backdrop-blur-xl shadow-lg border-b border-border/30'
+        : 'bg-background/90 backdrop-blur-md border-b border-border/30'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
@@ -54,7 +62,9 @@ export function Navigation() {
                 to={item.path}
                 className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${isActive(item.path)
                   ? 'text-primary active' // keep underline via .active, remove bg/border
-                  : 'text-foreground/80 hover:text-primary'
+                  : overlay
+                    ? 'text-white/90 hover:text-white'
+                    : 'text-foreground/80 hover:text-primary'
                   }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
