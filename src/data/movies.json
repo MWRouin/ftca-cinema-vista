@@ -17,7 +17,8 @@
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/0TFjx-C-c5I",
-        "public": false
+        "public": false,
+        "playerVisible": false
     },
     {
         "id": "and-then-there-was-one",
@@ -47,7 +48,8 @@
         ],
         "image": "__BASE_URL__/Posters/And_then_there_was_One.jpeg",
         "movieUrl": "https://www.youtube.com/embed/4F9RNN2a7aY",
-        "public": true
+        "public": true,
+        "playerVisible": false
     },
     {
         "id": "caged-bastards",
@@ -77,7 +79,8 @@
         ],
         "image": "__BASE_URL__/Posters/Caged-bastards-extend.jpg",
         "movieUrl": "https://www.youtube.com/embed/Yn-ETnl2Cw4",
-        "public": true
+        "public": true,
+        "playerVisible": false
     },
     {
         "id": "sire-ex-machina",
@@ -110,7 +113,8 @@
         ],
         "image": "__BASE_URL__/Posters/Sire-Ex-Machina.jpg",
         "movieUrl": "https://www.youtube.com/embed/g9nCqaKcviA",
-        "public": true
+        "public": true,
+        "playerVisible": false
     },
     {
         "id": "mad-ant",
@@ -130,7 +134,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/mad-ant.jpg",
         "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
-        "public": true
+        "public": true,
+        "playerVisible": false
     },
     {
         "id": "athena",
@@ -172,7 +177,8 @@
         ],
         "image": "__BASE_URL__/Posters/athena.jpg",
         "movieUrl": "https://www.youtube.com/embed/NxwaFQ640QA",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "offrande",
@@ -198,7 +204,8 @@
         ],
         "image": "__BASE_URL__/Posters/offrande.jpg",
         "movieUrl": "https://www.youtube.com/embed/g6MVMVvBFH4",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "un-des-notres",
@@ -232,7 +239,8 @@
         ],
         "image": "__BASE_URL__/Posters/un-des-notres.jpg",
         "movieUrl": "https://www.youtube.com/embed/UYiRNnx1SNw",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "silence",
@@ -256,7 +264,8 @@
         ],
         "image": "__BASE_URL__/Posters/silence.jpg",
         "movieUrl": "https://www.youtube.com/embed/LmrwjbQhByA",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "tayara",
@@ -276,7 +285,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/tayara.png",
         "movieUrl": "https://www.youtube.com/embed/Lj7kmSW5i_0",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "la-gamelle",
@@ -299,7 +309,8 @@
         ],
         "image": "__BASE_URL__/Posters/La-Gamelle.png",
         "movieUrl": "https://www.youtube.com/embed/cyJbwaLiU-0",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "chute-libre",
@@ -319,7 +330,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/Chute_libre.jpg",
         "movieUrl": "https://www.youtube.com/embed/3GXHpGOlZ0A",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "le-sifflet",
@@ -339,7 +351,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/Le_Sifflet.jpg",
         "movieUrl": "https://www.youtube.com/embed/J4_7A6C06fI",
-        "public": true
+        "public": true,
+        "playerVisible": false
     },
     {
         "id": "l-eveil",
@@ -359,7 +372,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/l_eveil.jpg",
         "movieUrl": "https://www.youtube.com/embed/BxRwxUEQRuw",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "avenue-des-histoires-amputees",
@@ -385,7 +399,8 @@
         ],
         "image": "__BASE_URL__/Posters/Av_des_histoires.jpg",
         "movieUrl": "https://www.youtube.com/embed/5tTaPMYEcwk",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "thara-taieb",
@@ -405,7 +420,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/thara-taieb.jpg",
         "movieUrl": "https://www.youtube.com/embed/Xwc4sqBuzeM",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "les-galleriens",
@@ -425,7 +441,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/les-galleriens.jpg",
         "movieUrl": "https://www.youtube.com/embed/-RqITnp5Z7M",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "ذاكرة-رهينة",
@@ -445,7 +462,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/Captive-Memory.jpg",
         "movieUrl": "https://www.youtube.com/embed/fjLGuhgbGps",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "123-soleil",
@@ -472,7 +490,8 @@
         ],
         "image": "__BASE_URL__/Posters/123_soleil.jpg",
         "movieUrl": "https://www.youtube.com/embed/tcf6UorlgEo",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "graine-de-lait-graine-de-vie",
@@ -497,7 +516,8 @@
         ],
         "image": "__BASE_URL__/Posters/graine-de-lait-graine-de-vie.jpg",
         "movieUrl": "https://www.youtube.com/embed/HoeVNDhcDWo",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "v",
@@ -517,7 +537,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/V.jpg",
         "movieUrl": "https://www.youtube.com/embed/1_Eus_4KkZI",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "au-pays-des-meres-vielles",
@@ -540,7 +561,8 @@
         ],
         "image": "__BASE_URL__/Posters/au-pays-des-meres-vielles.jpg",
         "movieUrl": "https://www.youtube.com/embed/E3O6XSeZLr0",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "accident-de-travail",
@@ -567,7 +589,8 @@
         ],
         "image": "__BASE_URL__/Posters/accident-de-travail.jpeg",
         "movieUrl": "https://www.youtube.com/embed/tuuI6huNJ68",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "l-araignée",
@@ -589,7 +612,8 @@
         ],
         "image": "__BASE_URL__/Posters/l-araignee.jpg",
         "movieUrl": "https://www.youtube.com/embed/EzVzuup33Xg",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "l-epingle",
@@ -615,7 +639,8 @@
         ],
         "image": "__BASE_URL__/Posters/l-epingle.jpg",
         "movieUrl": "https://www.youtube.com/embed/wSsrVYmT6BY",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "home",
@@ -637,7 +662,8 @@
         ],
         "image": "__BASE_URL__/Posters/home.jpeg",
         "movieUrl": "https://www.youtube.com/embed/u6t1FAir0vc",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "3al-7it",
@@ -659,7 +685,8 @@
         ],
         "image": "__BASE_URL__/Posters/3al7it.jpg",
         "movieUrl": "https://www.youtube.com/embed/CSOq74FcOtE",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "mur",
@@ -679,7 +706,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/mur.jpg",
         "movieUrl": "https://www.youtube.com/embed/IwgBUO4ytPg",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "nasibi",
@@ -699,7 +727,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/nasibi.jpg",
         "movieUrl": "https://www.youtube.com/embed/z4QYI_pfS8k",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "travailleur",
@@ -719,7 +748,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/travailleur.jpg",
         "movieUrl": "https://www.youtube.com/embed/o-sYF4R-kwM",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "Temps-Mort",
@@ -743,7 +773,8 @@
         ],
         "image": "__BASE_URL__/Posters/temp-mort.jpeg",
         "movieUrl": "https://www.youtube.com/embed/FuywJo34B1Y",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "3syen",
@@ -767,7 +798,8 @@
         ],
         "image": "__BASE_URL__/Posters/3syen.jpg",
         "movieUrl": "https://www.youtube.com/embed/sMg0arZ7lPM",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "trip",
@@ -801,7 +833,8 @@
         ],
         "image": "__BASE_URL__/Posters/trip.jpeg",
         "movieUrl": "https://www.youtube.com/embed/8JKJnARlwgI",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "Oz9AcNMuUZw",
@@ -821,7 +854,8 @@
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/Oz9AcNMuUZw",
-        "public": false
+        "public": false,
+        "playerVisible": false
     },
     {
         "id": "des-bieres-et-des-progres",
@@ -852,7 +886,8 @@
         ],
         "image": "__BASE_URL__/Posters/des-bieres-et-des-progres.jpg",
         "movieUrl": "https://www.youtube.com/embed/eukOd7aTAg8",
-        "public": true
+        "public": true,
+        "playerVisible": true
     },
     {
         "id": "kari-for-dog",
@@ -877,7 +912,8 @@
         ],
         "image": "__BASE_URL__/Posters/kari_for_dog.jpg",
         "movieUrl": "https://www.youtube.com/embed/yVOap57hQlc",
-        "public": false
+        "public": false,
+        "playerVisible": true
     },
     {
         "id": "mad-ant",
@@ -897,7 +933,8 @@
         "cast": [],
         "image": "__BASE_URL__/Posters/mad_ant.jpg",
         "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
-        "public": false
+        "public": false,
+        "playerVisible": false
     },
     {
         "id": "ca-tourne",
@@ -917,6 +954,7 @@
         "cast": [],
         "image": "",
         "movieUrl": "https://www.youtube.com/embed/V2SnHlKTIjA",
-        "public": false
+        "public": false,
+        "playerVisible": false
     }
 ]

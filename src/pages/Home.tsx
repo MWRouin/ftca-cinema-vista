@@ -50,7 +50,13 @@ export default function Home() {
           <div className="container">
             <div className="content">
 
-              <div className="eyebrow">Amateur Cinema · Active Since 1964</div>
+              <div className="eyebrow">
+                <span className="eyebrow-text">
+                  <span className="eyebrow-seg">Amateur Cinema</span>
+                  <span className="eyebrow-sep" aria-hidden="true">·</span>
+                  <span className="eyebrow-seg">Active Since 1964</span>
+                </span>
+              </div>
 
               <h1>
                 <span className="line">Hammam-Lif</span>

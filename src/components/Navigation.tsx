@@ -1,36 +1,72 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import { Menu, Home, Film, Calendar, Newspaper, Users, Award, Mail } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { Logo } from './Logo';
 
+// Icon per route — used to give the mobile menu a little more character.
+const navIcons: Record<string, LucideIcon> = {
+  '/': Home,
+  '/movies': Film,
+  '/events': Calendar,
+  '/blog': Newspaper,
+  '/about': Users,
+  '/palmares': Award,
+  '/contact': Mail,
+};
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const location = useLocation();
-
-  // Track scroll position
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const isHome = location.pathname === '/';
-  const scrolled = scrollY > 20;
-  // On the home page the navbar overlays the hero transparently until the
-  // hero's bottom edge has scrolled up behind the navbar. We measure the
-  // actual hero element (re-evaluated each scroll-driven render) so the
-  // switch tracks the real hero height instead of a fixed viewport guess.
-  const overlay = isHome && (() => {
-    if (typeof window === 'undefined') return true;
-    const hero = document.querySelector('.editorial-hero');
-    const navHeight = 64; // h-16
-    if (hero) return hero.getBoundingClientRect().bottom > navHeight;
-    return scrollY < window.innerHeight * 0.8;
-  })();
+
+  // `scrolled` (past 20px) and `overlay` (navbar sits transparently over the
+  // hero) are the only scroll-derived values the navbar renders from. We
+  // compute them in a rAF-throttled scroll handler and only commit them to
+  // state when they actually flip, so the navbar re-renders a couple of times
+  // per scroll instead of on every frame. The previous version called
+  // setState on every scroll event AND read getBoundingClientRect() each time,
+  // forcing a synchronous layout per frame — a major source of mobile jank,
+  // worst on the home page where the hero is measured.
+  const [scrolled, setScrolled] = useState(false);
+  const [overlay, setOverlay] = useState(isHome);
+
+  useEffect(() => {
+    let rafId = 0;
+
+    const measure = () => {
+      rafId = 0;
+      const y = window.scrollY;
+      setScrolled(y > 20);
+
+      if (!isHome) {
+        setOverlay(false);
+        return;
+      }
+      // On home the navbar overlays the hero transparently until the hero's
+      // bottom edge has scrolled up behind the navbar.
+      const hero = document.querySelector('.editorial-hero');
+      const navHeight = 64; // h-16
+      setOverlay(
+        hero
+          ? hero.getBoundingClientRect().bottom > navHeight
+          : y < window.innerHeight * 0.8
+      );
+    };
+
+    const onScroll = () => {
+      if (!rafId) rafId = requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [isHome]);
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -47,11 +83,11 @@ export function Navigation() {
 
   return (
     <>
-    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${overlay
-      ? 'bg-transparent text-white'
+    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${overlay
+      ? 'bg-transparent text-white border-transparent'
       : scrolled
-        ? 'bg-background/98 backdrop-blur-xl shadow-lg border-b border-border/30'
-        : 'bg-background/90 backdrop-blur-md border-b border-border/30'
+        ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border/30'
+        : 'bg-background/90 backdrop-blur-md border-border/30'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
@@ -113,31 +149,55 @@ export function Navigation() {
       </div>
     </nav>
 
+      {/* Tap-outside backdrop: closes the mobile menu when tapping anywhere
+          off it. Transparent (no visual change) and below the nav (z-50) so the
+          toggle button still works, but above the panel-less page content. */}
+      {isOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-30"
+          aria-hidden="true"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
       {/* Mobile Navigation — rendered OUTSIDE <nav> on purpose: the nav has
           its own backdrop-filter off-hero, which would suppress this panel's
           backdrop-blur and make the blur appear only over the hero. */}
       <div
         className={
-          `md:hidden fixed top-16 right-3 z-40 w-52 transition-all duration-200 ${isOpen
-            ? 'opacity-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 -translate-y-4 pointer-events-none'}`
+          `md:hidden fixed top-16 right-3 z-40 w-60 origin-top-right transition-all duration-200 ${isOpen
+            ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
+            : 'opacity-0 -translate-y-3 scale-95 pointer-events-none'}`
         }
       >
-        <div className="border border-white/15 shadow-xl backdrop-blur-2xl bg-black/50">
-          <div className="px-2 py-3 max-h-[calc(100vh-5rem)] overflow-y-auto flex flex-col items-end text-right gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`nav-link nav-link-dark text-lg font-medium transition-all duration-300 focus-cinema ${isActive(item.path)
-                  ? 'text-white active'
-                  : 'text-white/90 hover:text-white'
-                  }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+        <div className="overflow-hidden rounded-lg border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-black/50 bg-gradient-to-b from-zinc-900/80 to-black/70 backdrop-blur-2xl">
+          {/* accent hairline */}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+          <div className="p-2 max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-1">
+            {navItems.map((item, index) => {
+              const Icon = navIcons[item.path] ?? Home;
+              const active = isActive(item.path);
+              return (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  style={{ transitionDelay: isOpen ? `${index * 40}ms` : '0ms' }}
+                  className={`group relative flex items-center justify-end gap-3 rounded-md px-3.5 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
+                    ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3'}
+                    ${active ? 'bg-white/10 text-white' : 'text-white/80 hover:text-white hover:bg-white/5'}`}
+                >
+                  <span>{item.name}</span>
+                  <Icon
+                    className={`w-[18px] h-[18px] shrink-0 transition-colors ${active ? 'text-accent' : 'text-white/55 group-hover:text-white'}`}
+                  />
+                  {/* right-edge active indicator (reserves space so rows don't shift) */}
+                  <span
+                    className={`absolute right-0 top-1/2 -translate-y-1/2 h-5 w-1 rounded-l-sm transition-colors ${active ? 'bg-accent' : 'bg-transparent'}`}
+                  />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

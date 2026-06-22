@@ -11,7 +11,10 @@ export type Movie = {
     description?: string;
     cast?: string[];
     movieUrl?: string; // embed URL or external link
-    public: boolean
+    public: boolean;
+    // Controls whether the in-page video player is shown for this movie.
+    // Independent of `public` (which controls whether the movie is listed).
+    playerVisible: boolean;
 };
 
 const BASE = import.meta.env.BASE_URL || "/";
@@ -26,6 +29,7 @@ function MovieFromJsonObject(jsonObject: any): Movie {
         ...jsonObject,
         image: jsonObject.image ? ResolveAssetUrl(jsonObject.image) : "",
         public: jsonObject.public ? jsonObject.public : false,
+        playerVisible: jsonObject.playerVisible ?? false,
         year: typeof jsonObject.year === 'number' ? jsonObject.year : '-'
     };
 }

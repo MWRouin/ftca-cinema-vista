@@ -170,18 +170,16 @@ export default function MoviePlayer() {
           </div>
         </div>
 
-        {/* Video Player */}
-        {/*
-
-        *****************Lecteur na7ineh (commented)******************
-
-        <section className="mb-12">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Watch Now</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+        {/* Video Player — shown only when this movie is flagged playerVisible
+            (independent of `public`, which controls listing). Minimal chrome so
+            the player stands out: edge-to-edge on mobile, a clean rounded frame
+            on larger screens. */}
+        {movie.playerVisible && (
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold mb-4">Watch Now</h2>
+            {/* -mx-4 cancels the page's px-4 so the player goes full-bleed on phones */}
+            <div className="-mx-4 sm:mx-0">
+              <div className="aspect-video w-full overflow-hidden bg-black shadow-2xl sm:rounded-xl sm:ring-1 sm:ring-border">
                 {movie.movieUrl ? (
                   <iframe
                     src={movie.movieUrl}
@@ -195,11 +193,9 @@ export default function MoviePlayer() {
                   </div>
                 )}
               </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        */}
+            </div>
+          </section>
+        )}
 
         {/* Related sections unchanged */}
         {relatedMoviesByDirector.length > 0 && (

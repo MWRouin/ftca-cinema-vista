@@ -192,7 +192,7 @@ export default function Contact() {
               <CardContent>
                 <div className="space-y-2">
                   <p className="text-muted-foreground">Stay connected with our latest news and events:</p>
-                  <div className="flex space-x-5">
+                  <div className="flex flex-wrap gap-x-5 gap-y-2">
                     {socialLinks.map(({ icon: Icon, href, label }) => (
                       <a
                         key={label}

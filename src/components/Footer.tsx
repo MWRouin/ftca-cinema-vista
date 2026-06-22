@@ -20,8 +20,11 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-muted/50 border-t border-border mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="relative mt-auto border-t border-border bg-secondary dark:bg-muted">
+      {/* Designed top edge: a faint accent line so the footer reads as a
+          distinct base rather than a continuation of the page. */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Club Info */}
           <div className="md:col-span-2">
@@ -53,7 +56,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -70,7 +73,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Contact</h4>
             <div className="space-y-2">
               <a
                 href="mailto:contact@cineamateur-hlif.com"
@@ -101,7 +104,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border mt-8 pt-8 flex flex-col lg:flex-row justify-between items-center text-center lg:text-left">
+        <div className="border-t border-border/70 mt-10 pt-6 flex flex-col lg:flex-row justify-between items-center text-center lg:text-left gap-2">
           <p className="text-sm text-muted-foreground">
             © {currentYear} - Club des Cinéastes Amateurs de Hammamlif - All rights reserved.
           </p>
