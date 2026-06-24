@@ -1,10 +1,14 @@
 
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Menu, Home, Film, Calendar, Newspaper, Users, Award, Mail } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { LanguageToggle } from './LanguageToggle';
 import { Logo } from './Logo';
+import { LocalLink } from '@/i18n/locale';
+import { stripLocale } from '@/i18n/config';
 
 // Icon per route — used to give the mobile menu a little more character.
 const navIcons: Record<string, LucideIcon> = {
@@ -20,7 +24,9 @@ const navIcons: Record<string, LucideIcon> = {
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const { t } = useTranslation();
+  const path = stripLocale(location.pathname);
+  const isHome = path === '/';
 
   // `scrolled` (past 20px) and `overlay` (navbar sits transparently over the
   // hero) are the only scroll-derived values the navbar renders from. We
@@ -69,17 +75,17 @@ export function Navigation() {
   }, [isHome]);
 
   const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Movies', path: '/movies' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'About', path: '/about' },
-    { name: 'Palmarès', path: '/palmares' },
-    { name: 'Contact', path: '/contact' },
+    { key: 'home', path: '/' },
+    { key: 'movies', path: '/movies' },
+    { key: 'events', path: '/events' },
+    { key: 'blog', path: '/blog' },
+    { key: 'about', path: '/about' },
+    { key: 'palmares', path: '/palmares' },
+    { key: 'contact', path: '/contact' },
   ];
 
   const normalize = (p: string) => (p.endsWith('/') && p !== '/' ? p.slice(0, -1) : p);
-  const isActive = (path: string) => normalize(location.pathname) === normalize(path);
+  const isActive = (target: string) => normalize(path) === normalize(target);
 
   return (
     <>
@@ -93,22 +99,22 @@ export function Navigation() {
         <div className="relative h-16 flex items-center">
           {/* Logo (left) */}
           <div className="flex items-center p-2">
-            <Link to="/" className="flex items-center space-x-3">
+            <LocalLink to="/" className="flex items-center space-x-3">
               <Logo
                 size={50}
                 className="hover:scale-110 transition-transform drop-shadow-lg"
                 {...(overlay ? { colorMain: '#fff', colorBack: '#7b828d', colorFront: '#cbd1ce' } : {})}
               />
-            </Link>
+            </LocalLink>
           </div>
 
           {/* Desktop Navigation (centered on md+) */}
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-2">
             {navItems.map((item, index) => (
-              <Link
-                key={item.name}
+              <LocalLink
+                key={item.key}
                 to={item.path}
-                className={`nav-link text-sm font-medium transition-all duration-300 focus-cinema ${isActive(item.path)
+                className={`nav-link text-sm font-medium whitespace-nowrap transition-all duration-300 focus-cinema ${isActive(item.path)
                   ? overlay
                     ? 'text-white active' // active over hero: white stays legible
                     : 'text-primary active' // keep underline via .active, remove bg/border
@@ -118,20 +124,22 @@ export function Navigation() {
                   }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {item.name}
-              </Link>
+                {t(`nav.${item.key}`)}
+              </LocalLink>
             ))}
           </div>
 
           {/* Right side actions: Theme toggle (desktop) and mobile controls */}
           <div className="ml-auto flex items-center space-x-3">
-            {/* Theme toggle: visible on md and hidden on small screens within this slot (mobile keeps its own toggle) */}
-            <div className="hidden md:flex">
+            {/* Theme + language toggles: visible on md and hidden on small screens within this slot (mobile keeps its own toggles) */}
+            <div className="hidden md:flex items-center space-x-2">
+              <LanguageToggle onDark={overlay} />
               <ThemeToggle onDark={overlay} />
             </div>
 
-            {/* Mobile: Theme toggle + menu button (unchanged behavior) */}
-            <div className="md:hidden flex items-center space-x-3">
+            {/* Mobile: language + theme toggle + menu button (unchanged behavior) */}
+            <div className="md:hidden flex items-center space-x-2">
+              <LanguageToggle onDark={overlay} />
               <ThemeToggle onDark={overlay} />
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -178,8 +186,8 @@ export function Navigation() {
               const Icon = navIcons[item.path] ?? Home;
               const active = isActive(item.path);
               return (
-                <Link
-                  key={item.name}
+                <LocalLink
+                  key={item.key}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   style={{ transitionDelay: isOpen ? `${index * 40}ms` : '0ms' }}
@@ -187,7 +195,7 @@ export function Navigation() {
                     ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3'}
                     ${active ? 'bg-white/10 text-white' : 'text-white/80 hover:text-white hover:bg-white/5'}`}
                 >
-                  <span>{item.name}</span>
+                  <span>{t(`nav.${item.key}`)}</span>
                   <Icon
                     className={`w-[18px] h-[18px] shrink-0 transition-colors ${active ? 'text-accent' : 'text-white/55 group-hover:text-white'}`}
                   />
@@ -195,7 +203,7 @@ export function Navigation() {
                   <span
                     className={`absolute right-0 top-1/2 -translate-y-1/2 h-5 w-1 rounded-l-sm transition-colors ${active ? 'bg-accent' : 'bg-transparent'}`}
                   />
-                </Link>
+                </LocalLink>
               );
             })}
           </div>

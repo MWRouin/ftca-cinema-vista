@@ -11,6 +11,8 @@ import { lazy, Suspense } from "react";
 import ScrollToTopOnLocationChange from "./lib/router/scroll-to-top";
 import NotFound from "./pages/NotFound";
 import PageLoader from "./pages/PageLoader";
+import { LocaleScope, LocaleRedirect } from "./i18n/locale";
+import "./i18n";
 
 const Home = lazy(() => import("./pages/Home"));
 const Movies = lazy(() => import("./pages/Movies"));
@@ -28,31 +30,56 @@ const Contact = lazy(() => import("./pages/Contact"));
 
 const queryClient = new QueryClient();
 
+// Page routes, defined once with locale-neutral relative paths. Mounted under
+// each "/<locale>" branch below so the same table serves every locale.
+const PageRoutes = () => (
+  <Layout>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="movies/:id" element={<MoviePlayer />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="events/ydour" element={<YdourEvent />} />
+        <Route path="events/ydour-v2" element={<YdourEventV2 />} />
+        <Route path="events/films-de-hammamlif" element={<FilmsDeHammamLifEvent />} />
+        <Route path="events/afterwork-movienight" element={<AfterworkMovienight />} />
+        <Route path="events" element={<Events />} />
+        <Route path="blog/:slug" element={<BlogArticle />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="about" element={<About />} />
+        <Route path="palmares" element={<Palmares />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  </Layout>
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
       <BrowserRouter basename={import.meta.env.VITE_BASE_PATH || "/"}>
         <ScrollToTopOnLocationChange />
-        <Layout>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/movies/:id" element={<MoviePlayer />} />
-              <Route path="/movies" element={<Movies />} />
-              <Route path="/events/ydour" element={<YdourEvent />} />
-              <Route path="/events/ydour-v2" element={<YdourEventV2 />} />
-              <Route path="/events/films-de-hammamlif" element={<FilmsDeHammamLifEvent />} />
-              <Route path="/events/afterwork-movienight" element={<AfterworkMovienight />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/blog/:slug" element={<BlogArticle />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/palmares" element={<Palmares />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </Layout>
+        <Routes>
+          <Route
+            path="/en/*"
+            element={
+              <LocaleScope locale="en">
+                <PageRoutes />
+              </LocaleScope>
+            }
+          />
+          <Route
+            path="/fr/*"
+            element={
+              <LocaleScope locale="fr">
+                <PageRoutes />
+              </LocaleScope>
+            }
+          />
+          {/* "/" and any non-locale path redirect to the resolved locale. */}
+          <Route path="*" element={<LocaleRedirect />} />
+        </Routes>
       </BrowserRouter>
     </ThemeProvider>
   </QueryClientProvider>

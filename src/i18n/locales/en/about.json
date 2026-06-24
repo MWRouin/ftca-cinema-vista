@@ -1,0 +1,46 @@
+{
+  "title": "Our Story",
+  "history": {
+    "lead": "Between sea and mountains, Hammam Lif was once a cultural destination.",
+    "p1": "In <hl>1964</hl>, our cinema club was born. We emerged during the golden era of Tunisia's ciné-club movement, aiming to promote cinematographic culture in Tunisia. However, things began to slowly fade: cinemas closed one by one, and film posters started to yellow.",
+    "p2": "Taking place in the heart of Hammam Lif, our space brought together high school students and university scholars. Cinema enthusiasts came from different ages and with different backgrounds and political views, all united by their passion.",
+    "p3": "From one generation to another, our club has created remarkable and impactful works: short films, documentaries, photographs, and screenplays that have won prizes and sparked social, cultural, and political change.",
+    "p4": "Today, those who remember look back with pride, as we continue forward with one driving motive: to be a voice for those who have none."
+  },
+  "mission": {
+    "title": "Our Mission",
+    "p1": "We produce to reflect social, cultural, and political realities. Our mission is to deliver people's concerns, shed light on difficult truths, and question what needs to be questioned.",
+    "through": "We do this through:",
+    "screenings": "Screenings",
+    "debates": "Debates",
+    "workshops": "Workshops",
+    "p2": "We attract and nurture new talents and promote Tunisian amateur cinema. As proud members of the FTCA, we organize cultural events, support human rights causes, defend free expression, and pass our filmmaking passion to the next generation.",
+    "imageAlt": "Ydour event – cinema screening",
+    "caption": "Captured during the “Ydour” event."
+  },
+  "values": {
+    "title": "What We Stand For",
+    "unityTitle": "Unity",
+    "unityDesc": "We believe in the power of coming together sharing ideas, efforts, and values as one. Unity is the flame of our community, it drives collaboration, fairness, and most importantly, a sense of belonging within us.",
+    "amateurismTitle": "Amateurism",
+    "amateurismDesc": "We embrace amateurism as our form of freedom. Our films are born from purpose and conviction, not political or commercial interests. Cinema is our tool of expression.",
+    "socialTitle": "Social Engagement",
+    "socialDesc": "Art and action go hand in hand. Our films go beyond entertainment and aesthetics, they exist to question, to reflect, and to move. We use cinema as a mean to address social issues, raise awareness, and give voice to what often goes unheard."
+  },
+  "team": {
+    "title": "Meet Our Team",
+    "showAll": "Show All",
+    "showLess": "Show Less"
+  },
+  "honorary": {
+    "title": "Honorary Members",
+    "subtitle": "Celebrating those who have contributed to our legacy"
+  },
+  "roles": {
+    "president": "President",
+    "general-secretary": "General Secretary",
+    "treasurer": "Treasurer",
+    "member": "Member",
+    "honorary-member": "Honorary Member"
+  }
+}

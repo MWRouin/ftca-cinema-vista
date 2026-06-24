@@ -7,10 +7,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function Contact() {
+  const { t } = useTranslation('contact');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -59,10 +61,10 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <PageTitle title='Contact Us' />
+          <PageTitle title={t('title')} />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Get in touch with our team or join our community
+            {t('subtitle')}
           </div>
         </div>
 
@@ -71,17 +73,16 @@ export default function Contact() {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl">Send us a Message</CardTitle>
+                <CardTitle className="text-2xl">{t('form.title')}</CardTitle>
                 <CardDescription>
-                  Have questions about our events, want to suggest a film, or interested in joining?
-                  We'd love to hear from you!
+                  {t('form.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/*<div className="grid grid-cols-1 md:grid-cols-2 gap-4">*/}
                   <div>
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name">{t('form.nameLabel')}</Label>
                     <Input
                       id="name"
                       name="name"
@@ -89,7 +90,7 @@ export default function Contact() {
                       //required
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="Your full name"
+                      placeholder={t('form.namePlaceholder')}
                     />
                   </div>
                   {/* <div>
@@ -106,7 +107,7 @@ export default function Contact() {
                     </div> */}
                   {/* </div> */}
                   <div>
-                    <Label htmlFor="subject">Subject *</Label>
+                    <Label htmlFor="subject">{t('form.subjectLabel')}</Label>
                     <Input
                       id="subject"
                       name="subject"
@@ -114,23 +115,23 @@ export default function Contact() {
                       required
                       value={formData.subject}
                       onChange={handleInputChange}
-                      placeholder="What is this about?"
+                      placeholder={t('form.subjectPlaceholder')}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="message">Message *</Label>
+                    <Label htmlFor="message">{t('form.messageLabel')}</Label>
                     <Textarea
                       id="message"
                       name="message"
                       required
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Tell us more..."
+                      placeholder={t('form.messagePlaceholder')}
                       rows={6}
                     />
                   </div>
                   <Button type="submit" className="w-full" size="lg">
-                    Send Message
+                    {t('form.submit')}
                   </Button>
                 </form>
               </CardContent>
@@ -142,27 +143,27 @@ export default function Contact() {
             {/* Contact Details */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Get in Touch</CardTitle>
+                <CardTitle className="text-xl">{t('details.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <div className="flex items-center space-x-2 mb-1">
                     <Mail className="w-5 h-5 text-primary  dark:text-accent" />
-                    <h4 className="font-semibold">Email</h4>
+                    <h4 className="font-semibold">{t('details.email')}</h4>
                   </div>
                   <p className="text-muted-foreground">contact@cineamateur-hlif.com</p>
                 </div>
                 <div>
                   <div className="flex items-center space-x-2 mb-1">
                     <Phone className="w-5 h-5 text-primary  dark:text-accent" />
-                    <h4 className="font-semibold">Phone</h4>
+                    <h4 className="font-semibold">{t('details.phone')}</h4>
                   </div>
                   <p className="text-muted-foreground">+216 55 466 297</p>
                 </div>
                 <div>
                   <div className="flex items-center space-x-2 mb-1">
                     <MapPin className="w-5 h-5 text-primary  dark:text-accent" />
-                    <h4 className="font-semibold">Address</h4>
+                    <h4 className="font-semibold">{t('details.address')}</h4>
                   </div>
                   <p className="text-muted-foreground">
                     80 RN1, Hammam-Lif
@@ -174,12 +175,12 @@ export default function Contact() {
             {/* Meeting Times */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Regular Meetings</CardTitle>
+                <CardTitle className="text-xl">{t('meetings.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-1">Weekly Meetings</h4>
-                  <p className="text-muted-foreground">Saturday at 5:00 PM</p>
+                  <h4 className="font-semibold mb-1">{t('meetings.weekly')}</h4>
+                  <p className="text-muted-foreground">{t('meetings.weeklyTime')}</p>
                 </div>
               </CardContent>
             </Card>
@@ -187,11 +188,11 @@ export default function Contact() {
             {/* Social Links */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Follow Us</CardTitle>
+                <CardTitle className="text-xl">{t('follow.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <p className="text-muted-foreground">Stay connected with our latest news and events:</p>
+                  <p className="text-muted-foreground">{t('follow.subtitle')}</p>
                   <div className="flex flex-wrap gap-x-5 gap-y-2">
                     {socialLinks.map(({ icon: Icon, href, label }) => (
                       <a
@@ -217,17 +218,17 @@ export default function Contact() {
             {/* Join Us */}
             <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950 border-amber-200 dark:border-amber-800">
               <CardHeader>
-                <CardTitle className="text-xl">Join Our Community</CardTitle>
+                <CardTitle className="text-xl">{t('join.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
-                  Interested in becoming a member? We welcome new film enthusiasts of all levels!
+                  {t('join.text')}
                 </p>
                 {/* <p>Stay tuned</p> */}
                 <a href='https://docs.google.com/forms/d/e/1FAIpQLScuvfikqSpUKanyxrXSs_TZzn4MTAdVmcy3Hvswp7Ux_p3pYQ/viewform'><Button className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
-                  
-                    Join us now
-                 
+
+                    {t('join.cta')}
+
                 </Button> </a>
               </CardContent>
             </Card>

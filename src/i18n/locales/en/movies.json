@@ -1,0 +1,9 @@
+{
+  "title": "Movie Catalog",
+  "subtitle": "Explore our curated collection of cinematic masterpieces",
+  "filterPlaceholder": "Filter by genre",
+  "allGenres": "All Genres",
+  "directedBy": "Directed by {{director}}",
+  "emptyMessage": "No movies found for the selected genre.",
+  "viewAll": "View All Movies"
+}

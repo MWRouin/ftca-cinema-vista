@@ -1,0 +1,9 @@
+{
+  "title": "Catalogue des films",
+  "subtitle": "Explorez notre collection de chefs-d'œuvre cinématographiques",
+  "filterPlaceholder": "Filtrer par genre",
+  "allGenres": "Tous les genres",
+  "directedBy": "Réalisé par {{director}}",
+  "emptyMessage": "Aucun film trouvé pour le genre sélectionné.",
+  "viewAll": "Voir tous les films"
+}

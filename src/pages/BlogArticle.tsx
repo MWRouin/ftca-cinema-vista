@@ -1,4 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 //import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,9 +9,12 @@ import { PAGE_SEO, SITE_URL } from '@/lib/metadata/seo-constants';
 import { getBlogArticleBySlug } from '@/data/blog';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import ShareActions from '@/components/customUi/share-actions';
+import { LocalLink, useLocale } from '@/i18n/locale';
 
 export default function BlogArticle() {
   const { slug } = useParams();
+  const { t } = useTranslation('blog');
+  const locale = useLocale();
   const article = getBlogArticleBySlug(slug);
 
   const formatDate = (dateString: string) => {
@@ -19,7 +23,7 @@ export default function BlogArticle() {
       month: 'long',
       day: 'numeric',
     };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    return new Date(dateString).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', options);
   };
 
   if (!article) {
@@ -30,14 +34,14 @@ export default function BlogArticle() {
           <div className="max-w-3xl mx-auto px-4 w-full">
             <Card className="text-center">
               <CardHeader>
-                <CardTitle>Article not found</CardTitle>
+                <CardTitle>{t('notFoundTitle')}</CardTitle>
                 <CardDescription>
-                  The article you are looking for does not exist.
+                  {t('notFoundDesc')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button asChild variant="outline">
-                  <Link to="/blog">← Back to Blog</Link>
+                  <LocalLink to="/blog">{t('backToBlog')}</LocalLink>
                 </Button>
               </CardContent>
             </Card>
@@ -61,7 +65,7 @@ export default function BlogArticle() {
         imageAlt={article.title}
         lang={article.lang ?? 'en'}
         author={article.author}
-        authorLabel="Written by"
+        authorLabel={t('writtenBy')}
         articlePublishedTime={new Date(article.date).toISOString()}
         jsonLd={{
           '@context': 'https://schema.org',
@@ -89,7 +93,7 @@ export default function BlogArticle() {
         <div className="max-w-4xl 2xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <Button asChild variant="outline">
-              <Link to="/blog">← Back to Blog</Link>
+              <LocalLink to="/blog">{t('backToBlog')}</LocalLink>
             </Button>
           </div>
 
@@ -110,7 +114,7 @@ export default function BlogArticle() {
 
               {/* Meta (always first) */}
               <div className="text-sm text-muted-foreground">
-                By {article.author} • {formatDate(article.date)} • {article.readTime}
+                {t('meta', { author: article.author, date: formatDate(article.date), readTime: article.readTime })}
               </div>
 
               {/* Actions */}

@@ -4,10 +4,17 @@ import { PageTitle } from '@/components/customUi/page-title';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
+// Build a stable translation-key slug from a name or role, e.g.
+// "General Secretary" -> "general-secretary". Used to look up per-member
+// translations while keeping the English source as a defaultValue fallback.
+const slugify = (value: string) => value.toLowerCase().trim().replace(/\s+/g, '-');
+
 function TeamSection({ teamMembers }) {
+  const { t } = useTranslation('about');
   const [showAll, setShowAll] = useState(false);
 
   // Decide which members to show based on showAll state
@@ -19,7 +26,7 @@ function TeamSection({ teamMembers }) {
 
   return (
     <section>
-      <h2 className="text-3xl font-bold mb-8 text-center">Meet Our Team</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">{t('team.title')}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-4 md:gap-6 lg:gap-8">
         {membersToShow.map((member, index) => (
           <Card key={index} className="text-center">
@@ -33,11 +40,13 @@ function TeamSection({ teamMembers }) {
               </div>
               <CardTitle className="text-xl">{member.name}</CardTitle>
               <CardDescription className="text-primary font-medium">
-                {member.role}
+                {t(`roles.${slugify(member.role)}`, { defaultValue: member.role })}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <CardDescription className="text-sm">{member.bio}</CardDescription>
+              <CardDescription className="text-sm">
+                {member.bio ? t(`members.${slugify(member.name)}.bio`, { defaultValue: member.bio }) : ''}
+              </CardDescription>
             </CardContent>
           </Card>
         ))}
@@ -50,7 +59,7 @@ function TeamSection({ teamMembers }) {
             onClick={() => setShowAll(!showAll)}
             className="min-w-[120px]"
           >
-            {showAll ? "Show Less" : "Show All"}
+            {showAll ? t('team.showLess') : t('team.showAll')}
           </Button>
         </div>
       )}
@@ -59,13 +68,14 @@ function TeamSection({ teamMembers }) {
 }
 
 function OldMembersSection({ oldMembers }) {
+  const { t } = useTranslation('about');
   return (
     <section className="py-12">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Honorary Members</h2>
+          <h2 className="text-3xl font-bold mb-4">{t('honorary.title')}</h2>
           <div className="section-divider w-16 mx-auto"></div>
-          <p className="text-muted-foreground mt-4">Celebrating those who have contributed to our legacy</p>
+          <p className="text-muted-foreground mt-4">{t('honorary.subtitle')}</p>
         </div>
 
         <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-lg p-8 lg:p-12 border border-muted/30">
@@ -88,6 +98,7 @@ function OldMembersSection({ oldMembers }) {
 }
 
 export default function About() {
+  const { t } = useTranslation('about');
 
   const BASE = import.meta.env.BASE_URL || "/";
 
@@ -451,7 +462,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <PageTitle title='Our Story' />
+          <PageTitle title={t('title')} />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           {/* <div className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             Discover our story, mission, and the passionate individuals who make our cinema club a vibrant community
@@ -466,31 +477,20 @@ export default function About() {
               className="text-2xl sm:text-3xl italic leading-snug text-foreground border-l-2 border-primary/60 pl-5 sm:pl-6 mb-10"
               style={{ fontFamily: '"Cormorant Garamond", serif' }}
             >
-              Between sea and mountains, Hammam Lif was once a cultural destination.
+              {t('history.lead')}
             </p>
 
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
-                In <span className="text-primary font-semibold">1964</span>, our cinema club was born. We emerged during the golden era of Tunisia's ciné-club movement,
-                aiming to promote cinematographic culture in Tunisia.
-                However, things began to slowly fade: cinemas closed one by one, and film posters started to yellow.
+                <Trans t={t} i18nKey="history.p1" components={{ hl: <span className="text-primary font-semibold" /> }} />
               </p>
 
-              <p>
-                Taking place in the heart of Hammam Lif, our space brought together high school students and university scholars.
-                Cinema enthusiasts came from different ages and with different backgrounds and political views,
-                all united by their passion.
-              </p>
+              <p>{t('history.p2')}</p>
 
-              <p>
-                From one generation to another, our club has created remarkable and impactful works:
-                short films, documentaries, photographs, and screenplays that have won prizes and
-                sparked social, cultural, and political change.
-              </p>
+              <p>{t('history.p3')}</p>
 
               <p className="text-foreground font-medium">
-                Today, those who remember look back with pride, as we continue forward with one driving motive:
-                to be a voice for those who have none.
+                {t('history.p4')}
               </p>
             </div>
           </div>
@@ -500,19 +500,19 @@ export default function About() {
         <section className="mb-16 bg-muted/50 rounded-lg p-8 lg:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+              <h2 className="text-3xl font-bold mb-6">{t('mission.title')}</h2>
               <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  We produce to reflect social, cultural, and political realities. Our mission is to deliver people's concerns, shed light on difficult truths, and question what needs to be questioned.
+                  {t('mission.p1')}
                 </p>
-                <div className="mt-6 mb-2 text-foreground font-medium">We do this through:</div>
+                <div className="mt-6 mb-2 text-foreground font-medium">{t('mission.through')}</div>
                 <ul className="list-disc pl-6 marker:text-primary/70 space-y-1">
-                  <li>Screenings</li>
-                  <li>Debates</li>
-                  <li>Workshops</li>
+                  <li>{t('mission.screenings')}</li>
+                  <li>{t('mission.debates')}</li>
+                  <li>{t('mission.workshops')}</li>
                 </ul>
                 <p>
-                  We attract and nurture new talents and promote Tunisian amateur cinema. As proud members of the FTCA, we organize cultural events, support human rights causes, defend free expression, and pass our filmmaking passion to the next generation.
+                  {t('mission.p2')}
                 </p>
               </div>
             </div>
@@ -520,12 +520,12 @@ export default function About() {
               <div className="rounded-lg overflow-hidden">
                 <LazyImage
                   src={`${BASE}About/ydour_web_optimized.jpg`}
-                  alt="Ydour event – cinema screening"
+                  alt={t('mission.imageAlt')}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="text-sm text-muted-foreground mt-2 text-center">
-                Captured during the “Ydour” event.
+                {t('mission.caption')}
               </div>
             </div>
           </div>
@@ -533,40 +533,35 @@ export default function About() {
 
         {/* Values Section */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">What We Stand For</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">{t('values.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Unity</CardTitle>
+                <CardTitle className="text-xl">{t('values.unityTitle')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  We believe in the power of coming together sharing ideas, efforts, and values as one.
-                  Unity is the flame of our community, it drives collaboration, fairness, and most importantly, a sense of belonging within us.
+                  {t('values.unityDesc')}
                 </CardDescription>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Amateurism</CardTitle>
+                <CardTitle className="text-xl">{t('values.amateurismTitle')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  We embrace amateurism as our form of freedom.
-                  Our films are born from purpose and conviction, not political or commercial interests.<br />
-                  Cinema is our tool of expression.
+                  {t('values.amateurismDesc')}
                 </CardDescription>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">Social Engagement</CardTitle>
+                <CardTitle className="text-xl">{t('values.socialTitle')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-base">
-                  Art and action go hand in hand.
-                  Our films go beyond entertainment and aesthetics, they exist to question, to reflect, and to move.
-                  We use cinema as a mean to address social issues, raise awareness, and give voice to what often goes unheard.
+                  {t('values.socialDesc')}
                 </CardDescription>
               </CardContent>
             </Card>

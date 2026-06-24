@@ -1,5 +1,6 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import './movie-player.css';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,9 +10,11 @@ import { getCurrentLang } from '@/lib/metadata/html-lang';
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
 import { ElementTitle } from '@/components/customUi/element-title';
+import { LocalLink } from '@/i18n/locale';
 
 export default function MoviePlayer() {
   const { id } = useParams();
+  const { t } = useTranslation('movie');
   const movie = getMovieById(id);
   const relatedMoviesByDirector = movie ? getRelatedMoviesByDirector(movie, 3) : [];
   const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : [];
@@ -37,17 +40,17 @@ export default function MoviePlayer() {
             <CardHeader>
               <img
                 src="/cinema-film-remove-svgrepo-com.svg"
-                alt="Movie not found"
+                alt={t('notFoundAlt')}
                 className="mx-auto mb-6 h-48 opacity-80"
               />
-              <CardTitle>Movie not found</CardTitle>
+              <CardTitle>{t('notFoundTitle')}</CardTitle>
               <CardDescription>
-                The movie you are looking for does not exist.
+                {t('notFoundDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline">
-                <Link to="/movies">← Back to Movies</Link>
+                <LocalLink to="/movies">{t('backToMovies')}</LocalLink>
               </Button>
             </CardContent>
           </Card>
@@ -66,7 +69,7 @@ export default function MoviePlayer() {
         imageUrl={movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${movie.image}`}
         imageAlt={`${movie.title} – poster`}
         author={movie.director}
-        authorLabel="Directed by"
+        authorLabel={t('directedByLabel')}
         lang={lang}
         jsonLd={{
           "@context": "https://schema.org",
@@ -91,7 +94,7 @@ export default function MoviePlayer() {
         {/* Back Button */}
         <div className="mb-6">
           <Button asChild variant="outline">
-            <Link to="/movies">← Back to Movies</Link>
+            <LocalLink to="/movies">{t('backToMovies')}</LocalLink>
           </Button>
         </div>
 
@@ -157,11 +160,11 @@ export default function MoviePlayer() {
 
             <div className="space-y-4">
               <div>
-                <h3 className="text-lg font-semibold mb-2">Director</h3>
+                <h3 className="text-lg font-semibold mb-2">{t('director')}</h3>
                 <p className="text-muted-foreground">{movie.director}</p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Cast</h3>
+                <h3 className="text-lg font-semibold mb-2">{t('cast')}</h3>
                 <p className="text-muted-foreground">
                   {movie.cast?.join(", ") || '—'}
                 </p>
@@ -176,7 +179,7 @@ export default function MoviePlayer() {
             on larger screens. */}
         {movie.playerVisible && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-4">Watch Now</h2>
+            <h2 className="text-2xl font-bold mb-4">{t('watchNow')}</h2>
             {/* -mx-4 cancels the page's px-4 so the player goes full-bleed on phones */}
             <div className="-mx-4 sm:mx-0">
               <div className="aspect-video w-full overflow-hidden bg-black shadow-2xl sm:rounded-xl sm:ring-1 sm:ring-border">
@@ -189,7 +192,7 @@ export default function MoviePlayer() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                    No video available
+                    {t('noVideo')}
                   </div>
                 )}
               </div>
@@ -200,11 +203,11 @@ export default function MoviePlayer() {
         {/* Related sections unchanged */}
         {relatedMoviesByDirector.length > 0 && (
           <section>
-            <h2 className="text-3xl font-bold mb-8">More from {movie.director}</h2>
+            <h2 className="text-3xl font-bold mb-8">{t('moreFrom', { director: movie.director })}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {relatedMoviesByDirector.map((relatedMovie) => (
                 <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <Link to={`/movies/${relatedMovie.id}`}>
+                  <LocalLink to={`/movies/${relatedMovie.id}`}>
                     <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
                       <img
                         src={relatedMovie.image}
@@ -214,9 +217,9 @@ export default function MoviePlayer() {
                     </div>
                     <CardHeader>
                       <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
-                      <CardDescription>Directed by {relatedMovie.director}</CardDescription>
+                      <CardDescription>{t('directedBy', { director: relatedMovie.director })}</CardDescription>
                     </CardHeader>
-                  </Link>
+                  </LocalLink>
                 </Card>
               ))}
             </div>
@@ -225,11 +228,11 @@ export default function MoviePlayer() {
 
         {relatedMoviesByDirector.length === 0 && relatedMoviesByGenre.length > 0 && (
           <section>
-            <h2 className="text-3xl font-bold mb-8">More like "{movie.title}"</h2>
+            <h2 className="text-3xl font-bold mb-8">{t('moreLike', { title: movie.title })}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {relatedMoviesByGenre.map((relatedMovie) => (
                 <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <Link to={`/movies/${relatedMovie.id}`}>
+                  <LocalLink to={`/movies/${relatedMovie.id}`}>
                     <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
                       <img
                         src={relatedMovie.image}
@@ -239,9 +242,9 @@ export default function MoviePlayer() {
                     </div>
                     <CardHeader>
                       <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
-                      <CardDescription>Directed by {relatedMovie.director}</CardDescription>
+                      <CardDescription>{t('directedBy', { director: relatedMovie.director })}</CardDescription>
                     </CardHeader>
-                  </Link>
+                  </LocalLink>
                 </Card>
               ))}
             </div>

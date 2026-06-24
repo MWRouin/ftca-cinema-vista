@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
@@ -11,28 +11,25 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { LazyImage } from "@/components/customUi/lazy-image";
 import ShareActions from "@/components/customUi/share-actions";
+import { LocalLink } from "@/i18n/locale";
 
+const SLUG = "afterwork";
 
 export default function AfterworkMovienight() {
+    const { t } = useTranslation("eventDetail");
+
     const event = {
-        title: "Afterwork - Movie Night",
-        category: "Screenings & Discussion",
-        status: "Past Event",
-        date: "January 28, 2026",
-        location: "DayOne, Marsa – Tunis",
+        title: t(`${SLUG}.title`),
+        category: t(`${SLUG}.category`),
+        status: t(`${SLUG}.status`),
+        date: t(`${SLUG}.date`),
+        location: t(`${SLUG}.location`),
         image: "/events/afterworkMovienight/hero.jpg",
-
-        overview: `
-"Afterwork – Movie Night" is an intimate film screening and discussion experience by the Hammam-Lif Amateur Filmmakers' Club. Held at Day One, a cozy limited-capacity space, the event begins with an introduction to the federation, the club, and its activities, before bringing together filmmakers and audience members to discover a selection of short films and engage in conversations around their creative process.
-
-More than just a screening, it’s a moment of exchange: from idea to screen, we explore writing, directing, sound, and visual choices through open discussions with the directors.
-`,
-
+        overview: t(`${SLUG}.overview`),
         quote: {
-            text: "Filmmaking is not about budget, it’s about ideas, intention, and vision.",
-            callToAction: "Stay tuned and follow us for updates.",
+            text: t(`${SLUG}.quoteText`),
+            callToAction: t(`${SLUG}.quoteCta`),
         },
-
         gallery: [
             "/events/afterworkMovienight/IMG_2779.jpeg",
             "/events/afterworkMovienight/IMG_2788.jpeg",
@@ -48,52 +45,11 @@ More than just a screening, it’s a moment of exchange: from idea to screen, we
     };
 
     const media = [
-        {
-            type: "image",
-            src: "/events/afterworkMovienight/experience.jpg",
-            title: "The Experience",
-            caption: `Step into a warm, intimate setting designed for focus and exchange. This is not a passive screening, but a shared moment where everyone is involved.
-
-From the first frame to the final discussion, the atmosphere encourages curiosity, reflection, and genuine interaction between the audience and the filmmakers.`
-        },
-        {
-            type: "image",
-            src: "/events/afterworkMovienight/watchingmovies.jpg",
-            title: "The Program",
-            caption: `The evening features a selection of our club's short films, each offering a distinct voice and approach:
-
-- And Then, There Was One (2024) — Khalil Said & Wadii Klaii
-- Sire Ex Machina (2023) — Safa Khiari
-- Wed Trabelsia (2025) — Wadii Klaii
-
-The screenings are followed by an open exchange with the directors.`
-        },
-        {
-            type: "video",
-            src: "/events/afterworkMovienight/Afterworkmovienight.webm",
-            title: "Post-Screening Discussion",
-            caption: `Together with the directors, we break down each work from idea to execution: writing, directing, sound design, visual composition, and on-set choices. The goal is not only to understand the films, but to demystify the filmmaking process.
-
-Every question is welcome, every perspective adds to the conversation. It’s a moment of shared learning and connection between filmmakers and audience.`
-        },
-        {
-            type: "video",
-            src: "/events/afterworkMovienight/DayoneLogoAnimated.webm",
-            title: "The place",
-            caption: `DayOne,📍La Marsa • Tunis,
-
-is a cultural space that welcomes artistic expression and hosts a variety of creative activities and events.
-
-@dayone.tn`
-        },
-        {
-            type: "image",
-            src: "/events/afterworkMovienight/community.jpg",
-            title: "Community & Spirit",
-            caption: `The event reflects the vision of the Hammam-Lif Amateur Filmmakers' Club: making cinema accessible, collaborative, and alive.
-
-We believe filmmaking is not about budget, but about ideas, intention, and vision. Whether you’re a filmmaker, a curious viewer, or just discovering this world, you are part of the experience.`
-        },
+        { type: "image", src: "/events/afterworkMovienight/experience.jpg" },
+        { type: "image", src: "/events/afterworkMovienight/watchingmovies.jpg" },
+        { type: "video", src: "/events/afterworkMovienight/Afterworkmovienight.webm" },
+        { type: "video", src: "/events/afterworkMovienight/DayoneLogoAnimated.webm" },
+        { type: "image", src: "/events/afterworkMovienight/community.jpg" },
     ];
 
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
@@ -107,7 +63,7 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
                     {/* Back */}
                     <div className="mb-6">
                         <Button asChild variant="outline">
-                            <Link to="/events">← Back to Events</Link>
+                            <LocalLink to="/events">{t("backToEvents")}</LocalLink>
                         </Button>
                     </div>
 
@@ -143,7 +99,7 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
 
                             {/* Actions */}
                             <div className="self-start sm:self-auto">
-                                <ShareActions title={event.title} text={event.overview}/>
+                                <ShareActions title={event.title} text={event.overview} />
                             </div>
                         </div>
                     </div>
@@ -156,15 +112,20 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
                             </p>
                             <br />
                             <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
-                                Discover the venue{" "}
-                                <a
-                                    href="https://www.instagram.com/dayone.tn/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-foreground"
-                                >
-                                    DayOne
-                                </a>.
+                                <Trans
+                                    t={t}
+                                    i18nKey={`${SLUG}.venueLink`}
+                                    components={{
+                                        venue: (
+                                            <a
+                                                href="https://www.instagram.com/dayone.tn/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline hover:text-foreground"
+                                            />
+                                        ),
+                                    }}
+                                />
                             </p>
                         </CardContent>
                     </Card>
@@ -180,8 +141,8 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
                                     className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"
                                         }`}
                                 >
-                                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                                    <p className="whitespace-pre-line">{item.caption}</p>
+                                    <h3 className="text-xl font-semibold mb-3">{t(`${SLUG}.media.${i}.title`)}</h3>
+                                    <p className="whitespace-pre-line">{t(`${SLUG}.media.${i}.caption`)}</p>
                                 </div>
 
                                 {/* Media */}
@@ -195,7 +156,7 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
                                         >
                                             <LazyImage
                                                 src={item.src}
-                                                alt={item.title || `Event highlight ${i + 1}`}
+                                                alt={t(`${SLUG}.media.${i}.title`)}
                                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                             />
                                         </div>
@@ -242,7 +203,7 @@ We believe filmmaking is not about budget, but about ideas, intention, and visio
                     <br />
 
                     <section>
-                        <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                        <h2 className="text-3xl font-bold mb-6">{t("gallery")}</h2>
                         <EventGallerySlider images={event.gallery} />
                     </section>
 

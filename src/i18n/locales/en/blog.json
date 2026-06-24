@@ -1,0 +1,13 @@
+{
+  "title": "Blog & Articles",
+  "subtitle": "Insights, reviews, and deep dives into the world of cinema",
+  "featured": "Featured",
+  "by": "By {{author}}",
+  "empty": "Blog is empty currently.",
+  "checkBack": "Check back soon!",
+  "notFoundTitle": "Article not found",
+  "notFoundDesc": "The article you are looking for does not exist.",
+  "backToBlog": "← Back to Blog",
+  "meta": "By {{author}} • {{date}} • {{readTime}}",
+  "writtenBy": "Written by"
+}

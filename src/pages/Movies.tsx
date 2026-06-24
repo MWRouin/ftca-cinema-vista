@@ -3,14 +3,16 @@ import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
+import { LocalLink } from '@/i18n/locale';
 
 export default function Movies() {
+  const { t } = useTranslation('movies');
   const [selectedGenre, setSelectedGenre] = useState<string>('all');
 
 
@@ -29,22 +31,22 @@ export default function Movies() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <PageTitle title='Movie Catalog' />
+          <PageTitle title={t('title')} />
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Explore our curated collection of cinematic masterpieces
+            {t('subtitle')}
           </div>
 
           {/* Filter */}
           <div className="flex justify-center">
             <Select value={selectedGenre} onValueChange={setSelectedGenre}>
               <SelectTrigger className="w-64 card-cinema hover-lift focus-cinema">
-                <SelectValue placeholder="Filter by genre" />
+                <SelectValue placeholder={t('filterPlaceholder')} />
               </SelectTrigger>
               <SelectContent className="card-cinema">
                 {genres.map((genre) => (
                   <SelectItem key={genre} value={genre} className="hover:bg-primary/10">
-                    {genre === 'all' ? 'All Genres' : genre}
+                    {genre === 'all' ? t('allGenres') : genre}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -60,7 +62,7 @@ export default function Movies() {
               className="opacity-100 visible"
             >
               <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
-                <Link to={`/movies/${movie.id}`} className="block">
+                <LocalLink to={`/movies/${movie.id}`} className="block">
                   <div className="aspect-[2/3] overflow-hidden bg-muted">
                     <LazyImage
                       src={movie.image}
@@ -80,10 +82,10 @@ export default function Movies() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="text-sm text-muted-foreground">
-                      Directed by {movie.director}
+                      {t('directedBy', { director: movie.director })}
                     </div>
                   </CardContent>
-                </Link>
+                </LocalLink>
               </Card>
             </div>
           ))}
@@ -94,13 +96,13 @@ export default function Movies() {
             <div className="w-24 h-24 gradient-cinema rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
               <span className="text-white font-bold text-2xl">?</span>
             </div>
-            <div className="text-xl text-muted-foreground">No movies found for the selected genre.</div>
+            <div className="text-xl text-muted-foreground">{t('emptyMessage')}</div>
             <Button
               onClick={() => setSelectedGenre('all')}
               variant="outline"
               className="mt-4 hover-lift"
             >
-              View All Movies
+              {t('viewAll')}
             </Button>
           </div>
         )}

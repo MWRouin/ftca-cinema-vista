@@ -1,37 +1,33 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LazyImage } from "@/components/customUi/lazy-image";
 import ShareActions from "@/components/customUi/share-actions";
+import { LocalLink } from "@/i18n/locale";
+
+const SLUG = "ydour";
 
 export default function YdourEvent() {
+    const { t } = useTranslation("eventDetail");
+
     const event = {
-        title: "Ydour - يدور",
-        category: "Screening & Discussion",
-        status: "Past Event",
-        date: "February 22, 2025",
-        location: "Café culturel LIBER'THÉ",
-        image:
-            "/events/ydour/ydour-title.jpg",
-
-        overview: `
-YDOUR exists to bring together the amateur cinema community and cinema lovers.
-
-We noticed a lack of regular events that allow people to gather, watch films, and exchange ideas outside traditional screening rooms.
-
-There are important moments when the community comes together, such as FIFAK, where screenings and debates create a strong sense of collective experience. However, these opportunities happen only once a year. While FIFAK may be the biggest amateur cinema event, it shouldn’t be the only space where this community exists.`,
-
+        title: t(`${SLUG}.title`),
+        category: t(`${SLUG}.category`),
+        status: t(`${SLUG}.status`),
+        date: t(`${SLUG}.date`),
+        location: t(`${SLUG}.location`),
+        image: "/events/ydour/ydour-title.jpg",
+        overview: t(`${SLUG}.overview`),
         quote: {
-            text: "Stay tuned for the next edition!",
-            callToAction: "Follow us to get the lates news!",
+            text: t(`${SLUG}.quoteText`),
+            callToAction: t(`${SLUG}.quoteCta`),
         },
-
         gallery: [
             "/events/ydour/gal1.jpg",
             "/events/ydour/gal2.jpg",
@@ -47,32 +43,10 @@ There are important moments when the community comes together, such as FIFAK, wh
     };
 
     const media = [
-        {
-            type: "image",
-            src: "/About/ydour_web_optimized.jpg",
-            title: "The Experience",
-            caption: `The screening went smoothly. We expected a chill coffeeshop session, some people interacting with the film and discussion, others simply having a coffee with friends and passing by.
-
-Instead, the event quickly filled up. The café was full before the projection even started, and many people couldn’t find a place. We didn’t expect this number of attendees. `
-        },
-        {
-            type: "image",
-            src: "/events/ydour/theplace.jpg",
-            title: "The Place",
-            caption: `Café Culturel Liberthé, located in Lafayette, downtown Tunis, has long been a gathering point for cultural events.
-
-Thanks to its history and active community, Liberthé attracts an audience that is curious, engaged, and always up to date with cultural initiatives. The café has been hosting events for years, and successfully so, making it the perfect place for an event like YDOUR.`
-        },
-        {
-            type: "video",
-            src: "/events/ydour/talk.webm",
-            title: "Post-Screening Discussion",
-            caption: `We initially worried that attendees might feel timid during the debate, but the discussions exceeded our expectations. Many people actively engaged, creating thoughtful and meaningful exchanges.
-
-From the start, we had structured the screening into three parts, each followed by a discussion. While intended to deepen engagement, this format gradually slowed the event. As the evening went on, some attendees showed signs of fatigue and distraction, slowly leaving. This highlighted that the structure, rather than the debate itself, should be reconsidered for future editions.`
-        },
+        { type: "image", src: "/About/ydour_web_optimized.jpg" },
+        { type: "image", src: "/events/ydour/theplace.jpg" },
+        { type: "video", src: "/events/ydour/talk.webm" },
     ];
-
 
     return (
         <>
@@ -83,7 +57,7 @@ From the start, we had structured the screening into three parts, each followed 
                     {/* Back */}
                     <div className="mb-6">
                         <Button asChild variant="outline">
-                            <Link to="/events">← Back to Events</Link>
+                            <LocalLink to="/events">{t("backToEvents")}</LocalLink>
                         </Button>
                     </div>
 
@@ -144,8 +118,8 @@ From the start, we had structured the screening into three parts, each followed 
                                     className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"
                                         }`}
                                 >
-                                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                                    <p className="whitespace-pre-line">{item.caption}</p>
+                                    <h3 className="text-xl font-semibold mb-3">{t(`${SLUG}.media.${i}.title`)}</h3>
+                                    <p className="whitespace-pre-line">{t(`${SLUG}.media.${i}.caption`)}</p>
                                 </div>
 
                                 {/* Media */}
@@ -156,7 +130,7 @@ From the start, we had structured the screening into three parts, each followed 
                                     {item.type === "image" ? (
                                         <LazyImage
                                             src={item.src}
-                                            alt={item.title || `Event highlight ${i + 1}`}
+                                            alt={t(`${SLUG}.media.${i}.title`)}
                                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                         />
                                     ) : (
@@ -179,22 +153,18 @@ From the start, we had structured the screening into three parts, each followed 
                     <br />
 
                     <section>
-                        <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                        <h2 className="text-3xl font-bold mb-6">{t("gallery")}</h2>
                         <EventGallerySlider images={event.gallery} />
                     </section>
 
                     <br />
 
                     <section className="space-y-12">
-
                         <div className="items-center">
                             {/* Text */}
-                            <div
-                                className="text-muted-foreground">
+                            <div className="text-muted-foreground">
                                 <p className="whitespace-pre-line text-center">
-                                    Building on this first edition, YDOUR will continue to evolve as a space for shared viewing and dialogue.
-                                    <br />Future editions will refine their rhythm and structure while preserving what matters most: closeness, exchange, and accessibility.
-                                    <br />Attendees can also expect new cultural layers and surprises that will enrich the experience even further.`,
+                                    {t(`${SLUG}.closing`)}
                                 </p>
                             </div>
                         </div>

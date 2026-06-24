@@ -1,10 +1,12 @@
 import { PageTitle } from '@/components/customUi/page-title'
 import { Button } from '@/components/ui/button'
-import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import MetaHeader from '@/lib/metadata/metadata'
 import { PAGE_SEO } from '@/lib/metadata/seo-constants'
+import { LocalLink } from '@/i18n/locale'
 
 export default function Palmares() {
+  const { t } = useTranslation('static')
   const BASE = import.meta.env.BASE_URL || "/"
   return (
     <>
@@ -13,10 +15,10 @@ export default function Palmares() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <PageTitle title='Palmarès'/>
+          <PageTitle title={t('palmares.title')}/>
           <div className="section-divider w-24 mx-auto mb-8"></div>
           <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Awards & Recognitions
+            {t('palmares.subtitle')}
           </div>
         </div>
 
@@ -24,7 +26,7 @@ export default function Palmares() {
           {/* Trophy — Twemoji SVG (same image across all browsers) */}
           <img
             src={`${BASE}palmares-trophy.svg`}
-            alt="Trophy"
+            alt={t('palmares.trophyAlt')}
             className="w-44 h-44 mx-auto drop-shadow-md"
             width={176}
             height={176}
@@ -32,16 +34,15 @@ export default function Palmares() {
 
           {/* Message */}
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            This space will celebrate the films, creators, and moments that shaped
-            our cinematic journey.
+            {t('palmares.message')}
             <br /><br />
-            <span className="italic">Coming soon.</span>
+            <span className="italic">{t('palmares.comingSoon')}</span>
           </p>
 
           {/* CTA */}
           <div className="space-x-4">
             <Button asChild>
-              <Link to="/">← Back to Home</Link>
+              <LocalLink to="/">{t('palmares.backHome')}</LocalLink>
             </Button>
           </div>
 
