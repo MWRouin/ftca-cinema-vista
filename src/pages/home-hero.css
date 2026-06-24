@@ -56,9 +56,9 @@
   --pad-x: clamp(1.15rem, 5vw, 3rem);
 
   position: relative;
-  /* Navbar is fixed/out of flow, so the hero fills from the very top. */
-  min-height: 80vh;
-  min-height: 80svh;
+  /* Sized to its content (no viewport-based min-height), so SEO/screenshot
+     tools that capture with very tall mobile viewports don't render a huge
+     mostly-empty hero. */
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -373,7 +373,6 @@
 @media (max-width: 680px) {
   .editorial-hero {
     align-items: flex-start;
-    min-height: 86svh;
     /* A touch less side padding on phones gives the larger title room to stay
        on one line. */
     --pad-x: clamp(1rem, 4vw, 3rem);
