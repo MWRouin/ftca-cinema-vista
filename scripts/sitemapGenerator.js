@@ -2,6 +2,7 @@ import fs from 'fs/promises';
 import fsSync from 'fs';
 import path from 'path';
 import {
+    SITE_URL,
     SUPPORTED_LOCALES,
     localizedPageUrl,
     hreflangAlternates,
@@ -28,22 +29,34 @@ function escapeXml(str) {
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+/** Resolve a stored asset path (possibly __BASE_URL__/… or relative) to an absolute URL. */
+function resolveImageUrl(image) {
+    if (!image) return "";
+    if (image.startsWith('http')) return image;
+    return `${SITE_URL}${image.replace('__BASE_URL__/', '/')}`;
+}
+
 /**
  * One <url> per locale for a locale-neutral page key, each listing every
- * locale (plus x-default) as an <xhtml:link> alternate.
+ * locale (plus x-default) as an <xhtml:link> alternate. `image` (absolute URL),
+ * when provided, is emitted as a Google image-sitemap <image:image> entry.
  */
-function urlEntries(pageKey, lastmod, changefreq = "monthly", priority = "0.5") {
+function urlEntries(pageKey, lastmod, changefreq = "monthly", priority = "0.5", image = "") {
     const alternates = hreflangAlternates(pageKey)
         .map(({ hreflang, href }) =>
             `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${escapeXml(href)}" />`)
         .join('\n');
+
+    const imageBlock = image
+        ? `\n    <image:image>\n      <image:loc>${escapeXml(image)}</image:loc>\n    </image:image>`
+        : '';
 
     return SUPPORTED_LOCALES.map((locale) => `  <url>
     <loc>${escapeXml(localizedPageUrl(pageKey, locale))}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
-${alternates}
+${alternates}${imageBlock}
   </url>`).join('\n');
 }
 
@@ -70,7 +83,7 @@ async function main([, , buildFolderPath]) {
         await fs.readFile(new URL('../src/data/movies.json', import.meta.url), 'utf-8')
     );
     for (const movie of movies.filter(m => m.public && m.id)) {
-        urls.push(urlEntries(`movies/${movie.id}`, today, "monthly", "0.6"));
+        urls.push(urlEntries(`movies/${movie.id}`, today, "monthly", "0.6", resolveImageUrl(movie.image)));
     }
 
     // Events
@@ -83,11 +96,11 @@ async function main([, , buildFolderPath]) {
 
     // Blog articles
     for (const article of getBlogArticles()) {
-        urls.push(urlEntries(`blog/${article.slug}`, article.date || today, "monthly", "0.7"));
+        urls.push(urlEntries(`blog/${article.slug}`, article.date || today, "monthly", "0.7", resolveImageUrl(article.image)));
     }
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.join('\n')}
 </urlset>
 `;

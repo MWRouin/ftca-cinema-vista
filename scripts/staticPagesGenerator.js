@@ -4,6 +4,7 @@ import path from 'path';
 import {
     SITE_URL,
     SITE_NAME,
+    SITE_NAME_FULL,
     PAGE_SEO,
     buildPageTitle,
     DEFAULT_OG_IMAGE,
@@ -14,6 +15,7 @@ import {
     getLocalizedPageSeo,
     localizedPageUrl,
     hreflangAlternates,
+    buildBreadcrumbList,
 } from '../src/lib/metadata/seo-constants.ts';
 import { getBlogArticles } from '../src/data/blog.ts';
 
@@ -66,6 +68,56 @@ function replaceOrInsertMetaTag(html, attributeName, key, content) {
         return html.replace(selector, metaTag);
     }
     return html.replace(/<\/head>/i, `  ${metaTag}\n</head>`);
+}
+
+/**
+ * Serialize one or more JSON-LD objects into <script> tags. Marked with
+ * data-ftca-seo="json-ld" so the runtime MetaHeader replaces them on hydration
+ * (no duplicate structured data in the rendered DOM).
+ */
+function jsonLdBlock(items) {
+    return items
+        .filter(Boolean)
+        .map((data) =>
+            `<script type="application/ld+json" data-ftca-seo="json-ld">${JSON.stringify(data)}</script>`)
+        .join('\n  ');
+}
+
+/** Sections shown in the no-JS navigation, in order. */
+const NAV_KEYS = ["", "movies", "events", "blog", "about", "palmares", "contact"];
+
+/**
+ * Build a page-specific <noscript> body block: a real <h1>, the description,
+ * an author/director line when present, and a localized nav. Replaces the
+ * generic fallback so crawlers / LLM bots that don't run JS see unique,
+ * page-relevant content (real visitors never render <noscript>).
+ */
+function buildNoscript(pageKey, locale, seo) {
+    const heading = pageKey === "" ? SITE_NAME_FULL : (seo?.title || SITE_NAME_FULL);
+    const description = seo?.description || "";
+    const authorLine = seo?.author
+        ? `<p>${escapeHtml(seo.authorLabel || "By")} ${escapeHtml(seo.author)}</p>`
+        : "";
+    const nav = NAV_KEYS
+        .map((key) => {
+            const label = getLocalizedPageSeo(key, locale).title
+                || (key === "" ? SITE_NAME_FULL : key);
+            return `        <li><a href="${escapeHtml(localizedPageUrl(key, locale))}">${escapeHtml(label)}</a></li>`;
+        })
+        .join('\n');
+
+    return `<noscript>
+    <div style="padding: 2rem; font-family: sans-serif; max-width: 800px; margin: 0 auto;">
+      <h1>${escapeHtml(heading)}</h1>
+      ${authorLine}
+      <p>${escapeHtml(description)}</p>
+      <nav>
+        <ul>
+${nav}
+        </ul>
+      </nav>
+    </div>
+  </noscript>`;
 }
 
 /** Build the <link rel="alternate" hreflang> block for a page key. */
@@ -125,12 +177,21 @@ function injectSeoMeta(html, { pageKey, locale, seo }) {
         .replace(/<meta[^>]*name="twitter:description"[^>]*content="[^"]*"[^>]*\/?>/,
             `<meta name="twitter:description" content="${escapeHtml(description)}" />`);
 
-    // og:locale:alternate + hreflang alternates (inserted once, before </head>).
+    // Per-page structured data: the page's own JSON-LD (Movie / Article / Event /
+    // CollectionPage …) plus an auto-generated BreadcrumbList. Baked into the
+    // static HTML so non-JS crawlers and social/LLM bots see it too.
+    const pageJsonLd = seo?.jsonLd
+        ? (Array.isArray(seo.jsonLd) ? seo.jsonLd : [seo.jsonLd])
+        : [];
+    const breadcrumb = buildBreadcrumbList(pageKey, seo?.title, locale);
+    const structuredData = jsonLdBlock([...pageJsonLd, breadcrumb]);
+
+    // og:locale:alternate + hreflang alternates + JSON-LD (inserted once, before </head>).
     const localeAlternates = altLocales
         .map((l) => `<meta property="og:locale:alternate" content="${OG_LOCALE[l]}" />`)
         .join('\n  ');
     result = result.replace(/<\/head>/i,
-        `  ${localeAlternates}\n  ${hreflangBlock(pageKey)}\n</head>`);
+        `  ${localeAlternates}\n  ${hreflangBlock(pageKey)}\n  ${structuredData}\n</head>`);
 
     if (author) {
         result = replaceOrInsertMetaTag(result, 'name', 'author', author);
@@ -140,6 +201,10 @@ function injectSeoMeta(html, { pageKey, locale, seo }) {
         result = replaceOrInsertMetaTag(result, 'name', 'twitter:label1', authorLabel);
         result = replaceOrInsertMetaTag(result, 'name', 'twitter:data1', author);
     }
+
+    // Replace the generic body <noscript> with page-specific content.
+    result = result.replace(/<noscript>[\s\S]*?<\/noscript>/i,
+        buildNoscript(pageKey, locale, seo));
 
     return result;
 }
@@ -264,14 +329,32 @@ async function main([, , buildFolderPath]) {
     );
     for (const movie of movies.filter(m => m.public && m.id)) {
         const pageKey = `movies/${movie.id}`;
+        const description = movie.description || `${movie.title} – amateur film by ${movie.director}. ${SITE_NAME}.`;
+        const imageUrl = movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${resolveAssetUrl(movie.image)}`;
         const seo = {
             title: movie.title,
-            description: movie.description || `${movie.title} – amateur film by ${movie.director}. ${SITE_NAME}.`,
-            imageUrl: movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${resolveAssetUrl(movie.image)}`,
+            description,
+            imageUrl,
             imageAlt: `${movie.title} – poster`,
             author: movie.director,
             authorLabel: 'Directed by',
             ogType: 'video.movie',
+            jsonLd: {
+                "@context": "https://schema.org",
+                "@type": "Movie",
+                name: movie.title,
+                description,
+                director: { "@type": "Person", name: movie.director },
+                ...(movie.year ? { dateCreated: String(movie.year) } : {}),
+                ...(movie.genre ? { genre: movie.genre } : {}),
+                ...(movie.duration ? { duration: movie.duration } : {}),
+                ...(Array.isArray(movie.cast) && movie.cast.length
+                    ? { actor: movie.cast.map((name) => ({ "@type": "Person", name })) }
+                    : {}),
+                url: `${SITE_URL}/movies/${movie.id}`,
+                image: imageUrl,
+                productionCompany: { "@type": "Organization", name: SITE_NAME },
+            },
         };
         // Movie titles are proper nouns / content — same SEO across locales.
         await generatePage(indexHtml, buildRoot, pageKey, () => seo);
@@ -295,14 +378,30 @@ async function main([, , buildFolderPath]) {
     /* ---------- blog ---------- */
     for (const article of getBlogArticles()) {
         const pageKey = `blog/${article.slug}`;
+        const imageUrl = article.image ? `${SITE_URL}${article.image}` : DEFAULT_OG_IMAGE;
+        const publishedIso = article.date ? new Date(article.date).toISOString() : undefined;
+        const articleUrl = `${SITE_URL}/${pageKey}`;
         const seo = {
             title: article.title,
             description: article.excerpt,
-            imageUrl: article.image ? `${SITE_URL}${article.image}` : DEFAULT_OG_IMAGE,
+            imageUrl,
             imageAlt: article.title || DEFAULT_OG_IMAGE_ALT,
             author: article.author,
             authorLabel: 'Written by',
             ogType: 'article',
+            jsonLd: {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: article.title,
+                description: article.excerpt,
+                image: imageUrl,
+                ...(publishedIso ? { datePublished: publishedIso, dateModified: publishedIso } : {}),
+                author: { "@type": "Person", name: article.author },
+                mainEntityOfPage: articleUrl,
+                url: articleUrl,
+                inLanguage: article.lang ?? 'en',
+                publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
+            },
         };
         await generatePage(indexHtml, buildRoot, pageKey, () => seo);
         stubKeys.add(pageKey);

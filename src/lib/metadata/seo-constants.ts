@@ -400,3 +400,48 @@ export function hreflangAlternates(
   alts.push({ hreflang: "x-default", href: localizedPageUrl(pageKey, DEFAULT_LOCALE) });
   return alts;
 }
+
+/**
+ * Build a BreadcrumbList JSON-LD for a page key (Home › Section › Leaf).
+ * Returns null for the homepage and the 404 page (no breadcrumb).
+ * Shared by MetaHeader (runtime) and the static generator so both stay in sync.
+ *
+ * `leafTitle` is the current page's display title; section labels are pulled
+ * from PAGE_SEO so they're localized consistently.
+ */
+export function buildBreadcrumbList(
+  pageKey: string,
+  leafTitle: string | undefined,
+  locale: Locale,
+): Record<string, unknown> | null {
+  if (!pageKey || pageKey === "404") return null;
+
+  const homeName = getLocalizedPageSeo("", locale).title || SITE_NAME_FULL;
+  const crumbs: Array<{ name: string; url: string }> = [
+    { name: homeName, url: localizedPageUrl("", locale) },
+  ];
+
+  const parts = pageKey.split("/");
+  if (parts.length > 1) {
+    const section = parts[0];
+    crumbs.push({
+      name: getLocalizedPageSeo(section, locale).title || section,
+      url: localizedPageUrl(section, locale),
+    });
+  }
+  crumbs.push({
+    name: leafTitle || getLocalizedPageSeo(pageKey, locale).title || pageKey,
+    url: localizedPageUrl(pageKey, locale),
+  });
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  };
+}
