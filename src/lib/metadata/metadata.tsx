@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useMemo } from "react";
 import type { OgType } from "./metadata-types";
 import { useHtmlLanguage } from "./html-lang";
 import {
@@ -10,6 +10,7 @@ import {
     TWITTER_HANDLE,
     buildPageUrl,
     buildPageTitle,
+    buildBreadcrumbList,
     PAGE_SEO_FR,
 } from "./seo-constants";
 import { useLocale } from "@/i18n/locale";
@@ -168,6 +169,14 @@ export default function MetaHeader({
 
     const resolvedUrl = pageUrl || buildPageUrl(localizePath(neutralPath, locale));
     const resolvedTitle = buildPageTitle(effectiveTitle);
+
+    // Auto-append a BreadcrumbList (Home › Section › Leaf) to the page's JSON-LD.
+    const jsonLdWithBreadcrumb = useMemo(() => {
+        const breadcrumb = buildBreadcrumbList(pageKey, effectiveTitle, locale);
+        if (!breadcrumb) return jsonLd;
+        const base = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+        return [...base, breadcrumb];
+    }, [pageKey, effectiveTitle, locale, jsonLd]);
     const robots = noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
@@ -205,7 +214,7 @@ export default function MetaHeader({
         setMetaTag("name", "twitter:label1", author ? (authorLabel || "Written by") : undefined);
         setMetaTag("name", "twitter:data1", author);
 
-        syncJsonLdScripts(jsonLd);
+        syncJsonLdScripts(jsonLdWithBreadcrumb);
     }, [
         articlePublishedTime,
         author,
@@ -213,7 +222,7 @@ export default function MetaHeader({
         effectiveDescription,
         imageAlt,
         imageUrl,
-        jsonLd,
+        jsonLdWithBreadcrumb,
         neutralPath,
         ogLocaleKey,
         ogType,
