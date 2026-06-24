@@ -11,6 +11,15 @@
  */
 
 import type { OgType } from "./metadata-types";
+import {
+  SUPPORTED_LOCALES,
+  DEFAULT_LOCALE,
+  OG_LOCALE,
+  localizePath,
+  type Locale,
+} from "../../i18n/config";
+
+export { SUPPORTED_LOCALES, DEFAULT_LOCALE, OG_LOCALE, type Locale };
 
 /* ─── Site-wide constants ─── */
 
@@ -289,3 +298,105 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     noindex: true,
   },
 };
+
+/* ─── i18n: French overrides ─── */
+
+/**
+ * French title/description overrides for the static pages, keyed like
+ * PAGE_SEO. Anything not listed falls back to the English PAGE_SEO entry.
+ * Movie/blog detail titles come from content data and are not translated here.
+ */
+export const PAGE_SEO_FR: Record<string, { title?: string; description?: string }> = {
+  "": {
+    title: "Accueil",
+    description:
+      "Club des Cinéastes Amateurs de Hammam-Lif (FTCA) – une communauté passionnée de cinéastes amateurs en Tunisie. Découvrez nos films, événements, projections et discussions.",
+  },
+  movies: {
+    title: "Films",
+    description:
+      "Explorez la collection de films amateurs du Club des Cinéastes de Hammam-Lif. Courts métrages, fictions et documentaires produits par les membres de la FTCA.",
+  },
+  events: {
+    title: "Événements",
+    description:
+      "Découvrez les événements du Club des Cinéastes Amateurs de Hammam-Lif : projections, discussions, ateliers et rencontres en Tunisie.",
+  },
+  "events/ydour": {
+    title: "Ydour – يدور",
+    description:
+      "Ydour : projection & discussion organisée par le Club des Cinéastes Amateurs de Hammam-Lif. Un rassemblement pour la communauté du cinéma amateur, Café culturel LIBER'THÉ, février 2025.",
+  },
+  "events/ydour-v2": {
+    title: "Ydour – يدور v2",
+    description:
+      "Deuxième édition de YDOUR : un espace dédié au cinéma amateur. Projections, ateliers, exposition, musique. Espace culturel L'Écurie.",
+  },
+  "events/afterwork-movienight": {
+    title: "Afterwork - Movie Night",
+    description:
+      "Projections de films et discussions intimes avec les cinéastes à Day One, par le Club des Cinéastes Amateurs de Hammam-Lif. Un espace pour explorer les idées et le processus derrière chaque film.",
+  },
+  "events/films-de-hammamlif": {
+    title: "Films de Hammam-Lif",
+    description:
+      "Films de Hammam-Lif : projection & exposition au Complexe Culturel Ali Ben Ayed. Un hommage à la culture cinématographique de Hammam-Lif par la FTCA, décembre 2025.",
+  },
+  blog: {
+    title: "Blog & Articles",
+    description:
+      "Articles, réflexions et regards sur le cinéma amateur par les membres du club FTCA Hammam-Lif.",
+  },
+  about: {
+    title: "À propos – Notre histoire",
+    description:
+      "Découvrez l'histoire du Club des Cinéastes Amateurs de Hammam-Lif, notre équipe passionnée et notre mission de promouvoir le cinéma amateur en Tunisie.",
+  },
+  palmares: {
+    title: "Palmarès",
+    description:
+      "Prix & distinctions du Club des Cinéastes Amateurs de Hammam-Lif. Récompenses et réalisations dans le cinéma amateur.",
+  },
+  contact: {
+    title: "Contact",
+    description:
+      "Contactez le Club des Cinéastes Amateurs de Hammam-Lif. Rejoignez notre communauté, proposez un film ou renseignez-vous sur nos événements.",
+  },
+  "404": {
+    title: "Page introuvable",
+    description: "La page que vous recherchez n'existe pas.",
+  },
+};
+
+/* ─── i18n helpers (shared by MetaHeader and the build scripts) ─── */
+
+/** Per-page SEO for a given locale, French overrides applied where present. */
+export function getLocalizedPageSeo(pageKey: string, locale: Locale): PageSeo {
+  const base = PAGE_SEO[pageKey] ?? {
+    title: SITE_NAME,
+    description: "",
+    pagePathname: pageKey,
+  };
+  if (locale === "fr" && PAGE_SEO_FR[pageKey]) {
+    return { ...base, ...PAGE_SEO_FR[pageKey] };
+  }
+  return base;
+}
+
+/** Absolute URL for a locale-neutral page key (e.g. "", "movies", "events/ydour"). */
+export function localizedPageUrl(pageKey: string, locale: Locale): string {
+  const path = pageKey ? `/${pageKey}` : "/";
+  return buildPageUrl(localizePath(path, locale));
+}
+
+/** hreflang alternates (every locale + x-default) for a page key. */
+export function hreflangAlternates(
+  pageKey: string,
+): Array<{ hreflang: string; href: string }> {
+  const alts = SUPPORTED_LOCALES.map((loc) => ({
+    hreflang: loc as string,
+    href: localizedPageUrl(pageKey, loc),
+  }));
+  alts.push({ hreflang: "x-default", href: localizedPageUrl(pageKey, DEFAULT_LOCALE) });
+  return alts;
+}

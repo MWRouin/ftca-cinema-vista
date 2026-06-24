@@ -10,6 +10,7 @@ import {
     TWITTER_HANDLE,
     buildPageUrl,
     buildPageTitle,
+    PAGE_SEO_FR,
 } from "./seo-constants";
 import { useLocale } from "@/i18n/locale";
 import {
@@ -157,8 +158,16 @@ export default function MetaHeader({
         ? (effectiveLang as Locale)
         : locale;
 
+    // Apply per-locale SEO overrides (currently French) for known page keys so
+    // the runtime title/description match the prerendered HTML. Content pages
+    // (movies/blog) aren't in the map and keep their data-driven values.
+    const pageKey = neutralPath.replace(/^\/+/, "");
+    const localizedSeo = locale !== DEFAULT_LOCALE ? PAGE_SEO_FR[pageKey] : undefined;
+    const effectiveTitle = localizedSeo?.title ?? title;
+    const effectiveDescription = localizedSeo?.description ?? description;
+
     const resolvedUrl = pageUrl || buildPageUrl(localizePath(neutralPath, locale));
-    const resolvedTitle = buildPageTitle(title);
+    const resolvedTitle = buildPageTitle(effectiveTitle);
     const robots = noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
@@ -168,7 +177,7 @@ export default function MetaHeader({
         setCanonicalLink(resolvedUrl);
         syncAlternateLinks(neutralPath);
 
-        setMetaTag("name", "description", description);
+        setMetaTag("name", "description", effectiveDescription);
         setMetaTag("name", "author", author || SITE_NAME_FULL);
         setMetaTag("name", "robots", robots);
 
@@ -179,7 +188,7 @@ export default function MetaHeader({
         setMetaTag("property", "og:title", resolvedTitle);
         setMetaTag("property", "og:site_name", SITE_NAME);
         setMetaTag("property", "og:url", resolvedUrl);
-        setMetaTag("property", "og:description", description);
+        setMetaTag("property", "og:description", effectiveDescription);
         setMetaTag("property", "og:type", ogType);
         setMetaTag("property", "og:image", imageUrl);
         setMetaTag("property", "og:image:width", "1200");
@@ -190,7 +199,7 @@ export default function MetaHeader({
 
         setMetaTag("name", "twitter:card", "summary_large_image");
         setMetaTag("name", "twitter:title", resolvedTitle);
-        setMetaTag("name", "twitter:description", description);
+        setMetaTag("name", "twitter:description", effectiveDescription);
         setMetaTag("name", "twitter:image", imageUrl);
         setMetaTag("name", "twitter:site", TWITTER_HANDLE);
         setMetaTag("name", "twitter:label1", author ? (authorLabel || "Written by") : undefined);
@@ -201,7 +210,7 @@ export default function MetaHeader({
         articlePublishedTime,
         author,
         authorLabel,
-        description,
+        effectiveDescription,
         imageAlt,
         imageUrl,
         jsonLd,
