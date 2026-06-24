@@ -99,7 +99,11 @@ export function Navigation() {
         <div className="relative h-16 flex items-center">
           {/* Logo (left) */}
           <div className="flex items-center p-2">
-            <LocalLink to="/" className="flex items-center space-x-3">
+            <LocalLink
+              to="/"
+              className="flex items-center space-x-3"
+              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+            >
               <Logo
                 size={50}
                 className="hover:scale-110 transition-transform drop-shadow-lg"
@@ -109,7 +113,7 @@ export function Navigation() {
           </div>
 
           {/* Desktop Navigation (centered on md+) */}
-          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-2">
+          <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-2">
             {navItems.map((item, index) => (
               <LocalLink
                 key={item.key}
@@ -131,22 +135,19 @@ export function Navigation() {
 
           {/* Right side actions: Theme toggle (desktop) and mobile controls */}
           <div className="ml-auto flex items-center space-x-3">
-            {/* Theme + language toggles: visible on md and hidden on small screens within this slot (mobile keeps its own toggles) */}
-            <div className="hidden md:flex items-center space-x-2">
+            {/* Language + theme toggles: visible on md and hidden on small screens within this slot (mobile keeps its own toggles) */}
+            <div className="hidden lg:flex items-center space-x-2">
               <LanguageToggle onDark={overlay} />
               <ThemeToggle onDark={overlay} />
             </div>
 
             {/* Mobile: language + theme toggle + menu button (unchanged behavior) */}
-            <div className="md:hidden flex items-center space-x-2">
+            <div className="lg:hidden flex items-center space-x-2">
               <LanguageToggle onDark={overlay} />
               <ThemeToggle onDark={overlay} />
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors group ${overlay
-                  ? 'bg-transparent'
-                  : 'bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30'
-                  }`}
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors group bg-transparent"
                 aria-label="Toggle menu"
               >
                 <Menu className={`w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-primary'} ${isOpen ? 'rotate-90' : ''}`} />
@@ -162,7 +163,7 @@ export function Navigation() {
           toggle button still works, but above the panel-less page content. */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 z-30"
+          className="lg:hidden fixed inset-0 z-30"
           aria-hidden="true"
           onClick={() => setIsOpen(false)}
         />
@@ -173,7 +174,7 @@ export function Navigation() {
           backdrop-blur and make the blur appear only over the hero. */}
       <div
         className={
-          `md:hidden fixed top-16 right-3 z-40 w-60 origin-top-right transition-all duration-200 ${isOpen
+          `lg:hidden fixed top-16 right-3 z-40 w-60 origin-top-right transition-all duration-200 ${isOpen
             ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
             : 'opacity-0 -translate-y-3 scale-95 pointer-events-none'}`
         }

@@ -184,6 +184,7 @@
 /* Each phrase stays intact; the break only happens at the dot (handled in the
    mobile media query below). */
 .editorial-hero .eyebrow-seg { white-space: nowrap; }
+.editorial-hero .eyebrow-sep { margin: 0 0.6rem; }
 
 /* Heading */
 .editorial-hero h1 {

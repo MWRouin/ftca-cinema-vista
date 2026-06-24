@@ -97,7 +97,7 @@ export default function YdourEventV2() {
 
                     {/* Overview */}
                     <Card className="mb-8">
-                        <CardContent>
+                        <CardContent className="pt-6">
                             <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                                 {event.overview}
                             </p>

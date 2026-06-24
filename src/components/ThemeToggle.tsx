@@ -23,16 +23,10 @@ const nextLabel: Record<string, string> = {
 export function ThemeToggle({ onDark = false }: { onDark?: boolean }) {
   const { theme, toggleTheme } = useTheme();
 
-  // Over the hero the navbar is transparent on a dark-tinted photo, so the
-  // toggle needs light colors to stay visible regardless of the active theme.
-  const buttonClass = onDark
-    ? "bg-transparent"
-    : "bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30";
-
   return (
     <button
       onClick={toggleTheme}
-      className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors group ${buttonClass}`}
+      className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors group bg-transparent"
       aria-label={`Switch to ${nextLabel[theme]} mode`}
       title={`Theme: ${theme}`}
     >

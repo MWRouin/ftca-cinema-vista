@@ -38,22 +38,22 @@ export function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
     navigate(localizePath(neutralPath, next) + location.search + location.hash);
   };
 
-  const buttonClass = onDark
-    ? "bg-transparent text-white hover:bg-white/10"
-    : "bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 text-primary";
+  const buttonClass = onDark ? "text-white" : "text-primary";
 
   return (
     <button
       onClick={switchLanguage}
-      className={`h-9 px-2.5 rounded-lg flex items-center gap-1.5 transition-colors group ${buttonClass}`}
+      className={`h-9 px-1.5 rounded-lg flex items-center bg-transparent transition-colors group ${buttonClass}`}
       aria-label={t("language.switchTo", { language: t(`language.${next}`) })}
       title={t("language.switchTo", { language: t(`language.${next}`) })}
     >
-      <Flag
-        className="w-5 h-auto rounded-[2px] shadow-sm ring-1 ring-black/10 group-hover:scale-110 transition-transform"
-        aria-hidden="true"
-      />
-      <span className="text-xs font-semibold uppercase">{locale}</span>
+      <span className="flex items-center gap-1.5 group-hover:scale-110 transition-transform">
+        <Flag
+          className="w-6 h-auto rounded-[2px] shadow-sm ring-1 ring-black/10"
+          aria-hidden="true"
+        />
+        <span className="text-sm font-semibold uppercase">{locale}</span>
+      </span>
     </button>
   );
 }

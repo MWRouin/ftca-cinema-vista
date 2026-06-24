@@ -8,26 +8,26 @@
   :root {
     /* Dark theme (root): mapped to the editorial hero palette
        (deep teal-green + warm sand accent on a green-ink ground). */
-    --background: 162 40% 6%;
+    --background: 162 40% 4%;
     /* green-tinted ink, ~ hero --ink #07150f */
     --foreground: 40 30% 94%;
     /* warm cream, ~ hero --cream #f8f4ec */
 
-    --card: 162 32% 9%;
+    --card: 162 32% 7%;
     --card-foreground: 40 30% 94%;
 
-    --popover: 162 32% 9%;
+    --popover: 162 32% 7%;
     --popover-foreground: 40 30% 94%;
 
     --primary: 167 58% 28%;
     /* hero --green #1f6b5c */
     --primary-foreground: 40 35% 95%;
 
-    --secondary: 167 55% 12%;
+    --secondary: 167 55% 10%;
     /* deep green section bg */
     --secondary-foreground: 40 30% 94%;
 
-    --muted: 162 18% 15%;
+    --muted: 162 18% 13%;
     --muted-foreground: 150 12% 64%;
 
     --accent: 41 45% 70%;
@@ -43,7 +43,7 @@
 
     --radius: 0.25rem;
 
-    --sidebar-background: 162 34% 8%;
+    --sidebar-background: 162 34% 6%;
     --sidebar-foreground: 40 30% 94%;
     --sidebar-primary: 167 55% 30%;
     --sidebar-primary-foreground: 40 35% 95%;
