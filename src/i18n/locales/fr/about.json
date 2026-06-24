@@ -1,0 +1,75 @@
+{
+  "title": "Notre histoire",
+  "history": {
+    "lead": "Entre mer et montagnes, Hammam-Lif fut autrefois une destination culturelle.",
+    "p1": "En <hl>1964</hl>, notre ciné-club est né. Nous avons émergé durant l'âge d'or du mouvement des ciné-clubs en Tunisie, avec l'ambition de promouvoir la culture cinématographique dans le pays. Mais peu à peu, les choses se sont estompées : les salles ont fermé l'une après l'autre, et les affiches de films ont commencé à jaunir.",
+    "p2": "Installé au cœur de Hammam-Lif, notre espace réunissait lycéens et universitaires. Des passionnés de cinéma d'âges, d'horizons et d'opinions politiques différents, tous unis par la même passion.",
+    "p3": "D'une génération à l'autre, notre club a réalisé des œuvres remarquables et marquantes : courts métrages, documentaires, photographies et scénarios primés, qui ont suscité des changements sociaux, culturels et politiques.",
+    "p4": "Aujourd'hui, ceux qui s'en souviennent regardent en arrière avec fierté, tandis que nous avançons avec une seule motivation : être la voix de ceux qui n'en ont pas."
+  },
+  "mission": {
+    "title": "Notre mission",
+    "p1": "Nous produisons pour refléter les réalités sociales, culturelles et politiques. Notre mission est de porter les préoccupations des gens, d'éclairer les vérités difficiles et de questionner ce qui doit l'être.",
+    "through": "Nous le faisons à travers :",
+    "screenings": "Des projections",
+    "debates": "Des débats",
+    "workshops": "Des ateliers",
+    "p2": "Nous attirons et accompagnons de nouveaux talents et faisons rayonner le cinéma amateur tunisien. Membres fiers de la FTCA, nous organisons des événements culturels, soutenons les causes des droits humains, défendons la liberté d'expression et transmettons notre passion du cinéma à la génération suivante.",
+    "imageAlt": "Événement Ydour – projection de cinéma",
+    "caption": "Capturé lors de l'événement « Ydour »."
+  },
+  "values": {
+    "title": "Ce que nous défendons",
+    "unityTitle": "L'unité",
+    "unityDesc": "Nous croyons en la force du rassemblement : partager des idées, des efforts et des valeurs comme un seul corps. L'unité est la flamme de notre communauté ; elle nourrit la collaboration, l'équité et, surtout, un sentiment d'appartenance.",
+    "amateurismTitle": "L'amateurisme",
+    "amateurismDesc": "Nous embrassons l'amateurisme comme une forme de liberté. Nos films naissent d'une intention et d'une conviction, non d'intérêts politiques ou commerciaux. Le cinéma est notre outil d'expression.",
+    "socialTitle": "L'engagement social",
+    "socialDesc": "L'art et l'action vont de pair. Nos films dépassent le divertissement et l'esthétique : ils existent pour questionner, faire réfléchir et émouvoir. Nous utilisons le cinéma comme un moyen d'aborder les enjeux sociaux, de sensibiliser et de donner voix à ce qui reste trop souvent inaudible."
+  },
+  "team": {
+    "title": "Notre équipe",
+    "showAll": "Tout afficher",
+    "showLess": "Afficher moins"
+  },
+  "honorary": {
+    "title": "Membres honoraires",
+    "subtitle": "En hommage à celles et ceux qui ont contribué à notre héritage"
+  },
+  "roles": {
+    "president": "Président",
+    "general-secretary": "Secrétaire général",
+    "treasurer": "Trésorier",
+    "member": "Membre",
+    "honorary-member": "Membre honoraire"
+  },
+  "members": {
+    "wadii-klaii": {
+      "bio": "Artiste pluridisciplinaire passionné de cinéma. D'abord monteur, il explore aujourd'hui la réalisation."
+    },
+    "seif-eddine-larbi": {
+      "bio": "Passionné d'écriture, ce qui le mène à une compréhension plus profonde des récits cinématographiques."
+    },
+    "hichem-gtari": {
+      "bio": "Ingénieur en mécanique passionné de cinéma. Il aime explorer les aspects techniques de la production de films."
+    },
+    "khalil-said": {
+      "bio": "Ingénieur en mécanique passionné de cinéma. Passionné de photographie et de réalisation."
+    },
+    "safa-khiari": {
+      "bio": "Professeure de français et cinéphile, elle aime découvrir le cinéma de différentes cultures."
+    },
+    "wissem-rouin": {
+      "bio": "Développeur web et passionné de cinéma."
+    },
+    "nour-ben-chiekh": {
+      "bio": "Journaliste et amoureuse du cinéma. Elle aime analyser les films sous un angle sociopolitique."
+    },
+    "aziz-baraketi": {
+      "bio": "Cinéphile ayant étudié le cinéma. D'abord photographe, il est devenu cadreur."
+    },
+    "itaf-daghsen": {
+      "bio": "Actrice et passionnée de cinéma. Passionnée par la narration à travers le jeu."
+    }
+  }
+}

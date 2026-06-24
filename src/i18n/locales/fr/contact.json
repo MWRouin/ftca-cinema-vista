@@ -1,0 +1,35 @@
+{
+  "title": "Nous contacter",
+  "subtitle": "Contactez notre équipe ou rejoignez notre communauté",
+  "form": {
+    "title": "Envoyez-nous un message",
+    "description": "Des questions sur nos événements, envie de suggérer un film ou de nous rejoindre ? Nous serions ravis d'avoir de vos nouvelles !",
+    "nameLabel": "Nom complet",
+    "namePlaceholder": "Votre nom complet",
+    "subjectLabel": "Objet *",
+    "subjectPlaceholder": "De quoi s'agit-il ?",
+    "messageLabel": "Message *",
+    "messagePlaceholder": "Dites-nous en plus...",
+    "submit": "Envoyer le message"
+  },
+  "details": {
+    "title": "Entrer en contact",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "address": "Adresse"
+  },
+  "meetings": {
+    "title": "Réunions régulières",
+    "weekly": "Réunions hebdomadaires",
+    "weeklyTime": "Le samedi à 17h00"
+  },
+  "follow": {
+    "title": "Suivez-nous",
+    "subtitle": "Restez connectés à nos dernières actualités et événements :"
+  },
+  "join": {
+    "title": "Rejoignez notre communauté",
+    "text": "Envie de devenir membre ? Nous accueillons les passionnés de cinéma de tous niveaux !",
+    "cta": "Rejoignez-nous"
+  }
+}

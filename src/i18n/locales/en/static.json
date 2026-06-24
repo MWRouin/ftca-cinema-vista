@@ -1,0 +1,14 @@
+{
+  "notFound": {
+    "message": "Oops! Page not found",
+    "backHome": "Return to Home"
+  },
+  "palmares": {
+    "title": "Palmarès",
+    "subtitle": "Awards & Recognitions",
+    "trophyAlt": "Trophy",
+    "message": "This space will celebrate the films, creators, and moments that shaped our cinematic journey.",
+    "comingSoon": "Coming soon.",
+    "backHome": "← Back to Home"
+  }
+}

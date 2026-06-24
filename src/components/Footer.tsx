@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
+import { LocalLink } from '@/i18n/locale';
 
 export function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Movies', path: '/movies' },
-    { name: 'Events', path: '/events' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'Contact', path: '/contact' },
+    { key: 'home', path: '/' },
+    { key: 'movies', path: '/movies' },
+    { key: 'events', path: '/events' },
+    { key: 'blog', path: '/blog' },
+    { key: 'contact', path: '/contact' },
   ];
 
   const socialLinks = [
@@ -28,15 +30,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Club Info */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center space-x-3 mb-4">
+            <LocalLink to="/" className="flex items-center space-x-3 mb-4">
               <Logo size={40} className="drop-shadow-lg" />
               <div>
-                <h3 className="font-bold text-lg">Club des Cinéastes Amateurs de Hammamlif</h3>
-                <p className="text-sm text-muted-foreground">Where Cinema Comes Alive</p>
+                <h3 className="font-bold text-lg">{t('footer.clubName')}</h3>
+                <p className="text-sm text-muted-foreground">{t('footer.tagline')}</p>
               </div>
-            </Link>
+            </LocalLink>
             <p className="text-muted-foreground mb-4 max-w-md">
-              Our mission and goals are far beyond celebrating cinema as an art. We have a philosophical foundation. We use it as a medium to question, reflect, and share ideas.
+              {t('footer.mission')}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -56,16 +58,16 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Quick Links</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
+                <li key={link.key}>
+                  <LocalLink
                     to={link.path}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {link.name}
-                  </Link>
+                    {t(`nav.${link.key}`)}
+                  </LocalLink>
                 </li>
               ))}
             </ul>
@@ -73,7 +75,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">Contact</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.contact')}</h4>
             <div className="space-y-2">
               <a
                 href="mailto:contact@cineamateur-hlif.com"
@@ -106,10 +108,10 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-border/70 mt-10 pt-6 flex flex-col lg:flex-row justify-between items-center text-center lg:text-left gap-2">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} - Club des Cinéastes Amateurs de Hammamlif - All rights reserved.
+            {t('footer.rights', { year: currentYear })}
           </p>
           <p className="text-sm text-muted-foreground mt-2 sm:mt-0">
-            Beyond art, cinema as a voice for ideas and critique.
+            {t('footer.critique')}
           </p>
         </div>
       </div>

@@ -2,13 +2,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { PageTitle } from '@/components/customUi/page-title';
 import { Inbox } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { getBlogArticles } from '@/data/blog';
+import { LocalLink, useLocale } from '@/i18n/locale';
 
 export default function Blog() {
+  const { t } = useTranslation('blog');
+  const locale = useLocale();
   const articles = getBlogArticles();
 
   const formatDate = (dateString: string) => {
@@ -17,7 +20,7 @@ export default function Blog() {
       month: 'long',
       day: 'numeric',
     };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    return new Date(dateString).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', options);
   };
 
   const getCategoryColor = (category: string) => {
@@ -40,17 +43,17 @@ export default function Blog() {
       <div className="min-h-screen py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <PageTitle title="Blog & Articles" />
+            <PageTitle title={t('title')} />
             <div className="section-divider w-24 mx-auto mb-8"></div>
             <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Insights, reviews, and deep dives into the world of cinema
+              {t('subtitle')}
             </div>
           </div>
 
           {featuredArticle ? (
             <div className="mb-12">
               <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <Link to={`/blog/${featuredArticle.slug}`} className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                <LocalLink to={`/blog/${featuredArticle.slug}`} className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                   <div className="aspect-[16/9] lg:aspect-auto overflow-hidden rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none">
                     <LazyImage
                       src={featuredArticle.image}
@@ -60,7 +63,7 @@ export default function Blog() {
                   </div>
                   <div className="p-8 flex flex-col justify-center">
                     <Badge className={`w-fit mb-4 ${getCategoryColor(featuredArticle.category)}`}>
-                      Featured • {featuredArticle.category}
+                      {t('featured')} • {featuredArticle.category}
                     </Badge>
                     <CardTitle className="text-2xl md:text-3xl mb-4 group-hover:text-primary transition-colors text-left">
                       {featuredArticle.title}
@@ -69,28 +72,28 @@ export default function Blog() {
                       {featuredArticle.excerpt}
                     </CardDescription>
                     <div className="flex items-center text-sm text-muted-foreground">
-                      <span>By {featuredArticle.author}</span>
+                      <span>{t('by', { author: featuredArticle.author })}</span>
                       <span className="mx-2">•</span>
                       <span>{formatDate(featuredArticle.date)}</span>
                       <span className="mx-2">•</span>
                       <span>{featuredArticle.readTime}</span>
                     </div>
                   </div>
-                </Link>
+                </LocalLink>
               </Card>
             </div>
           ) : (
             <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
               <Inbox className="w-40 h-40 mx-auto text-muted-foreground" />
-              <p className="text-lg text-muted-foreground">Blog is empty currently.</p>
-              <p className="text-sm text-muted-foreground">Check back soon!</p>
+              <p className="text-lg text-muted-foreground">{t('empty')}</p>
+              <p className="text-sm text-muted-foreground">{t('checkBack')}</p>
             </div>
           )}
 
           {articles.length > 1 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {articles.slice(1).map((article) => (
-                <Link key={article.slug} to={`/blog/${article.slug}`} className="block">
+                <LocalLink key={article.slug} to={`/blog/${article.slug}`} className="block">
                   <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
                     <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
                       <LazyImage
@@ -112,7 +115,7 @@ export default function Blog() {
                         {article.excerpt}
                       </CardDescription>
                       <div className="flex items-center text-sm text-muted-foreground">
-                        <span>By {article.author}</span>
+                        <span>{t('by', { author: article.author })}</span>
                         <span className="mx-2">•</span>
                         <span>{formatDate(article.date)}</span>
                       </div>
@@ -121,7 +124,7 @@ export default function Blog() {
                       </div>
                     </CardContent>
                   </Card>
-                </Link>
+                </LocalLink>
               ))}
             </div>
           ) : null}

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ElementTitle } from '@/components/customUi/element-title';
 import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
@@ -11,33 +11,25 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { LazyImage } from "@/components/customUi/lazy-image";
 import ShareActions from "@/components/customUi/share-actions";
+import { LocalLink } from "@/i18n/locale";
 
+const SLUG = "ydour-v2";
 
 export default function YdourEventV2() {
+    const { t } = useTranslation("eventDetail");
+
     const event = {
-        title: "Ydour - يدور (2nd Edition)",
-        category: "Screenings • Workshops • Exhibition • Music",
-        status: "Upcoming Event",
-        date: "May 15–17, 2026",
-        location: "L’Écurie, Lafayette – Tunis",
+        title: t(`${SLUG}.title`),
+        category: t(`${SLUG}.category`),
+        status: t(`${SLUG}.status`),
+        date: t(`${SLUG}.date`),
+        location: t(`${SLUG}.location`),
         image: "/events/ydour2/ydour2Hero.jpg",
-
-        overview: `
-We are back again with the second edition of YDOUR / يدور.
-
-A space dedicated to amateur cinema. - من أجل سينما الهواة
-
-Over three days, YDOUR brings together filmmakers, artists, and curious minds through screenings, discussions, workshops, exhibitions, and music.
-
-Following the energy of the first edition, this new chapter expands the experience into a richer and more open cultural space.
-
-`,
-
+        overview: t(`${SLUG}.overview`),
         quote: {
-            text: "Places are limited — reservation details coming soon.",
-            callToAction: "Stay tuned and follow us for updates.",
+            text: t(`${SLUG}.quoteText`),
+            callToAction: t(`${SLUG}.quoteCta`),
         },
-
         gallery: [
             "/events/ydour2/ydour2.webp",
             "/events/ydour2/ydour2_2.jpg",
@@ -47,34 +39,8 @@ Following the energy of the first edition, this new chapter expands the experien
     };
 
     const media = [
-        {
-            type: "image",
-            src: "/events/ydour2/ydour2_4.jpg",
-            title: "Event Program",
-            caption: `Screenings & Debate:
-From the 1980s to the present, a selection of FTCA Hammam-Lif films. After screening, there is an open discussion.
-
-Workshops:
-Practical lessons encompassing the fundamentals of filmmaking. Anyone who wishes to learn and try new things is welcome.
-
-Photo Exhibition:
-A collective exhibition of works across generations, exploring different visual themes.
-
-Music:
-A curated music program fostering an area for gathering and exchange, showcasing local alternative sounds.`
-        },
-        {
-            type: "image",
-            src: "/events/ydour2/lecurie.png",
-            title: "The place",
-            caption: `L’Écurie,
-
-📍Tunis • Lafayette - Belvédère ,
-
-is a cultural space that welcomes artistic expression and hosts a variety of creative activities and events.
-
-@lecurie.tn`
-        },
+        { type: "image", src: "/events/ydour2/ydour2_4.jpg" },
+        { type: "image", src: "/events/ydour2/lecurie.png" },
     ];
 
     const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
@@ -88,7 +54,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                     {/* Back */}
                     <div className="mb-6">
                         <Button asChild variant="outline">
-                            <Link to="/events">← Back to Events</Link>
+                            <LocalLink to="/events">{t("backToEvents")}</LocalLink>
                         </Button>
                     </div>
 
@@ -131,29 +97,33 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
 
                     {/* Overview */}
                     <Card className="mb-8">
-                        <CardContent>
+                        <CardContent className="pt-6">
                             <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
                                 {event.overview}
                             </p>
                             <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
-                                Follow the event on{" "}
-                                <a
-                                    href="https://www.instagram.com/ydour.cine/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-foreground"
-                                >
-                                    Instagram
-                                </a>{" "}
-                                and discover the venue{" "}
-                                <a
-                                    href="https://www.instagram.com/lecurie.tn/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-foreground"
-                                >
-                                    L’Écurie
-                                </a>.
+                                <Trans
+                                    t={t}
+                                    i18nKey={`${SLUG}.follow`}
+                                    components={{
+                                        ig: (
+                                            <a
+                                                href="https://www.instagram.com/ydour.cine/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline hover:text-foreground"
+                                            />
+                                        ),
+                                        venue: (
+                                            <a
+                                                href="https://www.instagram.com/lecurie.tn/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="underline hover:text-foreground"
+                                            />
+                                        ),
+                                    }}
+                                />
                             </p>
                         </CardContent>
                     </Card>
@@ -169,8 +139,8 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                                     className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"
                                         }`}
                                 >
-                                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                                    <p className="whitespace-pre-line">{item.caption}</p>
+                                    <h3 className="text-xl font-semibold mb-3">{t(`${SLUG}.media.${i}.title`)}</h3>
+                                    <p className="whitespace-pre-line">{t(`${SLUG}.media.${i}.caption`)}</p>
                                 </div>
 
                                 {/* Media */}
@@ -184,7 +154,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                                         >
                                             <LazyImage
                                                 src={item.src}
-                                                alt={item.title || `Event highlight ${i + 1}`}
+                                                alt={t(`${SLUG}.media.${i}.title`)}
                                                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                             />
                                         </div>
@@ -288,7 +258,7 @@ is a cultural space that welcomes artistic expression and hosts a variety of cre
                     <br />
 
                     <section>
-                        <h2 className="text-3xl font-bold mb-6">Event Gallery</h2>
+                        <h2 className="text-3xl font-bold mb-6">{t("gallery")}</h2>
                         <EventGallerySlider images={event.gallery} />
                     </section>
                 </div>

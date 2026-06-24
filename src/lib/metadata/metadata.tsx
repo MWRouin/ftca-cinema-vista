@@ -7,11 +7,19 @@ import {
     DEFAULT_OG_IMAGE,
     DEFAULT_OG_IMAGE_ALT,
     DEFAULT_DESCRIPTION,
-    DEFAULT_LANG,
     TWITTER_HANDLE,
     buildPageUrl,
     buildPageTitle,
 } from "./seo-constants";
+import { useLocale } from "@/i18n/locale";
+import {
+    DEFAULT_LOCALE,
+    OG_LOCALE,
+    SUPPORTED_LOCALES,
+    localizePath,
+    stripLocale,
+    type Locale,
+} from "@/i18n/config";
 
 interface MetaHeaderProps {
     /** Page title (without the " | FTCA Hammam‑Lif" suffix — that's appended automatically). */
@@ -80,6 +88,30 @@ function setCanonicalLink(href: string) {
     link.setAttribute(MANAGED_ATTR, "true");
 }
 
+/**
+ * Emit <link rel="alternate" hreflang="…"> for every locale plus x-default,
+ * pointing at the locale-specific URL for the given locale-neutral path.
+ */
+function syncAlternateLinks(neutralPath: string) {
+    document.head
+        .querySelectorAll(`link[rel="alternate"][${MANAGED_ATTR}="hreflang"]`)
+        .forEach((node) => node.remove());
+
+    const add = (hreflang: string, href: string) => {
+        const link = document.createElement("link");
+        link.setAttribute("rel", "alternate");
+        link.setAttribute("hreflang", hreflang);
+        link.setAttribute("href", href);
+        link.setAttribute(MANAGED_ATTR, "hreflang");
+        document.head.appendChild(link);
+    };
+
+    SUPPORTED_LOCALES.forEach((loc) =>
+        add(loc, buildPageUrl(localizePath(neutralPath, loc))),
+    );
+    add("x-default", buildPageUrl(localizePath(neutralPath, DEFAULT_LOCALE)));
+}
+
 function syncJsonLdScripts(jsonLd?: Record<string, unknown> | Record<string, unknown>[]) {
     document.head
         .querySelectorAll(`script[${MANAGED_ATTR}="json-ld"]`)
@@ -106,16 +138,26 @@ export default function MetaHeader({
     ogType = "website",
     imageUrl = DEFAULT_OG_IMAGE,
     imageAlt = DEFAULT_OG_IMAGE_ALT,
-    lang = DEFAULT_LANG,
+    lang,
     jsonLd,
     articlePublishedTime,
     author,
     authorLabel,
     noindex = false,
 }: MetaHeaderProps) {
-    useHtmlLanguage(lang);
+    const locale = useLocale();
+    // Explicit `lang` (e.g. an article's content language) wins; otherwise the
+    // page inherits the active UI locale.
+    const effectiveLang = lang ?? locale;
+    useHtmlLanguage(effectiveLang);
 
-    const resolvedUrl = pageUrl || buildPageUrl(pagePathname ?? getCurrentPathname());
+    // Locale-neutral path (no "/fr" prefix), used to build per-locale URLs.
+    const neutralPath = pagePathname ?? stripLocale("/" + getCurrentPathname());
+    const ogLocaleKey: Locale = (SUPPORTED_LOCALES as readonly string[]).includes(effectiveLang)
+        ? (effectiveLang as Locale)
+        : locale;
+
+    const resolvedUrl = pageUrl || buildPageUrl(localizePath(neutralPath, locale));
     const resolvedTitle = buildPageTitle(title);
     const robots = noindex
         ? "noindex, nofollow"
@@ -124,12 +166,16 @@ export default function MetaHeader({
     useLayoutEffect(() => {
         document.title = resolvedTitle;
         setCanonicalLink(resolvedUrl);
+        syncAlternateLinks(neutralPath);
 
         setMetaTag("name", "description", description);
         setMetaTag("name", "author", author || SITE_NAME_FULL);
         setMetaTag("name", "robots", robots);
 
-        setMetaTag("property", "og:locale", "en_US");
+        setMetaTag("property", "og:locale", OG_LOCALE[ogLocaleKey]);
+        SUPPORTED_LOCALES.filter((loc) => loc !== ogLocaleKey).forEach((loc, i) =>
+            setMetaTag("property", `og:locale:alternate${i ? `:${i}` : ""}`, OG_LOCALE[loc]),
+        );
         setMetaTag("property", "og:title", resolvedTitle);
         setMetaTag("property", "og:site_name", SITE_NAME);
         setMetaTag("property", "og:url", resolvedUrl);
@@ -159,6 +205,8 @@ export default function MetaHeader({
         imageAlt,
         imageUrl,
         jsonLd,
+        neutralPath,
+        ogLocaleKey,
         ogType,
         resolvedTitle,
         resolvedUrl,

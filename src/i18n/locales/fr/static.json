@@ -1,0 +1,14 @@
+{
+  "notFound": {
+    "message": "Oups ! Page introuvable",
+    "backHome": "Retour à l'accueil"
+  },
+  "palmares": {
+    "title": "Palmarès",
+    "subtitle": "Prix & Distinctions",
+    "trophyAlt": "Trophée",
+    "message": "Cet espace célébrera les films, les créateurs et les moments qui ont marqué notre parcours cinématographique.",
+    "comingSoon": "Bientôt disponible.",
+    "backHome": "← Retour à l'accueil"
+  }
+}

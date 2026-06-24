@@ -1,0 +1,13 @@
+{
+  "title": "Blog & Articles",
+  "subtitle": "Réflexions, critiques et plongées au cœur du cinéma",
+  "featured": "À la une",
+  "by": "Par {{author}}",
+  "empty": "Le blog est vide pour le moment.",
+  "checkBack": "Revenez bientôt !",
+  "notFoundTitle": "Article introuvable",
+  "notFoundDesc": "L'article que vous recherchez n'existe pas.",
+  "backToBlog": "← Retour au blog",
+  "meta": "Par {{author}} • {{date}} • {{readTime}}",
+  "writtenBy": "Écrit par"
+}

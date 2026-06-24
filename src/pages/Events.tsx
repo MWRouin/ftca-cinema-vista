@@ -3,12 +3,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { PageTitle } from '@/components/customUi/page-title';
 import { CalendarX, FolderX } from 'lucide-react';
-import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
+import { LocalLink, useLocale } from '@/i18n/locale';
 
 export default function Events() {
+  const { t } = useTranslation('events');
+  const locale = useLocale();
   const events = [
     {
       id: 'ydour',
@@ -70,16 +73,16 @@ export default function Events() {
       month: 'long',
       day: 'numeric'
     };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    return new Date(dateString).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', options);
   };
 
   const EventCard = ({ event }: { event: typeof events[0] }) => (
     <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 max-w-[720px]">
 
       {/* Clickable overlay */}
-      <Link
+      <LocalLink
         to={`/events/${event.id}`}
-        aria-label={`Open event ${event.title}`}
+        aria-label={t('openEvent', { title: event.title })}
       >
 
         <div className="aspect-[16/9] overflow-hidden rounded-t-lg relative z-20">
@@ -93,16 +96,16 @@ export default function Events() {
         <CardHeader className="relative z-20">
           <div className="flex justify-between items-start mb-2">
             <Badge variant='secondary'>
-              {event.category}
+              {t(`items.${event.id}.category`)}
             </Badge>
             <Badge variant={event.status === 'upcoming' ? 'default' : 'outline'}>
-              {event.status === 'upcoming' ? 'Upcoming' : 'Past Event'}
+              {event.status === 'upcoming' ? t('badgeUpcoming') : t('badgePast')}
             </Badge>
           </div>
           <CardTitle className="text-xl">{event.title}</CardTitle>
           <CardDescription className="space-y-1">
             <span className="block font-medium">
-              {formatDate(event.date)} at {event.time}
+              {t('dateTime', { date: formatDate(event.date), time: event.time })}
             </span>
             <span className="block text-sm text-amber-600 dark:text-amber-400">
               📍 {event.location}
@@ -111,9 +114,9 @@ export default function Events() {
         </CardHeader>
 
         <CardContent className="relative z-20">
-          <p className="text-muted-foreground">{event.description}</p>
+          <p className="text-muted-foreground">{t(`items.${event.id}.description`)}</p>
         </CardContent>
-      </Link>
+      </LocalLink>
     </Card>
   );
 
@@ -125,16 +128,16 @@ export default function Events() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <PageTitle title='Events' />
+            <PageTitle title={t('title')} />
             <div className="section-divider w-24 mx-auto mb-8"></div>
             <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Join our community events, screenings, and workshops
+              {t('subtitle')}
             </div>
           </div>
 
           {/* Upcoming Events */}
           {upcomingEvents.length > 0 && <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">Upcoming Events</h2>
+            <h2 className="text-3xl font-bold mb-8">{t('upcoming')}</h2>
             {upcomingEvents.length > 0 ? (
               <div className="grid grid-cols-1 gap-8">
                 {upcomingEvents.map((event) => (
@@ -146,11 +149,11 @@ export default function Events() {
                 <CalendarX className="w-20 h-20 mx-auto text-muted-foreground" />
 
                 <p className="text-lg text-muted-foreground">
-                  No upcoming events scheduled.
+                  {t('noUpcoming')}
                 </p>
 
                 <p className="text-sm text-muted-foreground">
-                  Check back soon for new announcements!
+                  {t('checkBackSoon')}
                 </p>
               </div>
             )}
@@ -158,7 +161,7 @@ export default function Events() {
 
           {/* Past Events */}
           <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">Past Events</h2>
+            <h2 className="text-3xl font-bold mb-8">{t('past')}</h2>
             {pastEvents.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {pastEvents.map((event) => (
@@ -168,8 +171,8 @@ export default function Events() {
             ) : (
               <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
                 <FolderX className="w-20 h-20 mx-auto text-muted-foreground" />
-                <p className="text-lg text-muted-foreground">No events.</p>
-                <p className="text-sm text-muted-foreground">Check back soon!</p>
+                <p className="text-lg text-muted-foreground">{t('noEvents')}</p>
+                <p className="text-sm text-muted-foreground">{t('checkBack')}</p>
               </div>
             )}
           </section>

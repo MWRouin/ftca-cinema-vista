@@ -1,0 +1,14 @@
+{
+  "notFoundTitle": "Film introuvable",
+  "notFoundDesc": "Le film que vous recherchez n'existe pas.",
+  "notFoundAlt": "Film introuvable",
+  "backToMovies": "← Retour aux films",
+  "director": "Réalisateur",
+  "cast": "Distribution",
+  "watchNow": "Regarder maintenant",
+  "noVideo": "Aucune vidéo disponible",
+  "moreFrom": "Plus de {{director}}",
+  "moreLike": "Dans le même esprit que « {{title}} »",
+  "directedBy": "Réalisé par {{director}}",
+  "directedByLabel": "Réalisé par"
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Événements",
+  "subtitle": "Participez à nos événements, projections et ateliers",
+  "upcoming": "Événements à venir",
+  "past": "Événements passés",
+  "badgeUpcoming": "À venir",
+  "badgePast": "Événement passé",
+  "dateTime": "{{date}} à {{time}}",
+  "openEvent": "Ouvrir l'événement {{title}}",
+  "noUpcoming": "Aucun événement à venir n'est programmé.",
+  "checkBackSoon": "Revenez bientôt pour de nouvelles annonces !",
+  "noEvents": "Aucun événement.",
+  "checkBack": "Revenez bientôt !",
+  "items": {
+    "ydour": {
+      "category": "Projection & Discussion",
+      "description": "YDOUR existe pour rassembler la communauté du cinéma amateur et les amoureux du cinéma."
+    },
+    "films-de-hammamlif": {
+      "category": "Projection & Exposition",
+      "description": "« Films de Hammam-Lif » vise à raviver cet esprit perdu et à inspirer le lien d'une nouvelle génération avec le cinéma et la culture."
+    },
+    "afterwork-movienight": {
+      "category": "Projection & Discussion",
+      "description": "Projections de films et discussions intimes avec les cinéastes à Day One. Un espace pour explorer les idées et le processus derrière chaque film."
+    },
+    "ydour-v2": {
+      "category": "Projection, Discussion et plus encore..",
+      "description": "Deuxième édition de YDOUR : un espace dédié au cinéma amateur."
+    }
+  }
+}

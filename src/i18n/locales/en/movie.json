@@ -1,0 +1,14 @@
+{
+  "notFoundTitle": "Movie not found",
+  "notFoundDesc": "The movie you are looking for does not exist.",
+  "notFoundAlt": "Movie not found",
+  "backToMovies": "← Back to Movies",
+  "director": "Director",
+  "cast": "Cast",
+  "watchNow": "Watch Now",
+  "noVideo": "No video available",
+  "moreFrom": "More from {{director}}",
+  "moreLike": "More like \"{{title}}\"",
+  "directedBy": "Directed by {{director}}",
+  "directedByLabel": "Directed by"
+}

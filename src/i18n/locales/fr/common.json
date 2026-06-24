@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "movies": "Films",
+    "events": "Événements",
+    "blog": "Blog",
+    "about": "À propos",
+    "palmares": "Palmarès",
+    "contact": "Contact"
+  },
+  "footer": {
+    "clubName": "Club des Cinéastes Amateurs de Hammamlif",
+    "tagline": "Là où le cinéma prend vie",
+    "mission": "Notre mission et nos objectifs vont bien au-delà de la célébration du cinéma en tant qu'art. Nous avons un fondement philosophique : nous l'utilisons comme un moyen de questionner, de réfléchir et de partager des idées.",
+    "quickLinks": "Liens rapides",
+    "contact": "Contact",
+    "rights": "© {{year}} - Club des Cinéastes Amateurs de Hammamlif - Tous droits réservés.",
+    "critique": "Au-delà de l'art, le cinéma comme voix pour les idées et la critique."
+  },
+  "language": {
+    "label": "Langue",
+    "switchTo": "Passer en {{language}}",
+    "en": "English",
+    "fr": "Français"
+  }
+}

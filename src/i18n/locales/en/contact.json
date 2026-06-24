@@ -1,0 +1,35 @@
+{
+  "title": "Contact Us",
+  "subtitle": "Get in touch with our team or join our community",
+  "form": {
+    "title": "Send us a Message",
+    "description": "Have questions about our events, want to suggest a film, or interested in joining? We'd love to hear from you!",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Your full name",
+    "subjectLabel": "Subject *",
+    "subjectPlaceholder": "What is this about?",
+    "messageLabel": "Message *",
+    "messagePlaceholder": "Tell us more...",
+    "submit": "Send Message"
+  },
+  "details": {
+    "title": "Get in Touch",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address"
+  },
+  "meetings": {
+    "title": "Regular Meetings",
+    "weekly": "Weekly Meetings",
+    "weeklyTime": "Saturday at 5:00 PM"
+  },
+  "follow": {
+    "title": "Follow Us",
+    "subtitle": "Stay connected with our latest news and events:"
+  },
+  "join": {
+    "title": "Join Our Community",
+    "text": "Interested in becoming a member? We welcome new film enthusiasts of all levels!",
+    "cta": "Join us now"
+  }
+}
