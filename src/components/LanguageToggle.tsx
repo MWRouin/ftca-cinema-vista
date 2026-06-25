@@ -1,4 +1,3 @@
-import type { ComponentType, SVGProps } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { GB, FR } from "country-flag-icons/react/3x2";
@@ -7,8 +6,9 @@ import { useLocale } from "@/i18n/locale";
 import { localizePath, stripLocale, LOCALE_STORAGE_KEY, type Locale } from "@/i18n/config";
 
 // Flag per locale. English uses the Union Jack (the common "English language"
-// convention); swap GB → US here if you prefer the US flag.
-const FLAGS: Record<Locale, ComponentType<SVGProps<SVGSVGElement> & { title?: string }>> = {
+// convention); swap GB → US here if you prefer the US flag. Typed from the
+// icon components themselves so it tracks country-flag-icons' own prop type.
+const FLAGS: Record<Locale, typeof GB> = {
   en: GB,
   fr: FR,
 };

@@ -180,9 +180,14 @@ function injectSeoMeta(html, { pageKey, locale, seo }) {
     // Per-page structured data: the page's own JSON-LD (Movie / Article / Event /
     // CollectionPage …) plus an auto-generated BreadcrumbList. Baked into the
     // static HTML so non-JS crawlers and social/LLM bots see it too.
-    const pageJsonLd = seo?.jsonLd
+    const rawJsonLd = seo?.jsonLd
         ? (Array.isArray(seo.jsonLd) ? seo.jsonLd : [seo.jsonLd])
         : [];
+    // Force each node's top-level `url` to this page's canonical (locale-prefixed)
+    // so structured data matches <link rel="canonical"> instead of the bare,
+    // un-prefixed URL hardcoded in PAGE_SEO / the movie & blog builders.
+    const pageJsonLd = rawJsonLd.map((node) =>
+        node && typeof node === 'object' && 'url' in node ? { ...node, url: pageUrl } : node);
     const breadcrumb = buildBreadcrumbList(pageKey, seo?.title, locale);
     const structuredData = jsonLdBlock([...pageJsonLd, breadcrumb]);
 
