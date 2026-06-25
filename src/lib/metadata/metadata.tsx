@@ -170,13 +170,29 @@ export default function MetaHeader({
     const resolvedUrl = pageUrl || buildPageUrl(localizePath(neutralPath, locale));
     const resolvedTitle = buildPageTitle(effectiveTitle);
 
+    // Localize the page's JSON-LD: force each node's `url` to this page's
+    // canonical (locale-prefixed) and apply any per-locale name/description
+    // override, mirroring the static generator so hydration doesn't diverge.
+    const localizedJsonLd = useMemo(() => {
+        if (!jsonLd) return jsonLd;
+        const nodes = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+        return nodes.map((node) => {
+            if (!node || typeof node !== "object") return node;
+            const next = { ...node, ...(localizedSeo?.jsonLd ?? {}) };
+            if ("url" in node) next.url = resolvedUrl;
+            return next;
+        });
+    }, [jsonLd, localizedSeo, resolvedUrl]);
+
     // Auto-append a BreadcrumbList (Home › Section › Leaf) to the page's JSON-LD.
     const jsonLdWithBreadcrumb = useMemo(() => {
         const breadcrumb = buildBreadcrumbList(pageKey, effectiveTitle, locale);
-        if (!breadcrumb) return jsonLd;
-        const base = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+        if (!breadcrumb) return localizedJsonLd;
+        const base = localizedJsonLd
+            ? (Array.isArray(localizedJsonLd) ? localizedJsonLd : [localizedJsonLd])
+            : [];
         return [...base, breadcrumb];
-    }, [pageKey, effectiveTitle, locale, jsonLd]);
+    }, [pageKey, effectiveTitle, locale, localizedJsonLd]);
     const robots = noindex
         ? "noindex, nofollow"
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";

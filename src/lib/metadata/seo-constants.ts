@@ -306,41 +306,74 @@ export const PAGE_SEO: Record<string, PageSeo> = {
  * PAGE_SEO. Anything not listed falls back to the English PAGE_SEO entry.
  * Movie/blog detail titles come from content data and are not translated here.
  */
-export const PAGE_SEO_FR: Record<string, { title?: string; description?: string }> = {
+export const PAGE_SEO_FR: Record<
+  string,
+  { title?: string; description?: string; jsonLd?: Record<string, unknown> }
+> = {
   "": {
     title: "Accueil",
     description:
       "Club des Cinéastes Amateurs de Hammam-Lif (FTCA) – une communauté passionnée de cinéastes amateurs en Tunisie. Découvrez nos films, événements, projections et discussions.",
+    jsonLd: {
+      name: "Club des Cinéastes Amateurs de Hammam-Lif",
+      description:
+        "Une communauté passionnée de cinéastes amateurs à Hammam-Lif, en Tunisie.",
+    },
   },
   movies: {
     title: "Films",
     description:
       "Explorez la collection de films amateurs du Club des Cinéastes de Hammam-Lif. Courts métrages, fictions et documentaires produits par les membres de la FTCA.",
+    jsonLd: {
+      name: `Films – ${SITE_NAME}`,
+      description: "Collection de films amateurs de la FTCA Hammam-Lif.",
+    },
   },
   events: {
     title: "Événements",
     description:
       "Découvrez les événements du Club des Cinéastes Amateurs de Hammam-Lif : projections, discussions, ateliers et rencontres en Tunisie.",
+    jsonLd: {
+      name: `Événements – ${SITE_NAME}`,
+      description: "Projections, discussions et ateliers.",
+    },
   },
   "events/ydour": {
     title: "Ydour – يدور",
     description:
       "Ydour : projection & discussion organisée par le Club des Cinéastes Amateurs de Hammam-Lif. Un rassemblement pour la communauté du cinéma amateur, Café culturel LIBER'THÉ, février 2025.",
+    jsonLd: {
+      description:
+        "Projection & discussion – un rassemblement pour la communauté du cinéma amateur.",
+    },
   },
   "events/ydour-v2": {
     title: "Ydour – يدور v2",
     description:
       "Deuxième édition de YDOUR : un espace dédié au cinéma amateur. Projections, ateliers, exposition, musique. Espace culturel L'Écurie.",
+    jsonLd: {
+      name: "Ydour – يدور (2ᵉ édition)",
+      description:
+        "Projection, discussion et plus encore.. – un rassemblement pour la communauté du cinéma amateur.",
+    },
   },
   "events/afterwork-movienight": {
     title: "Afterwork - Movie Night",
     description:
       "Projections de films et discussions intimes avec les cinéastes à Day One, par le Club des Cinéastes Amateurs de Hammam-Lif. Un espace pour explorer les idées et le processus derrière chaque film.",
+    jsonLd: {
+      description:
+        "une expérience intime de projection et de discussion par le Club des Cinéastes Amateurs de Hammam-Lif à Day One. Un espace pour explorer les idées et le processus derrière chaque film.",
+    },
   },
   "events/films-de-hammamlif": {
     title: "Films de Hammam-Lif",
     description:
       "Films de Hammam-Lif : projection & exposition au Complexe Culturel Ali Ben Ayed. Un hommage à la culture cinématographique de Hammam-Lif par la FTCA, décembre 2025.",
+    jsonLd: {
+      description:
+        "Projection & exposition – un hommage à la culture cinématographique de Hammam-Lif.",
+    },
   },
   blog: {
     title: "Blog & Articles",
@@ -351,6 +384,10 @@ export const PAGE_SEO_FR: Record<string, { title?: string; description?: string 
     title: "À propos – Notre histoire",
     description:
       "Découvrez l'histoire du Club des Cinéastes Amateurs de Hammam-Lif, notre équipe passionnée et notre mission de promouvoir le cinéma amateur en Tunisie.",
+    jsonLd: {
+      name: "À propos – Club des Cinéastes Amateurs de Hammam-Lif",
+      description: `L'histoire et l'équipe derrière ${SITE_NAME}.`,
+    },
   },
   palmares: {
     title: "Palmarès",
@@ -377,10 +414,16 @@ export function getLocalizedPageSeo(pageKey: string, locale: Locale): PageSeo {
     description: "",
     pagePathname: pageKey,
   };
-  if (locale === "fr" && PAGE_SEO_FR[pageKey]) {
-    return { ...base, ...PAGE_SEO_FR[pageKey] };
+  const override = locale === "fr" ? PAGE_SEO_FR[pageKey] : undefined;
+  if (!override) return base;
+
+  const merged: PageSeo = { ...base, ...override };
+  // jsonLd is merged field-by-field so a localized name/description override
+  // doesn't drop the base @type / url / nested nodes.
+  if (base.jsonLd || override.jsonLd) {
+    merged.jsonLd = { ...base.jsonLd, ...override.jsonLd };
   }
-  return base;
+  return merged;
 }
 
 /** Absolute URL for a locale-neutral page key (e.g. "", "movies", "events/ydour"). */
