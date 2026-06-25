@@ -51,13 +51,13 @@ export function Navigation() {
         setOverlay(false);
         return;
       }
-      // On home the navbar overlays the hero transparently until the hero's
-      // bottom edge has scrolled up behind the navbar.
+      // On home the navbar overlays the hero transparently until the navbar's
+      // vertical middle reaches the hero's bottom edge.
       const hero = document.querySelector('.editorial-hero');
       const navHeight = 64; // h-16
       setOverlay(
         hero
-          ? hero.getBoundingClientRect().bottom > navHeight
+          ? hero.getBoundingClientRect().bottom > navHeight / 3 * 2
           : y < window.innerHeight * 0.8
       );
     };
