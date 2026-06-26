@@ -63,10 +63,11 @@ export function LocalLink({ to, ...rest }: Omit<LinkProps, "to"> & { to: string 
 export function LocaleRedirect() {
   const location = useLocation();
   const target = detectPreferredLocale();
-  const rest = location.pathname === "/" ? "" : location.pathname;
+  // pathname carries no locale prefix here; localizePath adds the prefix and a
+  // trailing slash so we redirect straight to the canonical (non-redirecting) form.
   return (
     <Navigate
-      to={`/${target}${rest}${location.search}${location.hash}`}
+      to={localizePath(location.pathname, target) + location.search + location.hash}
       replace
     />
   );

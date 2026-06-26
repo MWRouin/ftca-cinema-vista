@@ -8,6 +8,6 @@
   "notFoundTitle": "Article not found",
   "notFoundDesc": "The article you are looking for does not exist.",
   "backToBlog": "← Back to Blog",
-  "meta": "By {{author}} • {{date}} • {{readTime}}",
+  "meta": "By <author>{{author}}</author> • {{date}} • {{readTime}}",
   "writtenBy": "Written by"
 }

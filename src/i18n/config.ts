@@ -65,14 +65,17 @@ export function localeFromPath(pathname: string): Locale {
 }
 
 /**
- * Prefix a locale-neutral path with its locale segment. Every locale is
- * prefixed (including the default).
+ * Prefix a locale-neutral path with its locale segment, ending in a trailing
+ * slash. Every locale is prefixed (including the default). The trailing slash
+ * matches the canonical URLs and GitHub Pages' served form (Pages 301-redirects
+ * the no-slash version), so in-app navigation and hard loads land on the same
+ * URL. `buildPageUrl` re-normalizes, so canonical/og URLs are unaffected.
  *
- * ("/movies", "fr") -> "/fr/movies" · ("/", "en") -> "/en"
+ * ("/movies", "fr") -> "/fr/movies/" · ("/", "en") -> "/en/"
  */
 export function localizePath(path: string, locale: Locale): string {
-  const clean = path.startsWith("/") ? path : `/${path}`;
-  return clean === "/" ? `/${locale}` : `/${locale}${clean}`;
+  const neutral = path.replace(/^\/+/, "").replace(/\/+$/, "");
+  return neutral ? `/${locale}/${neutral}/` : `/${locale}/`;
 }
 
 /**
