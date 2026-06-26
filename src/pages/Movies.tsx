@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useTranslation } from 'react-i18next';
-import { getMovies } from '@/data/movies';
+import { getMovies, getDirectorNames } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import MetaHeader from '@/lib/metadata/metadata';
@@ -82,7 +82,7 @@ export default function Movies() {
                   </CardHeader>
                   <CardContent className="pt-0">
                     <div className="text-sm text-muted-foreground">
-                      {t('directedBy', { director: movie.director })}
+                      {t('directedBy', { director: getDirectorNames(movie) })}
                     </div>
                   </CardContent>
                 </LocalLink>

@@ -7,6 +7,9 @@ import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
+import { getMembers, getHonoraryMembers } from '@/data/people';
+import { isPersonPublic } from '@/data/movies';
+import { LocalLink } from '@/i18n/locale';
 
 // Build a stable translation-key slug from a name or role, e.g.
 // "General Secretary" -> "general-secretary". Used to look up per-member
@@ -31,14 +34,16 @@ function TeamSection({ teamMembers }) {
         {membersToShow.map((member, index) => (
           <Card key={index} className="text-center">
             <CardHeader>
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
-                <LazyImage
-                  src={member.image ? member.image : defaultUserImage}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardTitle className="text-xl">{member.name}</CardTitle>
+              <LocalLink to={`/people/${member.id}`} className="block group">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
+                  <LazyImage
+                    src={member.image ? member.image : defaultUserImage}
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <CardTitle className="text-xl transition-colors group-hover:text-primary">{member.name}</CardTitle>
+              </LocalLink>
               <CardDescription className="text-primary font-medium">
                 {t(`roles.${slugify(member.role)}`, { defaultValue: member.role })}
               </CardDescription>
@@ -84,9 +89,18 @@ function OldMembersSection({ oldMembers }) {
               <li key={index} className="group">
                 <div className="flex items-start space-x-3">
                   <div className="flex-shrink-0 w-1 h-6 bg-gradient-to-b from-primary to-primary/50 rounded-full mt-1"></div>
-                  <span className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                    {member.name}
-                  </span>
+                  {member.hasPage ? (
+                    <LocalLink
+                      to={`/people/${member.id}`}
+                      className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300"
+                    >
+                      {member.name}
+                    </LocalLink>
+                  ) : (
+                    <span className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                      {member.name}
+                    </span>
+                  )}
                 </div>
               </li>
             ))}
@@ -102,358 +116,22 @@ export default function About() {
 
   const BASE = import.meta.env.BASE_URL || "/";
 
-  const teamMembers = [
-    {
-      name: "Wadii Klaii",
-      role: "President",
-      bio: "Multi-disciplinary artist with a passion for cinema. Started as a editor and now exploring directing.",
-      image: `${BASE}Members/wadii.jpg`
-    },
-    {
-      name: "Seif Eddine Larbi",
-      role: "General Secretary",
-      bio: "Passionate about writing which leads to a deeper understanding of film narratives.",
-      image: `${BASE}Members/seif.jpg`
-    },
-    {
-      name: "Hichem Gtari",
-      role: "Treasurer",
-      bio: "Mechanical Engineer with a passion for filmmaking. Enjoys exploring the technical aspects of film production.",
-      image: `${BASE}Members/hichem.jpg`
-    },
-    {
-      name: "Khalil Said",
-      role: "Member",
-      bio: "Mechanical engineer with a passion for filmmaking. Passionate about photography and directing.",
-      image: `${BASE}Members/khalil.jpg`
-    },
-    {
-      name: "Safa Khiari",
-      role: "Member",
-      bio: "French Teacher and film enthusiast, loves exploring cinema from different cultures.",
-      image: `${BASE}Members/safe.jpg`
-    },
-    {
-      name: "Wissem Rouin",
-      role: "Member",
-      bio: "Web Developer and cinema enthusiast.",
-      image: `${BASE}Members/wissem.jpg`
-    },
-    {
-      name: "Nour Ben Chiekh",
-      role: "Member",
-      bio: "Journalist and film lover. Enjoys analyzing films from a socio-political perspective.",
-      image: `${BASE}Members/nour.jpg`
-    },
-    {
-      name: "Aziz Baraketi",
-      role: "Member",
-      bio: "Film Buff and studied cinema. Started as a photographer and now he became a camera operator.",
-      image: `${BASE}Members/aziz.jpg`
-    },
-    {
-      name: "Itaf Daghsen",
-      role: "Member",
-      bio: "Actress and film enthusiast. Passionate about storytelling through performance.",
-      image: `${BASE}Members/itaf.jpg`
-    },
-    {
-      name: "Hihem Toumi",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/hichemToumi.jpg`
-    },
-    {
-      name: "Ghassen Jemaia",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/ghassen.jpg`
-    },
-    {
-      name: "Taieb Ben Ameur",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/taiebbenameur.jpg`
-    },
-    {
-      name: "Fares Ben Khelifa",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/faresbenkhelifa.jpg`
-    },
-    {
-      name: "Ghassen Ben Slema",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/ghassenbenslama.jpg`
-    },
-    {
-      name: "Halim Jerbi",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/halim.jpg`
-    },
-    {
-      name: "Ines Ben Halima",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/inesbenhalima.jpg`
-    },
-    {
-      name: "Maha Ezzine",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/mahaezzine.png`
-    },
-    {
-      name: "Mayssa Ezzine",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/mayssa.jpg`
-    },
-    {
-      name: "Maher Ben Khelifa",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/maher.jpg`
-    },
-    {
-      name: "Mehdi Ben Farhat",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/mahdi.jpg`
-    },
-    {
-      name: "Youssef El Behi",
-      role: "Member",
-      bio: "",
-      image: `${BASE}Members/youssef.jpg`
-    },
-    {
-      name: "Zeyneb Ben Ghachem",
-      role: "Member",
-      bio: "",
-      image: ""
-    }
-  ];
-  const oldMembers = [
-    {
-      name: "Kamel Staali",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Wissem Rebah",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Abdelkader Chikhawi",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Amor Sbika",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Ridha Ben Hlima",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Mourad Mahjbi",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Imen Nafti",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Rachiq Meddeb",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Mohamed Ali Bahroun",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Khaled Tounsi",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Walid Chebbi",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Yassine Bhar",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Mehdi Mokrani",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Slim Fassatoui",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Walid Mattar",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Yahya Gabous",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Mohamed Khiri",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Ridha Achour",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Chaffai Zaafouri",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Ahmed Ben Amor",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Jalel Ben Dana",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Lotfi Moudoud",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Lotfi Trabelsi",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Moncef Ben Mrad",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Said Ben Sedrine",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Ridha Baccar",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Salma Baccar",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Najet Mabouj",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Raouf Ben Mosly",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Hamadi Ghelella",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Rafik Staali",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Meher Harrazi",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Yosra Nefti",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Akrem Tliba",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Fethi Ben Slema",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    },
-    {
-      name: "Manel Karkour",
-      role: "Honorary Member",
-      bio: "",
-      image: ""
-    }
-  ];
+  // Active club members, sourced from the shared people registry. The English
+  // bio is passed as the i18n defaultValue (FR overrides live in about.json).
+  const teamMembers = getMembers().map((p) => ({
+    id: p.id,
+    name: p.name,
+    role: p.membership?.role ?? "Member",
+    bio: p.bio?.en ?? "",
+    image: p.image ?? "",
+  }));
+  // Honorary members (name only) from the shared people registry. Those with a
+  // page (e.g. they directed a film) link to it.
+  const oldMembers = getHonoraryMembers().map((p) => ({
+    id: p.id,
+    name: p.name,
+    hasPage: isPersonPublic(p.id),
+  }));
 
   return (
     <>

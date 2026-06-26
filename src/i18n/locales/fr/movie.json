@@ -10,5 +10,15 @@
   "moreFrom": "Plus de {{director}}",
   "moreLike": "Dans le même esprit que « {{title}} »",
   "directedBy": "Réalisé par {{director}}",
-  "directedByLabel": "Réalisé par"
+  "directedByLabel": "Réalisé par",
+  "roles": {
+    "director": "Réalisation",
+    "writer": "Scénario",
+    "producer": "Production",
+    "cinematographer": "Image",
+    "editor": "Montage",
+    "sound": "Son",
+    "music": "Musique",
+    "actor": "Distribution"
+  }
 }

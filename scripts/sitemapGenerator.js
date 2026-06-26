@@ -8,6 +8,7 @@ import {
     hreflangAlternates,
 } from '../src/lib/metadata/seo-constants.ts';
 import { getBlogArticles } from '../src/data/blog.ts';
+import { getPublicPeople } from '../src/data/movies.ts';
 
 /**
  * Post-build script: generates a per-locale sitemap.xml with hreflang
@@ -97,6 +98,11 @@ async function main([, , buildFolderPath]) {
     // Blog articles
     for (const article of getBlogArticles()) {
         urls.push(urlEntries(`blog/${article.slug}`, article.date || today, "monthly", "0.7", resolveImageUrl(article.image)));
+    }
+
+    // People (members / filmmakers with a public page)
+    for (const person of getPublicPeople()) {
+        urls.push(urlEntries(`people/${person.id}`, today, "monthly", "0.5", resolveImageUrl(person.image)));
     }
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
