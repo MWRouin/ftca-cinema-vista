@@ -1,3 +1,5 @@
+import { resolvePersonId } from "./people";
+
 export type BlogArticle = {
   slug: string;
   title: string;
@@ -151,3 +153,7 @@ export const getBlogArticles = () => articles.filter((article) => article.public
 
 export const getBlogArticleBySlug = (slug?: string) =>
   articles.find((article) => article.public && article.slug === slug);
+
+/** Public articles whose author name resolves to the given person id. */
+export const getArticlesByPerson = (personId: string): BlogArticle[] =>
+  articles.filter((article) => article.public && resolvePersonId(article.author) === personId);

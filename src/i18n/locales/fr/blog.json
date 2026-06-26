@@ -8,6 +8,6 @@
   "notFoundTitle": "Article introuvable",
   "notFoundDesc": "L'article que vous recherchez n'existe pas.",
   "backToBlog": "← Retour au blog",
-  "meta": "Par {{author}} • {{date}} • {{readTime}}",
+  "meta": "Par <author>{{author}}</author> • {{date}} • {{readTime}}",
   "writtenBy": "Écrit par"
 }

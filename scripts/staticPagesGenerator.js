@@ -9,6 +9,7 @@ import {
     buildPageTitle,
     DEFAULT_OG_IMAGE,
     DEFAULT_OG_IMAGE_ALT,
+    DEFAULT_PERSON_OG_IMAGE,
     SUPPORTED_LOCALES,
     DEFAULT_LOCALE,
     OG_LOCALE,
@@ -431,9 +432,12 @@ async function main([, , buildFolderPath]) {
     /* ---------- people ---------- */
     for (const person of getPublicPeople()) {
         const pageKey = `people/${person.id}`;
-        const imageUrl = person.image
+        // Their own portrait when set; otherwise the neutral user placeholder
+        // (matches the runtime Person page) rather than the generic site banner.
+        const personImage = person.image
             ? (person.image.startsWith('http') ? person.image : `${SITE_URL}${person.image}`)
-            : DEFAULT_OG_IMAGE;
+            : undefined;
+        const imageUrl = personImage || DEFAULT_PERSON_OG_IMAGE;
         const description = person.bio?.en || `${person.name} — ${SITE_NAME_FULL}.`;
         const seo = {
             title: person.name,
@@ -445,7 +449,7 @@ async function main([, , buildFolderPath]) {
                 "@context": "https://schema.org",
                 "@type": "Person",
                 name: person.name,
-                ...(person.image ? { image: imageUrl } : {}),
+                ...(personImage ? { image: personImage } : {}),
                 ...(person.membership
                     ? { memberOf: { "@type": "Organization", name: SITE_NAME_FULL } }
                     : {}),

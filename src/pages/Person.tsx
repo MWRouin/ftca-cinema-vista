@@ -5,10 +5,11 @@ import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/ca
 import { Badge } from '@/components/ui/badge';
 import { getPersonById } from '@/data/people';
 import { getFilmography, isPersonPublic } from '@/data/movies';
+import { getArticlesByPerson } from '@/data/blog';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
-import { SITE_URL, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
+import { SITE_URL, SITE_NAME_FULL, DEFAULT_PERSON_OG_IMAGE } from '@/lib/metadata/seo-constants';
 import { LocalLink, useLocale } from '@/i18n/locale';
 
 // Same stable slug used by About's per-member i18n keys, so FR bios/roles resolve.
@@ -45,6 +46,13 @@ export default function Person() {
   }
 
   const filmography = getFilmography(person.id);
+  const articles = getArticlesByPerson(person.id);
+  const formatDate = (value: string) =>
+    new Date(value).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   const roleLabel = person.membership?.role
     ? t(`roles.${slugify(person.membership.role)}`, { ns: 'about', defaultValue: person.membership.role })
     : undefined;
@@ -52,9 +60,14 @@ export default function Person() {
   const bio = t(`members.${person.id}.bio`, { ns: 'about', defaultValue: person.bio?.en ?? '' });
 
   const description = (person.bio?.en || `${person.name} — ${SITE_NAME_FULL}.`).trim();
-  const imageUrl = person.image
+  // Their own portrait when set; otherwise the neutral user placeholder, so the
+  // social/LLM preview shows the same avatar the page renders instead of the
+  // generic site banner. JSON-LD `image` stays unset when there's no real
+  // portrait (don't claim the placeholder is the person's photo).
+  const personImage = person.image
     ? (person.image.startsWith('http') ? person.image : `${SITE_URL}${person.image}`)
     : undefined;
+  const ogImage = personImage ?? DEFAULT_PERSON_OG_IMAGE;
 
   return (
     <>
@@ -63,13 +76,13 @@ export default function Person() {
         description={description}
         pagePathname={`people/${person.id}`}
         ogType="profile"
-        imageUrl={imageUrl}
+        imageUrl={ogImage}
         imageAlt={person.name}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'Person',
           name: person.name,
-          ...(imageUrl ? { image: imageUrl } : {}),
+          ...(personImage ? { image: personImage } : {}),
           ...(person.membership
             ? { memberOf: { '@type': 'Organization', name: SITE_NAME_FULL } }
             : {}),
@@ -143,6 +156,39 @@ export default function Person() {
               </div>
             )}
           </section>
+
+          {/* Articles written by this person (only when they have any) */}
+          {articles.length > 0 && (
+            <section className="mt-16">
+              <h2 className="text-3xl font-bold mb-8">{t('articles')}</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {articles.map((article) => (
+                  <Card key={article.slug} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
+                    <LocalLink to={`/blog/${article.slug}`} className="block">
+                      {article.image && (
+                        <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-muted">
+                          <LazyImage
+                            src={article.image}
+                            alt={article.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      <CardHeader>
+                        <CardTitle className="text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+                          {article.title}
+                        </CardTitle>
+                        <CardDescription className="flex flex-wrap items-center gap-1.5 pt-1">
+                          <Badge variant="outline" className="text-xs">{article.category}</Badge>
+                          <span className="text-xs text-muted-foreground self-center">• {formatDate(article.date)}</span>
+                        </CardDescription>
+                      </CardHeader>
+                    </LocalLink>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </>

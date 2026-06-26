@@ -35,15 +35,27 @@ export const DEFAULT_OG_IMAGE =
 export const DEFAULT_OG_IMAGE_ALT =
   "Hammam-Lif Amateur Filmmakers Club – FTCA Hammam-Lif";
 
+// OG/social image for a person with no portrait — the same neutral user
+// placeholder the profile page renders. Absolute (and at the site root, since
+// the site deploys at BASE "/") so crawlers and social bots can fetch it.
+export const DEFAULT_PERSON_OG_IMAGE = `${SITE_URL}/Members/user.png`;
+
 export const DEFAULT_DESCRIPTION =
   "Hammam-Lif Amateur Filmmakers Club (FTCA) – A passionate community of amateur filmmakers. Films, events, screenings and discussions in Hammam-Lif, Tunisia.";
 
 /* ─── Helpers ─── */
 
-/** Full URL for a given path segment (no leading slash needed). */
+/**
+ * Full canonical URL for a given path segment (no leading slash needed).
+ * Always ends in a trailing slash: the site is hosted on GitHub Pages, which
+ * serves every page as `…/<path>/index.html` and 301-redirects the no-slash
+ * form to the trailing-slash one. Emitting the slashed form here keeps
+ * canonical / og:url / hreflang / sitemap pointed at the final, non-redirecting
+ * URL instead of one that bounces.
+ */
 export function buildPageUrl(pathname = ""): string {
-  const clean = pathname.replace(/^\/+/, "");
-  return clean ? `${SITE_URL}/${clean}` : `${SITE_URL}/`;
+  const clean = pathname.replace(/^\/+/, "").replace(/\/+$/, "");
+  return clean ? `${SITE_URL}/${clean}/` : `${SITE_URL}/`;
 }
 
 /** Title with consistent branding suffix. */

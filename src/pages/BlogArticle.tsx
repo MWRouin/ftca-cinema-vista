@@ -1,5 +1,6 @@
+import type { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 //import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,9 +8,31 @@ import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO, SITE_URL } from '@/lib/metadata/seo-constants';
 import { getBlogArticleBySlug } from '@/data/blog';
+import { resolvePersonId } from '@/data/people';
+import { isPersonPublic } from '@/data/movies';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import ShareActions from '@/components/customUi/share-actions';
 import { LocalLink, useLocale } from '@/i18n/locale';
+
+/**
+ * The article's author, linked to their person page when the name resolves to a
+ * public member (same rule as a movie's cast credits); otherwise plain text.
+ * `children` is the localized name token injected by <Trans>.
+ */
+function AuthorLink({ author, children }: { author: string; children?: ReactNode }) {
+  const personId = resolvePersonId(author);
+  if (personId && isPersonPublic(personId)) {
+    return (
+      <LocalLink
+        to={`/people/${personId}`}
+        className="underline-offset-2 hover:text-primary hover:underline transition-colors"
+      >
+        {children}
+      </LocalLink>
+    );
+  }
+  return <>{children}</>;
+}
 
 export default function BlogArticle() {
   const { slug } = useParams();
@@ -114,7 +137,12 @@ export default function BlogArticle() {
 
               {/* Meta (always first) */}
               <div className="text-sm text-muted-foreground">
-                {t('meta', { author: article.author, date: formatDate(article.date), readTime: article.readTime })}
+                <Trans
+                  t={t}
+                  i18nKey="meta"
+                  values={{ author: article.author, date: formatDate(article.date), readTime: article.readTime }}
+                  components={{ author: <AuthorLink author={article.author} /> }}
+                />
               </div>
 
               {/* Actions */}
