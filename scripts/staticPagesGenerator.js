@@ -18,6 +18,14 @@ import {
     buildBreadcrumbList,
 } from '../src/lib/metadata/seo-constants.ts';
 import { getBlogArticles } from '../src/data/blog.ts';
+import {
+    getDirectors,
+    getCast,
+    getDirectorNames,
+    creditName,
+    getMovieDescription,
+    getPublicPeople,
+} from '../src/data/movies.ts';
 
 /* ------------------ utils ------------------ */
 
@@ -334,35 +342,43 @@ async function main([, , buildFolderPath]) {
     );
     for (const movie of movies.filter(m => m.public && m.id)) {
         const pageKey = `movies/${movie.id}`;
-        const description = movie.description || `${movie.title} – amateur film by ${movie.director}. ${SITE_NAME}.`;
         const imageUrl = movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${resolveAssetUrl(movie.image)}`;
-        const seo = {
-            title: movie.title,
-            description,
-            imageUrl,
-            imageAlt: `${movie.title} – poster`,
-            author: movie.director,
-            authorLabel: 'Directed by',
-            ogType: 'video.movie',
-            jsonLd: {
-                "@context": "https://schema.org",
-                "@type": "Movie",
-                name: movie.title,
+        const directorNames = getDirectorNames(movie);
+        const directors = getDirectors(movie);
+        const cast = getCast(movie);
+        // Names are proper nouns (locale-independent); only the description is localized.
+        const buildSeo = (locale) => {
+            const description = getMovieDescription(movie, locale)
+                || `${movie.title} – amateur film by ${directorNames}. ${SITE_NAME}.`;
+            return {
+                title: movie.title,
                 description,
-                director: { "@type": "Person", name: movie.director },
-                ...(movie.year ? { dateCreated: String(movie.year) } : {}),
-                ...(movie.genre ? { genre: movie.genre } : {}),
-                ...(movie.duration ? { duration: movie.duration } : {}),
-                ...(Array.isArray(movie.cast) && movie.cast.length
-                    ? { actor: movie.cast.map((name) => ({ "@type": "Person", name })) }
-                    : {}),
-                url: `${SITE_URL}/movies/${movie.id}`,
-                image: imageUrl,
-                productionCompany: { "@type": "Organization", name: SITE_NAME },
-            },
+                imageUrl,
+                imageAlt: `${movie.title} – poster`,
+                author: directorNames,
+                authorLabel: 'Directed by',
+                ogType: 'video.movie',
+                jsonLd: {
+                    "@context": "https://schema.org",
+                    "@type": "Movie",
+                    name: movie.title,
+                    description,
+                    ...(directors.length
+                        ? { director: directors.map((c) => ({ "@type": "Person", name: creditName(c) })) }
+                        : {}),
+                    ...(cast.length
+                        ? { actor: cast.map((c) => ({ "@type": "Person", name: creditName(c) })) }
+                        : {}),
+                    ...(movie.year ? { dateCreated: String(movie.year) } : {}),
+                    ...(movie.genre ? { genre: movie.genre } : {}),
+                    ...(movie.duration ? { duration: movie.duration } : {}),
+                    url: `${SITE_URL}/movies/${movie.id}`,
+                    image: imageUrl,
+                    productionCompany: { "@type": "Organization", name: SITE_NAME },
+                },
+            };
         };
-        // Movie titles are proper nouns / content — same SEO across locales.
-        await generatePage(indexHtml, buildRoot, pageKey, () => seo);
+        await generatePage(indexHtml, buildRoot, pageKey, buildSeo);
         stubKeys.add(pageKey);
     }
 
@@ -408,6 +424,35 @@ async function main([, , buildFolderPath]) {
                 publisher: { "@type": "Organization", name: SITE_NAME, url: SITE_URL },
             },
         };
+        await generatePage(indexHtml, buildRoot, pageKey, () => seo);
+        stubKeys.add(pageKey);
+    }
+
+    /* ---------- people ---------- */
+    for (const person of getPublicPeople()) {
+        const pageKey = `people/${person.id}`;
+        const imageUrl = person.image
+            ? (person.image.startsWith('http') ? person.image : `${SITE_URL}${person.image}`)
+            : DEFAULT_OG_IMAGE;
+        const description = person.bio?.en || `${person.name} — ${SITE_NAME_FULL}.`;
+        const seo = {
+            title: person.name,
+            description,
+            imageUrl,
+            imageAlt: person.name,
+            ogType: 'profile',
+            jsonLd: {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: person.name,
+                ...(person.image ? { image: imageUrl } : {}),
+                ...(person.membership
+                    ? { memberOf: { "@type": "Organization", name: SITE_NAME_FULL } }
+                    : {}),
+                url: `${SITE_URL}/people/${person.id}`,
+            },
+        };
+        // Names are proper nouns — same SEO across locales.
         await generatePage(indexHtml, buildRoot, pageKey, () => seo);
         stubKeys.add(pageKey);
     }

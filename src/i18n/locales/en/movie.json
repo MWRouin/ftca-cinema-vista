@@ -10,5 +10,15 @@
   "moreFrom": "More from {{director}}",
   "moreLike": "More like \"{{title}}\"",
   "directedBy": "Directed by {{director}}",
-  "directedByLabel": "Directed by"
+  "directedByLabel": "Directed by",
+  "roles": {
+    "director": "Director",
+    "writer": "Writer",
+    "producer": "Producer",
+    "cinematographer": "Cinematography",
+    "editor": "Editing",
+    "sound": "Sound",
+    "music": "Music",
+    "actor": "Cast"
+  }
 }

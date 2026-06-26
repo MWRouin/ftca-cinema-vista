@@ -28,6 +28,8 @@ import enMovie from "./locales/en/movie.json";
 import frMovie from "./locales/fr/movie.json";
 import enEventDetail from "./locales/en/eventDetail.json";
 import frEventDetail from "./locales/fr/eventDetail.json";
+import enPerson from "./locales/en/person.json";
+import frPerson from "./locales/fr/person.json";
 
 /**
  * Translation resources, grouped by locale then namespace. One namespace per
@@ -46,6 +48,7 @@ const resources = {
     blog: enBlog,
     movie: enMovie,
     eventDetail: enEventDetail,
+    person: enPerson,
   },
   fr: {
     common: frCommon,
@@ -58,6 +61,7 @@ const resources = {
     blog: frBlog,
     movie: frMovie,
     eventDetail: frEventDetail,
+    person: frPerson,
   },
 } as const;
 
@@ -78,7 +82,7 @@ i18n.use(initReactI18next).init({
   fallbackLng: DEFAULT_LOCALE,
   supportedLngs: SUPPORTED_LOCALES as readonly string[],
   defaultNS: "common",
-  ns: ["common", "home", "static", "movies", "contact", "events", "about", "blog", "movie", "eventDetail"],
+  ns: ["common", "home", "static", "movies", "contact", "events", "about", "blog", "movie", "eventDetail", "person"],
   interpolation: { escapeValue: false },
   returnNull: false,
 });

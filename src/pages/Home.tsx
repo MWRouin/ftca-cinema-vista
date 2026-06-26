@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Trans, useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { getMovies } from '@/data/movies';
+import { getMovies, getDirectorNames } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
@@ -140,7 +140,7 @@ export default function Home() {
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="text-sm text-muted-foreground">
-                          {t('films.directedBy', { director: movie.director })}
+                          {t('films.directedBy', { director: getDirectorNames(movie) })}
                         </div>
                       </CardContent>
                     </LocalLink>
