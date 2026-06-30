@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
-import { Button } from '@/components/ui/button';
+import { BackButton } from '@/components/customUi/back-button';
 //import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ElementTitle } from '@/components/customUi/element-title';
@@ -63,9 +63,7 @@ export default function BlogArticle() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button asChild variant="outline">
-                  <LocalLink to="/blog">{t('backToBlog')}</LocalLink>
-                </Button>
+                <BackButton to="/blog" label={t('backToBlog')} className="mb-0" />
               </CardContent>
             </Card>
           </div>
@@ -114,11 +112,7 @@ export default function BlogArticle() {
       />
       <div className="min-h-screen py-12">
         <div className="max-w-4xl 2xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-6">
-            <Button asChild variant="outline">
-              <LocalLink to="/blog">{t('backToBlog')}</LocalLink>
-            </Button>
-          </div>
+          <BackButton to="/blog" label={t('backToBlog')} />
 
           {article.image ? (
             <div className="aspect-[16/8] overflow-hidden rounded-lg mb-10">

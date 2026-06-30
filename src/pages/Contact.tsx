@@ -2,7 +2,8 @@
 import { PageTitle } from '@/components/customUi/page-title';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { SocialLinks } from '@/components/customUi/social-links';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -47,12 +48,6 @@ export default function Contact() {
 
     /* alert('Thank you for your message! We\'ll get back to you soon.'); */
   };
-
-  const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/ftcahamhama/', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/ftca.hlif/', label: 'Instagram' },
-    { icon: Youtube, href: 'https://www.youtube.com/@ftcahammamlif', label: 'YouTube' },
-  ];
 
   return (
     <>
@@ -193,24 +188,7 @@ export default function Contact() {
               <CardContent>
                 <div className="space-y-2">
                   <p className="text-muted-foreground">{t('follow.subtitle')}</p>
-                  <div className="flex flex-wrap gap-x-5 gap-y-2">
-                    {socialLinks.map(({ icon: Icon, href, label }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        //className="w-9 h-9 bg-primary/10 hover:bg-primary/20 rounded-lg flex items-center justify-center transition-colors group"
-                        className="flex items-center justify-center space-x-2 text-primary dark:text-accent hover:scale-110 transition-colors group"
-                        aria-label={label}
-                      >
-                        <Icon className="w-5 h-5 group-hover:scale-110" /> <span className="group-hover:scale-110">{label}</span>
-                      </a>
-                    ))}
-                    {/* <a href="https://www.facebook.com/ftcahamhama/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Facebook</a>
-                    <a href="https://www.instagram.com/ftca.hlif/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Instagram</a>
-                    <a href="https://www.youtube.com/@ftcahammamlif" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">YouTube</a>
-                   */}</div>
+                  <SocialLinks variant="labeled" />
                 </div>
               </CardContent>
             </Card>

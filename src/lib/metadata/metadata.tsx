@@ -179,7 +179,11 @@ export default function MetaHeader({
         return nodes.map((node) => {
             if (!node || typeof node !== "object") return node;
             const next = { ...node, ...(localizedSeo?.jsonLd ?? {}) };
+            // Pin the page-identity URLs to this page's canonical so structured
+            // data matches <link rel="canonical"> / og:url (both locale-prefixed,
+            // trailing-slash) instead of the bare URL hardcoded in the builders.
             if ("url" in node) next.url = resolvedUrl;
+            if ("mainEntityOfPage" in node) next.mainEntityOfPage = resolvedUrl;
             return next;
         });
     }, [jsonLd, localizedSeo, resolvedUrl]);

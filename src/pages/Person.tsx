@@ -1,16 +1,17 @@
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/button';
+import { BackButton } from '@/components/customUi/back-button';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { getPersonById } from '@/data/people';
 import { getFilmography, isPersonPublic } from '@/data/movies';
 import { getArticlesByPerson } from '@/data/blog';
 import { LazyImage } from '@/components/customUi/lazy-image';
+import { MovieCard } from '@/components/customUi/movie-card';
+import { ArticleCard } from '@/components/customUi/article-card';
 import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME_FULL, DEFAULT_PERSON_OG_IMAGE } from '@/lib/metadata/seo-constants';
-import { LocalLink, useLocale } from '@/i18n/locale';
 
 // Same stable slug used by About's per-member i18n keys, so FR bios/roles resolve.
 const slugify = (value: string) => value.toLowerCase().trim().replace(/\s+/g, '-');
@@ -18,7 +19,6 @@ const slugify = (value: string) => value.toLowerCase().trim().replace(/\s+/g, '-
 export default function Person() {
   const { id } = useParams();
   const { t } = useTranslation('person');
-  const locale = useLocale();
 
   const person = id ? getPersonById(id) : undefined;
   const BASE = import.meta.env.BASE_URL || '/';
@@ -47,12 +47,6 @@ export default function Person() {
 
   const filmography = getFilmography(person.id);
   const articles = getArticlesByPerson(person.id);
-  const formatDate = (value: string) =>
-    new Date(value).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
   const roleLabel = person.membership?.role
     ? t(`roles.${slugify(person.membership.role)}`, { ns: 'about', defaultValue: person.membership.role })
     : undefined;
@@ -92,11 +86,7 @@ export default function Person() {
       <div className="min-h-screen py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back */}
-          <div className="mb-6">
-            <Button asChild variant="outline">
-              <LocalLink to="/about">{t('back')}</LocalLink>
-            </Button>
-          </div>
+          <BackButton to="/about" label={t('back')} />
 
           {/* Header */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-12">
@@ -126,32 +116,14 @@ export default function Person() {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
                 {filmography.map(({ movie, roles }) => (
-                  <Card key={movie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                    <LocalLink to={`/movies/${movie.id}`}>
-                      <div className="aspect-[2/3] overflow-hidden rounded-t-lg bg-muted">
-                        <LazyImage
-                          src={movie.image}
-                          alt={movie.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                      <CardHeader>
-                        <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors">
-                          {movie.title}
-                        </CardTitle>
-                        <CardDescription className="flex flex-wrap gap-1.5 pt-1">
-                          {roles.map((role) => (
-                            <Badge key={role} variant="outline" className="text-xs">
-                              {t(`roles.${role}`, { ns: 'movie', defaultValue: role })}
-                            </Badge>
-                          ))}
-                          {movie.year !== '-' && (
-                            <span className="text-xs text-muted-foreground self-center">• {movie.year}</span>
-                          )}
-                        </CardDescription>
-                      </CardHeader>
-                    </LocalLink>
-                  </Card>
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    badges={roles.map((role) => ({
+                      label: t(`roles.${role}`, { ns: 'movie', defaultValue: role }),
+                      variant: 'outline',
+                    }))}
+                  />
                 ))}
               </div>
             )}
@@ -163,28 +135,7 @@ export default function Person() {
               <h2 className="text-3xl font-bold mb-8">{t('articles')}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {articles.map((article) => (
-                  <Card key={article.slug} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
-                    <LocalLink to={`/blog/${article.slug}`} className="block">
-                      {article.image && (
-                        <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-muted">
-                          <LazyImage
-                            src={article.image}
-                            alt={article.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                      )}
-                      <CardHeader>
-                        <CardTitle className="text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors">
-                          {article.title}
-                        </CardTitle>
-                        <CardDescription className="flex flex-wrap items-center gap-1.5 pt-1">
-                          <Badge variant="outline" className="text-xs">{article.category}</Badge>
-                          <span className="text-xs text-muted-foreground self-center">• {formatDate(article.date)}</span>
-                        </CardDescription>
-                      </CardHeader>
-                    </LocalLink>
-                  </Card>
+                  <ArticleCard key={article.slug} article={article} variant="compact" />
                 ))}
               </div>
             </section>

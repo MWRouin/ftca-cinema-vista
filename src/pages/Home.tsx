@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Trans, useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { getMovies, getDirectorNames } from '@/data/movies';
+import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
-import { LazyImage } from '@/components/customUi/lazy-image';
+import { MovieCard } from '@/components/customUi/movie-card';
 import { LocalLink } from '@/i18n/locale';
 import './home-hero.css';
 
@@ -116,36 +116,8 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
-              {featuredMovies.map((movie, index) => (
-                <div
-                  key={movie.id}
-                  className="opacity-100 visible"
-                >
-                  <Card className="bg-card border border-border shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group overflow-hidden h-full">
-                    <LocalLink to={`/movies/${movie.id}`} className="block">
-                      <div className="aspect-[2/3] overflow-hidden bg-muted">
-                        <LazyImage
-                          src={movie.image}
-                          alt={movie.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                        />
-                      </div>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors text-foreground">
-                          {movie.title}
-                        </CardTitle>
-                        <CardDescription className="text-sm text-primary/80">
-                          {movie.genre} • {movie.year}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="pt-0">
-                        <div className="text-sm text-muted-foreground">
-                          {t('films.directedBy', { director: getDirectorNames(movie) })}
-                        </div>
-                      </CardContent>
-                    </LocalLink>
-                  </Card>
-                </div>
+              {featuredMovies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
               ))}
             </div>
 
