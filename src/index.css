@@ -466,43 +466,10 @@
     }
   }
 
-  /* light mode: dark text → light/white contour */
-  .dark .nav-link {
-    text-shadow: 0 0 4px rgba(50, 50, 50, 0.7);
-  }
-
-  .nav-link {
-    text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
-  }
-
-  .dark .nav-link:hover,
-  .dark .nav-link.active {
-    text-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
-  }
-
-  .nav-link:hover,
-  .nav-link.active {
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-  }
-
-  /* Over the hero the nav text is forced white; in light mode its white glow
-     reads as a halo, so drop it there. Dark mode keeps a faint dark contour. */
-  .nav-link.nav-overlay {
-    text-shadow: none;
-  }
-
+  /* Nav text carries no glow off-hero (the bar is mostly solid) nor over the
+     hero in light mode. Only dark-mode-over-hero keeps a faint contour so the
+     white text stays legible against bright parts of the hero image. */
   .dark .nav-link.nav-overlay {
     text-shadow: 0 0 4px rgba(50, 50, 50, 0.7);
-  }
-
-  /* Force the dark-theme overlay nav-link look regardless of app theme
-     (used by the mobile dropdown, which always sits on dark glass). */
-  .nav-link-dark {
-    text-shadow: 0 0 4px rgba(50, 50, 50, 0.7);
-  }
-
-  .nav-link-dark:hover,
-  .nav-link-dark.active {
-    text-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
   }
 }

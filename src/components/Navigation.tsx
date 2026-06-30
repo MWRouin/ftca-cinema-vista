@@ -2,24 +2,12 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, Home, Film, Calendar, Newspaper, Users, Award, Mail } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageToggle } from './LanguageToggle';
 import { Logo } from './Logo';
 import { LocalLink } from '@/i18n/locale';
 import { stripLocale } from '@/i18n/config';
-
-// Icon per route — used to give the mobile menu a little more character.
-const navIcons: Record<string, LucideIcon> = {
-  '/': Home,
-  '/movies': Film,
-  '/events': Calendar,
-  '/blog': Newspaper,
-  '/about': Users,
-  '/palmares': Award,
-  '/contact': Mail,
-};
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,8 +80,8 @@ export function Navigation() {
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${overlay
       ? 'bg-transparent text-white border-transparent'
       : scrolled
-        ? 'bg-background/98 backdrop-blur-xl shadow-lg border-border/30'
-        : 'bg-background/90 backdrop-blur-md border-border/30'
+        ? 'bg-background/85 shadow-lg border-border/30'
+        : 'bg-background/85 border-border/30'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
@@ -169,9 +157,7 @@ export function Navigation() {
         />
       )}
 
-      {/* Mobile Navigation — rendered OUTSIDE <nav> on purpose: the nav has
-          its own backdrop-filter off-hero, which would suppress this panel's
-          backdrop-blur and make the blur appear only over the hero. */}
+      {/* Mobile Navigation — a theme-aware popover panel matching the site UI. */}
       <div
         className={
           `lg:hidden fixed top-16 right-3 z-40 w-60 origin-top-right transition-all duration-200 ${isOpen
@@ -179,12 +165,11 @@ export function Navigation() {
             : 'opacity-0 -translate-y-3 scale-95 pointer-events-none'}`
         }
       >
-        <div className="overflow-hidden rounded-lg border border-white/10 ring-1 ring-white/5 shadow-2xl shadow-black/50 bg-gradient-to-b from-zinc-900/80 to-black/70 backdrop-blur-2xl">
+        <div className="overflow-hidden rounded-xl border border-border bg-card/95 shadow-xl backdrop-blur-md">
           {/* accent hairline */}
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
-          <div className="p-2 max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-1">
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+          <div className="p-2 max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-0.5">
             {navItems.map((item, index) => {
-              const Icon = navIcons[item.path] ?? Home;
               const active = isActive(item.path);
               return (
                 <LocalLink
@@ -192,17 +177,14 @@ export function Navigation() {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   style={{ transitionDelay: isOpen ? `${index * 40}ms` : '0ms' }}
-                  className={`group relative flex items-center justify-end gap-3 rounded-md px-3.5 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
+                  className={`group relative flex items-center justify-end rounded-md px-3.5 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
                     ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3'}
-                    ${active ? 'bg-white/10 text-white' : 'text-white/80 hover:text-white hover:bg-white/5'}`}
+                    ${active ? 'bg-primary/10 text-primary' : 'text-foreground/80 hover:bg-primary/5 hover:text-primary'}`}
                 >
                   <span>{t(`nav.${item.key}`)}</span>
-                  <Icon
-                    className={`w-[18px] h-[18px] shrink-0 transition-colors ${active ? 'text-accent' : 'text-white/55 group-hover:text-white'}`}
-                  />
                   {/* right-edge active indicator (reserves space so rows don't shift) */}
                   <span
-                    className={`absolute right-0 top-1/2 -translate-y-1/2 h-5 w-1 rounded-l-sm transition-colors ${active ? 'bg-accent' : 'bg-transparent'}`}
+                    className={`absolute right-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-l-sm transition-colors ${active ? 'bg-primary' : 'bg-transparent'}`}
                   />
                 </LocalLink>
               );
