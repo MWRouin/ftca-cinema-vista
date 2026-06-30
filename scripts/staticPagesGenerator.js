@@ -192,11 +192,17 @@ function injectSeoMeta(html, { pageKey, locale, seo }) {
     const rawJsonLd = seo?.jsonLd
         ? (Array.isArray(seo.jsonLd) ? seo.jsonLd : [seo.jsonLd])
         : [];
-    // Force each node's top-level `url` to this page's canonical (locale-prefixed)
-    // so structured data matches <link rel="canonical"> instead of the bare,
-    // un-prefixed URL hardcoded in PAGE_SEO / the movie & blog builders.
-    const pageJsonLd = rawJsonLd.map((node) =>
-        node && typeof node === 'object' && 'url' in node ? { ...node, url: pageUrl } : node);
+    // Force each node's page-identity URLs (`url`, `mainEntityOfPage`) to this
+    // page's canonical (locale-prefixed, trailing-slash) so structured data
+    // matches <link rel="canonical"> instead of the bare, un-prefixed URL
+    // hardcoded in PAGE_SEO / the movie & blog builders.
+    const pageJsonLd = rawJsonLd.map((node) => {
+        if (!node || typeof node !== 'object') return node;
+        const next = { ...node };
+        if ('url' in node) next.url = pageUrl;
+        if ('mainEntityOfPage' in node) next.mainEntityOfPage = pageUrl;
+        return next;
+    });
     const breadcrumb = buildBreadcrumbList(pageKey, seo?.title, locale);
     const structuredData = jsonLdBlock([...pageJsonLd, breadcrumb]);
 

@@ -118,7 +118,7 @@ export function Navigation() {
               <LocalLink
                 key={item.key}
                 to={item.path}
-                className={`nav-link text-sm font-medium whitespace-nowrap transition-all duration-300 focus-cinema ${isActive(item.path)
+                className={`nav-link ${overlay ? 'nav-overlay ' : ''}text-sm font-medium whitespace-nowrap transition-all duration-300 focus-cinema ${isActive(item.path)
                   ? overlay
                     ? 'text-white active' // active over hero: white stays legible
                     : 'text-primary active' // keep underline via .active, remove bg/border

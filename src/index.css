@@ -485,6 +485,16 @@
     text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
   }
 
+  /* Over the hero the nav text is forced white; in light mode its white glow
+     reads as a halo, so drop it there. Dark mode keeps a faint dark contour. */
+  .nav-link.nav-overlay {
+    text-shadow: none;
+  }
+
+  .dark .nav-link.nav-overlay {
+    text-shadow: 0 0 4px rgba(50, 50, 50, 0.7);
+  }
+
   /* Force the dark-theme overlay nav-link look regardless of app theme
      (used by the mobile dropdown, which always sits on dark glass). */
   .nav-link-dark {

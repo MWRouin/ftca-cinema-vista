@@ -1,9 +1,17 @@
 {
   "title": "Catalogue des films",
   "subtitle": "Explorez notre collection de chefs-d'œuvre cinématographiques",
-  "filterPlaceholder": "Filtrer par genre",
-  "allGenres": "Tous les genres",
-  "directedBy": "Réalisé par {{director}}",
-  "emptyMessage": "Aucun film trouvé pour le genre sélectionné.",
-  "viewAll": "Voir tous les films"
+  "searchPlaceholder": "Rechercher",
+  "clearSearch": "Effacer la recherche",
+  "filtersToggle": "Filtres",
+  "genreLabel": "Genre",
+  "yearLabel": "Année",
+  "sortPlaceholder": "Trier par",
+  "sortNewest": "Plus récents",
+  "sortOldest": "Plus anciens",
+  "sortTitle": "Titre (A–Z)",
+  "results_one": "{{count}} film",
+  "results_other": "{{count}} films",
+  "clearFilters": "Tout effacer",
+  "emptyMessage": "Aucun film ne correspond à vos filtres."
 }

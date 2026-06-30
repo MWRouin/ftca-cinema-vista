@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/button';
+import { BackButton } from '@/components/customUi/back-button';
 import './movie-player.css';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -20,6 +20,7 @@ import {
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
 import { ElementTitle } from '@/components/customUi/element-title';
+import { MovieCard } from '@/components/customUi/movie-card';
 import { LocalLink, useLocale } from '@/i18n/locale';
 
 /** A credit's name, linked to the person's page when they have one. */
@@ -78,9 +79,7 @@ export default function MoviePlayer() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button asChild variant="outline">
-                <LocalLink to="/movies">{t('backToMovies')}</LocalLink>
-              </Button>
+              <BackButton to="/movies" label={t('backToMovies')} className="mb-0" />
             </CardContent>
           </Card>
         </div>
@@ -138,11 +137,7 @@ export default function MoviePlayer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Back Button */}
-        <div className="mb-6">
-          <Button asChild variant="outline">
-            <LocalLink to="/movies">{t('backToMovies')}</LocalLink>
-          </Button>
-        </div>
+        <BackButton to="/movies" label={t('backToMovies')} />
 
         {/* Movie Header */}
         <div className="grid grid-cols-3 md:grid-cols-3 gap-8 mb-12">
@@ -245,21 +240,7 @@ export default function MoviePlayer() {
             <h2 className="text-3xl font-bold mb-8">{t('moreFrom', { director: directorNames })}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {relatedMoviesByDirector.map((relatedMovie) => (
-                <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <LocalLink to={`/movies/${relatedMovie.id}`}>
-                    <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
-                      <img
-                        src={relatedMovie.image}
-                        alt={relatedMovie.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
-                      <CardDescription>{t('directedBy', { director: getDirectorNames(relatedMovie) })}</CardDescription>
-                    </CardHeader>
-                  </LocalLink>
-                </Card>
+                <MovieCard key={relatedMovie.id} movie={relatedMovie} />
               ))}
             </div>
           </section>
@@ -270,21 +251,7 @@ export default function MoviePlayer() {
             <h2 className="text-3xl font-bold mb-8">{t('moreLike', { title: movie.title })}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
               {relatedMoviesByGenre.map((relatedMovie) => (
-                <Card key={relatedMovie.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <LocalLink to={`/movies/${relatedMovie.id}`}>
-                    <div className="aspect-[2/3] overflow-hidden rounded-t-lg">
-                      <img
-                        src={relatedMovie.image}
-                        alt={relatedMovie.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{relatedMovie.title}</CardTitle>
-                      <CardDescription>{t('directedBy', { director: getDirectorNames(relatedMovie) })}</CardDescription>
-                    </CardHeader>
-                  </LocalLink>
-                </Card>
+                <MovieCard key={relatedMovie.id} movie={relatedMovie} />
               ))}
             </div>
           </section>

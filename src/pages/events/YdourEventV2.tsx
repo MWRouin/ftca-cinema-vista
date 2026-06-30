@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/customUi/back-button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ElementTitle } from '@/components/customUi/element-title';
-import { Calendar, MapPin, Clock, Instagram, Facebook, Youtube } from "lucide-react";
+import { Calendar, MapPin, Clock } from "lucide-react";
+import { SocialLinks } from "@/components/customUi/social-links";
 import { Trans, useTranslation } from "react-i18next";
 import { EventGallerySlider } from "@/components/customUi/event-gallery-slider";
 import MetaHeader from '@/lib/metadata/metadata';
@@ -11,7 +12,6 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { LazyImage } from "@/components/customUi/lazy-image";
 import ShareActions from "@/components/customUi/share-actions";
-import { LocalLink } from "@/i18n/locale";
 
 const SLUG = "ydour-v2";
 
@@ -52,11 +52,7 @@ export default function YdourEventV2() {
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     {/* Back */}
-                    <div className="mb-6">
-                        <Button asChild variant="outline">
-                            <LocalLink to="/events">{t("backToEvents")}</LocalLink>
-                        </Button>
-                    </div>
+                    <BackButton to="/events" label={t("backToEvents")} />
 
                     {/* Hero */}
                     <div className="aspect-[16/9] overflow-hidden rounded-lg mb-10">
@@ -220,35 +216,7 @@ export default function YdourEventV2() {
                                     {event.quote.callToAction}
                                 </p>
 
-                                <div className="flex justify-center gap-6">
-                                    <a
-                                        href="https://www.facebook.com/ftcahamhama/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label="Facebook"
-                                        className="hover:scale-125 w-10 h-10 transition-transform"
-                                    >
-                                        <Facebook className="w-7 h-7 text-[#0866ff]" />
-                                    </a>
-                                    <a
-                                        href="https://www.instagram.com/ftca.hlif/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label="Instagram"
-                                        className="hover:scale-125 w-10 h-10 transition-transform"
-                                    >
-                                        <Instagram className="w-7 h-7 text-[#e7009a]" />
-                                    </a>
-                                    <a
-                                        href="https://www.youtube.com/@ftcahammamlif/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        aria-label="YouTube"
-                                        className="hover:scale-125 w-10 h-10 transition-transform"
-                                    >
-                                        <Youtube className="w-7 h-7 text-[#ff0033]" />
-                                    </a>
-                                </div>
+                                <SocialLinks variant="brand" />
                             </div>
 
                         </CardContent>

@@ -1,6 +1,7 @@
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
+import { SocialLinks } from '@/components/customUi/social-links';
 import { LocalLink } from '@/i18n/locale';
 
 export function Footer() {
@@ -13,12 +14,6 @@ export function Footer() {
     { key: 'events', path: '/events' },
     { key: 'blog', path: '/blog' },
     { key: 'contact', path: '/contact' },
-  ];
-
-  const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/ftcahamhama/', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/ftca.hlif/', label: 'Instagram' },
-    { icon: Youtube, href: 'https://www.youtube.com/@ftcahammamlif', label: 'YouTube' },
   ];
 
   return (
@@ -40,20 +35,7 @@ export function Footer() {
             <p className="text-muted-foreground mb-4 max-w-md">
               {t('footer.mission')}
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 rounded-lg flex items-center justify-center transition-colors group"
-                  aria-label={label}
-                >
-                  <Icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                </a>
-              ))}
-            </div>
+            <SocialLinks variant="chip" />
           </div>
 
           {/* Quick Links */}

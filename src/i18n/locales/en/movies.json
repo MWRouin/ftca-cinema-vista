@@ -1,9 +1,17 @@
 {
   "title": "Movie Catalog",
   "subtitle": "Explore our curated collection of cinematic masterpieces",
-  "filterPlaceholder": "Filter by genre",
-  "allGenres": "All Genres",
-  "directedBy": "Directed by {{director}}",
-  "emptyMessage": "No movies found for the selected genre.",
-  "viewAll": "View All Movies"
+  "searchPlaceholder": "Search by title",
+  "clearSearch": "Clear search",
+  "filtersToggle": "Filters",
+  "genreLabel": "Genre",
+  "yearLabel": "Year",
+  "sortPlaceholder": "Sort by",
+  "sortNewest": "Newest first",
+  "sortOldest": "Oldest first",
+  "sortTitle": "Title (A–Z)",
+  "results_one": "{{count}} film",
+  "results_other": "{{count}} films",
+  "clearFilters": "Clear all",
+  "emptyMessage": "No movies match your filters."
 }
