@@ -1,5 +1,6 @@
 
-import { PageTitle } from '@/components/customUi/page-title';
+import { PageHeader } from '@/components/customUi/page-header';
+import { PageContainer } from '@/components/customUi/page-container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
@@ -52,16 +53,8 @@ export default function Contact() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.contact} />
-    <div className="min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <PageTitle title={t('title')} />
-          <div className="section-divider w-24 mx-auto mb-8"></div>
-          <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            {t('subtitle')}
-          </div>
-        </div>
+    <PageContainer>
+        <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
@@ -212,8 +205,7 @@ export default function Contact() {
             </Card>
           </div>
         </div>
-      </div>
-    </div>
+    </PageContainer>
     </>
   );
 }

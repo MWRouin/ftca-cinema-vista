@@ -1,5 +1,7 @@
-import { PageTitle } from '@/components/customUi/page-title';
+import { PageHeader } from '@/components/customUi/page-header';
+import { PageContainer } from '@/components/customUi/page-container';
 import { ArticleCard } from '@/components/customUi/article-card';
+import { EmptyState } from '@/components/customUi/empty-state';
 import { Inbox } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import MetaHeader from '@/lib/metadata/metadata';
@@ -15,26 +17,15 @@ export default function Blog() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.blog} />
-      <div className="min-h-screen py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <PageTitle title={t('title')} />
-            <div className="section-divider w-24 mx-auto mb-8"></div>
-            <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              {t('subtitle')}
-            </div>
-          </div>
+      <PageContainer>
+          <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
           {featuredArticle ? (
             <div className="mb-12">
               <ArticleCard article={featuredArticle} variant="featured" />
             </div>
           ) : (
-            <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
-              <Inbox className="w-40 h-40 mx-auto text-muted-foreground" />
-              <p className="text-lg text-muted-foreground">{t('empty')}</p>
-              <p className="text-sm text-muted-foreground">{t('checkBack')}</p>
-            </div>
+            <EmptyState icon={Inbox} iconClassName="w-40 h-40" title={t('empty')} subtitle={t('checkBack')} />
           )}
 
           {articles.length > 1 ? (
@@ -44,8 +35,7 @@ export default function Blog() {
               ))}
             </div>
           ) : null}
-        </div>
-      </div>
+      </PageContainer>
     </>
   );
 }

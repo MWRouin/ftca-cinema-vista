@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { NotFoundCard } from '@/components/customUi/not-found-card';
+import { PageContainer } from '@/components/customUi/page-container';
 import { Badge } from '@/components/ui/badge';
 import { getPersonById } from '@/data/people';
 import { getFilmography, isPersonPublic } from '@/data/movies';
@@ -12,9 +13,7 @@ import { ArticleCard } from '@/components/customUi/article-card';
 import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME_FULL, DEFAULT_PERSON_OG_IMAGE } from '@/lib/metadata/seo-constants';
-
-// Same stable slug used by About's per-member i18n keys, so FR bios/roles resolve.
-const slugify = (value: string) => value.toLowerCase().trim().replace(/\s+/g, '-');
+import { slugify } from '@/lib/utils';
 
 export default function Person() {
   const { id } = useParams();
@@ -27,21 +26,17 @@ export default function Person() {
   /* ---------- Not found / non-public ---------- */
   if (!person || !isPersonPublic(person.id)) {
     return (
-      <div className="min-h-screen py-12 flex items-center">
-        <div className="max-w-3xl mx-auto px-4 w-full">
-          <Card className="text-center">
-            <CardHeader>
-              <img
-                src={defaultUserImage}
-                alt={t('notFoundAlt')}
-                className="mx-auto mb-6 h-32 w-32 rounded-full object-cover opacity-70"
-              />
-              <CardTitle>{t('notFoundTitle')}</CardTitle>
-              <CardDescription>{t('notFoundDesc')}</CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-      </div>
+      <NotFoundCard
+        image={
+          <img
+            src={defaultUserImage}
+            alt={t('notFoundAlt')}
+            className="mx-auto mb-6 h-32 w-32 rounded-full object-cover opacity-70"
+          />
+        }
+        title={t('notFoundTitle')}
+        description={t('notFoundDesc')}
+      />
     );
   }
 
@@ -83,8 +78,7 @@ export default function Person() {
           url: `${SITE_URL}/people/${person.id}`,
         }}
       />
-      <div className="min-h-screen py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <PageContainer py={8}>
           {/* Back */}
           <BackButton to="/about" label={t('back')} />
 
@@ -140,8 +134,7 @@ export default function Person() {
               </div>
             </section>
           )}
-        </div>
-      </div>
+      </PageContainer>
     </>
   );
 }

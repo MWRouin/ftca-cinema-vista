@@ -1,4 +1,5 @@
-import { PageTitle } from '@/components/customUi/page-title'
+import { PageHeader } from '@/components/customUi/page-header'
+import { PageContainer } from '@/components/customUi/page-container'
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
 import MetaHeader from '@/lib/metadata/metadata'
@@ -11,16 +12,8 @@ export default function Palmares() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.palmares} />
-    <div className="min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <PageTitle title={t('palmares.title')}/>
-          <div className="section-divider w-24 mx-auto mb-8"></div>
-          <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            {t('palmares.subtitle')}
-          </div>
-        </div>
+    <PageContainer>
+        <PageHeader title={t('palmares.title')} subtitle={t('palmares.subtitle')} />
 
         <div className="text-center space-y-12">
           {/* Trophy — Twemoji SVG (same image across all browsers) */}
@@ -47,8 +40,7 @@ export default function Palmares() {
           </div>
 
         </div>
-      </div>
-    </div>
+    </PageContainer>
     </>
   )
 }
