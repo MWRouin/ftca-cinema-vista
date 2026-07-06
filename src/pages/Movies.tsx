@@ -7,7 +7,8 @@ import { Slider } from '@/components/ui/slider';
 import { Search, X, SlidersHorizontal } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getMovies, creditName, type Movie } from '@/data/movies';
-import { PageTitle } from '@/components/customUi/page-title';
+import { PageHeader } from '@/components/customUi/page-header';
+import { PageContainer } from '@/components/customUi/page-container';
 import { MovieCard } from '@/components/customUi/movie-card';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
@@ -122,16 +123,8 @@ export default function Movies() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.movies} />
-      <div className="min-h-screen py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-10">
-            <PageTitle title={t('title')} />
-            <div className="section-divider w-24 mx-auto mb-8"></div>
-            <div className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t('subtitle')}
-            </div>
-          </div>
+      <PageContainer>
+          <PageHeader title={t('title')} subtitle={t('subtitle')} className="mb-10" />
 
           {/* Filter controls */}
           <div className="mb-10 mt-6">
@@ -281,8 +274,7 @@ export default function Movies() {
               </Button>
             </div>
           )}
-        </div>
-      </div>
+      </PageContainer>
     </>
   );
 }

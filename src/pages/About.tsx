@@ -1,6 +1,7 @@
 
 import { LazyImage } from '@/components/customUi/lazy-image';
-import { PageTitle } from '@/components/customUi/page-title';
+import { PageHeader } from '@/components/customUi/page-header';
+import { PageContainer } from '@/components/customUi/page-container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
@@ -10,11 +11,7 @@ import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { getMembers, getHonoraryMembers } from '@/data/people';
 import { isPersonPublic } from '@/data/movies';
 import { LocalLink } from '@/i18n/locale';
-
-// Build a stable translation-key slug from a name or role, e.g.
-// "General Secretary" -> "general-secretary". Used to look up per-member
-// translations while keeping the English source as a defaultValue fallback.
-const slugify = (value: string) => value.toLowerCase().trim().replace(/\s+/g, '-');
+import { slugify } from '@/lib/utils';
 
 function TeamSection({ teamMembers }) {
   const { t } = useTranslation('about');
@@ -136,16 +133,8 @@ export default function About() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.about} />
-    <div className="min-h-screen py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <PageTitle title={t('title')} />
-          <div className="section-divider w-24 mx-auto mb-8"></div>
-          {/* <div className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Discover our story, mission, and the passionate individuals who make our cinema club a vibrant community
-          </div> */}
-        </div>
+    <PageContainer>
+        <PageHeader title={t('title')} />
 
         {/* History Section */}
         <section className="mb-16">
@@ -253,8 +242,7 @@ export default function About() {
         <section className="mt-16">
           <OldMembersSection oldMembers={oldMembers} />
         </section>
-      </div>
-    </div>
+    </PageContainer>
     </>
   );
 }

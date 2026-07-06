@@ -1,7 +1,8 @@
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useState } from "react";
 import { LazyImage } from "./lazy-image";
+import { LightboxOverlay } from "./lightbox";
 
 export function EventGallerySlider({ images }: { images: string[] }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -60,30 +61,18 @@ export function EventGallerySlider({ images }: { images: string[] }) {
 
       {/* Lightbox */}
       {lightboxIndex !== null && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
-          onClick={closeLightbox}
-        >
-          {/* Close */}
-          <button
-            onClick={closeLightbox}
-            aria-label="Close"
-            className="absolute top-4 right-4 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
-          >
-            <X />
-          </button>
-
+        <LightboxOverlay onClose={closeLightbox}>
           {/* Prev */}
           <button
             onClick={(e) => { e.stopPropagation(); goToPrev(); }}
             aria-label="Previous image"
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
           >
             <ChevronLeft />
           </button>
 
           {/* Image */}
-          <LazyImage
+          <img
             src={images[lightboxIndex]}
             alt={`Event gallery photo ${lightboxIndex + 1}`}
             className="max-w-full max-h-full object-contain select-none"
@@ -94,7 +83,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
           <button
             onClick={(e) => { e.stopPropagation(); goToNext(); }}
             aria-label="Next image"
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
           >
             <ChevronRight />
           </button>
@@ -103,7 +92,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm">
             {lightboxIndex + 1} / {images.length}
           </div>
-        </div>
+        </LightboxOverlay>
       )}
     </>
   );

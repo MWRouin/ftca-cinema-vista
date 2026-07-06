@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LazyImage } from "@/components/customUi/lazy-image";
-import { LocalLink, useLocale } from "@/i18n/locale";
+import { LocalLink } from "@/i18n/locale";
+import { useLocalizedDate } from "@/hooks/useLocalizedDate";
 import type { BlogArticle } from "@/data/blog";
 
 /** Category → badge color classes (shared so every article badge matches). */
@@ -37,13 +38,7 @@ interface ArticleCardProps {
  */
 export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
   const { t } = useTranslation("blog");
-  const locale = useLocale();
-  const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  const formatDate = useLocalizedDate();
 
   // The whole section is the blog, so a "Blog" category badge is redundant —
   // only surface a category when it's something more specific.

@@ -2,17 +2,17 @@ import type { ReactNode } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
-//import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { NotFoundCard } from '@/components/customUi/not-found-card';
+import { PageContainer } from '@/components/customUi/page-container';
+import { PersonLink } from '@/components/customUi/person-link';
 import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO, SITE_URL } from '@/lib/metadata/seo-constants';
 import { getBlogArticleBySlug } from '@/data/blog';
 import { resolvePersonId } from '@/data/people';
-import { isPersonPublic } from '@/data/movies';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import ShareActions from '@/components/customUi/share-actions';
-import { LocalLink, useLocale } from '@/i18n/locale';
+import { useLocalizedDate } from '@/hooks/useLocalizedDate';
 
 /**
  * The article's author, linked to their person page when the name resolves to a
@@ -20,54 +20,24 @@ import { LocalLink, useLocale } from '@/i18n/locale';
  * `children` is the localized name token injected by <Trans>.
  */
 function AuthorLink({ author, children }: { author: string; children?: ReactNode }) {
-  const personId = resolvePersonId(author);
-  if (personId && isPersonPublic(personId)) {
-    return (
-      <LocalLink
-        to={`/people/${personId}`}
-        className="underline-offset-2 hover:text-primary hover:underline transition-colors"
-      >
-        {children}
-      </LocalLink>
-    );
-  }
-  return <>{children}</>;
+  return <PersonLink personId={resolvePersonId(author)}>{children}</PersonLink>;
 }
 
 export default function BlogArticle() {
   const { slug } = useParams();
   const { t } = useTranslation('blog');
-  const locale = useLocale();
+  const formatDate = useLocalizedDate();
   const article = getBlogArticleBySlug(slug);
-
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    };
-    return new Date(dateString).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', options);
-  };
 
   if (!article) {
     return (
       <>
         <MetaHeader {...PAGE_SEO['404']} />
-        <div className="min-h-screen py-12 flex items-center">
-          <div className="max-w-3xl mx-auto px-4 w-full">
-            <Card className="text-center">
-              <CardHeader>
-                <CardTitle>{t('notFoundTitle')}</CardTitle>
-                <CardDescription>
-                  {t('notFoundDesc')}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <BackButton to="/blog" label={t('backToBlog')} className="mb-0" />
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        <NotFoundCard
+          title={t('notFoundTitle')}
+          description={t('notFoundDesc')}
+          action={<BackButton to="/blog" label={t('backToBlog')} className="mb-0" />}
+        />
       </>
     );
   }
@@ -110,8 +80,7 @@ export default function BlogArticle() {
           },
         }}
       />
-      <div className="min-h-screen py-12">
-        <div className="max-w-4xl 2xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <PageContainer width="4xl" className="2xl:max-w-5xl">
           <BackButton to="/blog" label={t('backToBlog')} />
 
           {article.image ? (
@@ -176,8 +145,7 @@ export default function BlogArticle() {
               return <p key={idx}>{text}</p>;
             })}
           </article>
-        </div>
-      </div>
+      </PageContainer>
     </>
   );
 }

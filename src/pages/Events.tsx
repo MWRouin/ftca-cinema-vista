@@ -1,17 +1,20 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { PageTitle } from '@/components/customUi/page-title';
+import { PageHeader } from '@/components/customUi/page-header';
+import { PageContainer } from '@/components/customUi/page-container';
+import { EmptyState } from '@/components/customUi/empty-state';
 import { CalendarX, FolderX } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import MetaHeader from '@/lib/metadata/metadata';
 import { PAGE_SEO } from '@/lib/metadata/seo-constants';
-import { LocalLink, useLocale } from '@/i18n/locale';
+import { LocalLink } from '@/i18n/locale';
+import { useLocalizedDate } from '@/hooks/useLocalizedDate';
 
 export default function Events() {
   const { t } = useTranslation('events');
-  const locale = useLocale();
+  const formatDate = useLocalizedDate();
   const events = [
     {
       id: 'ydour',
@@ -67,15 +70,6 @@ export default function Events() {
     .filter(event => event.status === 'past')
     .sort((event1, event2) => new Date(event2.date).getTime() - new Date(event1.date).getTime());
 
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    return new Date(dateString).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', options);
-  };
-
   const EventCard = ({ event }: { event: typeof events[0] }) => (
     <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 max-w-[720px]">
 
@@ -124,16 +118,8 @@ export default function Events() {
   return (
     <>
       <MetaHeader {...PAGE_SEO.events} />
-      <div className="min-h-screen py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <PageTitle title={t('title')} />
-            <div className="section-divider w-24 mx-auto mb-8"></div>
-            <div className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-              {t('subtitle')}
-            </div>
-          </div>
+      <PageContainer>
+          <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
           {/* Upcoming Events */}
           {upcomingEvents.length > 0 && <section className="mb-16">
@@ -145,17 +131,7 @@ export default function Events() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
-                <CalendarX className="w-20 h-20 mx-auto text-muted-foreground" />
-
-                <p className="text-lg text-muted-foreground">
-                  {t('noUpcoming')}
-                </p>
-
-                <p className="text-sm text-muted-foreground">
-                  {t('checkBackSoon')}
-                </p>
-              </div>
+              <EmptyState icon={CalendarX} title={t('noUpcoming')} subtitle={t('checkBackSoon')} />
             )}
           </section>}
 
@@ -169,15 +145,10 @@ export default function Events() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 bg-muted/50 rounded-lg space-y-4">
-                <FolderX className="w-20 h-20 mx-auto text-muted-foreground" />
-                <p className="text-lg text-muted-foreground">{t('noEvents')}</p>
-                <p className="text-sm text-muted-foreground">{t('checkBack')}</p>
-              </div>
+              <EmptyState icon={FolderX} title={t('noEvents')} subtitle={t('checkBack')} />
             )}
           </section>
-        </div>
-      </div>
+      </PageContainer>
     </>
   );
 }

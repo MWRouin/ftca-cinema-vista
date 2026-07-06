@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
 import './movie-player.css';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
   getMovieById,
@@ -14,29 +13,20 @@ import {
   creditName,
   getDirectorNames,
   getMovieDescription,
-  isPersonPublic,
   type Credit,
 } from '@/data/movies';
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
 import { ElementTitle } from '@/components/customUi/element-title';
 import { MovieCard } from '@/components/customUi/movie-card';
-import { LocalLink, useLocale } from '@/i18n/locale';
+import { NotFoundCard } from '@/components/customUi/not-found-card';
+import { PageContainer } from '@/components/customUi/page-container';
+import { PersonLink } from '@/components/customUi/person-link';
+import { useLocale } from '@/i18n/locale';
 
 /** A credit's name, linked to the person's page when they have one. */
 function CreditLink({ credit }: { credit: Credit }) {
-  const name = creditName(credit);
-  if (credit.personId && isPersonPublic(credit.personId)) {
-    return (
-      <LocalLink
-        to={`/people/${credit.personId}`}
-        className="underline-offset-2 hover:text-primary hover:underline transition-colors"
-      >
-        {name}
-      </LocalLink>
-    );
-  }
-  return <>{name}</>;
+  return <PersonLink personId={credit.personId}>{creditName(credit)}</PersonLink>;
 }
 
 /** Render a list of credits as comma/ampersand-separated linked names. */
@@ -64,26 +54,18 @@ export default function MoviePlayer() {
   /* ---------- Not found ---------- */
   if (!movie) {
     return (
-      <div className="min-h-screen py-12 flex items-center">
-        <div className="max-w-3xl mx-auto px-4 w-full">
-          <Card className="text-center">
-            <CardHeader>
-              <img
-                src="/cinema-film-remove-svgrepo-com.svg"
-                alt={t('notFoundAlt')}
-                className="mx-auto mb-6 h-48 opacity-80"
-              />
-              <CardTitle>{t('notFoundTitle')}</CardTitle>
-              <CardDescription>
-                {t('notFoundDesc')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <BackButton to="/movies" label={t('backToMovies')} className="mb-0" />
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      <NotFoundCard
+        image={
+          <img
+            src="/cinema-film-remove-svgrepo-com.svg"
+            alt={t('notFoundAlt')}
+            className="mx-auto mb-6 h-48 opacity-80"
+          />
+        }
+        title={t('notFoundTitle')}
+        description={t('notFoundDesc')}
+        action={<BackButton to="/movies" label={t('backToMovies')} className="mb-0" />}
+      />
     );
   }
 
@@ -133,8 +115,7 @@ export default function MoviePlayer() {
           }
         }}
       />
-    <div className="min-h-screen py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <PageContainer py={8}>
 
         {/* Back Button */}
         <BackButton to="/movies" label={t('backToMovies')} />
@@ -257,8 +238,7 @@ export default function MoviePlayer() {
           </section>
         )}
 
-      </div>
-    </div>
+    </PageContainer>
     </>
   );
 }
