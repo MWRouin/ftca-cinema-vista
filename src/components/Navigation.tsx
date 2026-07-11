@@ -160,12 +160,12 @@ export function Navigation() {
       {/* Mobile Navigation — a theme-aware popover panel matching the site UI. */}
       <div
         className={
-          `lg:hidden fixed top-16 right-3 z-40 w-60 origin-top-right transition-all duration-200 ${isOpen
+          `lg:hidden fixed top-16 right-3 z-40 w-fit origin-top-right transition-all duration-200 ${isOpen
             ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
             : 'opacity-0 -translate-y-3 scale-95 pointer-events-none'}`
         }
       >
-        <div className="overflow-hidden rounded-xl border border-border bg-card/95 shadow-xl backdrop-blur-md">
+        <div className="overflow-hidden rounded-md border border-border bg-card/95 shadow-xl backdrop-blur-md">
           {/* accent hairline */}
           <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
           <div className="p-2 max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-0.5">
@@ -177,15 +177,11 @@ export function Navigation() {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   style={{ transitionDelay: isOpen ? `${index * 40}ms` : '0ms' }}
-                  className={`group relative flex items-center justify-end rounded-md px-3.5 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
+                  className={`nav-link group relative flex items-center justify-center rounded-sm px-6 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
                     ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3'}
-                    ${active ? 'bg-primary/10 text-primary' : 'text-foreground/80 hover:bg-primary/5 hover:text-primary'}`}
+                    ${active ? 'text-primary active' : 'text-foreground/80 hover:text-primary'}`}
                 >
                   <span>{t(`nav.${item.key}`)}</span>
-                  {/* right-edge active indicator (reserves space so rows don't shift) */}
-                  <span
-                    className={`absolute right-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-l-sm transition-colors ${active ? 'bg-primary' : 'bg-transparent'}`}
-                  />
                 </LocalLink>
               );
             })}
