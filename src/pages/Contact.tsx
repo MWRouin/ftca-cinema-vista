@@ -133,30 +133,48 @@ export default function Contact() {
               <CardHeader>
                 <CardTitle className="text-xl">{t('details.title')}</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <div className="flex items-center space-x-2 mb-1">
-                    <Mail className="w-5 h-5 text-primary  dark:text-accent" />
-                    <h4 className="font-semibold">{t('details.email')}</h4>
+              <CardContent className="flex flex-col gap-1">
+                <a
+                  href="mailto:contact@cineamateur-hlif.com"
+                  className="group block -mx-6 px-6 py-4 transition-colors hover:bg-muted/50"
+                >
+                  <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <Mail className="w-5 h-5 text-primary  dark:text-accent" />
+                      <h4 className="font-semibold">{t('details.email')}</h4>
+                    </div>
+                    <p className="text-muted-foreground">contact@cineamateur-hlif.com</p>
                   </div>
-                  <p className="text-muted-foreground">contact@cineamateur-hlif.com</p>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-2 mb-1">
-                    <Phone className="w-5 h-5 text-primary  dark:text-accent" />
-                    <h4 className="font-semibold">{t('details.phone')}</h4>
+                </a>
+                <a
+                  href="tel:+21655466297"
+                  className="group block -mx-6 px-6 py-4 transition-colors hover:bg-muted/50"
+                >
+                  <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <Phone className="w-5 h-5 text-primary  dark:text-accent" />
+                      <h4 className="font-semibold">{t('details.phone')}</h4>
+                    </div>
+                    <p className="text-muted-foreground">+216 55 466 297</p>
                   </div>
-                  <p className="text-muted-foreground">+216 55 466 297</p>
-                </div>
-                <div>
-                  <div className="flex items-center space-x-2 mb-1">
-                    <MapPin className="w-5 h-5 text-primary  dark:text-accent" />
-                    <h4 className="font-semibold">{t('details.address')}</h4>
+                </a>
+                <a
+                  href="https://www.google.com/maps/place/80+RN1,+Hammam-Lif/@36.7269597,10.3343537,636m/data=!3m1!1e3!4m6!3m5!1s0x12fd492504981c43:0x7772fc5d93b2f677!8m2!3d36.7270195!4d10.336157!16s%2Fg%2F11bw43n7d7?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View location on Google Maps"
+                  className="group block -mx-6 px-6 py-4 transition-colors hover:bg-muted/50"
+                >
+                  <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <MapPin className="w-5 h-5 text-primary  dark:text-accent" />
+                      <h4 className="font-semibold">{t('details.address')}</h4>
+                    </div>
+                    <p className="text-muted-foreground">
+                      80 RN1, Hammam-Lif
+                    </p>
                   </div>
-                  <p className="text-muted-foreground">
-                    80 RN1, Hammam-Lif
-                  </p>
-                </div>
+                </a>
               </CardContent>
             </Card>
 

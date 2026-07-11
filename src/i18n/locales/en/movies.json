@@ -1,7 +1,7 @@
 {
   "title": "Movie Catalog",
   "subtitle": "Explore our curated collection of cinematic masterpieces",
-  "searchPlaceholder": "Search by title",
+  "searchPlaceholder": "Search",
   "clearSearch": "Clear search",
   "filtersToggle": "Filters",
   "genreLabel": "Genre",
