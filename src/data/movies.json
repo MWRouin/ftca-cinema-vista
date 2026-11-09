@@ -4,7 +4,7 @@
     "title": "واد الطرابلسية",
     "genre": "Fiction",
     "year": 2025,
-    "duration": "30 minutes",
+    "duration": "30'",
     "image": "",
     "descriptions": {
       "defaultLang": "fr",
@@ -28,7 +28,7 @@
     "title": "And Then There Was One",
     "genre": "Fiction",
     "year": 2024,
-    "duration": "10 minutes",
+    "duration": "10'",
     "image": "__BASE_URL__/Posters/And_then_there_was_One.jpeg",
     "descriptions": {
       "defaultLang": "fr",
@@ -92,7 +92,7 @@
     "title": "Caged Bastards",
     "genre": "Fiction",
     "year": 2023,
-    "duration": "8 minutes",
+    "duration": "8'",
     "image": "__BASE_URL__/Posters/Caged-bastards-extend.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -156,7 +156,7 @@
     "title": "Sire Ex Machina",
     "genre": "Fiction",
     "year": 2023,
-    "duration": "10 minutes",
+    "duration": "10'",
     "image": "__BASE_URL__/Posters/Sire-Ex-Machina.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -228,7 +228,7 @@
     "title": "Mad Ant",
     "genre": "Fiction",
     "year": 2022,
-    "duration": "5 minutes",
+    "duration": "5'",
     "image": "__BASE_URL__/Posters/mad-ant.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -252,7 +252,7 @@
     "title": "Athena",
     "genre": "Fiction",
     "year": 2019,
-    "duration": "12 minutes",
+    "duration": "12'",
     "image": "__BASE_URL__/Posters/athena.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -364,7 +364,7 @@
     "title": "Offrande",
     "genre": "Fiction",
     "year": 2018,
-    "duration": "10 minutes",
+    "duration": "10'",
     "image": "__BASE_URL__/Posters/offrande.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -412,7 +412,7 @@
     "title": "Un des Notres",
     "genre": "Fiction",
     "year": 2016,
-    "duration": "13 minutes",
+    "duration": "13'",
     "image": "__BASE_URL__/Posters/un-des-notres.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -492,7 +492,7 @@
     "title": "Silence",
     "genre": "Fiction",
     "year": 2016,
-    "duration": "10 minutes",
+    "duration": "10'",
     "image": "__BASE_URL__/Posters/silence.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -528,7 +528,7 @@
     "title": "Tayara",
     "genre": "Fiction",
     "year": 2015,
-    "duration": "5 minutes",
+    "duration": "5'",
     "image": "__BASE_URL__/Posters/tayara.png",
     "descriptions": {
       "defaultLang": "fr",
@@ -552,7 +552,7 @@
     "title": "La Gamelle",
     "genre": "Fiction",
     "year": 2010,
-    "duration": "9 minutes",
+    "duration": "9'",
     "image": "__BASE_URL__/Posters/La-Gamelle.png",
     "descriptions": {
       "defaultLang": "fr",
@@ -584,7 +584,7 @@
     "title": "Chute libre - أحلام مستحيلة",
     "genre": "Documentary",
     "year": 2008,
-    "duration": "15:46",
+    "duration": "15'",
     "image": "__BASE_URL__/Posters/Chute_libre.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -607,8 +607,8 @@
     "id": "le-sifflet",
     "title": "Le Sifflet",
     "genre": "Documentary",
-    "year": "nan",
-    "duration": "22:52",
+    "year": 2006,
+    "duration": "22'",
     "image": "__BASE_URL__/Posters/Le_Sifflet.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -632,7 +632,7 @@
     "title": "L' Eveil",
     "genre": "Fiction",
     "year": 1967,
-    "duration": "8:45",
+    "duration": "8'",
     "image": "__BASE_URL__/Posters/l_eveil.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -656,7 +656,7 @@
     "title": "Avenue des Histoires Amputées",
     "genre": "Documentary",
     "year": 2010,
-    "duration": "17:09",
+    "duration": "17'",
     "image": "__BASE_URL__/Posters/Av_des_histoires.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -704,7 +704,7 @@
     "title": "Thara Taieb",
     "genre": "Fiction",
     "year": 1987,
-    "duration": "9:02",
+    "duration": "9'",
     "image": "__BASE_URL__/Posters/thara-taieb.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -728,7 +728,7 @@
     "title": "Les galleriens",
     "genre": "Fiction",
     "year": 1969,
-    "duration": "12:30",
+    "duration": "12'",
     "image": "__BASE_URL__/Posters/les-galleriens.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -752,7 +752,7 @@
     "title": "ذاكرة رهينة",
     "genre": "Fiction",
     "year": 1995,
-    "duration": "7:37",
+    "duration": "7'",
     "image": "__BASE_URL__/Posters/Captive-Memory.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -776,7 +776,7 @@
     "title": "123 Soleil",
     "genre": "Fiction",
     "year": 2005,
-    "duration": "4:20",
+    "duration": "4'",
     "image": "__BASE_URL__/Posters/123_soleil.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -824,7 +824,7 @@
     "title": "Graine de Lait Graine de Vie",
     "genre": "Fiction",
     "year": 2006,
-    "duration": "6:43",
+    "duration": "6'",
     "image": "__BASE_URL__/Posters/graine-de-lait-graine-de-vie.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -864,7 +864,7 @@
     "title": "V",
     "genre": "Fiction",
     "year": 2013,
-    "duration": "2:25",
+    "duration": "2'",
     "image": "__BASE_URL__/Posters/V.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -888,7 +888,7 @@
     "title": "Au Pays des Méres Vielles",
     "genre": "Documentary",
     "year": 2013,
-    "duration": "14:10",
+    "duration": "14'",
     "image": "__BASE_URL__/Posters/au-pays-des-meres-vielles.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -920,7 +920,7 @@
     "title": "Accident de Travail",
     "genre": "Fiction",
     "year": 2014,
-    "duration": "8:41",
+    "duration": "8'",
     "image": "__BASE_URL__/Posters/accident-de-travail.jpeg",
     "descriptions": {
       "defaultLang": "fr",
@@ -968,7 +968,7 @@
     "title": "L'Araignée",
     "genre": "Fiction",
     "year": 2014,
-    "duration": "9:45",
+    "duration": "9'",
     "image": "__BASE_URL__/Posters/l-araignee.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -996,7 +996,7 @@
     "title": "L'Épingle",
     "genre": "Fiction",
     "year": 2005,
-    "duration": "4:20",
+    "duration": "4'",
     "image": "__BASE_URL__/Posters/l-epingle.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1040,7 +1040,7 @@
     "title": "Home",
     "genre": "Fiction",
     "year": 2016,
-    "duration": "5:42",
+    "duration": "5'",
     "image": "__BASE_URL__/Posters/home.jpeg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1068,7 +1068,7 @@
     "title": "3al 7it",
     "genre": "Fiction",
     "year": 2012,
-    "duration": "3:12",
+    "duration": "3'",
     "image": "__BASE_URL__/Posters/3al7it.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1148,7 +1148,7 @@
     "title": "Travailleur - خدّام",
     "genre": "Documentary",
     "year": 2006,
-    "duration": "15:15",
+    "duration": "15'",
     "image": "__BASE_URL__/Posters/travailleur.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1172,7 +1172,7 @@
     "title": "Temps Mort",
     "genre": "Fiction",
     "year": 2016,
-    "duration": "12:44",
+    "duration": "12'",
     "image": "__BASE_URL__/Posters/temp-mort.jpeg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1208,7 +1208,7 @@
     "title": "عصيان",
     "genre": "Fiction",
     "year": 2004,
-    "duration": "15:06",
+    "duration": "15'",
     "image": "__BASE_URL__/Posters/3syen.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1244,7 +1244,7 @@
     "title": "Trip - هربة",
     "genre": "Fiction",
     "year": 2017,
-    "duration": "12:43",
+    "duration": "12'",
     "image": "__BASE_URL__/Posters/trip.jpeg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1339,7 +1339,7 @@
     "title": "Des biéres et des progrés",
     "genre": "Fiction",
     "year": 2018,
-    "duration": "7 mins",
+    "duration": "7'",
     "image": "__BASE_URL__/Posters/des-bieres-et-des-progres.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1403,7 +1403,7 @@
     "title": "Kari for Dog",
     "genre": "Fiction",
     "year": 2005,
-    "duration": "02:17",
+    "duration": "2'",
     "image": "__BASE_URL__/Posters/kari_for_dog.jpg",
     "descriptions": {
       "defaultLang": "fr",
@@ -1443,7 +1443,7 @@
     "title": "Mad Ant",
     "genre": "Fiction",
     "year": "nan",
-    "duration": "5:57",
+    "duration": "5'",
     "image": "__BASE_URL__/Posters/mad_ant.jpg",
     "descriptions": {
       "defaultLang": "fr",
