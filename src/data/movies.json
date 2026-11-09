@@ -5,7 +5,7 @@
     "genre": "Fiction",
     "year": 2025,
     "duration": "30'",
-    "image": "",
+    "image": "__BASE_URL__/Posters/wed_trabelsia.jpg",
     "descriptions": {
       "defaultLang": "fr",
       "data": {
@@ -17,6 +17,38 @@
       {
         "role": "director",
         "personId": "wadii-klaii"
+      },
+      {
+        "role": "actor",
+        "name": "Nadhir Becha"
+      },
+      {
+        "role": "actor",
+        "name": "Hedi Saadaoui"
+      },
+      {
+        "role": "actor",
+        "name": "Khalil Fadhlaoui"
+      },
+      {
+        "role": "actor",
+        "personId": "khalil-said"
+      },
+      {
+        "role": "actor",
+        "name": "Amenallah Zinn"
+      },
+      {
+        "role": "actor",
+        "name": "Adem Belghaieb"
+      },
+      {
+        "role": "actor",
+        "name": "Sami Aniba"
+      },
+      {
+        "role": "actor",
+        "name": "Ahmed Aniba"
       }
     ],
     "movieUrl": "https://www.youtube.com/embed/0TFjx-C-c5I",
