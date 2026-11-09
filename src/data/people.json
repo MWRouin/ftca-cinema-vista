@@ -199,6 +199,7 @@
   {
     "id": "ridha-ben-hlima",
     "name": "Ridha Ben Hlima",
+    "image": "__BASE_URL__/Members/ridhabenhlima.jpg",
     "membership": { "status": "honorary", "role": "Honorary Member", "order": 5 },
     "aliases": ["Ridha Ben Halima"],
     "public": false

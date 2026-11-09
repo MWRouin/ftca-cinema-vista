@@ -1,18 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ImageOff } from "lucide-react";
 import { Loader } from "@/components/customUi/loader";
 import { cn } from "@/lib/utils";
 
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   loaderSize?: number;
+  /** Shown instead of the image when `src` is empty or fails to load. */
+  fallback?: React.ReactNode;
 }
 
 export function LazyImage({
   loaderSize = 24,
   className,
   alt,
+  src,
+  fallback,
   ...props
 }: LazyImageProps) {
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setFailed(false);
+  }, [src]);
+
+  // No image to load (or it broke): show a static placeholder, never the loader.
+  if (!src || failed) {
+    return (
+      <div
+        className={cn("relative flex items-center justify-center bg-muted text-muted-foreground", className)}
+        role="img"
+        aria-label={alt}
+      >
+        {fallback ?? <ImageOff className="h-1/4 w-1/4 opacity-40" aria-hidden />}
+      </div>
+    );
+  }
 
   return (
     <div className={cn("relative", className)}>
@@ -24,6 +48,7 @@ export function LazyImage({
 
       <img
         {...props}
+        src={src}
         alt={alt}
         className={cn(
           "w-full h-full object-cover transition-opacity duration-300",
@@ -31,7 +56,7 @@ export function LazyImage({
         )}
         loading="lazy"
         onLoad={() => setLoading(false)}
-        onError={() => setLoading(false)}
+        onError={() => setFailed(true)}
       />
     </div>
   );
