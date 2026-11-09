@@ -5,6 +5,7 @@
   "backToMovies": "← Retour aux films",
   "director": "Réalisateur",
   "cast": "Distribution",
+  "crew": "Équipe technique",
   "watchNow": "Regarder maintenant",
   "noVideo": "Aucune vidéo disponible",
   "moreFrom": "Plus de {{director}}",
@@ -17,7 +18,12 @@
     "producer": "Production",
     "cinematographer": "Image",
     "editor": "Montage",
-    "sound": "Son",
+    "sound": "Prise de son",
+    "sound-mixing": "Mixage son",
+    "logistics": "Logistique et direction de plateau",
+    "voice-over-direction": "Direction voix off",
+    "voice-over": "Voix off",
+    "subtitles": "Sous-titres",
     "music": "Musique",
     "actor": "Distribution"
   }
