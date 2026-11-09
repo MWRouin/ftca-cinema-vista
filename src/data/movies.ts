@@ -1,8 +1,7 @@
 import rawMovies from "./movies.json"
 import { getPersonById, getPeople, type Person } from "./people"
 
-/** A role in the making of a film. Only `director`/`actor` are populated from
- *  current data; the rest exist so crew can be filled in per-movie over time. */
+/** A role in the making of a film. Crew roles are filled in per-movie over time. */
 export type CreditRole =
     | "director"
     | "writer"
@@ -10,6 +9,11 @@ export type CreditRole =
     | "cinematographer"
     | "editor"
     | "sound"
+    | "sound-mixing"
+    | "logistics"
+    | "voice-over-direction"
+    | "voice-over"
+    | "subtitles"
     | "music"
     | "actor";
 

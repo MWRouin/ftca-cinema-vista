@@ -19,6 +19,50 @@
         "personId": "wadii-klaii"
       },
       {
+        "role": "writer",
+        "personId": "wadii-klaii"
+      },
+      {
+        "role": "editor",
+        "personId": "wadii-klaii"
+      },
+      {
+        "role": "cinematographer",
+        "personId": "aziz-baraketi"
+      },
+      {
+        "role": "sound",
+        "personId": "seif-eddine-larbi"
+      },
+      {
+        "role": "sound-mixing",
+        "name": "Oussema Nefzi"
+      },
+      {
+        "role": "logistics",
+        "personId": "hichem-gtari"
+      },
+      {
+        "role": "voice-over-direction",
+        "personId": "safa-khiari"
+      },
+      {
+        "role": "voice-over",
+        "name": "Amenallah Zinn"
+      },
+      {
+        "role": "subtitles",
+        "personId": "itaf-daghsen"
+      },
+      {
+        "role": "subtitles",
+        "personId": "nour-ben-chiekh"
+      },
+      {
+        "role": "subtitles",
+        "personId": "khalil-said"
+      },
+      {
         "role": "actor",
         "name": "Nadhir Becha"
       },

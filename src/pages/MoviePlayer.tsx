@@ -168,23 +168,30 @@ export default function MoviePlayer() {
                 </div>
               )}
 
-              {crewByRole.map(([role, credits]) => (
-                <div key={role}>
-                  <h3 className="text-lg font-semibold mb-2">
-                    {t(`roles.${role}`, { defaultValue: role })}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    <CreditList credits={credits} />
-                  </p>
-                </div>
-              ))}
-
               <div>
                 <h3 className="text-lg font-semibold mb-2">{t('cast')}</h3>
                 <p className="text-muted-foreground">
                   {cast.length ? <CreditList credits={cast} /> : '—'}
                 </p>
               </div>
+
+              {crewByRole.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold mb-3">{t('crew')}</h3>
+                  <dl className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+                    {crewByRole.map(([role, credits]) => (
+                      <div key={role}>
+                        <dt className="text-xs uppercase tracking-wide text-muted-foreground/70">
+                          {t(`roles.${role}`, { defaultValue: role })}
+                        </dt>
+                        <dd>
+                          <CreditList credits={credits} />
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
             </div>
           </div>
         </div>

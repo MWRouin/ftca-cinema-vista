@@ -5,6 +5,7 @@
   "backToMovies": "← Back to Movies",
   "director": "Director",
   "cast": "Cast",
+  "crew": "Technical team",
   "watchNow": "Watch Now",
   "noVideo": "No video available",
   "moreFrom": "More from {{director}}",
@@ -17,7 +18,12 @@
     "producer": "Producer",
     "cinematographer": "Cinematography",
     "editor": "Editing",
-    "sound": "Sound",
+    "sound": "Sound recording",
+    "sound-mixing": "Sound mixing",
+    "logistics": "Logistics & set direction",
+    "voice-over-direction": "Voice-over direction",
+    "voice-over": "Voice-over",
+    "subtitles": "Subtitles",
     "music": "Music",
     "actor": "Cast"
   }
