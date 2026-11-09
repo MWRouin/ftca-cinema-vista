@@ -1,7 +1,6 @@
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { componentTagger } from "lovable-tagger";
 
 // Fonts used above the fold on first paint (hero heading/body), self-hosted via
 // @fontsource (see src/fonts.ts). Preloading their woff2 files lets the browser
@@ -54,8 +53,6 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      mode === 'development' &&
-      componentTagger(),
       mode !== 'development' && preloadCriticalFonts(base),
     ].filter(Boolean),
     resolve: {
