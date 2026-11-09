@@ -20,7 +20,7 @@
       }
     ],
     "movieUrl": "https://www.youtube.com/embed/0TFjx-C-c5I",
-    "public": false,
+    "public": true,
     "playerVisible": false
   },
   {

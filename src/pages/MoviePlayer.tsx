@@ -18,6 +18,7 @@ import {
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
 import { ElementTitle } from '@/components/customUi/element-title';
+import { LazyImage } from '@/components/customUi/lazy-image';
 import { MovieCard } from '@/components/customUi/movie-card';
 import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
@@ -126,7 +127,7 @@ export default function MoviePlayer() {
           {/* Poster */}
           <div className="col-span-1 md:row-span-3">
             <div className="aspect-[2/3] overflow-hidden rounded-lg">
-              <img
+              <LazyImage
                 src={movie.image}
                 alt={movie.title}
                 className="w-full h-full object-cover"
