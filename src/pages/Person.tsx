@@ -114,7 +114,7 @@ export default function Person() {
                     key={movie.id}
                     movie={movie}
                     badges={roles.map((role) => ({
-                      label: t(`roles.${role}`, { ns: 'movie', defaultValue: role }),
+                      label: t(`roles.${role === 'actor' && person.gender === 'female' ? 'actress' : role}`, { ns: 'movie', defaultValue: role }),
                       variant: 'outline',
                     }))}
                   />

@@ -4,7 +4,7 @@
   "notFoundAlt": "Film introuvable",
   "backToMovies": "← Retour aux films",
   "director": "Réalisateur",
-  "cast": "Distribution",
+  "cast": "Acteurs",
   "crew": "Équipe technique",
   "watchNow": "Regarder maintenant",
   "noVideo": "Aucune vidéo disponible",
@@ -25,6 +25,7 @@
     "voice-over": "Voix off",
     "subtitles": "Sous-titres",
     "music": "Musique",
-    "actor": "Distribution"
+    "actor": "Acteur",
+    "actress": "Actrice"
   }
 }

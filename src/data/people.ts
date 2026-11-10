@@ -11,9 +11,13 @@ export type ClubMembership = {
     order?: number; // display order within a status group
 };
 
+export type Gender = "male" | "female";
+
 export type Person = {
     id: string; // slug, matches slugify(name)
     name: string; // canonical display name
+    /** Only used to pick gendered role labels (actor/actress); never inferred. */
+    gender?: Gender;
     image?: string;
     bio?: LocalizedText;
     membership?: ClubMembership; // present iff the person is a club member
