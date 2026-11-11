@@ -151,7 +151,7 @@ export default function MoviePlayer() {
               <p
                 key={locale}
                 lang={locale}
-                className="text-lg text-muted-foreground lang-fade-enter"
+                className="text-lg text-muted-foreground whitespace-pre-line lang-fade-enter"
                 aria-live="polite"
               >
                 {description}
