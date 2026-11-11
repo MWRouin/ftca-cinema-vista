@@ -40,6 +40,7 @@ Template:
 | Sprint | Summary |
 |---|---|
 | [2026-11-movie-data-and-docs](sprints/2026-11-movie-data-and-docs.md) | Movie data fixes, crew credits, gender labels, cleanup, docs structure |
+| [2026-11-skills-and-synopsis](sprints/2026-11-skills-and-synopsis.md) | Docs skills and rules, Wed Trabelsia synopsis |
 
 ## Module `AGENTS.md` files
 
