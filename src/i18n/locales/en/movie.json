@@ -4,7 +4,7 @@
   "notFoundAlt": "Movie not found",
   "backToMovies": "← Back to Movies",
   "director": "Director",
-  "cast": "Cast",
+  "cast": "Actors",
   "crew": "Technical team",
   "watchNow": "Watch Now",
   "noVideo": "No video available",
@@ -25,6 +25,7 @@
     "voice-over": "Voice-over",
     "subtitles": "Subtitles",
     "music": "Music",
-    "actor": "Cast"
+    "actor": "Actor",
+    "actress": "Actress"
   }
 }
