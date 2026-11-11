@@ -46,6 +46,15 @@ Each module gets its own `AGENTS.md` (read when you work in that folder), plus a
 | `src/pages/` | Route-level pages | to add |
 | `scripts/` | Sitemap and static page generation (to be replaced by Next.js) | to add |
 
+## Documentation workflow
+
+Agents working here keep the docs current as part of the work:
+
+- **Plans** go in `docs/plans/<issue#>-<name>.md` (milestone-level, with a status line) before large work starts.
+- **Sprint log:** when a body of work or a PR is wrapped up, add a log to `docs/sprints/` and its row to `docs/README.md`. Claude Code has this as the `sprint-log` skill (`.claude/skills/sprint-log/`); other agents follow the template in `docs/README.md`.
+- **Module docs:** when you add, port, restructure or remove a module, write or update its `AGENTS.md` (and the one-line `CLAUDE.md` import) and the module map above. Claude Code has this as the `module-docs` skill (`.claude/skills/module-docs/`).
+- Don't duplicate what the code already says, and don't commit docs unless asked.
+
 ## Docs
 
 - [docs/README.md](docs/README.md): index of plans and sprint logs, and how to write them.
