@@ -23,8 +23,8 @@ The site is a Vite + React 18 SPA (react-router, i18next, Tailwind, shadcn/Radix
 Each milestone is a goal only. The how and the implementation details are decided when that milestone starts. Milestones in the same wave have no dependency on each other and can run in parallel.
 
 **Wave 1: foundations (parallel)**
-- **M1. Scaffold:** Next.js (App Router, static export, TypeScript, Tailwind, path alias) set up next to the current app, which keeps building.
-- **M2. Parity baseline:** record the current built site as the reference: URL list, per-page metadata and JSON-LD, hreflang and canonicals, sitemap, redirect behaviour.
+- **M1. Scaffold** (done): Next.js 16 (App Router, static export, TypeScript, Tailwind, path alias) set up in place. `src/pages` was renamed `src/views` (Next reserves `src/pages`), React was upgraded to 19 (required by the App Router) with the Radix and Embla packages that needed it, and the Vite app still builds. `npm run next:dev` / `next:build` run the new app from `src/app`.
+- **M2. Parity baseline** (done): `tools/parity.mjs` snapshots any static build (URLs, head metadata, JSON-LD, hreflang, sitemap) and diffs two snapshots. The Vite build is recorded in `docs/research/parity-baseline.json` (253 pages, 83 of them redirect stubs; 168 sitemap URLs).
 
 **Wave 2: shared layer (parallel, after M1)**
 - **M3. Shell and routing:** root layout, theme, navigation and footer, fonts, global CSS, locale segment routing, the `/` locale redirect and the 404 page.

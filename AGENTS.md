@@ -4,12 +4,14 @@ Website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, m
 
 ## Current state
 
-Vite + React 18 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). Until the migration lands, work in `src/` follows the current Vite structure.
+Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Vite app (`src/App.tsx`, `src/views/`) still builds while pages are ported into the Next.js app (`src/app/`). Milestones M1 (scaffold) and M2 (parity baseline) are done; see the plan for the rest.
 
 ## Commands
 
 - `npm run dev`: dev server on `http://localhost:8080`
 - `npm run build`: Vite build, then `scripts/sitemapGenerator.js` and `scripts/staticPagesGenerator.js` into `dist/`
+- `npm run next:dev` / `npm run next:build`: the Next.js app (port 3000; static output in `out/`)
+- `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare static builds against `docs/research/parity-baseline.json`
 - `npm run lint`: ESLint
 - No test suite. Verify with `npx tsc --noEmit -p tsconfig.app.json` and `npx vite build`.
 - Deploy: pushes to `Production` build and publish to GitHub Pages (`.github/workflows/deploy.yml`).
@@ -43,7 +45,7 @@ Each module gets its own `AGENTS.md` (read when you work in that folder), plus a
 | `src/lib/metadata/` | SEO constants and page metadata | to add |
 | `src/components/customUi/` | Shared presentational components | to add |
 | `src/components/ui/` | shadcn primitives | to add |
-| `src/pages/` | Route-level pages | to add |
+| `src/views/` | Route-level page components (renamed from `src/pages`) | to add |
 | `scripts/` | Sitemap and static page generation (to be replaced by Next.js) | to add |
 
 ## Documentation workflow
