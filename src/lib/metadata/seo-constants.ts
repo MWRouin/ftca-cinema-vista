@@ -3,7 +3,7 @@
  *
  * Consumed by:
  *  - src/lib/metadata/metadata.tsx       (MetaHeader component, via react-helmet-async)
- *  - src/pages/*                         (every page imports PAGE_SEO)
+ *  - src/views/*                         (every page imports PAGE_SEO)
  *  - scripts/staticPagesGenerator.js     (build-time HTML injection)
  *  - scripts/sitemapGenerator.js         (build-time sitemap)
  *
