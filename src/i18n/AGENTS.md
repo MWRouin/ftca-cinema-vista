@@ -7,13 +7,14 @@ Locales (`en`, `fr`), translation catalogs and locale helpers. Every URL is loca
 - `config.ts`: locale constants and pure path helpers (`localizePath`, `stripLocale`, `localeFromPath`). No React, no i18next; safe in scripts and server code.
 - `resources.ts`: all catalogs, one namespace per page (`common` holds nav/footer). **Register a new namespace here.**
 - `instance.ts`: `createI18n(locale)` and `getT(locale, ns)` for server code and `generateMetadata`. Synchronous.
-- `provider.tsx`: client `I18nProvider`, mounted in `src/app/[locale]/layout.tsx`, so client components use `useTranslation()` as before.
-- `index.ts` and `locale.tsx`: the Vite app's global init and react-router helpers (`LocaleScope`, `LocalLink`). Removed with Vite at M11.
+- `provider.tsx`: client `I18nProvider`, mounted in `src/app/[locale]/layout.tsx`; gives client components `useTranslation()` and `useLocale()`.
+- `locale.tsx`: `useLocale` and `LocalLink` (wraps `next/link` and adds the locale prefix).
+- `index.ts`: the frozen Vite app's global init. Removed with Vite at M11.
 
 ## Rules
 
 - Catalogs are plain JSON in `locales/<lang>/<ns>.json`; keep `en` and `fr` keys identical.
-- Don't import `react-router-dom` or `window` in `config.ts`, `resources.ts` or `instance.ts`.
+- Don't import `next/*`, React or `window` in `config.ts`, `resources.ts` or `instance.ts`; they run in server code and scripts.
 - Use `localizePath`/`LocalLink`, not hand-built `/en/...` strings.
 
 ## Verify

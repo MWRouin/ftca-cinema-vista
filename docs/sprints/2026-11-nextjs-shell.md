@@ -1,0 +1,26 @@
+# Next.js shell and routing (2026-11-12)
+
+## Shipped
+
+- **M3, shell and routing:**
+  - `src/app/[locale]/layout.tsx` is a root layout with `<html lang dir>` per locale and wraps theme, i18n, navigation and footer. It preloads the four above-the-fold font files (`src/lib/critical-fonts.ts`) and sets the saved theme before first paint (`src/lib/theme-script.ts`).
+  - `src/i18n/locale.tsx` now provides `useLocale` and `LocalLink` on top of `next/link`; `Layout`, `Navigation` and `LanguageToggle` use `next/navigation`. The language switch keeps the scroll position, as before.
+  - `src/app/(root)/` serves `/`: same locale rule as the old redirect (stored choice, then browser language, then default), with canonical, hreflang and a `noscript` refresh.
+  - `src/app/global-not-found.tsx` produces `404.html`.
+  - `next build` output was checked: `en` and `fr` pages have the right `lang`, translated navigation and locale-prefixed links; the preload links point to the same hashed files the CSS uses.
+
+## Decisions
+
+- **The Vite app is frozen from this milestone.** In-place migration means shared components now import `next/*`; keeping both apps compiling would have needed adapter layers that are thrown away at M11. The old site stays buildable from `main`, and `docs/research/parity-baseline.json` is the reference output.
+- **No top-level `app/layout.tsx`.** Two root layouts (`[locale]` and `(root)`) are what let `lang` and `dir` be correct in the static HTML of each locale.
+- **404 via `experimental.globalNotFound`**, because with no top-level layout there is nowhere else to render `404.html`. Revisit if the flag changes in a later Next release.
+- **`@fontsource` instead of `next/font`**: the CSS refers to the literal family names (`"Inter"`, `"Cormorant Garamond"`), so this keeps the look identical with no CSS changes.
+
+## Left over
+
+- Redirect pages for the 82 un-prefixed legacy URLs (for example `/movies/trip/`): they need the list of pages from M7 to M9 and are checked at M12.
+- Per-page `<title>`, description, canonical, hreflang and JSON-LD for `/en/` and `/fr/` (M10); `out/en/index.html` has no `<title>` yet.
+- The 404 page contains two `robots` meta tags (`noindex` and `noindex, follow`).
+- Home is a placeholder until M7. `ScrollToTopOnLocationChange`, `MetaHeader` and `html-lang.ts` are unused and go away with M10 and M11.
+- Not checked in a browser: navigation menu, theme toggle, language toggle and the hero fonts. `src/app/[locale]/m5-check/` is still a temporary, uncommitted page for the M5 manual check.
+- Restart `npm run next:dev` after pulling this: the build rewrites `.next`.

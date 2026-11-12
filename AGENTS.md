@@ -4,16 +4,15 @@ Website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, m
 
 ## Current state
 
-Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Vite app (`src/App.tsx`, `src/views/`) still builds while pages are ported into the Next.js app (`src/app/`). Milestones M1, M2, M4, M5 and M6 are done; M3 (shell and routing) and the page ports are next; see the plan.
+Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Next.js app (`src/app/`) has the shell, locale routing, i18n and the root redirect; pages are ported from `src/views/` one by one (M7 to M9). **The Vite app (`src/App.tsx`, `src/main.tsx`, `index.html`, `vite.config.ts`) is frozen since M3**: shared components now use `next/*`, so it no longer builds. It is deleted at M11; the old site stays buildable from `main`. Milestones M1 to M6 are done; see the plan.
 
 ## Commands
 
-- `npm run dev`: dev server on `http://localhost:8080`
-- `npm run build`: Vite build, then `scripts/sitemapGenerator.js` and `scripts/staticPagesGenerator.js` into `dist/`
 - `npm run next:dev` / `npm run next:build`: the Next.js app (port 3000; static output in `out/`)
+- `npm run dev` / `npm run build`: the frozen Vite app (does not build any more; kept only until M11)
 - `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare static builds against `docs/research/parity-baseline.json`
 - `npm run lint`: ESLint
-- No test suite. Verify with `npx tsc --noEmit -p tsconfig.app.json` and `npx vite build`.
+- No test suite. Verify with `npx tsc --noEmit -p tsconfig.next.json` and `npx next build`, then check the HTML in `out/`.
 - Deploy: pushes to `Production` build and publish to GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Conventions
@@ -22,11 +21,11 @@ Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix)
 - **Warnings:** don't mute tooling warnings (Browserslist, npm audit, etc.). Fix the cause or leave them visible and mention them.
 - **Agent memory lives in the repo.** Don't use Claude's filesystem auto-memory (`~/.claude*/projects/*/memory`). Record durable guidance here in `AGENTS.md` (or in the relevant module's `AGENTS.md`), plans in `docs/plans/`, history in `docs/sprints/`.
 - **Package manager:** npm only (`package-lock.json`). There is no bun/yarn lockfile.
-- **URLs:** every page is locale-prefixed with a trailing slash (`/en/movies/`, `/fr/movies/`). Un-prefixed URLs redirect to a locale. Use `LocalLink`/`localizePath`, not raw paths.
+- **URLs:** every page is locale-prefixed with a trailing slash (`/en/movies/`, `/fr/movies/`). `/` redirects to a locale. Use `LocalLink`/`localizePath`, not raw paths.
 - **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`.
 - **Posters:** 2:3 portrait, 1000×1500 is the common size. Reduce dimensions rather than compressing further. Crop to 2:3.
 - **Person portraits:** square, saved in `public/Members/`.
-- **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font was fixed by preloading the above-the-fold woff2 files (`preloadCriticalFonts` plugin in `vite.config.ts`, patterns in `CRITICAL_FONT_PATTERNS`). If the hero's font family/weight changes, update the patterns. Under Next.js this should be replaced by `next/font` (milestone M3).
+- **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font was fixed by preloading the above-the-fold woff2 files (`preloadCriticalFonts` plugin in `vite.config.ts`, patterns in `CRITICAL_FONT_PATTERNS`). If the hero's font family/weight changes, update the patterns. In the Next app the same files are preloaded from `src/lib/critical-fonts.ts` (kept on `@fontsource` instead of `next/font`, because the CSS refers to the literal family names).
 - **Pronouns and gender in data:** `gender` on a person only selects the actor/actress label; never infer it elsewhere.
 
 ## Data rules worth knowing

@@ -1,6 +1,7 @@
+'use client';
 
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Menu } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
@@ -11,9 +12,9 @@ import { stripLocale } from '@/i18n/config';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
   const { t } = useTranslation();
-  const path = stripLocale(location.pathname);
+  const path = stripLocale(pathname);
   const isHome = path === '/';
 
   // `scrolled` (past 20px) and `overlay` (navbar sits transparently over the

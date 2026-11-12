@@ -1,4 +1,6 @@
-import { useLocation, useNavigate } from "react-router-dom";
+"use client";
+
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { GB, FR } from "country-flag-icons/react/3x2";
 
@@ -21,21 +23,25 @@ const FLAGS: Record<Locale, typeof GB> = {
  */
 export function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
   const locale = useLocale();
-  const location = useLocation();
-  const navigate = useNavigate();
+  const pathname = usePathname();
+  const router = useRouter();
   const { t } = useTranslation();
 
   const next: Locale = locale === "en" ? "fr" : "en";
   const Flag = FLAGS[locale];
 
   const switchLanguage = () => {
-    const neutralPath = stripLocale(location.pathname);
+    const neutralPath = stripLocale(pathname);
     try {
       localStorage.setItem(LOCALE_STORAGE_KEY, next);
     } catch {
       /* storage unavailable (private mode); navigation still works */
     }
-    navigate(localizePath(neutralPath, next) + location.search + location.hash);
+    // scroll: false keeps the reader's position, as a language switch isn't a page change.
+    router.push(
+      localizePath(neutralPath, next) + window.location.search + window.location.hash,
+      { scroll: false },
+    );
   };
 
   const buttonClass = onDark ? "text-white" : "text-primary";
