@@ -21,7 +21,8 @@ function walk(dir) {
 
 function attrs(tag) {
   const out = {};
-  for (const m of tag.matchAll(/([\w:-]+)\s*=\s*"([^"]*)"/g)) out[m[1]] = m[2];
+  // Attribute names are case-insensitive in HTML (React writes hrefLang).
+  for (const m of tag.matchAll(/([\w:-]+)\s*=\s*"([^"]*)"/g)) out[m[1].toLowerCase()] = m[2];
   return out;
 }
 
@@ -35,7 +36,8 @@ function parseHtml(html) {
   }
   const links = (rel) =>
     (head.match(/<link\b[^>]*>/gi) ?? []).map(attrs).filter((a) => a.rel === rel);
-  const jsonLd = (head.match(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) ?? [])
+  // JSON-LD may sit in <head> (Vite build) or <body> (Next.js); both are valid.
+  const jsonLd = (html.match(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi) ?? [])
     .map((s) => s.replace(/^[\s\S]*?>/, "").replace(/<\/script>$/i, "").trim())
     .map((s) => {
       try { return JSON.stringify(JSON.parse(s)); } catch { return `INVALID:${s.slice(0, 80)}`; }
@@ -76,16 +78,34 @@ function snapshot(buildDir, outFile) {
   console.log(`${n} pages (${redirects} redirect stubs), ${snap.sitemapUrls?.length ?? 0} sitemap URLs -> ${outFile}`);
 }
 
+// Compare text, not markup: builds escape the same character differently (' vs &#x27;).
+const ENTITIES = { "&amp;": "&", "&quot;": '"', "&#x27;": "'", "&#39;": "'", "&lt;": "<", "&gt;": ">" };
+const decode = (snapshotFile) =>
+  JSON.parse(
+    fs.readFileSync(snapshotFile, "utf8").replace(/&(amp|quot|#x27|#39|lt|gt);/g, (m) =>
+      JSON.stringify(ENTITIES[m]).slice(1, -1),
+    ),
+  );
+
 function diff(beforeFile, afterFile) {
-  const a = JSON.parse(fs.readFileSync(beforeFile, "utf8"));
-  const b = JSON.parse(fs.readFileSync(afterFile, "utf8"));
+  const a = decode(beforeFile);
+  const b = decode(afterFile);
   const missing = Object.keys(a.pages).filter((u) => !(u in b.pages));
   const extra = Object.keys(b.pages).filter((u) => !(u in a.pages));
   const changed = [];
+  const byField = {}; // field -> { count, example }
   for (const u of Object.keys(a.pages).filter((u) => u in b.pages)) {
-    const fields = Object.keys(a.pages[u]).filter(
-      (k) => JSON.stringify(a.pages[u][k]) !== JSON.stringify(b.pages[u][k]),
+    const pa = { ...a.pages[u], ...prefixed(a.pages[u].meta) };
+    const pb = { ...b.pages[u], ...prefixed(b.pages[u].meta) };
+    delete pa.meta;
+    delete pb.meta;
+    const fields = [...new Set([...Object.keys(pa), ...Object.keys(pb)])].filter(
+      (k) => JSON.stringify(pa[k]) !== JSON.stringify(pb[k]),
     );
+    for (const k of fields) {
+      byField[k] ??= { count: 0, example: `${u}: ${short(pa[k])} -> ${short(pb[k])}` };
+      byField[k].count++;
+    }
     if (fields.length) changed.push(`${u}  [${fields.join(", ")}]`);
   }
   const sm = (x) => new Set(x ?? []);
@@ -99,11 +119,20 @@ function diff(beforeFile, afterFile) {
   section("Missing pages", missing);
   section("Extra pages", extra);
   section("Pages with changed head data", changed);
+  section(
+    "Changed fields (count, first example)",
+    Object.entries(byField)
+      .sort(([, x], [, y]) => y.count - x.count)
+      .map(([k, v]) => `${String(v.count).padStart(4)}  ${k}\n        ${v.example}`),
+  );
   section("Sitemap URLs missing", smMissing);
   section("Sitemap URLs extra", smExtra);
   if (a.robots !== b.robots) console.log("\nrobots.txt differs");
   process.exitCode = missing.length || smMissing.length ? 1 : 0;
 }
+
+const prefixed = (meta) => Object.fromEntries(Object.entries(meta ?? {}).map(([k, v]) => [`meta:${k}`, v]));
+const short = (v) => (v === undefined ? "(none)" : JSON.stringify(v).slice(0, 90));
 
 const [cmd, x, y] = process.argv.slice(2);
 if (cmd === "snapshot" && x && y) snapshot(x, y);

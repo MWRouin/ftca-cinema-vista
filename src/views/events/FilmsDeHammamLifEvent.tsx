@@ -7,7 +7,6 @@ export default function FilmsDeHammamLifEvent() {
     <EventDetailLayout
       data={{
         slug: "films-de-hammamlif",
-        seoKey: "events/films-de-hammamlif",
         heroImage: "/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg",
         media: [
           { type: "image", src: "/events/FilmsDeHammamLif/theExperience.jpg" },

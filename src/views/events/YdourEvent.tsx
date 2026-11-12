@@ -7,7 +7,6 @@ export default function YdourEvent() {
     <EventDetailLayout
       data={{
         slug: "ydour",
-        seoKey: "events/ydour",
         heroImage: "/events/ydour/ydour-title.jpg",
         media: [
           { type: "image", src: "/About/ydour_web_optimized.jpg" },

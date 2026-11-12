@@ -13,13 +13,12 @@ import { LazyImage } from '@/components/customUi/lazy-image';
 import { MovieCard } from '@/components/customUi/movie-card';
 import { ArticleCard } from '@/components/customUi/article-card';
 import { ElementTitle } from '@/components/customUi/element-title';
-import MetaHeader from '@/lib/metadata/metadata';
-import { SITE_URL, SITE_NAME_FULL, DEFAULT_PERSON_OG_IMAGE } from '@/lib/metadata/seo-constants';
 import { slugify } from '@/lib/utils';
 import { BASE_URL } from '@/lib/base-path';
+import { decodeParam } from '@/lib/route-params';
 
 export default function Person() {
-  const { id } = useParams<{ id: string }>();
+  const id = decodeParam(useParams<{ id: string }>().id);
   const { t } = useTranslation('person');
 
   const person = id ? getPersonById(id) : undefined;
@@ -50,36 +49,8 @@ export default function Person() {
   // English bio lives in people.json; FR override (if any) lives in about.json.
   const bio = t(`members.${person.id}.bio`, { ns: 'about', defaultValue: person.bio?.en ?? '' });
 
-  const description = (person.bio?.en || `${person.name} — ${SITE_NAME_FULL}.`).trim();
-  // Their own portrait when set; otherwise the neutral user placeholder, so the
-  // social/LLM preview shows the same avatar the page renders instead of the
-  // generic site banner. JSON-LD `image` stays unset when there's no real
-  // portrait (don't claim the placeholder is the person's photo).
-  const personImage = person.image
-    ? (person.image.startsWith('http') ? person.image : `${SITE_URL}${person.image}`)
-    : undefined;
-  const ogImage = personImage ?? DEFAULT_PERSON_OG_IMAGE;
-
   return (
     <>
-      <MetaHeader
-        title={person.name}
-        description={description}
-        pagePathname={`people/${person.id}`}
-        ogType="profile"
-        imageUrl={ogImage}
-        imageAlt={person.name}
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'Person',
-          name: person.name,
-          ...(personImage ? { image: personImage } : {}),
-          ...(person.membership
-            ? { memberOf: { '@type': 'Organization', name: SITE_NAME_FULL } }
-            : {}),
-          url: `${SITE_URL}/people/${person.id}`,
-        }}
-      />
       <PageContainer py={8}>
           {/* Back */}
           <BackButton to="/about" label={t('back')} />

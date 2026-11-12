@@ -17,8 +17,6 @@ import {
   getMovieDescription,
   type Credit,
 } from '@/data/movies';
-import MetaHeader from '@/lib/metadata/metadata';
-import { SITE_URL, SITE_NAME, SITE_NAME_FULL } from '@/lib/metadata/seo-constants';
 import { ElementTitle } from '@/components/customUi/element-title';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { MovieCard } from '@/components/customUi/movie-card';
@@ -26,6 +24,7 @@ import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { PersonLink } from '@/components/customUi/person-link';
 import { useLocale } from '@/i18n/locale';
+import { decodeParam } from '@/lib/route-params';
 
 /** A credit's name, linked to the person's page when they have one. */
 function CreditLink({ credit }: { credit: Credit }) {
@@ -47,7 +46,7 @@ function CreditList({ credits, separator = ', ' }: { credits: Credit[]; separato
 }
 
 export default function MoviePlayer() {
-  const { id } = useParams<{ id: string }>();
+  const id = decodeParam(useParams<{ id: string }>().id);
   const { t } = useTranslation('movie');
   const locale = useLocale();
   const movie = getMovieById(id);
@@ -90,34 +89,6 @@ export default function MoviePlayer() {
 
   return (
     <>
-      <MetaHeader
-        title={movie.title}
-        description={description || `${movie.title} – Amateur film by ${directorNames}. ${SITE_NAME}.`}
-        pagePathname={`movies/${movie.id}`}
-        ogType="video.movie"
-        imageUrl={movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${movie.image}`}
-        imageAlt={`${movie.title} – poster`}
-        author={directorNames}
-        authorLabel={t('directedByLabel')}
-        lang={locale}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Movie",
-          "name": movie.title,
-          "description": description,
-          ...(directors.length ? { director: directors.map((c) => ({ "@type": "Person", name: creditName(c) })) } : {}),
-          ...(cast.length ? { actor: cast.map((c) => ({ "@type": "Person", name: creditName(c) })) } : {}),
-          "dateCreated": String(movie.year),
-          "genre": movie.genre,
-          "duration": movie.duration,
-          "url": `${SITE_URL}/movies/${movie.id}`,
-          "image": movie.image?.startsWith('http') ? movie.image : `${SITE_URL}${movie.image}`,
-          "productionCompany": {
-            "@type": "Organization",
-            "name": SITE_NAME_FULL
-          }
-        }}
-      />
     <PageContainer py={8}>
 
         {/* Back Button */}

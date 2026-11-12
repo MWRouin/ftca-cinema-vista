@@ -5,12 +5,20 @@ import "@/fonts";
 import "@/index.css";
 import { Layout } from "@/components/Layout";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { ThemeScript } from "@/components/ThemeScript";
+import { InlineScript } from "@/components/InlineScript";
+import { JsonLd } from "@/components/JsonLd";
 import { SUPPORTED_LOCALES, dirForLocale, isLocale } from "@/i18n/config";
 import { I18nProvider } from "@/i18n/provider";
+import { SITE_JSON_LD } from "@/lib/metadata/page-seo";
+import { SITE_METADATA, SITE_VIEWPORT } from "@/lib/metadata/next-metadata";
+import { THEME_SCRIPT } from "@/lib/theme-script";
 import { CRITICAL_FONT_URLS } from "@/lib/critical-fonts";
 
 export const dynamicParams = false;
+
+// Site-wide head data; each page adds its own through generateMetadata.
+export const metadata = SITE_METADATA;
+export const viewport = SITE_VIEWPORT;
 
 export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));
@@ -34,9 +42,10 @@ export default async function LocaleLayout({
         {CRITICAL_FONT_URLS.map((href) => (
           <link key={href} rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href={href} />
         ))}
-        <ThemeScript />
+        <InlineScript code={THEME_SCRIPT} />
       </head>
       <body>
+        <JsonLd nodes={SITE_JSON_LD} />
         <ThemeProvider>
           <I18nProvider locale={locale}>
             <Layout>{children}</Layout>

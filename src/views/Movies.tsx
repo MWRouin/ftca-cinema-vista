@@ -12,8 +12,6 @@ import { getMovies, creditName, type Movie } from '@/data/movies';
 import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
 import { MovieCard } from '@/components/customUi/movie-card';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { cn } from '@/lib/utils';
 
 type SortOrder = 'newest' | 'oldest' | 'title';
@@ -124,7 +122,6 @@ export default function Movies() {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO.movies} />
       <PageContainer>
           <PageHeader title={t('title')} subtitle={t('subtitle')} className="mb-10" />
 

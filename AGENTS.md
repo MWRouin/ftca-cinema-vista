@@ -4,7 +4,7 @@ Website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, m
 
 ## Current state
 
-Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Next.js app (`src/app/`) has the shell, locale routing, i18n, the root redirect and every page (the UI lives in `src/views/`, wrapped by thin route files); SEO metadata is still the old client-side `MetaHeader` until M10. **The Vite app (`src/App.tsx`, `src/main.tsx`, `index.html`, `vite.config.ts`) is frozen since M3**: shared components now use `next/*`, so it no longer builds. It is deleted at M11; the old site stays buildable from `main`. Milestones M1 to M9 are done; M10 (SEO layer), M11 (cleanup) and M12 (cutover) remain; see the plan.
+Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Next.js app (`src/app/`) has the shell, locale routing, i18n, every page (the UI lives in `src/views/`, wrapped by thin route files), server-rendered SEO metadata and JSON-LD, the sitemap and redirect pages for un-prefixed URLs. **The Vite app (`src/App.tsx`, `src/main.tsx`, `index.html`, `vite.config.ts`) is frozen since M3**: shared components now use `next/*`, so it no longer builds. It is deleted at M11; the old site stays buildable from `main`. Milestones M1 to M10 are done; M11 (cleanup) and M12 (cutover) remain; see the plan.
 
 ## Commands
 
@@ -21,7 +21,7 @@ Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix)
 - **Warnings:** don't mute tooling warnings (Browserslist, npm audit, etc.). Fix the cause or leave them visible and mention them.
 - **Agent memory lives in the repo.** Don't use Claude's filesystem auto-memory (`~/.claude*/projects/*/memory`). Record durable guidance here in `AGENTS.md` (or in the relevant module's `AGENTS.md`), plans in `docs/plans/`, history in `docs/sprints/`.
 - **Package manager:** npm only (`package-lock.json`). There is no bun/yarn lockfile.
-- **URLs:** every page is locale-prefixed with a trailing slash (`/en/movies/`, `/fr/movies/`). `/` redirects to a locale. Use `LocalLink`/`localizePath`, not raw paths.
+- **URLs:** every page is locale-prefixed with a trailing slash (`/en/movies/`, `/fr/movies/`). `/` and un-prefixed URLs (`/movies/trip/`) redirect to a locale. Use `LocalLink`/`localizePath`, not raw paths.
 - **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`.
 - **Posters:** 2:3 portrait, 1000×1500 is the common size. Reduce dimensions rather than compressing further. Crop to 2:3.
 - **Person portraits:** square, saved in `public/Members/`.
@@ -43,7 +43,7 @@ Each module gets its own `AGENTS.md` (read when you work in that folder), plus a
 |---|---|---|
 | `src/data/` | Movies, people, blog content and helpers | [done](src/data/AGENTS.md) |
 | `src/i18n/` | Locales, translation catalogs, locale routing helpers | [done](src/i18n/AGENTS.md) |
-| `src/lib/metadata/` | SEO constants and page metadata | to add |
+| `src/lib/metadata/` | SEO constants, page metadata and JSON-LD | [done](src/lib/metadata/AGENTS.md) |
 | `src/components/customUi/` | Shared presentational components | to add |
 | `src/components/ui/` | shadcn primitives | to add |
 | `src/app/` | Next.js routes, layouts, 404 and root redirect | [done](src/app/AGENTS.md) |

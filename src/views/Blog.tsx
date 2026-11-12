@@ -6,8 +6,6 @@ import { ArticleCard } from '@/components/customUi/article-card';
 import { EmptyState } from '@/components/customUi/empty-state';
 import { Inbox } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { getBlogArticles } from '@/data/blog';
 
 export default function Blog() {
@@ -18,7 +16,6 @@ export default function Blog() {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO.blog} />
       <PageContainer>
           <PageHeader title={t('title')} subtitle={t('subtitle')} />
 

@@ -10,7 +10,6 @@ export default function AfterworkMovienight() {
     <EventDetailLayout
       data={{
         slug: "afterwork",
-        seoKey: "events/afterwork-movienight",
         heroImage: "/events/afterworkMovienight/hero.jpg",
         media: [
           { type: "image", src: "/events/afterworkMovienight/experience.jpg" },

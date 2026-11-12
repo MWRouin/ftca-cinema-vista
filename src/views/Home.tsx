@@ -6,8 +6,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { MovieCard } from '@/components/customUi/movie-card';
 import { LocalLink } from '@/i18n/locale';
 import './home-hero.css';
@@ -40,7 +38,6 @@ export default function Home() {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO[""]} />
       <div className="min-h-screen">
         {/* Hero Section */}
         <section

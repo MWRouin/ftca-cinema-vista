@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { getMembers, getHonoraryMembers } from '@/data/people';
 import { isPersonPublic } from '@/data/movies';
 import { LocalLink } from '@/i18n/locale';
@@ -130,7 +128,6 @@ export default function About() {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO.about} />
     <PageContainer>
         <PageHeader title={t('title')} />
 

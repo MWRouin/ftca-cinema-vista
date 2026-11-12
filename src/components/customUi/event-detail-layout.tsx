@@ -11,8 +11,6 @@ import { LazyImage } from "@/components/customUi/lazy-image";
 import { Lightbox } from "@/components/customUi/lightbox";
 import { useLightbox } from "@/hooks/useLightbox";
 import ShareActions from "@/components/customUi/share-actions";
-import MetaHeader from "@/lib/metadata/metadata";
-import { PAGE_SEO } from "@/lib/metadata/seo-constants";
 import { PageContainer } from "@/components/customUi/page-container";
 
 export type EventMedia = { type: "image" | "video"; src: string };
@@ -20,8 +18,6 @@ export type EventMedia = { type: "image" | "video"; src: string };
 export type EventDetailData = {
   /** i18n key under eventDetail.json (e.g. "ydour"). */
   slug: string;
-  /** PAGE_SEO key (e.g. "events/ydour"). */
-  seoKey: string;
   heroImage: string;
   /** Alternating text/media rows; captions come from `${slug}.media.${i}`. */
   media: EventMedia[];
@@ -168,7 +164,6 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO[data.seoKey]} />
       <PageContainer width="5xl">
         <BackButton to="/events" label={t("backToEvents")} />
 

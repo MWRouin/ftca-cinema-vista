@@ -8,8 +8,6 @@ import { EmptyState } from '@/components/customUi/empty-state';
 import { CalendarX, FolderX } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LocalLink } from '@/i18n/locale';
 import { useLocalizedDate } from '@/hooks/useLocalizedDate';
 
@@ -118,7 +116,6 @@ export default function Events() {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO.events} />
       <PageContainer>
           <PageHeader title={t('title')} subtitle={t('subtitle')} />
 

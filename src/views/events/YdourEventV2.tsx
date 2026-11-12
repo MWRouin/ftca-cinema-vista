@@ -10,7 +10,6 @@ export default function YdourEventV2() {
     <EventDetailLayout
       data={{
         slug: "ydour-v2",
-        seoKey: "events/ydour-v2",
         heroImage: "/events/ydour2/ydour2Hero.jpg",
         media: [
           { type: "image", src: "/events/ydour2/ydour2_4.jpg" },

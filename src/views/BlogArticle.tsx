@@ -8,13 +8,12 @@ import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { PersonLink } from '@/components/customUi/person-link';
 import { ElementTitle } from '@/components/customUi/element-title';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO, SITE_URL } from '@/lib/metadata/seo-constants';
 import { getBlogArticleBySlug } from '@/data/blog';
 import { resolvePersonId } from '@/data/people';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import ShareActions from '@/components/customUi/share-actions';
 import { useLocalizedDate } from '@/hooks/useLocalizedDate';
+import { decodeParam } from '@/lib/route-params';
 
 /**
  * The article's author, linked to their person page when the name resolves to a
@@ -26,7 +25,7 @@ function AuthorLink({ author, children }: { author: string; children?: ReactNode
 }
 
 export default function BlogArticle() {
-  const { slug } = useParams<{ slug: string }>();
+  const slug = decodeParam(useParams<{ slug: string }>().slug);
   const { t } = useTranslation('blog');
   const formatDate = useLocalizedDate();
   const article = getBlogArticleBySlug(slug);
@@ -34,7 +33,6 @@ export default function BlogArticle() {
   if (!article) {
     return (
       <>
-        <MetaHeader {...PAGE_SEO['404']} />
         <NotFoundCard
           title={t('notFoundTitle')}
           description={t('notFoundDesc')}
@@ -44,44 +42,8 @@ export default function BlogArticle() {
     );
   }
 
-  const imageUrl = article.image?.startsWith('http') ? article.image : `${SITE_URL}${article.image}`;
-  const articlePath = `blog/${article.slug}`;
-
   return (
     <>
-      <MetaHeader
-        title={article.title}
-        description={article.excerpt}
-        pagePathname={articlePath}
-        ogType="article"
-        imageUrl={imageUrl}
-        imageAlt={article.title}
-        lang={article.lang ?? 'en'}
-        author={article.author}
-        authorLabel={t('writtenBy')}
-        articlePublishedTime={new Date(article.date).toISOString()}
-        jsonLd={{
-          '@context': 'https://schema.org',
-          '@type': 'BlogPosting',
-          headline: article.title,
-          description: article.excerpt,
-          image: imageUrl,
-          datePublished: new Date(article.date).toISOString(),
-          dateModified: new Date(article.date).toISOString(),
-          author: {
-            '@type': 'Person',
-            name: article.author,
-          },
-          mainEntityOfPage: `${SITE_URL}/${articlePath}`,
-          url: `${SITE_URL}/${articlePath}`,
-          inLanguage: article.lang ?? 'en',
-          publisher: {
-            '@type': 'Organization',
-            name: 'FTCA Hammam-Lif',
-            url: SITE_URL,
-          },
-        }}
-      />
       <PageContainer width="4xl" className="2xl:max-w-5xl">
           <BackButton to="/blog" label={t('backToBlog')} />
 

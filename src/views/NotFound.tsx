@@ -3,8 +3,6 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LocalLink } from '@/i18n/locale';
 
 const NotFound = () => {
@@ -20,7 +18,6 @@ const NotFound = () => {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO["404"]} />
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>

@@ -5,8 +5,8 @@ import "@/index.css";
 import { SITE_NAME_FULL } from "@/lib/metadata/seo-constants";
 
 export const metadata: Metadata = {
+  // Next adds <meta name="robots" content="noindex"> to not-found pages itself.
   title: `Page not found | ${SITE_NAME_FULL}`,
-  robots: { index: false, follow: true },
 };
 
 // Served as /404.html (GitHub Pages uses it for unknown URLs). It sits outside

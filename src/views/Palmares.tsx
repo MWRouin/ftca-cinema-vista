@@ -4,8 +4,6 @@ import { PageHeader } from '@/components/customUi/page-header'
 import { PageContainer } from '@/components/customUi/page-container'
 import { Button } from '@/components/ui/button'
 import { useTranslation } from 'react-i18next'
-import MetaHeader from '@/lib/metadata/metadata'
-import { PAGE_SEO } from '@/lib/metadata/seo-constants'
 import { LocalLink } from '@/i18n/locale'
 import { BASE_URL } from '@/lib/base-path';
 
@@ -13,7 +11,6 @@ export default function Palmares() {
   const { t } = useTranslation('static')
   return (
     <>
-      <MetaHeader {...PAGE_SEO.palmares} />
     <PageContainer>
         <PageHeader title={t('palmares.title')} subtitle={t('palmares.subtitle')} />
 

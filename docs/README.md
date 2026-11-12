@@ -47,6 +47,7 @@ Template:
 | [2026-11-nextjs-movies-people](sprints/2026-11-nextjs-movies-people.md) | Movie list, movie and person pages (M8) |
 | [2026-11-nextjs-events-blog](sprints/2026-11-nextjs-events-blog.md) | Events and blog pages (M9) |
 | [2026-11-nextjs-content-pages](sprints/2026-11-nextjs-content-pages.md) | Home, About, Palmarès, Contact (M7); all pages ported |
+| [2026-11-nextjs-seo](sprints/2026-11-nextjs-seo.md) | Metadata, JSON-LD, sitemap, legacy redirects (M10) |
 
 ## Module `AGENTS.md` files
 

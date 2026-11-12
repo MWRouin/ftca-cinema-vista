@@ -1,6 +1,12 @@
 import type { ReactNode } from "react";
 
-// Second root layout, for "/" only: it has no locale yet, so no site chrome.
+import { SITE_METADATA, SITE_VIEWPORT } from "@/lib/metadata/next-metadata";
+
+export const metadata = SITE_METADATA;
+export const viewport = SITE_VIEWPORT;
+
+// Second root layout, for URLs without a locale prefix ("/" and legacy deep
+// links): they only redirect, so there is no site chrome.
 export default function RootRedirectLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">

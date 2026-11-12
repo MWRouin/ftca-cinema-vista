@@ -11,8 +11,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import MetaHeader from '@/lib/metadata/metadata';
-import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 
 export default function Contact() {
   const { t } = useTranslation('contact');
@@ -53,7 +51,6 @@ export default function Contact() {
 
   return (
     <>
-      <MetaHeader {...PAGE_SEO.contact} />
     <PageContainer>
         <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
