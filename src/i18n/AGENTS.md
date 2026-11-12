@@ -4,7 +4,7 @@ Locales (`en`, `fr`), translation catalogs and locale helpers. Every URL is loca
 
 ## Layout
 
-- `config.ts`: locale constants and pure path helpers (`localizePath`, `stripLocale`, `localeFromPath`). No React, no i18next; safe in scripts and server code.
+- `config.ts`: locale constants and pure path helpers (`localizePath`, `stripLocale`). No React, no i18next; safe in scripts and server code.
 - `resources.ts`: all catalogs, one namespace per page (`common` holds nav/footer). **Register a new namespace here.**
 - `instance.ts`: `createI18n(locale)` and `getT(locale, ns)` for server code and `generateMetadata`. Synchronous.
 - `provider.tsx`: client `I18nProvider`, mounted in `src/app/[locale]/layout.tsx`; gives client components `useTranslation()` and `useLocale()`.

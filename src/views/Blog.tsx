@@ -15,7 +15,6 @@ export default function Blog() {
   const featuredArticle = articles[0];
 
   return (
-    <>
       <PageContainer>
           <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
@@ -35,6 +34,5 @@ export default function Blog() {
             </div>
           ) : null}
       </PageContainer>
-    </>
   );
 }

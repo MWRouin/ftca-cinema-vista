@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { getMovies, creditName, type Movie } from '@/data/movies';
 import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
-import { MovieCard } from '@/components/customUi/movie-card';
+import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
 import { cn } from '@/lib/utils';
 
 type SortOrder = 'newest' | 'oldest' | 'title';
@@ -87,8 +87,7 @@ export default function Movies() {
       if (!yearActive) return true;
       // Unknown-year movies can't sit on a timeline, so drop them once the range narrows.
       if (movie.year === '-') return false;
-      const movieYear = movie.year as number;
-      return movieYear >= yearRange[0] && movieYear <= yearRange[1];
+      return movie.year >= yearRange[0] && movie.year <= yearRange[1];
     })
     .filter((movie) => search === null || search.ids.has(movie.id))
     .sort((movieA, movieB) => {
@@ -98,13 +97,10 @@ export default function Movies() {
       }
       if (sortOrder === 'title') return movieA.title.localeCompare(movieB.title);
       // Movies with an unknown year ('-') always sort last, in either direction.
-      const aUnknown = movieA.year === '-';
-      const bUnknown = movieB.year === '-';
-      if (aUnknown !== bUnknown) return aUnknown ? 1 : -1;
-      if (aUnknown) return 0;
-      return sortOrder === 'oldest'
-        ? (movieA.year as number) - (movieB.year as number)
-        : (movieB.year as number) - (movieA.year as number);
+      if (movieA.year === '-' || movieB.year === '-') {
+        return Number(movieA.year === '-') - Number(movieB.year === '-');
+      }
+      return sortOrder === 'oldest' ? movieA.year - movieB.year : movieB.year - movieA.year;
     });
 
   const hasActiveFilters = selectedGenres.length > 0 || yearActive || trimmedQuery !== '';
@@ -121,7 +117,6 @@ export default function Movies() {
   };
 
   return (
-    <>
       <PageContainer>
           <PageHeader title={t('title')} subtitle={t('subtitle')} className="mb-10" />
 
@@ -257,11 +252,11 @@ export default function Movies() {
 
           {/* Movies grid */}
           {filteredMovies.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
+            <MovieGrid>
               {filteredMovies.map((movie) => (
                 <MovieCard key={movie.id} movie={movie} />
               ))}
-            </div>
+            </MovieGrid>
           ) : (
             <div className="text-center py-20">
               <div className="w-24 h-24 gradient-cinema rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
@@ -274,6 +269,5 @@ export default function Movies() {
             </div>
           )}
       </PageContainer>
-    </>
   );
 }

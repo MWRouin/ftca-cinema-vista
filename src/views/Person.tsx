@@ -6,23 +6,21 @@ import { BackButton } from '@/components/customUi/back-button';
 import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { Badge } from '@/components/ui/badge';
-import { getPersonById } from '@/data/people';
+import { DEFAULT_PERSON_IMAGE, getPersonById } from '@/data/people';
 import { getFilmography, isPersonPublic } from '@/data/movies';
 import { getArticlesByPerson } from '@/data/blog';
 import { LazyImage } from '@/components/customUi/lazy-image';
-import { MovieCard } from '@/components/customUi/movie-card';
+import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
 import { ArticleCard } from '@/components/customUi/article-card';
 import { ElementTitle } from '@/components/customUi/element-title';
 import { slugify } from '@/lib/utils';
-import { BASE_URL } from '@/lib/base-path';
 import { decodeParam } from '@/lib/route-params';
 
 export default function Person() {
   const id = decodeParam(useParams<{ id: string }>().id);
   const { t } = useTranslation('person');
 
-  const person = id ? getPersonById(id) : undefined;
-  const defaultUserImage = `${BASE_URL}Members/user.png`;
+  const person = getPersonById(id);
 
   /* ---------- Not found / non-public ---------- */
   if (!person || !isPersonPublic(person.id)) {
@@ -30,7 +28,7 @@ export default function Person() {
       <NotFoundCard
         image={
           <img
-            src={defaultUserImage}
+            src={DEFAULT_PERSON_IMAGE}
             alt={t('notFoundAlt')}
             className="mx-auto mb-6 h-32 w-32 rounded-full object-cover opacity-70"
           />
@@ -50,7 +48,6 @@ export default function Person() {
   const bio = t(`members.${person.id}.bio`, { ns: 'about', defaultValue: person.bio?.en ?? '' });
 
   return (
-    <>
       <PageContainer py={8}>
           {/* Back */}
           <BackButton to="/about" label={t('back')} />
@@ -59,7 +56,7 @@ export default function Person() {
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-12">
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 bg-muted">
               <LazyImage
-                src={person.image ? person.image : defaultUserImage}
+                src={person.image || DEFAULT_PERSON_IMAGE}
                 alt={person.name}
                 className="w-full h-full object-cover"
               />
@@ -81,7 +78,7 @@ export default function Person() {
             {filmography.length === 0 ? (
               <p className="text-muted-foreground">{t('noFilmography')}</p>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
+              <MovieGrid>
                 {filmography.map(({ movie, roles }) => (
                   <MovieCard
                     key={movie.id}
@@ -92,7 +89,7 @@ export default function Person() {
                     }))}
                   />
                 ))}
-              </div>
+              </MovieGrid>
             )}
           </section>
 
@@ -108,6 +105,5 @@ export default function Person() {
             </section>
           )}
       </PageContainer>
-    </>
   );
 }

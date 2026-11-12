@@ -24,8 +24,7 @@ import frPerson from "./locales/fr/person.json";
 /**
  * Translation resources, grouped by locale then namespace. One namespace per
  * page keeps catalogs small; `common` holds shared chrome (nav, footer).
- * Register new namespaces here as pages are translated. Framework-agnostic:
- * shared by the Vite app (index.ts) and the Next.js app (instance.ts).
+ * Register new namespaces here as pages are translated. Framework-agnostic.
  */
 export const resources = {
   en: {

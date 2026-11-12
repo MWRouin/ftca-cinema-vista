@@ -1,13 +1,12 @@
 /**
  * i18n configuration — framework-agnostic locale primitives.
  *
- * Kept free of React/i18next imports so it can be reused by helpers, the
- * router, and (later) the build scripts.
+ * Kept free of React/i18next imports so server code and client components can
+ * both use it.
  *
- * Scope today: English (default) + French, LTR only. Arabic + RTL are planned
- * but intentionally out of scope here — see I18N_PLAN.md. The shape below is
- * extensible: adding 'ar' is a matter of extending SUPPORTED_LOCALES and
- * RTL_LOCALES and supplying catalogs.
+ * Scope today: English (default) + French, LTR only. The shape is extensible:
+ * adding 'ar' is a matter of extending SUPPORTED_LOCALES and RTL_LOCALES and
+ * supplying catalogs.
  */
 
 export const SUPPORTED_LOCALES = ["en", "fr"] as const;
@@ -16,7 +15,8 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 /**
  * Fallback locale: used when "/" is visited and the browser language is
  * unsupported (or no preference is stored). Every locale — including this one —
- * is URL-prefixed (`/en`, `/fr`); "/" itself only redirects.
+ * is URL-prefixed (`/en`, `/fr`); "/" itself only redirects (see
+ * `src/lib/locale-redirect.ts`).
  */
 export const DEFAULT_LOCALE: Locale = "en";
 
@@ -58,49 +58,16 @@ export function stripLocale(pathname: string): string {
   return pathname;
 }
 
-/** The locale encoded in a pathname's first segment (default if none). */
-export function localeFromPath(pathname: string): Locale {
-  const first = pathname.replace(/^\/+/, "").split("/")[0];
-  return isLocale(first) ? first : DEFAULT_LOCALE;
-}
-
 /**
  * Prefix a locale-neutral path with its locale segment, ending in a trailing
  * slash. Every locale is prefixed (including the default). The trailing slash
  * matches the canonical URLs and GitHub Pages' served form (Pages 301-redirects
  * the no-slash version), so in-app navigation and hard loads land on the same
- * URL. `buildPageUrl` re-normalizes, so canonical/og URLs are unaffected.
+ * URL.
  *
  * ("/movies", "fr") -> "/fr/movies/" · ("/", "en") -> "/en/"
  */
 export function localizePath(path: string, locale: Locale): string {
   const neutral = path.replace(/^\/+/, "").replace(/\/+$/, "");
   return neutral ? `/${locale}/${neutral}/` : `/${locale}/`;
-}
-
-/**
- * Resolve the locale to use when no locale is present in the URL (i.e. on "/").
- * Priority: explicit stored choice → browser language → default fallback.
- */
-export function detectPreferredLocale(): Locale {
-  if (typeof window !== "undefined") {
-    try {
-      const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-      if (isLocale(stored ?? undefined)) return stored as Locale;
-    } catch {
-      /* storage unavailable */
-    }
-
-    const candidates =
-      navigator.languages && navigator.languages.length
-        ? navigator.languages
-        : [navigator.language];
-
-    for (const lang of candidates) {
-      const base = lang?.toLowerCase().split(/[-_]/)[0];
-      if (isLocale(base)) return base as Locale;
-    }
-  }
-
-  return DEFAULT_LOCALE;
 }

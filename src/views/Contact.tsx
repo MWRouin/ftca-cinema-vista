@@ -11,15 +11,21 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_MAPS_URL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_HREF,
+  JOIN_FORM_URL,
+} from '@/lib/contact';
+
+const EMPTY_FORM = { name: '', subject: '', message: '' };
 
 export default function Contact() {
   const { t } = useTranslation('contact');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  const { t: tCommon } = useTranslation();
+  const [formData, setFormData] = useState(EMPTY_FORM);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -30,27 +36,15 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    //console.log('Form submitted:', formData);
+    // No backend: hand the message over to the visitor's mail app.
     const { name, subject, message } = formData;
-    const mailto = `mailto:contact@cineamateur-hlif.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(`${message}\n\nName: ${name}`)}`;
-
-    window.location.href = mailto;
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-
-    /* alert('Thank you for your message! We\'ll get back to you soon.'); */
+    setFormData(EMPTY_FORM);
   };
 
   return (
-    <>
     <PageContainer>
         <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
@@ -66,32 +60,17 @@ export default function Contact() {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/*<div className="grid grid-cols-1 md:grid-cols-2 gap-4">*/}
                   <div>
                     <Label htmlFor="name">{t('form.nameLabel')}</Label>
                     <Input
                       id="name"
                       name="name"
                       type="text"
-                      //required
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder={t('form.namePlaceholder')}
                     />
                   </div>
-                  {/* <div>
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        //required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="your.email@example.com"
-                      />
-                    </div> */}
-                  {/* </div> */}
                   <div>
                     <Label htmlFor="subject">{t('form.subjectLabel')}</Label>
                     <Input
@@ -133,44 +112,42 @@ export default function Contact() {
               </CardHeader>
               <CardContent className="flex flex-col gap-1">
                 <a
-                  href="mailto:contact@cineamateur-hlif.com"
+                  href={`mailto:${CONTACT_EMAIL}`}
                   className="group block -mx-6 px-6 py-4 transition-colors hover:bg-muted/50"
                 >
                   <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
                     <div className="flex items-center space-x-2 mb-1">
-                      <Mail className="w-5 h-5 text-primary  dark:text-accent" />
+                      <Mail className="w-5 h-5 text-primary dark:text-accent" />
                       <h4 className="font-semibold">{t('details.email')}</h4>
                     </div>
-                    <p className="text-muted-foreground">contact@cineamateur-hlif.com</p>
+                    <p className="text-muted-foreground">{CONTACT_EMAIL}</p>
                   </div>
                 </a>
                 <a
-                  href="tel:+21655466297"
+                  href={CONTACT_PHONE_HREF}
                   className="group block -mx-6 px-6 py-4 transition-colors hover:bg-muted/50"
                 >
                   <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
                     <div className="flex items-center space-x-2 mb-1">
-                      <Phone className="w-5 h-5 text-primary  dark:text-accent" />
+                      <Phone className="w-5 h-5 text-primary dark:text-accent" />
                       <h4 className="font-semibold">{t('details.phone')}</h4>
                     </div>
-                    <p className="text-muted-foreground">+216 55 466 297</p>
+                    <p className="text-muted-foreground">{CONTACT_PHONE}</p>
                   </div>
                 </a>
                 <a
-                  href="https://www.google.com/maps/place/80+RN1,+Hammam-Lif/@36.7269597,10.3343537,636m/data=!3m1!1e3!4m6!3m5!1s0x12fd492504981c43:0x7772fc5d93b2f677!8m2!3d36.7270195!4d10.336157!16s%2Fg%2F11bw43n7d7?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D"
+                  href={CONTACT_MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="View location on Google Maps"
+                  aria-label={tCommon('a11y.viewOnMaps')}
                   className="group block -mx-6 px-6 py-4 transition-colors hover:bg-muted/50"
                 >
                   <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
                     <div className="flex items-center space-x-2 mb-1">
-                      <MapPin className="w-5 h-5 text-primary  dark:text-accent" />
+                      <MapPin className="w-5 h-5 text-primary dark:text-accent" />
                       <h4 className="font-semibold">{t('details.address')}</h4>
                     </div>
-                    <p className="text-muted-foreground">
-                      80 RN1, Hammam-Lif
-                    </p>
+                    <p className="text-muted-foreground">{CONTACT_ADDRESS}</p>
                   </div>
                 </a>
               </CardContent>
@@ -211,17 +188,15 @@ export default function Contact() {
                 <p className="text-muted-foreground mb-4">
                   {t('join.text')}
                 </p>
-                {/* <p>Stay tuned</p> */}
-                <a href='https://docs.google.com/forms/d/e/1FAIpQLScuvfikqSpUKanyxrXSs_TZzn4MTAdVmcy3Hvswp7Ux_p3pYQ/viewform'><Button className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
-
+                <Button asChild className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
+                  <a href={JOIN_FORM_URL} target="_blank" rel="noopener noreferrer">
                     {t('join.cta')}
-
-                </Button> </a>
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           </div>
         </div>
     </PageContainer>
-    </>
   );
 }

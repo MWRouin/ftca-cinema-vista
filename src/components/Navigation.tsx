@@ -21,10 +21,8 @@ export function Navigation() {
   // hero) are the only scroll-derived values the navbar renders from. We
   // compute them in a rAF-throttled scroll handler and only commit them to
   // state when they actually flip, so the navbar re-renders a couple of times
-  // per scroll instead of on every frame. The previous version called
-  // setState on every scroll event AND read getBoundingClientRect() each time,
-  // forcing a synchronous layout per frame — a major source of mobile jank,
-  // worst on the home page where the hero is measured.
+  // per scroll instead of on every frame (measuring the hero on every scroll
+  // event forces a layout per frame, which janks on mobile).
   const [scrolled, setScrolled] = useState(false);
   const [overlay, setOverlay] = useState(isHome);
 
@@ -80,9 +78,7 @@ export function Navigation() {
     <>
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${overlay
       ? 'bg-transparent text-white border-transparent'
-      : scrolled
-        ? 'bg-background/85 shadow-lg border-border/30'
-        : 'bg-background/85 border-border/30'
+      : `bg-background/85 border-border/30 ${scrolled ? 'shadow-lg' : ''}`
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
@@ -122,26 +118,18 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Right side actions: Theme toggle (desktop) and mobile controls */}
-          <div className="ml-auto flex items-center space-x-3">
-            {/* Language + theme toggles: visible on md and hidden on small screens within this slot (mobile keeps its own toggles) */}
-            <div className="hidden lg:flex items-center space-x-2">
-              <LanguageToggle onDark={overlay} />
-              <ThemeToggle onDark={overlay} />
-            </div>
-
-            {/* Mobile: language + theme toggle + menu button (unchanged behavior) */}
-            <div className="lg:hidden flex items-center space-x-2">
-              <LanguageToggle onDark={overlay} />
-              <ThemeToggle onDark={overlay} />
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-9 h-9 rounded-lg flex items-center justify-center transition-colors group bg-transparent"
-                aria-label="Toggle menu"
-              >
-                <Menu className={`w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-primary'} ${isOpen ? 'rotate-90' : ''}`} />
-              </button>
-            </div>
+          {/* Right side: language and theme toggles, plus the menu button below lg */}
+          <div className="ml-auto flex items-center space-x-2">
+            <LanguageToggle onDark={overlay} />
+            <ThemeToggle onDark={overlay} />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-colors group bg-transparent"
+              aria-label={t('a11y.toggleMenu')}
+              aria-expanded={isOpen}
+            >
+              <Menu className={`w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-primary'} ${isOpen ? 'rotate-90' : ''}`} />
+            </button>
           </div>
         </div>
       </div>

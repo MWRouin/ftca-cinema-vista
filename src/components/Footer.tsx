@@ -3,6 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
 import { SocialLinks } from '@/components/customUi/social-links';
 import { LocalLink } from '@/i18n/locale';
+import {
+  CONTACT_ADDRESS,
+  CONTACT_EMAIL,
+  CONTACT_MAPS_URL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_HREF,
+} from '@/lib/contact';
 
 export function Footer() {
   const { t } = useTranslation();
@@ -60,28 +67,28 @@ export function Footer() {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.contact')}</h4>
             <div className="space-y-2">
               <a
-                href="mailto:contact@cineamateur-hlif.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span className="text-sm">contact@cineamateur-hlif.com</span>
+                <span className="text-sm">{CONTACT_EMAIL}</span>
               </a>
               <a
-                href="tel:+21655466297"
+                href={CONTACT_PHONE_HREF}
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span className="text-sm">+216 55 466 297</span>
+                <span className="text-sm">{CONTACT_PHONE}</span>
               </a>
               <a
-                href="https://www.google.com/maps/place/80+RN1,+Hammam-Lif/@36.7269597,10.3343537,636m/data=!3m1!1e3!4m6!3m5!1s0x12fd492504981c43:0x7772fc5d93b2f677!8m2!3d36.7270195!4d10.336157!16s%2Fg%2F11bw43n7d7?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2OUgBUAM%3D"
+                href={CONTACT_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="View location on Google Maps"
+                aria-label={t('a11y.viewOnMaps')}
                 className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
               >
                 <MapPin className="w-4 h-4" />
-                <span className="text-sm">80 RN1, Hammam-Lif</span>
+                <span className="text-sm">{CONTACT_ADDRESS}</span>
               </a>
             </div>
           </div>
@@ -89,7 +96,9 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-border/70 mt-10 pt-6 flex flex-col lg:flex-row justify-between items-center text-center lg:text-left gap-2">
-          <p className="text-sm text-muted-foreground">
+          {/* The year in the prerendered HTML is the build's; a page loaded after
+              New Year would otherwise fail hydration on this text. */}
+          <p className="text-sm text-muted-foreground" suppressHydrationWarning>
             {t('footer.rights', { year: currentYear })}
           </p>
           <p className="text-sm text-muted-foreground mt-2 sm:mt-0">

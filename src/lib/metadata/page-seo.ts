@@ -87,12 +87,18 @@ export function movieSeo(movie: Movie, locale: Locale): Seo {
         : {}),
       ...(typeof movie.year === "number" ? { dateCreated: String(movie.year) } : {}),
       ...(movie.genre ? { genre: movie.genre } : {}),
-      ...(movie.duration ? { duration: movie.duration } : {}),
+      ...(isoDuration(movie.duration) ? { duration: isoDuration(movie.duration) } : {}),
       url: `${SITE_URL}/movies/${movie.id}`,
       image: imageUrl,
       productionCompany: { "@type": "Organization", name: SITE_NAME },
     },
   };
+}
+
+/** "10'" (whole minutes, as written in movies.json) -> "PT10M", the ISO 8601 form schema.org expects. */
+function isoDuration(duration: string | undefined): string | undefined {
+  const minutes = duration?.match(/^(\d+)'$/)?.[1];
+  return minutes ? `PT${Number(minutes)}M` : undefined;
 }
 
 export function eventSeo(event: EventMeta, locale: Locale): Seo {

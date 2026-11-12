@@ -5,80 +5,25 @@ import { Badge } from '@/components/ui/badge';
 import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
 import { EmptyState } from '@/components/customUi/empty-state';
-import { CalendarX, FolderX } from 'lucide-react';
+import { FolderX } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { LocalLink } from '@/i18n/locale';
 import { useLocalizedDate } from '@/hooks/useLocalizedDate';
+import { getEvents, type EventMeta } from '@/data/events';
 
-export default function Events() {
+const byDate = (event1: EventMeta, event2: EventMeta) =>
+  new Date(event1.date).getTime() - new Date(event2.date).getTime();
+
+function EventCard({ event }: { event: EventMeta }) {
   const { t } = useTranslation('events');
   const formatDate = useLocalizedDate();
-  const events = [
-    {
-      id: 'ydour',
-      title: "Ydour - يدور",
-      date: "2025-02-22",
-      time: "18:30",
-      location: "Café culturel LIBER'THÉ",
-      description: "YDOUR exists to bring together the amateur cinema community and cinema lovers.",
-      image: "/events/ydour/ydour-title.jpg",
-      status: "past",
-      category: "Screening & Discussion"
-    },
-    {
-      id: 'films-de-hammamlif',
-      title: "Films de Hammam-Lif",
-      date: "2025-12-27",
-      time: "16:30",
-      location: "Complexe culturel Ali Ben Ayed",
-      description: "\"Films de Hammam-Lif\" aims to revive this lost spirit and inspire a new generation’s connection to cinema and culture.",
-      image: "/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg",
-      status: "past",
-      category: "Screening & Exhibition"
-    },
-    {
-      id: 'afterwork-movienight',
-      title: "Afterwork - Movie Night",
-      date: "2026-01-28",
-      time: "19:00",
-      location: "Espace culturel DayOne",
-      description: "Intimate film screenings and discussions with filmmakers at Day One. A space to explore the ideas and process behind each film.",
-      image: "/events/afterworkMovienight/hero.jpg",
-      status: "past",
-      category: "Screening & Discussion"
-    },
-    {
-      id: 'ydour-v2',
-      title: "Ydour - يدور (2nd Edition)",
-      date: "2026-05-15",
-      time: "18:00",
-      location: "Espace culturel L'Écurie",
-      description: "Second edition of YDOUR: a space for amateur cinema.",
-      image: "/events/ydour2/ydour2.webp",
-      status: "past",
-      category: "Screening, Discussion, and more.."
-    }
-  ];
+  const upcoming = event.status === 'upcoming';
 
-  const upcomingEvents = events
-    .filter(event => event.status === 'upcoming')
-    .sort((event1, event2) => new Date(event1.date).getTime() - new Date(event2.date).getTime());
-
-  const pastEvents = events
-    .filter(event => event.status === 'past')
-    .sort((event1, event2) => new Date(event2.date).getTime() - new Date(event1.date).getTime());
-
-  const EventCard = ({ event }: { event: typeof events[0] }) => (
+  return (
     <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 max-w-[720px]">
-
-      {/* Clickable overlay */}
-      <LocalLink
-        to={`/events/${event.id}`}
-        aria-label={t('openEvent', { title: event.title })}
-      >
-
-        <div className="aspect-[16/9] overflow-hidden rounded-t-lg relative z-20">
+      <LocalLink to={`/events/${event.id}`} aria-label={t('openEvent', { title: event.title })}>
+        <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
           <LazyImage
             src={event.image}
             alt={event.title}
@@ -86,13 +31,11 @@ export default function Events() {
           />
         </div>
 
-        <CardHeader className="relative z-20">
+        <CardHeader>
           <div className="flex justify-between items-start mb-2">
-            <Badge variant='secondary'>
-              {t(`items.${event.id}.category`)}
-            </Badge>
-            <Badge variant={event.status === 'upcoming' ? 'default' : 'outline'}>
-              {event.status === 'upcoming' ? t('badgeUpcoming') : t('badgePast')}
+            <Badge variant="secondary">{t(`items.${event.id}.category`)}</Badge>
+            <Badge variant={upcoming ? 'default' : 'outline'}>
+              {upcoming ? t('badgeUpcoming') : t('badgePast')}
             </Badge>
           </div>
           <CardTitle className="text-xl">{event.title}</CardTitle>
@@ -106,47 +49,51 @@ export default function Events() {
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="relative z-20">
+        <CardContent>
           <p className="text-muted-foreground">{t(`items.${event.id}.description`)}</p>
         </CardContent>
       </LocalLink>
     </Card>
   );
+}
 
+export default function Events() {
+  const { t } = useTranslation('events');
+  const events = getEvents();
+
+  // Upcoming: soonest first. Past: most recent first.
+  const upcomingEvents = events.filter((event) => event.status === 'upcoming').sort(byDate);
+  const pastEvents = events.filter((event) => event.status === 'past').sort(byDate).reverse();
 
   return (
-    <>
-      <PageContainer>
-          <PageHeader title={t('title')} subtitle={t('subtitle')} />
+    <PageContainer>
+      <PageHeader title={t('title')} subtitle={t('subtitle')} />
 
-          {/* Upcoming Events */}
-          {upcomingEvents.length > 0 && <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">{t('upcoming')}</h2>
-            {upcomingEvents.length > 0 ? (
-              <div className="grid grid-cols-1 gap-8">
-                {upcomingEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
-                ))}
-              </div>
-            ) : (
-              <EmptyState icon={CalendarX} title={t('noUpcoming')} subtitle={t('checkBackSoon')} />
-            )}
-          </section>}
+      {/* Upcoming Events (the section is hidden when there are none) */}
+      {upcomingEvents.length > 0 && (
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-8">{t('upcoming')}</h2>
+          <div className="grid grid-cols-1 gap-8">
+            {upcomingEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
 
-          {/* Past Events */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold mb-8">{t('past')}</h2>
-            {pastEvents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {pastEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
-                ))}
-              </div>
-            ) : (
-              <EmptyState icon={FolderX} title={t('noEvents')} subtitle={t('checkBack')} />
-            )}
-          </section>
-      </PageContainer>
-    </>
+      {/* Past Events */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-bold mb-8">{t('past')}</h2>
+        {pastEvents.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {pastEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState icon={FolderX} title={t('noEvents')} subtitle={t('checkBack')} />
+        )}
+      </section>
+    </PageContainer>
   );
 }

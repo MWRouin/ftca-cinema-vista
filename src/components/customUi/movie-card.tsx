@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -51,6 +51,13 @@ function CardBadges({ badges }: { badges: CardBadge[] }) {
         </Badge>
       ))}
     </div>
+  );
+}
+
+/** The responsive grid every list of movie cards sits in. */
+export function MovieGrid({ children }: { children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-6 lg:gap-8">{children}</div>
   );
 }
 

@@ -345,12 +345,6 @@
     }
   }
 
-  /* Fallback visibility for animation elements */
-  .animate-on-scroll-fallback {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   /* Focus states for accessibility */
   /* Show focus ring only for keyboard users (focus-visible).
      Prevents persistent outline after mouse click while keeping accessibility. */

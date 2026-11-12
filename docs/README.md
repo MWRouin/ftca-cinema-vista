@@ -49,6 +49,7 @@ Template:
 | [2026-11-nextjs-content-pages](sprints/2026-11-nextjs-content-pages.md) | Home, About, Palmarès, Contact (M7); all pages ported |
 | [2026-11-nextjs-seo](sprints/2026-11-nextjs-seo.md) | Metadata, JSON-LD, sitemap, legacy redirects (M10) |
 | [2026-11-nextjs-cleanup-cutover](sprints/2026-11-nextjs-cleanup-cutover.md) | Vite removal (M11), deploy switch and final parity (M12) |
+| [2026-11-code-cleanup](sprints/2026-11-code-cleanup.md) | Post-migration scan: bug fixes, dead code, duplicated data and strings |
 
 ## Module `AGENTS.md` files
 

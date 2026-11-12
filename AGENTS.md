@@ -10,7 +10,7 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 
 - `npm run dev`: dev server on `http://localhost:3000`
 - `npm run build`: static build into `out/` (pages, metadata, sitemap)
-- `npm run lint`: ESLint (two known errors, in `src/components/ui/textarea.tsx` and `tailwind.config.ts`, predate the migration)
+- `npm run lint`: ESLint (clean; keep it that way)
 - `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare a build's pages and head data with `docs/research/parity-baseline.json`
 - No test suite. Verify with `npx tsc --noEmit` and `npm run build`, then check the HTML in `out/`.
 - Deploy: pushes to `Production` build and publish `out/` to GitHub Pages (`.github/workflows/deploy.yml`).
@@ -27,12 +27,14 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 - **Person portraits:** square, saved in `public/Members/`.
 - **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font is avoided by preloading the above-the-fold woff2 files listed in `src/lib/critical-fonts.ts`; if the hero's font family or weight changes, update that list. The fonts stay on `@fontsource` instead of `next/font` because the CSS refers to the literal family names.
 - **Server-rendered markup:** pages are prerendered, so client components must render the same HTML on the server and on first load. Don't read `window`, `localStorage` or the clock during render (read them in an effect), and don't rely on `onLoad`-style events for elements that are already in the HTML (see `LazyImage`).
+- **Shared strings and constants:** UI labels used by shared components (share buttons, lightbox, theme toggle, aria labels) live in the `common` i18n namespace; the club's email, phone, address and form links live in `src/lib/contact.ts`. Don't hard-code either in a component.
 - **Pronouns and gender in data:** `gender` on a person only selects the actor/actress label; never infer it elsewhere.
 
 ## Data rules worth knowing
 
 - `movies.json`: `public` controls listing. `playerVisible` controls the embedded video. `duration` is whole minutes written like `10'`.
 - Credits use roles `director`, `actor` plus crew roles (`writer`, `editor`, `cinematographer`, `sound`, `sound-mixing`, `logistics`, `voice-over-direction`, `voice-over`, `subtitles`, ...). A credit is either a `personId` (links to a person) or a free-text `name`.
+- `events.json`: one entry per event, including what the events list shows (`time`, `image`, `status`). `status` (`upcoming`/`past`) is set by hand.
 - `people.json`: a person has a public page if `public: true`, or is an active member, or has any film credit (`isPersonPublic` in `src/data/movies.ts`). `"public": false` does not hide anyone who qualifies another way.
 - Image-less items must not show a loader: `LazyImage` renders a placeholder when `src` is empty or fails.
 

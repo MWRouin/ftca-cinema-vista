@@ -7,32 +7,35 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { getMembers, getHonoraryMembers } from '@/data/people';
+import { DEFAULT_PERSON_IMAGE, getMembers, getHonoraryMembers } from '@/data/people';
 import { isPersonPublic } from '@/data/movies';
 import { LocalLink } from '@/i18n/locale';
 import { slugify } from '@/lib/utils';
-import { BASE_URL } from '@/lib/base-path';
+import { publicUrl } from '@/lib/base-path';
 
-function TeamSection({ teamMembers }) {
+type TeamMember = { id: string; name: string; role: string; bio: string; image: string };
+type HonoraryMember = { id: string; name: string; hasPage: boolean };
+
+/** Members shown before "Show all" is pressed. */
+const TEAM_PREVIEW_COUNT = 12;
+
+function TeamSection({ teamMembers }: { teamMembers: TeamMember[] }) {
   const { t } = useTranslation('about');
   const [showAll, setShowAll] = useState(false);
 
-  // Decide which members to show based on showAll state
-  const membersToShow = showAll ? teamMembers : teamMembers.slice(0, 12);
-
-  const defaultUserImage = `${BASE_URL}Members/user.png`;
+  const membersToShow = showAll ? teamMembers : teamMembers.slice(0, TEAM_PREVIEW_COUNT);
 
   return (
     <section>
       <h2 className="text-3xl font-bold mb-8 text-center">{t('team.title')}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-4 md:gap-6 lg:gap-8">
-        {membersToShow.map((member, index) => (
-          <Card key={index} className="text-center">
+        {membersToShow.map((member) => (
+          <Card key={member.id} className="text-center">
             <CardHeader>
               <LocalLink to={`/people/${member.id}`} className="block group">
                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                   <LazyImage
-                    src={member.image ? member.image : defaultUserImage}
+                    src={member.image || DEFAULT_PERSON_IMAGE}
                     alt={member.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
@@ -45,15 +48,14 @@ function TeamSection({ teamMembers }) {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-sm">
-                {member.bio ? t(`members.${slugify(member.name)}.bio`, { defaultValue: member.bio }) : ''}
+                {member.bio ? t(`members.${member.id}.bio`, { defaultValue: member.bio }) : ''}
               </CardDescription>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Show button only if more than 12 members */}
-      {teamMembers.length > 12 && (
+      {teamMembers.length > TEAM_PREVIEW_COUNT && (
         <div className="mt-8 text-center">
           <Button
             onClick={() => setShowAll(!showAll)}
@@ -67,7 +69,7 @@ function TeamSection({ teamMembers }) {
   );
 }
 
-function OldMembersSection({ oldMembers }) {
+function OldMembersSection({ oldMembers }: { oldMembers: HonoraryMember[] }) {
   const { t } = useTranslation('about');
   return (
     <section className="py-12">
@@ -80,8 +82,8 @@ function OldMembersSection({ oldMembers }) {
 
         <div className="bg-gradient-to-br from-muted/30 to-muted/10 rounded-lg p-8 lg:p-12 border border-muted/30">
           <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 list-none">
-            {oldMembers.map((member, index) => (
-              <li key={index} className="group">
+            {oldMembers.map((member) => (
+              <li key={member.id} className="group">
                 <div className="flex items-start space-x-3">
                   <div className="flex-shrink-0 w-1 h-6 bg-gradient-to-b from-primary to-primary/50 rounded-full mt-1"></div>
                   {member.hasPage ? (
@@ -127,7 +129,6 @@ export default function About() {
   }));
 
   return (
-    <>
     <PageContainer>
         <PageHeader title={t('title')} />
 
@@ -181,7 +182,7 @@ export default function About() {
             <div>
               <div className="rounded-lg overflow-hidden">
                 <LazyImage
-                  src={`${BASE_URL}About/ydour_web_optimized.jpg`}
+                  src={publicUrl('About/ydour_web_optimized.jpg')}
                   alt={t('mission.imageAlt')}
                   className="w-full h-full object-cover"
                 />
@@ -238,6 +239,5 @@ export default function About() {
           <OldMembersSection oldMembers={oldMembers} />
         </section>
     </PageContainer>
-    </>
   );
 }

@@ -7,6 +7,7 @@ import {
   Send,
   Twitter,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type ShareActionsProps = {
   title: string;
@@ -14,6 +15,7 @@ type ShareActionsProps = {
 };
 
 export default function ShareActions({ title, text }: ShareActionsProps) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -92,12 +94,12 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
         {copied ? (
           <>
             <Check className="w-4 h-4" />
-            Copied
+            {t("share.copied")}
           </>
         ) : (
           <>
             <Link className="w-4 h-4" />
-            Copy
+            {t("share.copy")}
           </>
         )}
       </button>
@@ -108,7 +110,7 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
         className="text-sm px-3 py-1.5 rounded-md border h-8 flex items-center gap-2 hover:bg-muted transition"
       >
         <Share2 className="w-4 h-4" />
-        Share
+        {t("share.share")}
       </button>
 
       {/* Dropdown */}
@@ -149,7 +151,7 @@ export default function ShareActions({ title, text }: ShareActionsProps) {
             className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-muted rounded-md"
           >
             <Link className="w-4 h-4" />
-            Copy link
+            {t("share.copyLink")}
           </button>
         </div>
       )}

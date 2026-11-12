@@ -163,7 +163,6 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
   };
 
   return (
-    <>
       <PageContainer width="5xl">
         <BackButton to="/events" label={t("backToEvents")} />
 
@@ -201,6 +200,5 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
 
         <EventCtaCard event={event} className="mt-16 mb-10" />
       </PageContainer>
-    </>
   );
 }

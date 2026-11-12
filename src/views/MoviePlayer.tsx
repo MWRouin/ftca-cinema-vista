@@ -19,11 +19,12 @@ import {
 } from '@/data/movies';
 import { ElementTitle } from '@/components/customUi/element-title';
 import { LazyImage } from '@/components/customUi/lazy-image';
-import { MovieCard } from '@/components/customUi/movie-card';
+import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
 import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { PersonLink } from '@/components/customUi/person-link';
 import { useLocale } from '@/i18n/locale';
+import { publicUrl } from '@/lib/base-path';
 import { decodeParam } from '@/lib/route-params';
 
 /** A credit's name, linked to the person's page when they have one. */
@@ -59,7 +60,7 @@ export default function MoviePlayer() {
       <NotFoundCard
         image={
           <img
-            src="/cinema-film-remove-svgrepo-com.svg"
+            src={publicUrl("cinema-film-remove-svgrepo-com.svg")}
             alt={t('notFoundAlt')}
             className="mx-auto mb-6 h-48 opacity-80"
           />
@@ -88,14 +89,13 @@ export default function MoviePlayer() {
   );
 
   return (
-    <>
     <PageContainer py={8}>
 
         {/* Back Button */}
         <BackButton to="/movies" label={t('backToMovies')} />
 
         {/* Movie Header */}
-        <div className="grid grid-cols-3 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-3 gap-8 mb-12">
 
           {/* Poster */}
           <div className="col-span-1 md:row-span-3">
@@ -196,30 +196,29 @@ export default function MoviePlayer() {
           </section>
         )}
 
-        {/* Related sections unchanged */}
+        {/* Related movies: same director first, otherwise same genre */}
         {relatedMoviesByDirector.length > 0 && (
           <section>
             <h2 className="text-3xl font-bold mb-8">{t('moreFrom', { director: directorNames })}</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
+            <MovieGrid>
               {relatedMoviesByDirector.map((relatedMovie) => (
                 <MovieCard key={relatedMovie.id} movie={relatedMovie} />
               ))}
-            </div>
+            </MovieGrid>
           </section>
         )}
 
         {relatedMoviesByDirector.length === 0 && relatedMoviesByGenre.length > 0 && (
           <section>
             <h2 className="text-3xl font-bold mb-8">{t('moreLike', { title: movie.title })}</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-2 sm:gap-6 lg:gap-8 xl:gap-8">
+            <MovieGrid>
               {relatedMoviesByGenre.map((relatedMovie) => (
                 <MovieCard key={relatedMovie.id} movie={relatedMovie} />
               ))}
-            </div>
+            </MovieGrid>
           </section>
         )}
 
     </PageContainer>
-    </>
   );
 }

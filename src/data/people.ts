@@ -1,7 +1,7 @@
 import rawPeople from "./people.json";
-import { resolveAssetUrl } from "@/lib/base-path";
+import { publicUrl, resolveAssetUrl } from "@/lib/base-path";
 
-/** Per-locale text. `ar` to be added with the Next.js rebuild. */
+/** Per-locale text. */
 export type LocalizedText = { en?: string; fr?: string };
 
 export type MembershipStatus = "active" | "honorary";
@@ -14,6 +14,9 @@ export type ClubMembership = {
 
 export type Gender = "male" | "female";
 
+/** Portrait shown for a person without one. */
+export const DEFAULT_PERSON_IMAGE = publicUrl("Members/user.png");
+
 export type Person = {
     id: string; // slug, matches slugify(name)
     name: string; // canonical display name
@@ -24,7 +27,7 @@ export type Person = {
     membership?: ClubMembership; // present iff the person is a club member
     /** Alternate spellings found in source data; used by resolvePersonId. */
     aliases?: string[];
-    /** Whether the person has a public /people/:id page (Phase 2). */
+    /** Forces a public /people/<id>/ page; see `isPersonPublic` for the full rule. */
     public?: boolean;
 };
 

@@ -32,18 +32,15 @@ export default function BlogArticle() {
 
   if (!article) {
     return (
-      <>
         <NotFoundCard
           title={t('notFoundTitle')}
           description={t('notFoundDesc')}
           action={<BackButton to="/blog" label={t('backToBlog')} className="mb-0" />}
         />
-      </>
     );
   }
 
   return (
-    <>
       <PageContainer width="4xl" className="2xl:max-w-5xl">
           <BackButton to="/blog" label={t('backToBlog')} />
 
@@ -93,14 +90,7 @@ export default function BlogArticle() {
 
               if (text.startsWith('## ')) {
                 return (
-                  <h2
-                    key={idx}
-                    className={
-                      article.lang === 'ar'
-                        ? 'text-right text-2xl font-semibold mt-8 mb-4 text-foreground'
-                        : 'text-left text-2xl font-semibold mt-8 mb-4 text-foreground'
-                    }
-                  >
+                  <h2 key={idx} className="text-2xl font-semibold mt-8 mb-4 text-foreground">
                     {text.slice(3)}
                   </h2>
                 );
@@ -110,6 +100,5 @@ export default function BlogArticle() {
             })}
           </article>
       </PageContainer>
-    </>
   );
 }

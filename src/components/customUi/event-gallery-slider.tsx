@@ -1,10 +1,12 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { LazyImage } from "./lazy-image";
 import { LightboxOverlay } from "./lightbox";
 
 export function EventGallerySlider({ images }: { images: string[] }) {
+  const { t } = useTranslation();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -33,7 +35,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
                 >
                   <LazyImage
                     src={img}
-                    alt={`Event gallery photo ${i + 1}`}
+                    alt={t("a11y.galleryPhoto", { number: i + 1 })}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -45,14 +47,14 @@ export function EventGallerySlider({ images }: { images: string[] }) {
         {/* Carousel Controls */}
         <button
           onClick={() => emblaApi?.scrollPrev()}
-          aria-label="Previous image"
+          aria-label={t("a11y.previousImage")}
           className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
         >
           <ChevronLeft />
         </button>
         <button
           onClick={() => emblaApi?.scrollNext()}
-          aria-label="Next image"
+          aria-label={t("a11y.nextImage")}
           className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 p-2 rounded-full"
         >
           <ChevronRight />
@@ -65,7 +67,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
           {/* Prev */}
           <button
             onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-            aria-label="Previous image"
+            aria-label={t("a11y.previousImage")}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
           >
             <ChevronLeft />
@@ -74,7 +76,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
           {/* Image */}
           <img
             src={images[lightboxIndex]}
-            alt={`Event gallery photo ${lightboxIndex + 1}`}
+            alt={t("a11y.galleryPhoto", { number: lightboxIndex + 1 })}
             className="max-w-full max-h-full object-contain select-none"
             onClick={(e) => e.stopPropagation()}
           />
@@ -82,7 +84,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
           {/* Next */}
           <button
             onClick={(e) => { e.stopPropagation(); goToNext(); }}
-            aria-label="Next image"
+            aria-label={t("a11y.nextImage")}
             className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
           >
             <ChevronRight />

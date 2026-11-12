@@ -27,8 +27,6 @@ export default function AfterworkMovienight() {
           "/events/afterworkMovienight/IMG_2818.jpeg",
           "/events/afterworkMovienight/IMG_8696.jpeg",
           "/events/afterworkMovienight/IMG_8701.jpeg",
-          "/events/afterworkMovienight/IMG_8696.jpeg",
-          "/events/afterworkMovienight/IMG_8701.jpeg",
         ],
         overviewExtra: (
           <>

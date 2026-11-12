@@ -1,33 +1,21 @@
 'use client';
 
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { LocalLink } from '@/i18n/locale';
 
 const NotFound = () => {
-  const pathname = usePathname();
   const { t } = useTranslation('static');
 
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      pathname
-    );
-  }, [pathname]);
-
   return (
-    <>
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">{t('notFound.message')}</p>
-        <LocalLink to="/" className="text-blue-500 hover:text-blue-700 underline">
+        <p className="text-xl text-muted-foreground mb-4">{t('notFound.message')}</p>
+        <LocalLink to="/" className="text-primary hover:text-primary/80 underline">
           {t('notFound.backHome')}
         </LocalLink>
       </div>
     </div>
-    </>
   );
 };
 

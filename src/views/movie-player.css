@@ -1,16 +1,4 @@
-/* Language toggle styles for movie detail page */
-
-button[aria-pressed="true"] {
-  outline: 2px solid rgba(255,255,255,0.12);
-  outline-offset: 2px;
-}
-
-/* Ensure movie detail description is not clamped */
-.movie-description-full {
-  display: block;
-}
-
-/* Animation for language switch: fades and slides the new text in */
+/* Movie detail page: the description fades and slides in when the language changes. */
 .lang-fade-enter {
   animation: langFadeIn .32s cubic-bezier(.2,.9,.3,1);
   will-change: opacity, transform;
