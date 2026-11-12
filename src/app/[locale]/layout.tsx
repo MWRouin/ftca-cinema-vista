@@ -5,10 +5,10 @@ import "@/fonts";
 import "@/index.css";
 import { Layout } from "@/components/Layout";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeScript } from "@/components/ThemeScript";
 import { SUPPORTED_LOCALES, dirForLocale, isLocale } from "@/i18n/config";
 import { I18nProvider } from "@/i18n/provider";
 import { CRITICAL_FONT_URLS } from "@/lib/critical-fonts";
-import { THEME_SCRIPT } from "@/lib/theme-script";
 
 export const dynamicParams = false;
 
@@ -34,7 +34,7 @@ export default async function LocaleLayout({
         {CRITICAL_FONT_URLS.map((href) => (
           <link key={href} rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href={href} />
         ))}
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <ThemeScript />
       </head>
       <body>
         <ThemeProvider>
