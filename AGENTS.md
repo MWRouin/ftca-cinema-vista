@@ -4,7 +4,7 @@ Website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, m
 
 ## Current state
 
-Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Next.js app (`src/app/`) has the shell, locale routing, i18n and the root redirect; pages are ported from `src/views/` one by one (M7 to M9). **The Vite app (`src/App.tsx`, `src/main.tsx`, `index.html`, `vite.config.ts`) is frozen since M3**: shared components now use `next/*`, so it no longer builds. It is deleted at M11; the old site stays buildable from `main`. Milestones M1 to M6, M8 (movies and people) and M9 (events and blog) are done; see the plan.
+Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Next.js app (`src/app/`) has the shell, locale routing, i18n, the root redirect and every page (the UI lives in `src/views/`, wrapped by thin route files); SEO metadata is still the old client-side `MetaHeader` until M10. **The Vite app (`src/App.tsx`, `src/main.tsx`, `index.html`, `vite.config.ts`) is frozen since M3**: shared components now use `next/*`, so it no longer builds. It is deleted at M11; the old site stays buildable from `main`. Milestones M1 to M9 are done; M10 (SEO layer), M11 (cleanup) and M12 (cutover) remain; see the plan.
 
 ## Commands
 

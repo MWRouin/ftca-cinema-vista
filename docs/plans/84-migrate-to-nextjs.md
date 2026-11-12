@@ -33,7 +33,7 @@ Each milestone is a goal only. The how and the implementation details are decide
 - **M6. CI/CD prep** (done): `.github/workflows/next-build.yml` builds the Next app on this branch and keeps `out/` as an artifact without deploying; the cutover steps are in its header. `deploy.yml` is unchanged until M12.
 
 **Wave 3: page ports (parallel, after M3 + M4 + M5)**
-- **M7. Content pages:** Home, About, Palmarès, Contact.
+- **M7. Content pages** (done): Home, About, Palmarès and Contact as client views behind thin routes, plus `[locale]/not-found.tsx` wrapping the old NotFound view. With M8 and M9, every content page of the baseline exists in the Next output (170 real pages; only the unlinked `/en/404/` and `/fr/404/` were not carried over).
 - **M8. Movies and people** (done): movie list, movie detail and person pages ported as client views behind thin route files; `generateStaticParams` produces all 35 movies and 35 people per locale. The URL set matches the baseline exactly (140 pages). Head metadata waits for M10.
 - **M9. Events and blog** (done): events list, the four event pages (one `[slug]` route with a component registry, `src/views/events/index.ts`), blog list and articles. `scripts/events.json` moved to `src/data/events.json`. The 18 URLs match the baseline exactly.
 - **M10. SEO layer:** per-page metadata, JSON-LD, hreflang and canonicals, sitemap and robots, replacing `MetaHeader` and the two generator scripts. It runs alongside M7–M9 and is applied page by page.

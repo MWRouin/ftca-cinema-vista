@@ -1,8 +1,5 @@
-import { isLocale } from "@/i18n/config";
+import Home from "@/views/Home";
 
-// Placeholder until the home page is ported (M7).
-export default async function LocaleHome({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  if (!isLocale(locale)) return null;
-  return <div className="p-8">Next.js scaffold ({locale})</div>;
+export default function HomePage() {
+  return <Home />;
 }

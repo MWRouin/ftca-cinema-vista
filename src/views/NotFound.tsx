@@ -1,4 +1,6 @@
-import { useLocation } from "react-router-dom";
+'use client';
+
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MetaHeader from '@/lib/metadata/metadata';
@@ -6,15 +8,15 @@ import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { LocalLink } from '@/i18n/locale';
 
 const NotFound = () => {
-  const location = useLocation();
+  const pathname = usePathname();
   const { t } = useTranslation('static');
 
   useEffect(() => {
     console.error(
       "404 Error: User attempted to access non-existent route:",
-      location.pathname
+      pathname
     );
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <>

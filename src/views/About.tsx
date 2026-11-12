@@ -1,3 +1,4 @@
+'use client';
 
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { PageHeader } from '@/components/customUi/page-header';
