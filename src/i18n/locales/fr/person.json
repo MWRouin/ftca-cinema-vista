@@ -3,9 +3,6 @@
   "filmography": "Filmographie",
   "noFilmography": "Aucun film pour le moment.",
   "articles": "Articles",
-  "notFoundTitle": "Personne introuvable",
-  "notFoundDesc": "La personne que vous recherchez n'existe pas.",
-  "notFoundAlt": "Personne introuvable",
   "filmCount_one": "{{count}} film",
   "filmCount_other": "{{count}} films"
 }

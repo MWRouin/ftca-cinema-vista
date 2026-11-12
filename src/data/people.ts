@@ -1,6 +1,7 @@
 import rawPeople from "./people.json";
+import { publicUrl, resolveAssetUrl } from "@/lib/base-path";
 
-/** Per-locale text. `ar` to be added with the Next.js rebuild. */
+/** Per-locale text. */
 export type LocalizedText = { en?: string; fr?: string };
 
 export type MembershipStatus = "active" | "honorary";
@@ -13,6 +14,9 @@ export type ClubMembership = {
 
 export type Gender = "male" | "female";
 
+/** Portrait shown for a person without one. */
+export const DEFAULT_PERSON_IMAGE = publicUrl("Members/user.png");
+
 export type Person = {
     id: string; // slug, matches slugify(name)
     name: string; // canonical display name
@@ -23,20 +27,9 @@ export type Person = {
     membership?: ClubMembership; // present iff the person is a club member
     /** Alternate spellings found in source data; used by resolvePersonId. */
     aliases?: string[];
-    /** Whether the person has a public /people/:id page (Phase 2). */
+    /** Forces a public /people/<id>/ page; see `isPersonPublic` for the full rule. */
     public?: boolean;
 };
-
-// Lazily-evaluated base path. Optional chaining keeps this safe in Node (tsx)
-// where Vite's `import.meta.env` is undefined — the people registry is imported
-// by build scripts as well as the app.
-const BASE = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL || "/";
-
-function resolveAssetUrl(url: string | undefined): string | undefined {
-    if (!url) return url;
-    if (!url.startsWith("__BASE_URL__/")) return url;
-    return url.replace("__BASE_URL__/", BASE);
-}
 
 function personFromJson(raw: Person): Person {
     return { ...raw, image: resolveAssetUrl(raw.image) };

@@ -1,16 +1,15 @@
 Official Website for "Club des cinéastes amateurs d'Hammam-Lif"
 =================
 
-A modern, responsive cinema club website built with Vite + React + TypeScript and shadcn/ui. It features themed UI, routing, and sample pages like Home, Movies, Events, Blog, About, and Contact.
+The website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, members and palmarès, in English and French. Built with Next.js (App Router, static export), React, TypeScript, Tailwind CSS and shadcn/ui. There is no backend: all content lives in the repo and the site is published as static files.
 
 Features
-- Fast Vite build with React and TypeScript
-- Themed UI with Tailwind CSS and shadcn/ui
-- Client-side routing (react-router) with a configurable base path
-- Per-page SEO meta tags (title, description, canonical, Open Graph, Twitter Cards)
-- JSON-LD structured data (Organization, WebSite, Event, Movie schemas)
-- Auto-generated sitemap.xml and static HTML pages with unique SEO at build time
-- Ready-to-extend pages and components
+- Fully static output (`out/`), deployable to GitHub Pages or any CDN
+- English and French, with locale-prefixed URLs (`/en/…/`, `/fr/…/`) and automatic locale redirect
+- Server-rendered SEO: per-page title, description, canonical, hreflang, Open Graph and Twitter tags
+- JSON-LD structured data (Organization, WebSite, Movie, Event, BlogPosting, Person, breadcrumbs)
+- Generated `sitemap.xml` with language alternates
+- Light, dark and system themes
 
 Quick start
 1) Install dependencies
@@ -18,7 +17,7 @@ Quick start
 npm install
 ```
 
-2) Start the dev server
+2) Start the dev server (http://localhost:3000)
 ```bash
 npm run dev
 ```
@@ -26,43 +25,32 @@ npm run dev
 3) Build for production
 ```bash
 npm run build
-npm run preview
+npx serve out
 ```
-
-Configuration
-- Base path: If deploying under a subfolder (e.g., GitHub Pages), set the public base path via `.env`:
-```bash
-# .env
-VITE_BASE_PATH=/ftca-cinema-vista/
-```
-The app and assets will automatically respect this base path.
 
 Scripts
-- `npm run dev` – start Vite dev server
-- `npm run build` – production build (includes sitemap generation)
-- `npm run preview` – preview the production build
+- `npm run dev` – start the Next.js dev server
+- `npm run build` – static production build into `out/` (pages, metadata and sitemap)
+- `npm run lint` – ESLint
+- `node tools/parity.mjs snapshot out <file.json>` and `diff <a> <b>` – record and compare the pages and head data of a build
 
-Post-build scripts (run automatically or manually after `vite build`):
-- `node scripts/sitemapGenerator.js dist` – generates `sitemap.xml` from pages, movies, and events data
-- `node scripts/staticPagesGenerator.js dist` – creates per-route HTML files with unique SEO meta tags for GitHub Pages
-
-SEO
-The site uses `react-helmet-async` for client-side meta tags and a build-time static page generator for crawler-friendly HTML.
-
+Deployment
+Pushes to the `Production` branch build the site and publish `out/` to GitHub Pages (`.github/workflows/deploy.yml`).
 
 Tech stack
-- Vite, React, TypeScript
-- Tailwind CSS, shadcn/ui
-- React Router
-- TanStack Query
+- Next.js (App Router, `output: 'export'`), React, TypeScript
+- Tailwind CSS, shadcn/ui (Radix)
+- i18next / react-i18next
 
 Project structure (high level)
+- `src/app` – routes, layouts, sitemap, 404 and locale redirects
+- `src/views` – page UI components used by the routes
 - `src/components` – shared UI and layout components
-- `src/pages` – route pages (Home, Movies, Events, Blog, About, Contact)
-- `src/lib/metadata` – SEO utilities (MetaHeader, constants, html-lang)
-- `src/hooks`, `src/lib` – utilities and custom hooks
-- `scripts` – build-time generators (static pages, sitemap)
-- `public` – static assets (logos, icons, robots.txt, sitemap.xml)
+- `src/data` – movies, people, events and blog content
+- `src/i18n` – locales and translation catalogs
+- `src/lib/metadata` – SEO data and metadata builders
+- `public` – static assets (posters, portraits, icons, robots.txt)
+- `docs` – plans, sprint logs and research; `AGENTS.md` files hold conventions for contributors and coding agents
 
 License
 This project is for internal/club usage. Add a license file if you plan to open-source it.

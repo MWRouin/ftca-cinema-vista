@@ -23,3 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 .unlighthouse/*
+# Local Claude Code settings
+.claude/settings.local.json
+
+# Next.js
+.next
+out
+next-env.d.ts
+*.tsbuildinfo

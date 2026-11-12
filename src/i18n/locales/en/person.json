@@ -3,9 +3,6 @@
   "filmography": "Filmography",
   "noFilmography": "No films listed yet.",
   "articles": "Articles",
-  "notFoundTitle": "Person not found",
-  "notFoundDesc": "The person you are looking for does not exist.",
-  "notFoundAlt": "Person not found",
   "filmCount_one": "{{count}} film",
   "filmCount_other": "{{count}} films"
 }

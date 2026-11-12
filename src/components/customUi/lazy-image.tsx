@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageOff } from "lucide-react";
 import { Loader } from "@/components/customUi/loader";
 import { cn } from "@/lib/utils";
@@ -20,9 +20,20 @@ export function LazyImage({
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
 
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // The image is in the server-rendered HTML, so the browser can finish (or
+  // fail) loading it before React hydrates; the load/error events are then
+  // already gone and onLoad/onError never fire. Read the element's state.
   useEffect(() => {
-    setLoading(true);
-    setFailed(false);
+    const img = imgRef.current;
+    if (img?.complete) {
+      setLoading(false);
+      setFailed(img.naturalWidth === 0);
+    } else {
+      setLoading(true);
+      setFailed(false);
+    }
   }, [src]);
 
   // No image to load (or it broke): show a static placeholder, never the loader.
@@ -48,6 +59,7 @@ export function LazyImage({
 
       <img
         {...props}
+        ref={imgRef}
         src={src}
         alt={alt}
         className={cn(

@@ -1,5 +1,6 @@
 import rawMovies from "./movies.json"
 import { getPersonById, getPeople, type Person } from "./people"
+import { resolveAssetUrl } from "@/lib/base-path"
 
 /** A role in the making of a film. Crew roles are filled in per-movie over time. */
 export type CreditRole =
@@ -47,40 +48,31 @@ export type Movie = {
     playerVisible: boolean;
 };
 
-// Optional chaining keeps this safe under Node (tsx) where Vite's
-// `import.meta.env` is undefined — build scripts import these helpers.
-const BASE = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL || "/";
-
-function ResolveAssetUrl(url: string): string {
-    if (!url.startsWith("__BASE_URL__/")) return url;
-    return url.replace("__BASE_URL__/", BASE);
-}
-
-function MovieFromJsonObject(jsonObject: Movie): Movie {
+function movieFromJson(jsonObject: Movie): Movie {
     return {
         ...jsonObject,
-        image: jsonObject.image ? ResolveAssetUrl(jsonObject.image) : "",
+        image: jsonObject.image ? resolveAssetUrl(jsonObject.image) : "",
         credits: Array.isArray(jsonObject.credits) ? jsonObject.credits : [],
-        public: jsonObject.public ? jsonObject.public : false,
+        public: jsonObject.public ?? false,
         playerVisible: jsonObject.playerVisible ?? false,
         year: typeof jsonObject.year === 'number' ? jsonObject.year : '-'
     };
 }
 
-function CompareMoviesProductionYear(movie1: Movie, movie2: Movie) {
-    if (movie1.year === '-') return 1;
-    if (movie2.year === '-') return -1;
-    return (movie2.year as number) - (movie1.year as number);
+/** Newest first; movies with an unknown year go last. */
+function compareByYearDesc(movie1: Movie, movie2: Movie) {
+    if (movie1.year === '-' || movie2.year === '-') {
+        return Number(movie1.year === '-') - Number(movie2.year === '-');
+    }
+    return movie2.year - movie1.year;
 }
-
-function IsMoviePublic(movie: Movie): boolean { return movie.public; }
 
 // JSON literals widen credit roles to `string`; the cast realigns them with the
 // `Movie` shape (the mapper re-normalizes runtime fields like image/year).
 const movies: Movie[] = (rawMovies as unknown as Movie[])
-    .map(MovieFromJsonObject)
-    .filter(IsMoviePublic)
-    .sort(CompareMoviesProductionYear);
+    .map(movieFromJson)
+    .filter((movie) => movie.public)
+    .sort(compareByYearDesc);
 
 export const getMovies = () => movies;
 
@@ -138,9 +130,8 @@ export const getRelatedMoviesByDirector = (movie: Movie, count = 3) => {
 };
 
 export const getRelatedMoviesByGenre = (movie: Movie, count = 3) => {
-    const pool = movies.filter((m) => m.genre === movie.genre && m.id !== movie.id);
-    return pool.slice(0, count);
-}
+    return movies.filter((m) => m.genre === movie.genre && m.id !== movie.id).slice(0, count);
+};
 
 /** Movies a curated Person is credited in, with the roles they held. */
 export const getFilmography = (personId: string): { movie: Movie; roles: CreditRole[] }[] =>

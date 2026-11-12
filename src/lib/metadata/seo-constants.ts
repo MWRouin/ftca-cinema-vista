@@ -1,13 +1,10 @@
 /**
  * SEO configuration — single source of truth.
  *
- * Consumed by:
- *  - src/lib/metadata/metadata.tsx       (MetaHeader component, via react-helmet-async)
- *  - src/pages/*                         (every page imports PAGE_SEO)
- *  - scripts/staticPagesGenerator.js     (build-time HTML injection)
- *  - scripts/sitemapGenerator.js         (build-time sitemap)
+ * Consumed by `page-seo.ts` and `next-metadata.ts` (page metadata and JSON-LD),
+ * the redirect pages and `src/app/sitemap.ts`.
  *
- * Keep this file free of React / DOM imports so Node scripts can load it too.
+ * Keep this file free of React / DOM imports: it runs in server code.
  */
 
 import type { OgType } from "./metadata-types";
@@ -26,9 +23,8 @@ export { SUPPORTED_LOCALES, DEFAULT_LOCALE, OG_LOCALE, type Locale };
 export const SITE_URL = "https://www.cineamateur-hlif.com";
 export const SITE_NAME = "FTCA Hammam-Lif";
 export const SITE_NAME_FULL = "Hammam-Lif Amateur Filmmakers Club";
-export const DEFAULT_LANG = "en";
 export const TWITTER_HANDLE = "@ftcahammemlif";
-export const CONTACT_EMAIL = "contact@cineamateur-hlif.com";
+export { CONTACT_EMAIL } from "../contact";
 
 export const DEFAULT_OG_IMAGE =
   "https://opengraph.b-cdn.net/production/images/e889e93c-a333-49e9-bb70-4d0506d588ff.jpg?token=Fbd-173Wg4scri1OkZIVXQEUGc9atCOObfuZX-GRquE&height=1200&width=1200&expires=33286675221";
@@ -417,7 +413,7 @@ export const PAGE_SEO_FR: Record<
   },
 };
 
-/* ─── i18n helpers (shared by MetaHeader and the build scripts) ─── */
+/* ─── i18n helpers ─── */
 
 /** Per-page SEO for a given locale, French overrides applied where present. */
 export function getLocalizedPageSeo(pageKey: string, locale: Locale): PageSeo {
@@ -459,7 +455,6 @@ export function hreflangAlternates(
 /**
  * Build a BreadcrumbList JSON-LD for a page key (Home › Section › Leaf).
  * Returns null for the homepage and the 404 page (no breadcrumb).
- * Shared by MetaHeader (runtime) and the static generator so both stay in sync.
  *
  * `leafTitle` is the current page's display title; section labels are pulled
  * from PAGE_SEO so they're localized consistently.
