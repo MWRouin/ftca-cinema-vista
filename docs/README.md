@@ -10,7 +10,7 @@ Each plan starts with a status line: `Status: draft | active | done | dropped`, 
 
 | Plan | Status |
 |---|---|
-| [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done (pending merge) |
+| [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done and deployed |
 
 ## Research
 
@@ -51,6 +51,7 @@ Template:
 | [2026-11-nextjs-cleanup-cutover](sprints/2026-11-nextjs-cleanup-cutover.md) | Vite removal (M11), deploy switch and final parity (M12) |
 | [2026-11-code-cleanup](sprints/2026-11-code-cleanup.md) | Post-migration scan: bug fixes, dead code, duplicated data and strings |
 | [2026-11-navigation-polish](sprints/2026-11-navigation-polish.md) | Theme flicker and scroll fixes, navigation progress bar, localized 404, unused CSS, mobile menu fixes |
+| [2026-11-launch-and-event-data](sprints/2026-11-launch-and-event-data.md) | Live site check, Event structured data for Search Console, self-hosted share image, CI checks, module docs |
 
 ## Module `AGENTS.md` files
 
