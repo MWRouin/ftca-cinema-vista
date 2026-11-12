@@ -21,4 +21,4 @@ Next.js App Router, static export (`output: 'export'`, trailing slashes). Every 
 
 ## Verify
 
-`npx tsc --noEmit -p tsconfig.next.json`, `npx next build`, then compare the generated URLs and head data with `docs/research/parity-baseline.json` using `node tools/parity.mjs`.
+`npx tsc --noEmit`, `npm run build`, then compare the generated URLs and head data with `docs/research/parity-baseline.json` using `node tools/parity.mjs`.

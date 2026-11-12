@@ -12,4 +12,4 @@ All site content as static data: movies, people, blog and the helpers that read 
 
 ## Verify
 
-`npx tsc --noEmit -p tsconfig.next.json` and `npx next build`; when page output may change, snapshot `out/` with `node tools/parity.mjs` and diff it against `docs/research/parity-baseline.json`.
+`npx tsc --noEmit` and `npm run build`; when page output may change, snapshot `out/` with `node tools/parity.mjs` and diff it against `docs/research/parity-baseline.json`.

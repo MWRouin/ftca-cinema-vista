@@ -19,4 +19,4 @@ Everything that ends up in a page's `<head>` and structured data. The static HTM
 
 ## Verify
 
-`npx next build`, then `node tools/parity.mjs snapshot out /tmp/next.json` and `node tools/parity.mjs diff docs/research/parity-baseline.json /tmp/next.json`. The "Changed fields" list should only contain the known differences recorded in `docs/sprints/2026-11-nextjs-seo.md`.
+`npm run build`, then `node tools/parity.mjs snapshot out /tmp/next.json` and `node tools/parity.mjs diff docs/research/parity-baseline.json /tmp/next.json`. The "Changed fields" list should only contain the known differences recorded in `docs/sprints/2026-11-nextjs-seo.md`.

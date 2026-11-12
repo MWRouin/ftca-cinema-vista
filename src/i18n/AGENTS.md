@@ -9,7 +9,6 @@ Locales (`en`, `fr`), translation catalogs and locale helpers. Every URL is loca
 - `instance.ts`: `createI18n(locale)` and `getT(locale, ns)` for server code and `generateMetadata`. Synchronous.
 - `provider.tsx`: client `I18nProvider`, mounted in `src/app/[locale]/layout.tsx`; gives client components `useTranslation()` and `useLocale()`.
 - `locale.tsx`: `useLocale` and `LocalLink` (wraps `next/link` and adds the locale prefix).
-- `index.ts`: the frozen Vite app's global init. Removed with Vite at M11.
 
 ## Rules
 
@@ -19,4 +18,4 @@ Locales (`en`, `fr`), translation catalogs and locale helpers. Every URL is loca
 
 ## Verify
 
-`npx next build`, then check `out/en/index.html` and `out/fr/index.html` contain translated text (server and client).
+`npm run build`, then check `out/en/index.html` and `out/fr/index.html` contain translated text (server and client).

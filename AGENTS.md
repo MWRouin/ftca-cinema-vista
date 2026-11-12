@@ -4,16 +4,16 @@ Website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, m
 
 ## Current state
 
-Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Next.js app (`src/app/`) has the shell, locale routing, i18n, every page (the UI lives in `src/views/`, wrapped by thin route files), server-rendered SEO metadata and JSON-LD, the sitemap and redirect pages for un-prefixed URLs. **The Vite app (`src/App.tsx`, `src/main.tsx`, `index.html`, `vite.config.ts`) is frozen since M3**: shared components now use `next/*`, so it no longer builds. It is deleted at M11; the old site stays buildable from `main`. Milestones M1 to M10 are done; M11 (cleanup) and M12 (cutover) remain; see the plan.
+Next.js App Router with static export (`output: 'export'`), React 19, TypeScript, i18next, Tailwind, shadcn/Radix. The site was migrated from a Vite SPA in November 2026 ([docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md), issue #84); the old app is gone, and `docs/research/parity-baseline.json` records its output for comparison. Routes live in `src/app/` as thin server files; the page UI is in `src/views/` as client components.
 
 ## Commands
 
-- `npm run next:dev` / `npm run next:build`: the Next.js app (port 3000; static output in `out/`)
-- `npm run dev` / `npm run build`: the frozen Vite app (does not build any more; kept only until M11)
-- `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare static builds against `docs/research/parity-baseline.json`
-- `npm run lint`: ESLint
-- No test suite. Verify with `npx tsc --noEmit -p tsconfig.next.json` and `npx next build`, then check the HTML in `out/`.
-- Deploy: pushes to `Production` build and publish to GitHub Pages (`.github/workflows/deploy.yml`).
+- `npm run dev`: dev server on `http://localhost:3000`
+- `npm run build`: static build into `out/` (pages, metadata, sitemap)
+- `npm run lint`: ESLint (two known errors, in `src/components/ui/textarea.tsx` and `tailwind.config.ts`, predate the migration)
+- `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare a build's pages and head data with `docs/research/parity-baseline.json`
+- No test suite. Verify with `npx tsc --noEmit` and `npm run build`, then check the HTML in `out/`.
+- Deploy: pushes to `Production` build and publish `out/` to GitHub Pages (`.github/workflows/deploy.yml`).
 
 ## Conventions
 
@@ -25,7 +25,8 @@ Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix)
 - **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`.
 - **Posters:** 2:3 portrait, 1000×1500 is the common size. Reduce dimensions rather than compressing further. Crop to 2:3.
 - **Person portraits:** square, saved in `public/Members/`.
-- **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font was fixed by preloading the above-the-fold woff2 files (`preloadCriticalFonts` plugin in `vite.config.ts`, patterns in `CRITICAL_FONT_PATTERNS`). If the hero's font family/weight changes, update the patterns. In the Next app the same files are preloaded from `src/lib/critical-fonts.ts` (kept on `@fontsource` instead of `next/font`, because the CSS refers to the literal family names).
+- **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font is avoided by preloading the above-the-fold woff2 files listed in `src/lib/critical-fonts.ts`; if the hero's font family or weight changes, update that list. The fonts stay on `@fontsource` instead of `next/font` because the CSS refers to the literal family names.
+- **Server-rendered markup:** pages are prerendered, so client components must render the same HTML on the server and on first load. Don't read `window`, `localStorage` or the clock during render (read them in an effect), and don't rely on `onLoad`-style events for elements that are already in the HTML (see `LazyImage`).
 - **Pronouns and gender in data:** `gender` on a person only selects the actor/actress label; never infer it elsewhere.
 
 ## Data rules worth knowing
@@ -47,8 +48,7 @@ Each module gets its own `AGENTS.md` (read when you work in that folder), plus a
 | `src/components/customUi/` | Shared presentational components | to add |
 | `src/components/ui/` | shadcn primitives | to add |
 | `src/app/` | Next.js routes, layouts, 404 and root redirect | [done](src/app/AGENTS.md) |
-| `src/views/` | Page UI components used by the routes (renamed from `src/pages`) | to add |
-| `scripts/` | Sitemap and static page generation (to be replaced by Next.js) | to add |
+| `src/views/` | Page UI components (client) used by the routes | to add |
 
 ## Documentation workflow
 

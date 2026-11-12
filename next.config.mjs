@@ -7,8 +7,6 @@ const nextConfig = {
   images: { unoptimized: true },
   // Lets app/global-not-found.tsx render the 404 page outside the locale layouts.
   experimental: { globalNotFound: true },
-  // Keep Next's tsconfig separate while the Vite app still builds from tsconfig.json.
-  typescript: { tsconfigPath: "tsconfig.next.json" },
 };
 
 export default nextConfig;

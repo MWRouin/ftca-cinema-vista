@@ -10,7 +10,7 @@ Each plan starts with a status line: `Status: draft | active | done | dropped`, 
 
 | Plan | Status |
 |---|---|
-| [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | active |
+| [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done (pending merge) |
 
 ## Research
 
@@ -48,6 +48,7 @@ Template:
 | [2026-11-nextjs-events-blog](sprints/2026-11-nextjs-events-blog.md) | Events and blog pages (M9) |
 | [2026-11-nextjs-content-pages](sprints/2026-11-nextjs-content-pages.md) | Home, About, Palmarès, Contact (M7); all pages ported |
 | [2026-11-nextjs-seo](sprints/2026-11-nextjs-seo.md) | Metadata, JSON-LD, sitemap, legacy redirects (M10) |
+| [2026-11-nextjs-cleanup-cutover](sprints/2026-11-nextjs-cleanup-cutover.md) | Vite removal (M11), deploy switch and final parity (M12) |
 
 ## Module `AGENTS.md` files
 

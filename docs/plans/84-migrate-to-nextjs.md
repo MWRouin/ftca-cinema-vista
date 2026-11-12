@@ -1,6 +1,6 @@
 # Plan: Migrate to Next.js
 
-Status: active · Issue: #84 · Branch: `84-migrate-to-nextjs`
+Status: done (pending merge and a browser pass) · Issue: #84 · Branch: `84-migrate-to-nextjs`
 
 ## Context
 
@@ -39,8 +39,8 @@ Each milestone is a goal only. The how and the implementation details are decide
 - **M10. SEO layer** (done): `generateMetadata` and server-rendered JSON-LD on every route, `app/sitemap.ts`, redirect pages for the 82 un-prefixed URLs, and `MetaHeader` removed. Against the baseline: same pages, same sitemap URLs, and head data identical except for a short list of known differences (see the M10 sprint log).
 
 **Wave 4: cleanup and verification**
-- **M11. Cleanup:** remove Vite, react-router, the old scripts and plugin, and `react-query`. Update the ESLint and TS configuration.
-- **M12. Parity and cutover:** compare against the M2 baseline, check legacy URL redirects, run performance and accessibility checks, merge, and switch the deploy.
+- **M11. Cleanup** (done): Vite app, `scripts/`, react-router, react-query, the Vite configs and `.env` removed; one `tsconfig.json`; npm scripts are `dev`, `build`, `lint`; README rewritten.
+- **M12. Parity and cutover** (done except merge): final parity run matches the M10 list of known differences; `deploy.yml` builds with `npm run build` and publishes `out/`; the temporary Next build workflow is removed. Not done: a browser, performance and accessibility pass, and the merge (left to the maintainer).
 
 ## Dependency overview
 

@@ -1,13 +1,9 @@
 /**
- * Public base path of the deployed site ("/" on the custom domain), shared by
- * the Vite app, the Next.js app and build scripts. Vite exposes it as
- * `import.meta.env.BASE_URL`; Next reads `NEXT_PUBLIC_BASE_PATH`. Under plain
- * Node (tsx scripts) neither exists and it falls back to "/".
+ * Public base path of the deployed site: "/" on the custom domain. Set
+ * `NEXT_PUBLIC_BASE_PATH` (and `basePath` in next.config.mjs) only if the site
+ * is ever served from a sub-path.
  */
-const raw: string =
-  (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL ??
-  (typeof process !== "undefined" ? process.env.NEXT_PUBLIC_BASE_PATH : undefined) ??
-  "/";
+const raw: string = process.env.NEXT_PUBLIC_BASE_PATH ?? "/";
 
 /** Always starts and ends with "/". */
 export const BASE_URL: string = `/${raw.replace(/^\/+|\/+$/g, "")}/`.replace(/^\/\/$/, "/");
