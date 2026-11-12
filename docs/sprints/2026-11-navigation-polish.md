@@ -1,6 +1,6 @@
 # Navigation polish after the migration (2026-11-12)
 
-Fixes for things that felt worse than the old SPA once the site ran on Next.js (branch `84-migrate-to-nextjs`, this commit). Each was measured on a production build in headless Chrome, before and after.
+Fixes for things that felt worse than the old SPA once the site ran on Next.js (branch `84-migrate-to-nextjs`, `65d0f4e` and this commit). Each was measured on a production build in headless Chrome, before and after.
 
 ## Shipped
 
@@ -10,6 +10,8 @@ Fixes for things that felt worse than the old SPA once the site ran on Next.js (
 - **404 page.** `404.html` (`app/global-not-found.tsx`) was a bare bilingual page. It now renders the site shell and the "Oops! Page not found" message in the URL's language and the saved theme (`views/GlobalNotFound`, `localeForUrl` in `src/lib/locale-redirect.ts`). The status is still 404; the old text stays as a `<noscript>` fallback.
 - **One not-found message.** The per-section cards in `MoviePlayer`, `Person` and `BlogArticle`, `NotFoundCard` and their `notFound*` strings are removed; those branches show the generic 404.
 - **Unused CSS removed** from `src/index.css` (512 to 329 lines): the utilities listed as left over in [2026-11-code-cleanup](2026-11-code-cleanup.md), their theme overrides, and six unused keyframes (`shimmer`, `loading-shimmer`, `fadeSlideDown`, `fadeSlideUp`, `grain`, `scrollPulse`).
+- **Language button without a flag.** It shows only the language code; `country-flag-icons` is uninstalled.
+- **Mobile menu.** Escape closes it, the panel is `inert` while closed (its links no longer take keyboard focus), the logo closes it, the menu icon cross-fades into an X, and the current page has `aria-current`. Its links no longer get the `.nav-link` hover background, which stayed behind an item after a tap.
 
 ## Decisions
 
@@ -17,6 +19,7 @@ Fixes for things that felt worse than the old SPA once the site ran on Next.js (
 - **No `loading.tsx`.** All content is bundled, so a full loading page would only flash on fast navigations. The previous page stays visible and the delayed bar gives feedback on slow ones.
 - **No per-section "movie not found" pages.** They were built on the smart 404 and then dropped: one generic message everywhere was preferred.
 - **404 language** for a URL without a locale prefix follows the root redirect: saved choice, then browser language, then English.
+- **The mobile menu keeps its small popover look.** A restyle (tinted active item, wider panel, bolder text) was tried and rejected as less simple; only behaviour fixes and the close icon stayed.
 
 ## Left over
 
@@ -24,6 +27,7 @@ Fixes for things that felt worse than the old SPA once the site ran on Next.js (
 - A language switch still remounts the page, so image fade-ins and entrance animations replay, and the progress bar disappears without its fill-and-fade finish.
 - `404.html` is blank (but themed) until JavaScript runs, and its tab title is English only.
 - The bar's initial creep uses CSS `@starting-style`; a browser without it shows the bar at 90% at once.
+- The mobile menu changes were not seen rendered at phone size.
 - Now unreferenced in `public/`: `cinema-doodle-set_160308-188.svg` and `.jpg`, `cinema-film-remove-svgrepo-com.svg`.
 - CSS variables and the unused catalog keys (`home.events.*`, `events.noUpcoming`, `events.checkBackSoon`) were not audited.
 - Movie, person and article views still keep a not-found branch that the routes never reach.

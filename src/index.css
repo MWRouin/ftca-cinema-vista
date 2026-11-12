@@ -240,6 +240,12 @@
     background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--secondary) / 0.12));
   }
 
+  /* Links in the mobile menu take no hover background: on a touch screen it
+     stays behind the item after a tap. */
+  .nav-link.nav-menu-item:hover {
+    background: none;
+  }
+
   .nav-link:hover::after,
   .nav-link.active::after {
     width: 60%;
@@ -263,13 +269,6 @@
     background: linear-gradient(90deg, transparent, hsl(var(--border) / 0.8), transparent);
     height: 2px;
     box-shadow: 0 1px 2px hsl(var(--foreground) / 0.1);
-  }
-
-  /* Mobile-specific improvements for dark theme */
-  @media (max-width: 768px) {
-    .dark .nav-link:hover {
-      background: linear-gradient(135deg, hsl(var(--primary) / 0.18), hsl(var(--secondary) / 0.18));
-    }
   }
 
   /* Light theme specific improvements */

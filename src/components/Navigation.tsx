@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageToggle } from './LanguageToggle';
 import { Logo } from './Logo';
@@ -61,6 +61,16 @@ export function Navigation() {
     };
   }, [isHome]);
 
+  // Escape closes the mobile menu, as it does for any popover.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen]);
+
   const navItems = [
     { key: 'home', path: '/' },
     { key: 'movies', path: '/movies' },
@@ -87,7 +97,10 @@ export function Navigation() {
             <LocalLink
               to="/"
               className="flex items-center space-x-3"
-              onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+              onClick={() => {
+                setIsOpen(false);
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+              }}
             >
               <Logo
                 size={50}
@@ -127,8 +140,13 @@ export function Navigation() {
               className="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-colors group bg-transparent"
               aria-label={t('a11y.toggleMenu')}
               aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
-              <Menu className={`w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-primary'} ${isOpen ? 'rotate-90' : ''}`} />
+              {/* Both icons are stacked and cross-fade, so the button turns into a close button. */}
+              <span className={`relative w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-primary'}`}>
+                <Menu className={`absolute inset-0 w-5 h-5 transition-[transform,opacity] duration-300 ${isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`} />
+                <X className={`absolute inset-0 w-5 h-5 transition-[transform,opacity] duration-300 ${isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
+              </span>
             </button>
           </div>
         </div>
@@ -146,8 +164,12 @@ export function Navigation() {
         />
       )}
 
-      {/* Mobile Navigation — a theme-aware popover panel matching the site UI. */}
+      {/* Mobile Navigation — a theme-aware popover panel matching the site UI.
+          `inert` while closed: the panel is only faded out, and its links must
+          not take keyboard focus or be read out. */}
       <div
+        id="mobile-menu"
+        inert={!isOpen}
         className={
           `lg:hidden fixed top-16 right-3 z-40 w-fit origin-top-right transition-all duration-200 ${isOpen
             ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
@@ -157,7 +179,7 @@ export function Navigation() {
         <div className="overflow-hidden rounded-md border border-border bg-card/95 shadow-xl backdrop-blur-md">
           {/* accent hairline */}
           <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-          <div className="p-2 max-h-[calc(100vh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-0.5">
+          <div className="p-2 max-h-[calc(100dvh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-0.5">
             {navItems.map((item, index) => {
               const active = isActive(item.path);
               return (
@@ -166,7 +188,8 @@ export function Navigation() {
                   to={item.path}
                   onClick={() => setIsOpen(false)}
                   style={{ transitionDelay: isOpen ? `${index * 40}ms` : '0ms' }}
-                  className={`nav-link group relative flex items-center justify-center rounded-sm px-6 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
+                  aria-current={active ? 'page' : undefined}
+                  className={`nav-link nav-menu-item group relative flex items-center justify-center rounded-sm px-6 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
                     ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3'}
                     ${active ? 'text-primary active' : 'text-foreground/80 hover:text-primary'}`}
                 >
