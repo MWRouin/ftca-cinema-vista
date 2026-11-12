@@ -22,5 +22,27 @@
     "switchTo": "Switch to {{language}}",
     "en": "English",
     "fr": "Français"
+  },
+  "theme": {
+    "switchTo": "Switch to {{mode}} mode",
+    "current": "Theme: {{mode}}",
+    "light": "light",
+    "dark": "dark",
+    "system": "system"
+  },
+  "share": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "share": "Share",
+    "copyLink": "Copy link"
+  },
+  "a11y": {
+    "toggleMenu": "Toggle menu",
+    "close": "Close",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "galleryPhoto": "Event gallery photo {{number}}",
+    "fullSizePreview": "Full size preview",
+    "viewOnMaps": "View location on Google Maps"
   }
 }

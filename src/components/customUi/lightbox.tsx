@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { LightboxState } from "@/hooks/useLightbox";
 
 /**
@@ -15,6 +16,8 @@ export function LightboxOverlay({
   onClose: () => void;
   children: ReactNode;
 }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     // Hide the page scrollbar; pad the body so content doesn't shift.
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -40,7 +43,7 @@ export function LightboxOverlay({
     >
       <button
         onClick={onClose}
-        aria-label="Close"
+        aria-label={t("a11y.close")}
         className="absolute top-4 right-4 z-10 text-white bg-white/10 hover:bg-white/20 p-2 rounded-full"
       >
         <X />
@@ -53,6 +56,7 @@ export function LightboxOverlay({
 
 /** Full-screen media overlay; renders nothing until an image or video is opened. */
 export function Lightbox({ state }: { state: LightboxState }) {
+  const { t } = useTranslation();
   if (!state.media) return null;
   const { type, src } = state.media;
   return (
@@ -60,7 +64,7 @@ export function Lightbox({ state }: { state: LightboxState }) {
       {type === "image" ? (
         <img
           src={src}
-          alt="Full size preview"
+          alt={t("a11y.fullSizePreview")}
           className="max-w-full max-h-full object-contain select-none"
           onClick={(e) => e.stopPropagation()}
         />

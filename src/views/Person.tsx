@@ -1,0 +1,95 @@
+'use client';
+
+import { useParams } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
+import { BackButton } from '@/components/customUi/back-button';
+import { PageContainer } from '@/components/customUi/page-container';
+import { Badge } from '@/components/ui/badge';
+import { DEFAULT_PERSON_IMAGE, getPersonById } from '@/data/people';
+import { getFilmography, isPersonPublic } from '@/data/movies';
+import { getArticlesByPerson } from '@/data/blog';
+import { LazyImage } from '@/components/customUi/lazy-image';
+import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
+import { ArticleCard } from '@/components/customUi/article-card';
+import { ElementTitle } from '@/components/customUi/element-title';
+import { slugify } from '@/lib/utils';
+import { decodeParam } from '@/lib/route-params';
+import NotFound from './NotFound';
+
+export default function Person() {
+  const id = decodeParam(useParams<{ id: string }>().id);
+  const { t } = useTranslation('person');
+
+  const person = getPersonById(id);
+
+  /* ---------- Not found / non-public ---------- */
+  if (!person || !isPersonPublic(person.id)) return <NotFound />;
+
+  const filmography = getFilmography(person.id);
+  const articles = getArticlesByPerson(person.id);
+  const roleLabel = person.membership?.role
+    ? t(`roles.${slugify(person.membership.role)}`, { ns: 'about', defaultValue: person.membership.role })
+    : undefined;
+  // English bio lives in people.json; FR override (if any) lives in about.json.
+  const bio = t(`members.${person.id}.bio`, { ns: 'about', defaultValue: person.bio?.en ?? '' });
+
+  return (
+      <PageContainer py={8}>
+          {/* Back */}
+          <BackButton to="/about" label={t('back')} />
+
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-12">
+            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 bg-muted">
+              <LazyImage
+                src={person.image || DEFAULT_PERSON_IMAGE}
+                alt={person.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="text-center sm:text-start space-y-3">
+              <ElementTitle title={person.name} />
+              {roleLabel && (
+                <div className="flex justify-center sm:justify-start">
+                  <Badge>{roleLabel}</Badge>
+                </div>
+              )}
+              {bio && <p className="text-lg text-muted-foreground max-w-2xl">{bio}</p>}
+            </div>
+          </div>
+
+          {/* Filmography */}
+          <section>
+            <h2 className="text-3xl font-bold mb-8">{t('filmography')}</h2>
+            {filmography.length === 0 ? (
+              <p className="text-muted-foreground">{t('noFilmography')}</p>
+            ) : (
+              <MovieGrid>
+                {filmography.map(({ movie, roles }) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    badges={roles.map((role) => ({
+                      label: t(`roles.${role === 'actor' && person.gender === 'female' ? 'actress' : role}`, { ns: 'movie', defaultValue: role }),
+                      variant: 'outline',
+                    }))}
+                  />
+                ))}
+              </MovieGrid>
+            )}
+          </section>
+
+          {/* Articles written by this person (only when they have any) */}
+          {articles.length > 0 && (
+            <section className="mt-16">
+              <h2 className="text-3xl font-bold mb-8">{t('articles')}</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {articles.map((article) => (
+                  <ArticleCard key={article.slug} article={article} variant="compact" />
+                ))}
+              </div>
+            </section>
+          )}
+      </PageContainer>
+  );
+}

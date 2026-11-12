@@ -22,5 +22,27 @@
     "switchTo": "Passer en {{language}}",
     "en": "English",
     "fr": "Français"
+  },
+  "theme": {
+    "switchTo": "Passer au mode {{mode}}",
+    "current": "Thème : {{mode}}",
+    "light": "clair",
+    "dark": "sombre",
+    "system": "système"
+  },
+  "share": {
+    "copy": "Copier",
+    "copied": "Copié",
+    "share": "Partager",
+    "copyLink": "Copier le lien"
+  },
+  "a11y": {
+    "toggleMenu": "Ouvrir ou fermer le menu",
+    "close": "Fermer",
+    "previousImage": "Image précédente",
+    "nextImage": "Image suivante",
+    "galleryPhoto": "Photo de l’événement {{number}}",
+    "fullSizePreview": "Aperçu en taille réelle",
+    "viewOnMaps": "Voir l’emplacement sur Google Maps"
   }
 }

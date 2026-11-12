@@ -1,0 +1,46 @@
+[
+  {
+    "id": "ydour",
+    "title": "Ydour – يدور",
+    "description": "Projection et discussion – un rassemblement pour la communauté du cinéma amateur à Tunis.",
+    "date": "2025-02-22",
+    "time": "18:30",
+    "location": "Café culturel LIBER'THÉ",
+    "image": "__BASE_URL__/events/ydour/ydour-title.jpg",
+    "status": "past",
+    "public": true
+  },
+  {
+    "id": "films-de-hammamlif",
+    "title": "Films de Hammam-Lif",
+    "description": "Projection et exposition – hommage à la culture cinématographique de Hammam-Lif au Complexe Culturel Ali Ben Ayed.",
+    "date": "2025-12-27",
+    "time": "16:30",
+    "location": "Complexe Culturel Ali Ben Ayed",
+    "image": "__BASE_URL__/events/FilmsDeHammamLif/FilmsDeHammamLif-title.jpg",
+    "status": "past",
+    "public": true
+  },
+  {
+    "id": "afterwork-movienight",
+    "title": "Afterwork - Movie Night",
+    "description": "An intimate film screening and discussion experience by the Hammam-Lif Amateur Filmmakers' Club at Day One. A space to explore the ideas and process behind each film.",
+    "date": "2026-01-28",
+    "time": "19:00",
+    "location": "Espace culturel DayOne",
+    "image": "__BASE_URL__/events/afterworkMovienight/hero.jpg",
+    "status": "past",
+    "public": true
+  },
+  {
+    "id": "ydour-v2",
+    "title": "Ydour - يدور (2nd Edition)",
+    "description": "Second edition of YDOUR: a space for amateur cinema. Screenings, Workshops, Exhibition, Music.",
+    "date": "2026-05-15",
+    "time": "18:00",
+    "location": "Espace culturel L'Écurie",
+    "image": "__BASE_URL__/events/ydour2/ydour2.webp",
+    "status": "past",
+    "public": true
+  }
+]
