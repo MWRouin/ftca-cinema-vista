@@ -40,8 +40,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload dist folder
-          path: './dist'
+          # Next.js static export
+          path: './out'
 
   # Deploy the already-built artifact. Kept separate so re-running a flaky
   # deploy never re-uploads the artifact (the cause of the
