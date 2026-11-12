@@ -42,17 +42,17 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 
 ## Module map
 
-Each module gets its own `AGENTS.md` (read when you work in that folder), plus a one-line `CLAUDE.md` containing `@AGENTS.md` so Claude Code loads it too. Not all exist yet; they are added as modules are ported or refactored.
+Each module gets its own `AGENTS.md` (read when you work in that folder), plus a one-line `CLAUDE.md` containing `@AGENTS.md` so Claude Code loads it too.
 
 | Module | Purpose | AGENTS.md |
 |---|---|---|
 | `src/data/` | Movies, people, blog content and helpers | [done](src/data/AGENTS.md) |
 | `src/i18n/` | Locales, translation catalogs, locale routing helpers | [done](src/i18n/AGENTS.md) |
 | `src/lib/metadata/` | SEO constants, page metadata and JSON-LD | [done](src/lib/metadata/AGENTS.md) |
-| `src/components/customUi/` | Shared presentational components | to add |
-| `src/components/ui/` | shadcn primitives | to add |
+| `src/components/customUi/` | Shared presentational components | [done](src/components/customUi/AGENTS.md) |
+| `src/components/ui/` | shadcn primitives | [done](src/components/ui/AGENTS.md) |
 | `src/app/` | Next.js routes, layouts, 404 and root redirect | [done](src/app/AGENTS.md) |
-| `src/views/` | Page UI components (client) used by the routes | to add |
+| `src/views/` | Page UI components (client) used by the routes | [done](src/views/AGENTS.md) |
 
 ## Documentation workflow
 
