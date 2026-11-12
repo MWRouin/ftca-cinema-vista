@@ -4,7 +4,7 @@ Website of the Hammam-Lif Amateur Filmmakers Club (FTCA): films, events, blog, m
 
 ## Current state
 
-Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Vite app (`src/App.tsx`, `src/views/`) still builds while pages are ported into the Next.js app (`src/app/`). Milestones M1 (scaffold) and M2 (parity baseline) are done; see the plan for the rest.
+Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix), being migrated to **Next.js App Router with static export**. See [docs/plans/84-migrate-to-nextjs.md](docs/plans/84-migrate-to-nextjs.md) (issue #84, branch `84-migrate-to-nextjs`). The Vite app (`src/App.tsx`, `src/views/`) still builds while pages are ported into the Next.js app (`src/app/`). Milestones M1, M2, M4, M5 and M6 are done; M3 (shell and routing) and the page ports are next; see the plan.
 
 ## Commands
 
@@ -20,11 +20,13 @@ Vite + React 19 + TypeScript SPA (react-router, i18next, Tailwind, shadcn/Radix)
 
 - **Commits:** a single title line only. No body, no `Co-Authored-By` line. Commit only when asked.
 - **Warnings:** don't mute tooling warnings (Browserslist, npm audit, etc.). Fix the cause or leave them visible and mention them.
+- **Agent memory lives in the repo.** Don't use Claude's filesystem auto-memory (`~/.claude*/projects/*/memory`). Record durable guidance here in `AGENTS.md` (or in the relevant module's `AGENTS.md`), plans in `docs/plans/`, history in `docs/sprints/`.
 - **Package manager:** npm only (`package-lock.json`). There is no bun/yarn lockfile.
 - **URLs:** every page is locale-prefixed with a trailing slash (`/en/movies/`, `/fr/movies/`). Un-prefixed URLs redirect to a locale. Use `LocalLink`/`localizePath`, not raw paths.
 - **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`.
 - **Posters:** 2:3 portrait, 1000×1500 is the common size. Reduce dimensions rather than compressing further. Crop to 2:3.
 - **Person portraits:** square, saved in `public/Members/`.
+- **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font was fixed by preloading the above-the-fold woff2 files (`preloadCriticalFonts` plugin in `vite.config.ts`, patterns in `CRITICAL_FONT_PATTERNS`). If the hero's font family/weight changes, update the patterns. Under Next.js this should be replaced by `next/font` (milestone M3).
 - **Pronouns and gender in data:** `gender` on a person only selects the actor/actress label; never infer it elsewhere.
 
 ## Data rules worth knowing
@@ -40,8 +42,8 @@ Each module gets its own `AGENTS.md` (read when you work in that folder), plus a
 
 | Module | Purpose | AGENTS.md |
 |---|---|---|
-| `src/data/` | Movies, people, blog content and helpers | to add |
-| `src/i18n/` | Locales, translation catalogs, locale routing helpers | to add |
+| `src/data/` | Movies, people, blog content and helpers | [done](src/data/AGENTS.md) |
+| `src/i18n/` | Locales, translation catalogs, locale routing helpers | [done](src/i18n/AGENTS.md) |
 | `src/lib/metadata/` | SEO constants and page metadata | to add |
 | `src/components/customUi/` | Shared presentational components | to add |
 | `src/components/ui/` | shadcn primitives | to add |
@@ -53,8 +55,9 @@ Each module gets its own `AGENTS.md` (read when you work in that folder), plus a
 Agents working here keep the docs current as part of the work:
 
 - **Plans** go in `docs/plans/<issue#>-<name>.md` (milestone-level, with a status line) before large work starts.
-- **Sprint log:** when a body of work or a PR is wrapped up, add a log to `docs/sprints/` and its row to `docs/README.md`. Claude Code has this as the `sprint-log` skill (`.claude/skills/sprint-log/`); other agents follow the template in `docs/README.md`.
+- **Sprint log:** when a body of work or a PR is wrapped up, add a log to `docs/sprints/` and its row to `docs/README.md`. Write it before committing so it lands in the same commit; if it was forgotten and the last commit is unpushed, amend it in. Don't cite the amended commit's own hash in the log (say "this commit"). Claude Code has this as the `sprint-log` skill (`.claude/skills/sprint-log/`); other agents follow the template in `docs/README.md`.
 - **Module docs:** when you add, port, restructure or remove a module, write or update its `AGENTS.md` (and the one-line `CLAUDE.md` import) and the module map above. Claude Code has this as the `module-docs` skill (`.claude/skills/module-docs/`).
+- **These instructions and skills are living documents.** Improve `AGENTS.md`, module `AGENTS.md` files and the skills in `.claude/skills/` when you find a gap, a wrong or stale statement, or a step that kept getting forgotten. Keep edits small and mention them to the user.
 - Don't duplicate what the code already says, and don't commit docs unless asked.
 
 ## Docs

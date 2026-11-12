@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next'
 import MetaHeader from '@/lib/metadata/metadata'
 import { PAGE_SEO } from '@/lib/metadata/seo-constants'
 import { LocalLink } from '@/i18n/locale'
+import { BASE_URL } from '@/lib/base-path';
 
 export default function Palmares() {
   const { t } = useTranslation('static')
-  const BASE = import.meta.env.BASE_URL || "/"
   return (
     <>
       <MetaHeader {...PAGE_SEO.palmares} />
@@ -18,7 +18,7 @@ export default function Palmares() {
         <div className="text-center space-y-12">
           {/* Trophy — Twemoji SVG (same image across all browsers) */}
           <img
-            src={`${BASE}palmares-trophy.svg`}
+            src={`${BASE_URL}palmares-trophy.svg`}
             alt={t('palmares.trophyAlt')}
             className="w-44 h-44 mx-auto drop-shadow-md"
             width={176}

@@ -1,5 +1,6 @@
 import rawMovies from "./movies.json"
 import { getPersonById, getPeople, type Person } from "./people"
+import { resolveAssetUrl } from "@/lib/base-path"
 
 /** A role in the making of a film. Crew roles are filled in per-movie over time. */
 export type CreditRole =
@@ -47,19 +48,10 @@ export type Movie = {
     playerVisible: boolean;
 };
 
-// Optional chaining keeps this safe under Node (tsx) where Vite's
-// `import.meta.env` is undefined — build scripts import these helpers.
-const BASE = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL || "/";
-
-function ResolveAssetUrl(url: string): string {
-    if (!url.startsWith("__BASE_URL__/")) return url;
-    return url.replace("__BASE_URL__/", BASE);
-}
-
 function MovieFromJsonObject(jsonObject: Movie): Movie {
     return {
         ...jsonObject,
-        image: jsonObject.image ? ResolveAssetUrl(jsonObject.image) : "",
+        image: jsonObject.image ? resolveAssetUrl(jsonObject.image) : "",
         credits: Array.isArray(jsonObject.credits) ? jsonObject.credits : [],
         public: jsonObject.public ? jsonObject.public : false,
         playerVisible: jsonObject.playerVisible ?? false,

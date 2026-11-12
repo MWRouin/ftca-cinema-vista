@@ -12,6 +12,7 @@ import { getMembers, getHonoraryMembers } from '@/data/people';
 import { isPersonPublic } from '@/data/movies';
 import { LocalLink } from '@/i18n/locale';
 import { slugify } from '@/lib/utils';
+import { BASE_URL } from '@/lib/base-path';
 
 function TeamSection({ teamMembers }) {
   const { t } = useTranslation('about');
@@ -20,9 +21,7 @@ function TeamSection({ teamMembers }) {
   // Decide which members to show based on showAll state
   const membersToShow = showAll ? teamMembers : teamMembers.slice(0, 12);
 
-  const BASE = import.meta.env.BASE_URL || "/";
-
-  const defaultUserImage = `${BASE}Members/user.png`;
+  const defaultUserImage = `${BASE_URL}Members/user.png`;
 
   return (
     <section>
@@ -111,8 +110,6 @@ function OldMembersSection({ oldMembers }) {
 export default function About() {
   const { t } = useTranslation('about');
 
-  const BASE = import.meta.env.BASE_URL || "/";
-
   // Active club members, sourced from the shared people registry. The English
   // bio is passed as the i18n defaultValue (FR overrides live in about.json).
   const teamMembers = getMembers().map((p) => ({
@@ -186,7 +183,7 @@ export default function About() {
             <div>
               <div className="rounded-lg overflow-hidden">
                 <LazyImage
-                  src={`${BASE}About/ydour_web_optimized.jpg`}
+                  src={`${BASE_URL}About/ydour_web_optimized.jpg`}
                   alt={t('mission.imageAlt')}
                   className="w-full h-full object-cover"
                 />

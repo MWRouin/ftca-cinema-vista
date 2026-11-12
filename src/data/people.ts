@@ -1,4 +1,5 @@
 import rawPeople from "./people.json";
+import { resolveAssetUrl } from "@/lib/base-path";
 
 /** Per-locale text. `ar` to be added with the Next.js rebuild. */
 export type LocalizedText = { en?: string; fr?: string };
@@ -26,17 +27,6 @@ export type Person = {
     /** Whether the person has a public /people/:id page (Phase 2). */
     public?: boolean;
 };
-
-// Lazily-evaluated base path. Optional chaining keeps this safe in Node (tsx)
-// where Vite's `import.meta.env` is undefined — the people registry is imported
-// by build scripts as well as the app.
-const BASE = (import.meta as { env?: { BASE_URL?: string } }).env?.BASE_URL || "/";
-
-function resolveAssetUrl(url: string | undefined): string | undefined {
-    if (!url) return url;
-    if (!url.startsWith("__BASE_URL__/")) return url;
-    return url.replace("__BASE_URL__/", BASE);
-}
 
 function personFromJson(raw: Person): Person {
     return { ...raw, image: resolveAssetUrl(raw.image) };

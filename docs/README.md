@@ -42,6 +42,7 @@ Template:
 | [2026-11-movie-data-and-docs](sprints/2026-11-movie-data-and-docs.md) | Movie data fixes, crew credits, gender labels, cleanup, docs structure |
 | [2026-11-skills-and-synopsis](sprints/2026-11-skills-and-synopsis.md) | Docs skills and rules, Wed Trabelsia synopsis |
 | [2026-11-nextjs-scaffold](sprints/2026-11-nextjs-scaffold.md) | Next.js scaffold (M1), parity baseline (M2) |
+| [2026-11-nextjs-foundations](sprints/2026-11-nextjs-foundations.md) | i18n and data layer (M4), UI primitives check (M5), CI prep (M6) |
 
 ## Module `AGENTS.md` files
 

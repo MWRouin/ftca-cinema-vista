@@ -15,4 +15,6 @@ Write a short log of what was done since the previous one, following the templat
    - *Left over:* open items and where each is tracked (issue, plan milestone). Include known caveats you noticed.
 4. **Confirm.** Show the draft's Decisions and Left over sections to the user and ask what's missing or wrong before finalising. Don't invent reasons for decisions you can't find in the conversation or history; mark them as unknown instead.
 5. **Update the index:** add a row to the sprint table in `docs/README.md`, and update the status in the plans table if a plan changed.
-6. Keep it short (about one screen). Don't commit unless asked; when asked, the commit message is a single title line with no body and no co-author line.
+6. **Timing:** write the log before committing the work, so it lands in the same commit. If the work is already committed and unpushed, amend the log into the last commit. Don't cite the hash of the commit that will contain the log (it changes on amend); say "this commit".
+7. Keep it short (about one screen). Don't commit unless asked; when asked, the commit message is a single title line with no body and no co-author line.
+8. If this procedure missed something or got in the way, improve this skill (see `AGENTS.md`).

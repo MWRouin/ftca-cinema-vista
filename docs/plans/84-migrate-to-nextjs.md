@@ -28,9 +28,9 @@ Each milestone is a goal only. The how and the implementation details are decide
 
 **Wave 2: shared layer (parallel, after M1)**
 - **M3. Shell and routing:** root layout, theme, navigation and footer, fonts, global CSS, locale segment routing, the `/` locale redirect and the 404 page.
-- **M4. i18n and data layer:** locale-aware translation setup, and making `src/data` and `seo-constants` framework-agnostic (remove `import.meta.env`) so Next and the content stay decoupled.
-- **M5. UI primitives check:** verify the Radix, Embla, lightbox and lucide components work as client components.
-- **M6. CI/CD prep:** update the deploy workflow and base path and domain handling for the new output, ready to switch at cutover.
+- **M4. i18n and data layer** (done): i18next kept (same `t()` API), with a framework-agnostic `createI18n`/`getT` for server code and an `I18nProvider` for client components. `import.meta.env` removed from `src/data` and the views via one shared `src/lib/base-path.ts`. The Vite build output is unchanged (parity diff empty).
+- **M5. UI primitives check** (done at build level): Radix Select/Slider, Embla slider, lucide icons and `LazyImage` prerender inside a client page; interactive behaviour still needs a manual check.
+- **M6. CI/CD prep** (done): `.github/workflows/next-build.yml` builds the Next app on this branch and keeps `out/` as an artifact without deploying; the cutover steps are in its header. `deploy.yml` is unchanged until M12.
 
 **Wave 3: page ports (parallel, after M3 + M4 + M5)**
 - **M7. Content pages:** Home, About, Palmarès, Contact.

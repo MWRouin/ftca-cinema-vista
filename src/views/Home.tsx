@@ -9,13 +9,13 @@ import { PAGE_SEO } from '@/lib/metadata/seo-constants';
 import { MovieCard } from '@/components/customUi/movie-card';
 import { LocalLink } from '@/i18n/locale';
 import './home-hero.css';
+import { BASE_URL } from '@/lib/base-path';
 
 export default function Home() {
   const { t } = useTranslation('home');
   const moviesRef = useScrollAnimation();
   const eventsRef = useScrollAnimation();
   const ctaRef = useScrollAnimation();
-  const BASE = import.meta.env.BASE_URL || "/";
 
   const featuredMovies = getMovies().slice(0, 4);
 
@@ -44,7 +44,7 @@ export default function Home() {
         <section
           className="editorial-hero"
           style={{
-            ["--hero-bg-image" as string]: `url(${BASE}Backgrounds/hero-image-hlif.jpg)`,
+            ["--hero-bg-image" as string]: `url(${BASE_URL}Backgrounds/hero-image-hlif.jpg)`,
           }}
         >
           <div className="grain"></div>

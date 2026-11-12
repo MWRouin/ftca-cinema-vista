@@ -1,10 +1,16 @@
-import { SUPPORTED_LOCALES } from "@/i18n/config";
-
-export function generateStaticParams() {
-  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
-}
+import { isLocale } from "@/i18n/config";
+import { getT } from "@/i18n/instance";
+import { NavSample } from "./nav-sample";
 
 export default async function LocaleHome({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return <main className="p-8">Next.js scaffold ({locale})</main>;
+  if (!isLocale(locale)) return null;
+  const t = getT(locale);
+  return (
+    <main className="p-8">
+      <p>Next.js scaffold ({locale})</p>
+      <p data-testid="server-t">{t("nav.home")}</p>
+      <NavSample />
+    </main>
+  );
 }

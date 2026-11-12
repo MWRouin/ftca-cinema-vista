@@ -14,14 +14,14 @@ import { ElementTitle } from '@/components/customUi/element-title';
 import MetaHeader from '@/lib/metadata/metadata';
 import { SITE_URL, SITE_NAME_FULL, DEFAULT_PERSON_OG_IMAGE } from '@/lib/metadata/seo-constants';
 import { slugify } from '@/lib/utils';
+import { BASE_URL } from '@/lib/base-path';
 
 export default function Person() {
   const { id } = useParams();
   const { t } = useTranslation('person');
 
   const person = id ? getPersonById(id) : undefined;
-  const BASE = import.meta.env.BASE_URL || '/';
-  const defaultUserImage = `${BASE}Members/user.png`;
+  const defaultUserImage = `${BASE_URL}Members/user.png`;
 
   /* ---------- Not found / non-public ---------- */
   if (!person || !isPersonPublic(person.id)) {
