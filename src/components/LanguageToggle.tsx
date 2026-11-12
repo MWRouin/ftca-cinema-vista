@@ -1,11 +1,13 @@
 "use client";
 
+import { useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { GB, FR } from "country-flag-icons/react/3x2";
 
 import { useLocale } from "@/i18n/locale";
 import { localizePath, stripLocale, LOCALE_STORAGE_KEY, type Locale } from "@/i18n/config";
+import { useReportNavigation } from "@/lib/navigation-progress";
 
 // Flag per locale. English uses the Union Jack (the common "English language"
 // convention); swap GB → US here if you prefer the US flag. Typed from the
@@ -26,6 +28,9 @@ export function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
+  // The transition stays pending until the other locale's page has loaded.
+  const [switching, startSwitch] = useTransition();
+  useReportNavigation(switching);
 
   const next: Locale = locale === "en" ? "fr" : "en";
   const Flag = FLAGS[locale];
@@ -38,10 +43,12 @@ export function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
       /* storage unavailable (private mode); navigation still works */
     }
     // scroll: false keeps the reader's position, as a language switch isn't a page change.
-    router.push(
-      localizePath(neutralPath, next) + window.location.search + window.location.hash,
-      { scroll: false },
-    );
+    startSwitch(() => {
+      router.push(
+        localizePath(neutralPath, next) + window.location.search + window.location.hash,
+        { scroll: false },
+      );
+    });
   };
 
   const buttonClass = onDark ? "text-white" : "text-primary";

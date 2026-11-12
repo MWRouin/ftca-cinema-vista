@@ -20,12 +20,11 @@ import {
 import { ElementTitle } from '@/components/customUi/element-title';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
-import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { PersonLink } from '@/components/customUi/person-link';
 import { useLocale } from '@/i18n/locale';
-import { publicUrl } from '@/lib/base-path';
 import { decodeParam } from '@/lib/route-params';
+import NotFound from './NotFound';
 
 /** A credit's name, linked to the person's page when they have one. */
 function CreditLink({ credit }: { credit: Credit }) {
@@ -55,22 +54,7 @@ export default function MoviePlayer() {
   const relatedMoviesByGenre = movie ? getRelatedMoviesByGenre(movie, 3) : [];
 
   /* ---------- Not found ---------- */
-  if (!movie) {
-    return (
-      <NotFoundCard
-        image={
-          <img
-            src={publicUrl("cinema-film-remove-svgrepo-com.svg")}
-            alt={t('notFoundAlt')}
-            className="mx-auto mb-6 h-48 opacity-80"
-          />
-        }
-        title={t('notFoundTitle')}
-        description={t('notFoundDesc')}
-        action={<BackButton to="/movies" label={t('backToMovies')} className="mb-0" />}
-      />
-    );
-  }
+  if (!movie) return <NotFound />;
 
   const directors = getDirectors(movie);
   const cast = getCast(movie);

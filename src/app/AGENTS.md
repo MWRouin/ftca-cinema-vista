@@ -6,7 +6,9 @@ Next.js App Router, static export (`output: 'export'`, trailing slashes). Every 
 
 - `[locale]/layout.tsx`: the root layout for all pages. Owns `<html lang dir>`, fonts, the theme script, and wraps `ThemeProvider`, `I18nProvider` and the site `Layout` (navigation, footer).
 - `(root)/`: second root layout for URLs without a locale prefix: `/` and the legacy deep links (`/movies/`, `/movies/<id>/`, …). They only render `LocaleRedirect`.
-- `global-not-found.tsx`: produces `404.html` (needs `experimental.globalNotFound`).
+- `global-not-found.tsx`: produces `404.html` (needs `experimental.globalNotFound`), the one file GitHub Pages serves for every unknown URL. Its static HTML is empty apart from a `<noscript>` fallback; `views/GlobalNotFound` picks the locale from the URL in the browser and renders the site shell around `views/NotFound`.
+- `[locale]/not-found.tsx`: the same `views/NotFound` for a `notFound()` call inside the locale tree. With `dynamicParams = false` and a static export, that is only reached in `npm run dev`; in production an unknown URL always gets `404.html`.
+- Every unknown URL gets the same generic message (`views/NotFound`); there are deliberately no per-section "movie not found" pages.
 - There is intentionally no `app/layout.tsx`; two root layouts keep `lang` correct per locale.
 
 ## Porting a page

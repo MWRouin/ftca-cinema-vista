@@ -50,6 +50,7 @@ Template:
 | [2026-11-nextjs-seo](sprints/2026-11-nextjs-seo.md) | Metadata, JSON-LD, sitemap, legacy redirects (M10) |
 | [2026-11-nextjs-cleanup-cutover](sprints/2026-11-nextjs-cleanup-cutover.md) | Vite removal (M11), deploy switch and final parity (M12) |
 | [2026-11-code-cleanup](sprints/2026-11-code-cleanup.md) | Post-migration scan: bug fixes, dead code, duplicated data and strings |
+| [2026-11-navigation-polish](sprints/2026-11-navigation-polish.md) | Theme flicker and scroll fixes, navigation progress bar, localized 404, unused CSS |
 
 ## Module `AGENTS.md` files
 

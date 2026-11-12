@@ -1,7 +1,4 @@
 {
-  "notFoundTitle": "Movie not found",
-  "notFoundDesc": "The movie you are looking for does not exist.",
-  "notFoundAlt": "Movie not found",
   "backToMovies": "← Back to Movies",
   "director": "Director",
   "cast": "Actors",

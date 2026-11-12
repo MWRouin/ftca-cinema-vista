@@ -167,26 +167,6 @@
     transform: translateY(0);
   }
 
-  .animate-on-scroll-delay {
-    transition-delay: 0.2s;
-  }
-
-  .animate-on-scroll-delay-1 {
-    transition-delay: 0.2s;
-  }
-
-  .animate-on-scroll-delay-2 {
-    transition-delay: 0.4s;
-  }
-
-  .animate-on-scroll-delay-3 {
-    transition-delay: 0.6s;
-  }
-
-  .animate-on-scroll-delay-4 {
-    transition-delay: 0.8s;
-  }
-
   /* Cinematic gradients */
   .gradient-cinema {
     background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 50%, hsl(var(--primary) / 0.8) 100%);
@@ -197,10 +177,6 @@
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.3) 100%);
   }
 
-  .gradient-subtle {
-    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted) / 0.5) 100%);
-  }
-
   /* Enhanced hover effects */
   .hover-lift {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -209,49 +185,6 @@
   .hover-lift:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 40px hsl(var(--primary) / 0.15);
-  }
-
-  .hover-glow {
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hover-glow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .hover-glow:hover::before {
-    left: 100%;
-  }
-
-  /* Text animations */
-  .text-shimmer {
-    background: linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--primary)), hsl(var(--foreground)));
-    background-size: 200% 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s ease-in-out infinite;
-  }
-
-  @keyframes shimmer {
-
-    0%,
-    100% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
   }
 
   /* Button enhancements */
@@ -283,22 +216,6 @@
     left: 100%;
   }
 
-  /* Card enhancements with better visual separation */
-  .card-cinema {
-    background: hsl(var(--card) / 0.95);
-    backdrop-filter: blur(10px);
-    border: 1px solid hsl(var(--border) / 0.8);
-    box-shadow: 0 2px 8px hsl(var(--primary) / 0.05), 0 1px 3px hsl(var(--foreground) / 0.1);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .card-cinema:hover {
-    background: hsl(var(--card));
-    border-color: hsl(var(--primary) / 0.4);
-    box-shadow: 0 8px 32px hsl(var(--primary) / 0.15), 0 4px 16px hsl(var(--foreground) / 0.1);
-    transform: translateY(-2px);
-  }
-
   /* Navigation enhancements with better contrast */
   .nav-link {
     position: relative;
@@ -328,23 +245,6 @@
     width: 60%;
   }
 
-  /* Loading states */
-  .loading-shimmer {
-    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--accent)) 50%, hsl(var(--muted)) 75%);
-    background-size: 200% 100%;
-    animation: loading-shimmer 1.5s infinite;
-  }
-
-  @keyframes loading-shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
   /* Focus states for accessibility */
   /* Show focus ring only for keyboard users (focus-visible).
      Prevents persistent outline after mouse click while keeping accessibility. */
@@ -367,96 +267,57 @@
 
   /* Mobile-specific improvements for dark theme */
   @media (max-width: 768px) {
-    .dark .card-cinema {
-      background: hsl(var(--card) / 0.9);
-      border: 1px solid hsl(var(--border) / 0.6);
-      box-shadow: 0 4px 12px hsl(var(--background) / 0.8);
-    }
-
-    .dark .gradient-subtle {
-      background: linear-gradient(135deg, hsl(var(--card) / 0.8) 0%, hsl(var(--muted) / 0.3) 100%);
-    }
-
     .dark .nav-link:hover {
       background: linear-gradient(135deg, hsl(var(--primary) / 0.18), hsl(var(--secondary) / 0.18));
     }
   }
 
   /* Light theme specific improvements */
-  .light .gradient-subtle {
-    background: linear-gradient(135deg, hsl(var(--card) / 0.9) 0%, hsl(var(--secondary) / 0.7) 100%);
-    border: 1px solid hsl(var(--border) / 0.6);
-  }
-
   .light .gradient-dark {
     background: linear-gradient(135deg, hsl(var(--secondary) / 0.3) 0%, hsl(var(--muted) / 0.5) 100%);
   }
 
-  /* globals.css */
-  .bg-texture {
-    background-image: url("/cinema-doodle-set_160308-188.svg");
-    background-attachment: scroll;
-    background-repeat: repeat;
-    background-position: top;
-    background-size: 100%;
-    /* if baked into SVG */
+  /* Page navigation progress bar (components/NavigationProgress). It creeps
+     towards the right edge without reaching it, as the real duration is
+     unknown; when the page arrives it fills the rest and fades out. Both steps
+     are transitions, so the finish continues from wherever the bar was. */
+  .nav-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    height: 3px;
+    background: hsl(var(--primary));
+    transform: scaleX(0.9);
+    transform-origin: left;
+    pointer-events: none;
+    transition: transform 10s cubic-bezier(0.1, 0.7, 0.2, 1);
   }
 
-  @keyframes fadeSlideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-16px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  @starting-style {
+    .nav-progress {
+      transform: scaleX(0);
     }
   }
 
-  @keyframes grain {
-
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-
-    25% {
-      transform: translate(-2%, -3%);
-    }
-
-    50% {
-      transform: translate(1%, 2%);
-    }
-
-    75% {
-      transform: translate(3%, -1%);
-    }
+  .nav-progress-done {
+    transform: scaleX(1);
+    opacity: 0;
+    transition: transform 200ms ease-out, opacity 200ms ease-in 200ms;
   }
 
-  @keyframes scrollPulse {
+  [dir="rtl"] .nav-progress {
+    transform-origin: right;
+  }
 
-    0%,
-    100% {
-      opacity: 0.3;
-      transform: scaleY(1);
+  @media (prefers-reduced-motion: reduce) {
+    .nav-progress {
+      transition: none;
     }
 
-    50% {
-      opacity: 1;
-      transform: scaleY(1.15);
+    .nav-progress-done {
+      transition: opacity 200ms ease-in;
     }
   }
 

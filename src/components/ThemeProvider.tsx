@@ -1,85 +1,96 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useLayoutEffect, useSyncExternalStore } from 'react';
 
 type Theme = 'dark' | 'light' | 'system';
 type ResolvedTheme = 'dark' | 'light';
 
-interface ThemeProviderContextType {
-  theme: Theme;
-  // The actual theme applied to the document, with 'system' resolved to the OS preference.
-  resolvedTheme: ResolvedTheme;
-  setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
-};
+const STORAGE_KEY = 'theme';
+const DARK_QUERY = '(prefers-color-scheme: dark)';
 
-const ThemeProviderContext = createContext<ThemeProviderContextType | undefined>(undefined);
+// The theme is kept outside React: it belongs to the visitor, not to a
+// component, and the whole tree remounts on a language switch (the locale
+// segment owns <html>). The saved choice lives in localStorage; this copy is
+// only used when storage is unavailable (private mode).
+let fallbackTheme: Theme = 'system';
+const listeners = new Set<() => void>();
 
-const getSystemTheme = (): ResolvedTheme => {
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
+const isTheme = (value: unknown): value is Theme =>
+  value === 'light' || value === 'dark' || value === 'system';
+
+const readTheme = (): Theme => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return isTheme(saved) ? saved : 'system';
+  } catch {
+    return fallbackTheme;
   }
-  return 'light';
 };
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // The first render must match the server's HTML, which cannot know the saved
-  // theme or the OS preference. So start from fixed values and read the real
-  // ones after mount (the inline ThemeScript has already set the page class,
-  // so there is no visual flash).
-  const [theme, setTheme] = useState<Theme>('system');
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>('dark');
-  const [ready, setReady] = useState(false);
+const readSystemTheme = (): ResolvedTheme =>
+  window.matchMedia(DARK_QUERY).matches ? 'dark' : 'light';
 
-  useEffect(() => {
-    setTheme((localStorage.getItem('theme') as Theme) || 'system');
-    setReady(true);
-  }, []);
+const writeTheme = (theme: Theme) => {
+  fallbackTheme = theme;
+  try {
+    localStorage.setItem(STORAGE_KEY, theme);
+  } catch {
+    /* storage unavailable (private mode); the choice lasts for this visit */
+  }
+  listeners.forEach((listener) => listener());
+};
 
-  useEffect(() => {
-    if (!ready) return;
-    const applied = theme === 'system' ? getSystemTheme() : theme;
-    setResolvedTheme(applied);
-
-    const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(applied);
-    localStorage.setItem('theme', theme);
-  }, [theme, ready]);
-
-  // Keep the document in sync when the OS preference changes while in 'system' mode.
-  useEffect(() => {
-    if (!ready || theme !== 'system') return;
-
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      const applied = getSystemTheme();
-      setResolvedTheme(applied);
-      const root = window.document.documentElement;
-      root.classList.remove('light', 'dark');
-      root.classList.add(applied);
-    };
-
-    media.addEventListener('change', handleChange);
-    return () => media.removeEventListener('change', handleChange);
-  }, [theme, ready]);
-
-  // Cycle through light -> dark -> system.
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light');
+// Notifies on a theme change here, in another tab, or in the OS preference.
+const subscribe = (listener: () => void) => {
+  const media = window.matchMedia(DARK_QUERY);
+  listeners.add(listener);
+  media.addEventListener('change', listener);
+  window.addEventListener('storage', listener);
+  return () => {
+    listeners.delete(listener);
+    media.removeEventListener('change', listener);
+    window.removeEventListener('storage', listener);
   };
+};
 
-  return (
-    <ThemeProviderContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
-      {children}
-    </ThemeProviderContext.Provider>
-  );
-}
+// The server cannot know the saved theme or the OS preference, so the static
+// HTML is rendered with these and the real values take over after hydration.
+const getServerTheme = (): Theme => 'system';
+const getServerSystemTheme = (): ResolvedTheme => 'dark';
+
+// Reads the store directly instead of taking the hook's values: while
+// hydrating, those are still the server's.
+const applyThemeClass = () => {
+  const theme = readTheme();
+  const root = window.document.documentElement;
+  root.classList.remove('light', 'dark');
+  root.classList.add(theme === 'system' ? readSystemTheme() : theme);
+};
 
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+  const theme = useSyncExternalStore(subscribe, readTheme, getServerTheme);
+  const systemTheme = useSyncExternalStore(subscribe, readSystemTheme, getServerSystemTheme);
+
+  return {
+    theme,
+    // The actual theme applied to the document, with 'system' resolved to the OS preference.
+    resolvedTheme: theme === 'system' ? systemTheme : theme,
+    setTheme: writeTheme,
+    // Cycle through light -> dark -> system.
+    toggleTheme: () =>
+      writeTheme(theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'),
+  };
 };
+
+/** Keeps the `light`/`dark` class on <html> in sync with the theme. */
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const { resolvedTheme } = useTheme();
+
+  // A layout effect, so the class is in place before the browser paints. The
+  // inline theme script sets it on page load, but React resets the attributes
+  // of <html> when the tree remounts on a language switch, and an effect that
+  // ran after paint would show one frame of the wrong theme.
+  useLayoutEffect(applyThemeClass, [resolvedTheme]);
+
+  return <>{children}</>;
+}

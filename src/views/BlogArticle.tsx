@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import { useParams } from 'next/navigation';
 import { useTranslation, Trans } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
-import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { PersonLink } from '@/components/customUi/person-link';
 import { ElementTitle } from '@/components/customUi/element-title';
@@ -14,6 +13,7 @@ import { LazyImage } from '@/components/customUi/lazy-image';
 import ShareActions from '@/components/customUi/share-actions';
 import { useLocalizedDate } from '@/hooks/useLocalizedDate';
 import { decodeParam } from '@/lib/route-params';
+import NotFound from './NotFound';
 
 /**
  * The article's author, linked to their person page when the name resolves to a
@@ -30,15 +30,7 @@ export default function BlogArticle() {
   const formatDate = useLocalizedDate();
   const article = getBlogArticleBySlug(slug);
 
-  if (!article) {
-    return (
-        <NotFoundCard
-          title={t('notFoundTitle')}
-          description={t('notFoundDesc')}
-          action={<BackButton to="/blog" label={t('backToBlog')} className="mb-0" />}
-        />
-    );
-  }
+  if (!article) return <NotFound />;
 
   return (
       <PageContainer width="4xl" className="2xl:max-w-5xl">

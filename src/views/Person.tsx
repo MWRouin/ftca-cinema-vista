@@ -3,7 +3,6 @@
 import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
-import { NotFoundCard } from '@/components/customUi/not-found-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { Badge } from '@/components/ui/badge';
 import { DEFAULT_PERSON_IMAGE, getPersonById } from '@/data/people';
@@ -15,6 +14,7 @@ import { ArticleCard } from '@/components/customUi/article-card';
 import { ElementTitle } from '@/components/customUi/element-title';
 import { slugify } from '@/lib/utils';
 import { decodeParam } from '@/lib/route-params';
+import NotFound from './NotFound';
 
 export default function Person() {
   const id = decodeParam(useParams<{ id: string }>().id);
@@ -23,21 +23,7 @@ export default function Person() {
   const person = getPersonById(id);
 
   /* ---------- Not found / non-public ---------- */
-  if (!person || !isPersonPublic(person.id)) {
-    return (
-      <NotFoundCard
-        image={
-          <img
-            src={DEFAULT_PERSON_IMAGE}
-            alt={t('notFoundAlt')}
-            className="mx-auto mb-6 h-32 w-32 rounded-full object-cover opacity-70"
-          />
-        }
-        title={t('notFoundTitle')}
-        description={t('notFoundDesc')}
-      />
-    );
-  }
+  if (!person || !isPersonPublic(person.id)) return <NotFound />;
 
   const filmography = getFilmography(person.id);
   const articles = getArticlesByPerson(person.id);

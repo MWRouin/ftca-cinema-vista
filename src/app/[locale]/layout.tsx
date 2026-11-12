@@ -36,8 +36,11 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
+  // data-scroll-behavior tells Next that the page uses `scroll-behavior: smooth`
+  // (index.css), so it can switch it off while it scrolls to the top on a
+  // navigation; otherwise that scroll is animated and stops short of the top.
   return (
-    <html lang={locale} dir={dirForLocale(locale)} suppressHydrationWarning>
+    <html lang={locale} dir={dirForLocale(locale)} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {CRITICAL_FONT_URLS.map((href) => (
           <link key={href} rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href={href} />
