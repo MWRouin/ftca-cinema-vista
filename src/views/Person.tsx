@@ -1,4 +1,6 @@
-import { useParams } from 'react-router-dom';
+'use client';
+
+import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
 import { NotFoundCard } from '@/components/customUi/not-found-card';
@@ -17,7 +19,7 @@ import { slugify } from '@/lib/utils';
 import { BASE_URL } from '@/lib/base-path';
 
 export default function Person() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { t } = useTranslation('person');
 
   const person = id ? getPersonById(id) : undefined;

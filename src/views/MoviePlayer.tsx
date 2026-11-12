@@ -1,4 +1,6 @@
-import { useParams } from 'react-router-dom';
+'use client';
+
+import { useParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
 import './movie-player.css';
@@ -45,7 +47,7 @@ function CreditList({ credits, separator = ', ' }: { credits: Credit[]; separato
 }
 
 export default function MoviePlayer() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { t } = useTranslation('movie');
   const locale = useLocale();
   const movie = getMovieById(id);

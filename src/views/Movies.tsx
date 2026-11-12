@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo, useState } from 'react';
 import Fuse from 'fuse.js';
 import { Button } from '@/components/ui/button';

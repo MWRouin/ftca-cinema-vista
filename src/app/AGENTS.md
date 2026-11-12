@@ -1,0 +1,21 @@
+# app (Next.js routes)
+
+Next.js App Router, static export (`output: 'export'`, trailing slashes). Every public page lives under `[locale]`; `/` and `404.html` are the only locale-less routes.
+
+## Layout
+
+- `[locale]/layout.tsx`: the root layout for all pages. Owns `<html lang dir>`, fonts, the theme script, and wraps `ThemeProvider`, `I18nProvider` and the site `Layout` (navigation, footer).
+- `(root)/`: second root layout, only for `/` (the locale redirect).
+- `global-not-found.tsx`: produces `404.html` (needs `experimental.globalNotFound`).
+- There is intentionally no `app/layout.tsx`; two root layouts keep `lang` correct per locale.
+
+## Porting a page
+
+- Keep the page UI in `src/views/<Name>.tsx` as a client component (`"use client"`), and make the route file a thin server wrapper: `[locale]/<route>/page.tsx` renders `<Name />`.
+- Dynamic routes set `export const dynamicParams = false` and list their params in `generateStaticParams()` from the data layer (`getMovies()`, `getPublicPeople()`); read them in the view with `useParams<{ id: string }>()`.
+- Replace react-router (`useParams`, `useLocation`, `Link`) with `next/navigation` and `LocalLink`.
+- Page `<head>` data still comes from the client-side `MetaHeader` until M10 replaces it with `generateMetadata`; until then the static HTML has no title or meta for ported pages.
+
+## Verify
+
+`npx tsc --noEmit -p tsconfig.next.json`, `npx next build`, then compare the generated URLs and head data with `docs/research/parity-baseline.json` using `node tools/parity.mjs`.
