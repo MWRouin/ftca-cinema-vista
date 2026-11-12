@@ -15,6 +15,7 @@
 - **No top-level `app/layout.tsx`.** Two root layouts (`[locale]` and `(root)`) are what let `lang` and `dir` be correct in the static HTML of each locale.
 - **404 via `experimental.globalNotFound`**, because with no top-level layout there is nowhere else to render `404.html`. Revisit if the flag changes in a later Next release.
 - **Theme script as an inline `<script>` in a small client component** (`ThemeScript`), not `next/script`: `next/script` queues the code until after first paint, which brings back the theme flash, and a plain server-rendered `<script>` makes React 19 log a console error when the root layout re-renders on the client (for example after a language switch). On the client the component renders the script with `type="text/template"`, which is inert and silences the warning.
+- **`ThemeProvider` starts from fixed values and reads `localStorage` after mount.** Reading it during the first render made the toggle's labels differ between the server HTML ("system") and a returning visitor's browser (their saved theme), which React 19 reports as a hydration mismatch. `ThemeScript` already sets the page class early, so only the toggle icon updates after mount. Render-time `window`, `localStorage` or `Date` reads in client components should be avoided for the same reason.
 - **`@fontsource` instead of `next/font`**: the CSS refers to the literal family names (`"Inter"`, `"Cormorant Garamond"`), so this keeps the look identical with no CSS changes.
 
 ## Left over

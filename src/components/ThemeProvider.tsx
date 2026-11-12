@@ -23,18 +23,21 @@ const getSystemTheme = (): ResolvedTheme => {
 };
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as Theme) || 'system';
-    }
-    return 'system';
-  });
-
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() =>
-    theme === 'system' ? getSystemTheme() : theme
-  );
+  // The first render must match the server's HTML, which cannot know the saved
+  // theme or the OS preference. So start from fixed values and read the real
+  // ones after mount (the inline ThemeScript has already set the page class,
+  // so there is no visual flash).
+  const [theme, setTheme] = useState<Theme>('system');
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>('dark');
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    setTheme((localStorage.getItem('theme') as Theme) || 'system');
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!ready) return;
     const applied = theme === 'system' ? getSystemTheme() : theme;
     setResolvedTheme(applied);
 
@@ -42,11 +45,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.classList.remove('light', 'dark');
     root.classList.add(applied);
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, ready]);
 
   // Keep the document in sync when the OS preference changes while in 'system' mode.
   useEffect(() => {
-    if (theme !== 'system') return;
+    if (!ready || theme !== 'system') return;
 
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
@@ -59,7 +62,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     media.addEventListener('change', handleChange);
     return () => media.removeEventListener('change', handleChange);
-  }, [theme]);
+  }, [theme, ready]);
 
   // Cycle through light -> dark -> system.
   const toggleTheme = () => {
