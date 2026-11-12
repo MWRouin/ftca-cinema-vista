@@ -391,7 +391,7 @@ async function main([, , buildFolderPath]) {
 
     /* ---------- events ---------- */
     const events = JSON.parse(
-        await fs.readFile(new URL('./events.json', import.meta.url), 'utf-8')
+        await fs.readFile(new URL('../src/data/events.json', import.meta.url), 'utf-8')
     );
     for (const event of events.filter(e => e.public && e.id)) {
         const pageKey = `events/${event.id}`;

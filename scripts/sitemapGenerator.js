@@ -89,7 +89,7 @@ async function main([, , buildFolderPath]) {
 
     // Events
     const events = JSON.parse(
-        await fs.readFile(new URL('./events.json', import.meta.url), 'utf-8')
+        await fs.readFile(new URL('../src/data/events.json', import.meta.url), 'utf-8')
     );
     for (const event of events.filter(e => e.public && e.id)) {
         urls.push(urlEntries(`events/${event.id}`, event.date || today, "monthly", "0.7"));

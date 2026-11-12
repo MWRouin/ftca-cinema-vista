@@ -1,3 +1,5 @@
+'use client';
+
 import { EventDetailLayout } from "@/components/customUi/event-detail-layout";
 
 export default function YdourEvent() {

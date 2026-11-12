@@ -45,6 +45,7 @@ Template:
 | [2026-11-nextjs-foundations](sprints/2026-11-nextjs-foundations.md) | i18n and data layer (M4), UI primitives check (M5), CI prep (M6) |
 | [2026-11-nextjs-shell](sprints/2026-11-nextjs-shell.md) | Shell, locale routing, `/` redirect and 404 (M3) |
 | [2026-11-nextjs-movies-people](sprints/2026-11-nextjs-movies-people.md) | Movie list, movie and person pages (M8) |
+| [2026-11-nextjs-events-blog](sprints/2026-11-nextjs-events-blog.md) | Events and blog pages (M9) |
 
 ## Module `AGENTS.md` files
 

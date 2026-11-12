@@ -13,6 +13,7 @@ Next.js App Router, static export (`output: 'export'`, trailing slashes). Every 
 
 - Keep the page UI in `src/views/<Name>.tsx` as a client component (`"use client"`), and make the route file a thin server wrapper: `[locale]/<route>/page.tsx` renders `<Name />`.
 - Dynamic routes set `export const dynamicParams = false` and list their params in `generateStaticParams()` from the data layer (`getMovies()`, `getPublicPeople()`); read them in the view with `useParams<{ id: string }>()`.
+- Pages that are a fixed set of components (the four events) use one `[slug]` route and a registry (`src/views/events/index.ts`) instead of one folder each.
 - Replace react-router (`useParams`, `useLocation`, `Link`) with `next/navigation` and `LocalLink`.
 - Page `<head>` data still comes from the client-side `MetaHeader` until M10 replaces it with `generateMetadata`; until then the static HTML has no title or meta for ported pages.
 

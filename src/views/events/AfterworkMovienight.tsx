@@ -1,3 +1,5 @@
+'use client';
+
 import { Trans, useTranslation } from "react-i18next";
 import { EventDetailLayout } from "@/components/customUi/event-detail-layout";
 

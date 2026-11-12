@@ -1,5 +1,7 @@
+'use client';
+
 import type { ReactNode } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import { useTranslation, Trans } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
 import { NotFoundCard } from '@/components/customUi/not-found-card';
@@ -24,7 +26,7 @@ function AuthorLink({ author, children }: { author: string; children?: ReactNode
 }
 
 export default function BlogArticle() {
-  const { slug } = useParams();
+  const { slug } = useParams<{ slug: string }>();
   const { t } = useTranslation('blog');
   const formatDate = useLocalizedDate();
   const article = getBlogArticleBySlug(slug);

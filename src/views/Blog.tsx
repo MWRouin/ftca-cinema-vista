@@ -1,3 +1,5 @@
+'use client';
+
 import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
 import { ArticleCard } from '@/components/customUi/article-card';

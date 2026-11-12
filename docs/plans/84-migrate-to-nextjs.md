@@ -35,7 +35,7 @@ Each milestone is a goal only. The how and the implementation details are decide
 **Wave 3: page ports (parallel, after M3 + M4 + M5)**
 - **M7. Content pages:** Home, About, Palmarès, Contact.
 - **M8. Movies and people** (done): movie list, movie detail and person pages ported as client views behind thin route files; `generateStaticParams` produces all 35 movies and 35 people per locale. The URL set matches the baseline exactly (140 pages). Head metadata waits for M10.
-- **M9. Events and blog:** events list, the four event pages, blog list and article.
+- **M9. Events and blog** (done): events list, the four event pages (one `[slug]` route with a component registry, `src/views/events/index.ts`), blog list and articles. `scripts/events.json` moved to `src/data/events.json`. The 18 URLs match the baseline exactly.
 - **M10. SEO layer:** per-page metadata, JSON-LD, hreflang and canonicals, sitemap and robots, replacing `MetaHeader` and the two generator scripts. It runs alongside M7–M9 and is applied page by page.
 
 **Wave 4: cleanup and verification**
