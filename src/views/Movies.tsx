@@ -254,7 +254,7 @@ export default function Movies() {
           {filteredMovies.length > 0 ? (
             <MovieGrid>
               {filteredMovies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard key={movie.id} movie={movie} titleAs="h2" />
               ))}
             </MovieGrid>
           ) : (

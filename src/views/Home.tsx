@@ -101,7 +101,7 @@ export default function Home() {
             </div>
 
             <div className="text-center mt-16">
-              <Button asChild variant="outline" className="btn-cinema text-white border-primary/30 hover:bg-primary/10 hover-lift">
+              <Button asChild variant="outline" className="btn-cinema text-primary-foreground border-primary/30 hover:bg-primary/10 hover-lift">
                 <LocalLink to="/movies">{t('films.viewAll')}</LocalLink>
               </Button>
             </div>

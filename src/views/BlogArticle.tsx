@@ -69,11 +69,14 @@ export default function BlogArticle() {
             </div>
           </header>
 
+          {/* Reading column capped at ~70 characters a line; paragraphs are
+              spaced by the wrapper (there is no typography plugin). An Arabic
+              article sits against the right edge. */}
           <article
             dir={article.lang === 'ar' ? 'rtl' : 'ltr'}
             className={
-              'prose prose-lg max-w-none text-base text-muted-foreground leading-relaxed ' +
-              (article.lang === 'ar' ? 'text-right' : 'text-left')
+              'max-w-[70ch] space-y-6 text-base sm:text-lg leading-relaxed sm:leading-8 text-foreground/85 ' +
+              (article.lang === 'ar' ? 'ml-auto text-right' : 'text-left')
             }
           >
             {article.body?.split('\n\n').map((para, idx) => {
@@ -82,7 +85,7 @@ export default function BlogArticle() {
 
               if (text.startsWith('## ')) {
                 return (
-                  <h2 key={idx} className="text-2xl font-semibold mt-8 mb-4 text-foreground">
+                  <h2 key={idx} className="text-2xl font-semibold pt-4 text-foreground">
                     {text.slice(3)}
                   </h2>
                 );

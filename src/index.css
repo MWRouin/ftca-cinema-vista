@@ -99,8 +99,10 @@
   }
 
   .dark {
-    /* slightly brighter green so it pops on the dark ground */
-    --primary: 165 55% 36%;
+    /* Brighter green so it pops on the dark ground. Cream text on it falls
+       under 4.5:1, so text on green fills (buttons, badges, chips) is ink. */
+    --primary: 165 55% 38%;
+    --primary-foreground: 162 40% 3%;
   }
 }
 
@@ -131,8 +133,10 @@
   }
 
   /* Smooth scrolling for the entire page */
-  html {
-    scroll-behavior: smooth;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   /* Custom scrollbar */
@@ -156,15 +160,26 @@
 
 /* Enhanced scroll-based animations */
 @layer utilities {
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Hidden only when a script will reveal it (useScrollAnimation) and motion
+     is welcome: without JS, or with reduced motion, the section just shows. */
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    .animate-on-scroll {
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animate-on-scroll:not(.in-view) {
+      opacity: 0;
+      transform: translateY(30px);
+    }
   }
 
-  .animate-on-scroll.in-view {
-    opacity: 1;
-    transform: translateY(0);
+  /* Hover lifts are decoration; drop them when the visitor asks for less
+     motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .hover-lift:hover,
+    .btn-cinema:hover {
+      transform: none;
+    }
   }
 
   /* Cinematic gradients */

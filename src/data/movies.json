@@ -10,7 +10,7 @@
       "defaultLang": "fr",
       "data": {
         "fr": "Slim, un adolescent du quartier de Wed Trabelsia, passe ses journées dans la rue avec son meilleur ami, Weld Boubou. Né d’un projet politique de logements en périphérie de Hammam-Lif, le quartier s’est développé au fil des années.\n\nEntre la fréquentation de jeunes plus âgés, l’ennui et le rythme du quotidien, le film suit Slim dans son environnement et donne à voir des fragments de la vie d’une jeunesse grandissant à Wed Trabelsia.",
-        "en": ""
+        "en": "Slim, a teenager from the Wed Trabelsia neighborhood, spends his days on the street with his best friend, Weld Boubou. Born of a political housing project on the outskirts of Hammam-Lif, the neighborhood has grown over the years.\n\nBetween hanging out with older boys, boredom and the rhythm of everyday life, the film follows Slim through his surroundings and offers glimpses of the lives of young people growing up in Wed Trabelsia."
       }
     },
     "credits": [
@@ -1511,25 +1511,6 @@
       }
     ],
     "movieUrl": "https://www.youtube.com/embed/yVOap57hQlc",
-    "public": false,
-    "playerVisible": false
-  },
-  {
-    "id": "mad-ant",
-    "title": "Mad Ant",
-    "genre": "Fiction",
-    "year": "nan",
-    "duration": "5'",
-    "image": "__BASE_URL__/Posters/mad_ant.jpg",
-    "descriptions": {
-      "defaultLang": "fr",
-      "data": {
-        "fr": "",
-        "en": ""
-      }
-    },
-    "credits": [],
-    "movieUrl": "https://www.youtube.com/embed/nflS_EOZwX0",
     "public": false,
     "playerVisible": false
   },

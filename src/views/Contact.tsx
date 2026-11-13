@@ -53,7 +53,7 @@ export default function Contact() {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle className="text-2xl">{t('form.title')}</CardTitle>
+                <CardTitle as="h2" className="text-2xl">{t('form.title')}</CardTitle>
                 <CardDescription>
                   {t('form.description')}
                 </CardDescription>
@@ -108,7 +108,7 @@ export default function Contact() {
             {/* Contact Details */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">{t('details.title')}</CardTitle>
+                <CardTitle as="h2" className="text-xl">{t('details.title')}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-1">
                 <a
@@ -118,7 +118,7 @@ export default function Contact() {
                   <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
                     <div className="flex items-center space-x-2 mb-1">
                       <Mail className="w-5 h-5 text-primary dark:text-accent" />
-                      <h4 className="font-semibold">{t('details.email')}</h4>
+                      <h3 className="font-semibold">{t('details.email')}</h3>
                     </div>
                     <p className="text-muted-foreground">{CONTACT_EMAIL}</p>
                   </div>
@@ -130,7 +130,7 @@ export default function Contact() {
                   <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
                     <div className="flex items-center space-x-2 mb-1">
                       <Phone className="w-5 h-5 text-primary dark:text-accent" />
-                      <h4 className="font-semibold">{t('details.phone')}</h4>
+                      <h3 className="font-semibold">{t('details.phone')}</h3>
                     </div>
                     <p className="text-muted-foreground">{CONTACT_PHONE}</p>
                   </div>
@@ -145,7 +145,7 @@ export default function Contact() {
                   <div className="origin-left transition-transform duration-200 group-hover:scale-[1.02]">
                     <div className="flex items-center space-x-2 mb-1">
                       <MapPin className="w-5 h-5 text-primary dark:text-accent" />
-                      <h4 className="font-semibold">{t('details.address')}</h4>
+                      <h3 className="font-semibold">{t('details.address')}</h3>
                     </div>
                     <p className="text-muted-foreground">{CONTACT_ADDRESS}</p>
                   </div>
@@ -156,11 +156,11 @@ export default function Contact() {
             {/* Meeting Times */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">{t('meetings.title')}</CardTitle>
+                <CardTitle as="h2" className="text-xl">{t('meetings.title')}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-1">{t('meetings.weekly')}</h4>
+                  <h3 className="font-semibold mb-1">{t('meetings.weekly')}</h3>
                   <p className="text-muted-foreground">{t('meetings.weeklyTime')}</p>
                 </div>
               </CardContent>
@@ -169,7 +169,7 @@ export default function Contact() {
             {/* Social Links */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl">{t('follow.title')}</CardTitle>
+                <CardTitle as="h2" className="text-xl">{t('follow.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
@@ -180,15 +180,16 @@ export default function Contact() {
             </Card>
 
             {/* Join Us */}
-            <Card className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950 dark:to-orange-950 border-amber-200 dark:border-amber-800">
+            {/* Sand accent: the site's highlight colour, as on the hero's main button. */}
+            <Card className="border-accent/60 bg-accent/10">
               <CardHeader>
-                <CardTitle className="text-xl">{t('join.title')}</CardTitle>
+                <CardTitle as="h2" className="text-xl">{t('join.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4">
                   {t('join.text')}
                 </p>
-                <Button asChild className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700">
+                <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/85">
                   <a href={JOIN_FORM_URL} target="_blank" rel="noopener noreferrer">
                     {t('join.cta')}
                   </a>

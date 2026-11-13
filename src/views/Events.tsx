@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
 import { EmptyState } from '@/components/customUi/empty-state';
-import { FolderX } from 'lucide-react';
+import { FolderX, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { LocalLink } from '@/i18n/locale';
@@ -43,8 +43,9 @@ function EventCard({ event }: { event: EventMeta }) {
             <span className="block font-medium">
               {t('dateTime', { date: formatDate(event.date), time: event.time })}
             </span>
-            <span className="block text-sm text-amber-600 dark:text-amber-400">
-              📍 {event.location}
+            <span className="flex items-center gap-1.5 text-sm">
+              <MapPin className="h-4 w-4 shrink-0 text-primary dark:text-accent" aria-hidden />
+              {event.location}
             </span>
           </CardDescription>
         </CardHeader>

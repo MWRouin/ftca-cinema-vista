@@ -19,6 +19,8 @@ interface MovieCardProps {
   to?: string;
   /** Badges shown on the card (e.g. the Person filmography's role badges). */
   badges?: CardBadge[];
+  /** Heading level of the title: h2 when the grid sits right under the page h1. */
+  titleAs?: "h2" | "h3";
 }
 
 /**
@@ -67,26 +69,33 @@ export function MovieGrid({ children }: { children: ReactNode }) {
  * (Movies, Home featured, MoviePlayer related, Person filmography). Callers just
  * feed it a Movie (and optional badges); the card owns the rest.
  */
-export function MovieCard({ movie, to, badges }: MovieCardProps) {
+export function MovieCard({ movie, to, badges, titleAs }: MovieCardProps) {
   const locale = useLocale();
   const { t } = useTranslation("movie");
   const description = getMovieDescription(movie, locale);
   const directorNames = getDirectorNames(movie);
 
   return (
-    <Card className="group transition-all duration-300 hover:shadow-lg hover:scale-[1.015] active:shadow-lg active:scale-[1.015]">
+    <Card className="group transition-all duration-300 hover:shadow-lg hover:scale-[1.015]">
       <LocalLink to={to ?? `/movies/${movie.id}`} className="block">
         <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg bg-muted">
           <LazyImage
             src={movie.image}
-            alt={movie.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 group-active:scale-105"
+            alt="" // the link is named by the title below
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
+          {/* Synopsis preview on hover (only on devices that can hover, so a
+              tap doesn't flash it) or on keyboard focus. Hidden from screen
+              readers: the link should be announced by its title, and the
+              synopsis is on the movie's page. */}
           {(description || directorNames) && (
-            <div className="absolute inset-0 z-[1] flex flex-col bg-black/85 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100">
-              <div className="flex flex-1 items-center justify-center overflow-y-auto">
+            <div
+              aria-hidden
+              className="absolute inset-0 z-[1] flex flex-col bg-black/85 p-4 opacity-0 transition-opacity duration-300 [@media(hover:hover)]:group-hover:opacity-100 group-has-[:focus-visible]:opacity-100"
+            >
+              <div className="flex flex-1 items-center justify-center overflow-hidden">
                 {description && (
-                  <p className="whitespace-pre-line text-xs leading-relaxed text-white/90 sm:text-sm">
+                  <p className="line-clamp-[10] whitespace-pre-line text-xs leading-relaxed text-white/90 sm:text-sm">
                     {description}
                   </p>
                 )}
@@ -101,7 +110,7 @@ export function MovieCard({ movie, to, badges }: MovieCardProps) {
           {badges && <CardBadges badges={badges} />}
         </div>
         <CardHeader>
-          <CardTitle className="text-lg leading-tight transition-colors group-hover:text-primary group-active:text-primary">
+          <CardTitle as={titleAs} className="text-lg leading-tight transition-colors group-hover:text-primary">
             {movie.title}
           </CardTitle>
           <CardDescription>

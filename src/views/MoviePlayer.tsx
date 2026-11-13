@@ -118,7 +118,7 @@ export default function MoviePlayer() {
             <div className="space-y-4">
               {directors.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">{t('director')}</h3>
+                  <h2 className="text-lg font-semibold mb-2">{t('director')}</h2>
                   <p className="text-muted-foreground">
                     <CreditList credits={directors} separator=" & " />
                   </p>
@@ -126,7 +126,7 @@ export default function MoviePlayer() {
               )}
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">{t('cast')}</h3>
+                <h2 className="text-lg font-semibold mb-2">{t('cast')}</h2>
                 <p className="text-muted-foreground">
                   {cast.length ? <CreditList credits={cast} /> : '—'}
                 </p>
@@ -134,7 +134,7 @@ export default function MoviePlayer() {
 
               {crewByRole.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">{t('crew')}</h3>
+                  <h2 className="text-lg font-semibold mb-3">{t('crew')}</h2>
                   <dl className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
                     {crewByRole.map(([role, credits]) => (
                       <div key={role}>

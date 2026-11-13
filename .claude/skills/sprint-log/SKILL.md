@@ -7,7 +7,7 @@ description: Write the sprint log for finished work in docs/sprints/ and update 
 
 Write a short log of what was done since the previous one, following the template in `docs/README.md`.
 
-1. **Find the starting point.** Read the newest file in `docs/sprints/` (by `YYYY-MM-` name) for its end date. If there is none, start from the first commit of the work in question.
+1. **Find the starting point.** Read the newest log for its end date: the last row of the sprint table in `docs/README.md` (file names share the `YYYY-MM-` prefix within a month, so sorting them by name doesn't find it). If there is none, start from the first commit of the work in question.
 2. **Collect the work.** `git log --format='%h %ad %s' --date=short <start>..HEAD` on the current branch, plus merged PRs. Read the diffs of anything whose title isn't clear. Skim `docs/plans/` for plans whose status or milestones changed.
 3. **Draft the log** in `docs/sprints/YYYY-MM-<short-name>.md` with the sections Shipped, Decisions and Left over:
    - *Shipped:* group commits by theme, one line each, with hashes or PR numbers. No commit-by-commit dump.

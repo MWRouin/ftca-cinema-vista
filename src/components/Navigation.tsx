@@ -9,6 +9,7 @@ import { LanguageToggle } from './LanguageToggle';
 import { Logo } from './Logo';
 import { LocalLink } from '@/i18n/locale';
 import { stripLocale } from '@/i18n/config';
+import { NAV_ITEMS } from '@/lib/site-nav';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,16 +72,6 @@ export function Navigation() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen]);
 
-  const navItems = [
-    { key: 'home', path: '/' },
-    { key: 'movies', path: '/movies' },
-    { key: 'events', path: '/events' },
-    { key: 'blog', path: '/blog' },
-    { key: 'about', path: '/about' },
-    { key: 'palmares', path: '/palmares' },
-    { key: 'contact', path: '/contact' },
-  ];
-
   const normalize = (p: string) => (p.endsWith('/') && p !== '/' ? p.slice(0, -1) : p);
   const isActive = (target: string) => normalize(path) === normalize(target);
 
@@ -88,7 +79,7 @@ export function Navigation() {
     <>
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${overlay
       ? 'bg-transparent text-white border-transparent'
-      : `bg-background/85 border-border/30 ${scrolled ? 'shadow-lg' : ''}`
+      : `bg-background border-border/30 ${scrolled ? 'shadow-lg' : ''}`
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
@@ -97,6 +88,7 @@ export function Navigation() {
             <LocalLink
               to="/"
               className="flex items-center space-x-3"
+              aria-label={t('a11y.homeLink')}
               onClick={() => {
                 setIsOpen(false);
                 window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -112,7 +104,7 @@ export function Navigation() {
 
           {/* Desktop Navigation (centered on md+) */}
           <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-2">
-            {navItems.map((item, index) => (
+            {NAV_ITEMS.map((item, index) => (
               <LocalLink
                 key={item.key}
                 to={item.path}
@@ -180,7 +172,7 @@ export function Navigation() {
           {/* accent hairline */}
           <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
           <div className="p-2 max-h-[calc(100dvh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-0.5">
-            {navItems.map((item, index) => {
+            {NAV_ITEMS.map((item, index) => {
               const active = isActive(item.path);
               return (
                 <LocalLink

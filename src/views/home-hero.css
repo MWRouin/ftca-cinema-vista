@@ -238,17 +238,6 @@
   line-height: 1.65;
 }
 
-/* Frosted blur only on pointer-fine devices (desktops/laptops), where it's
-   cheap. On touch screens the continuously-animating hero behind the quote
-   forced this blur to re-sample every frame — a big mobile cost for an effect
-   that's barely visible over the dark wash. */
-@media (hover: hover) and (pointer: fine) {
-  .editorial-hero .quote {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-}
-
 /* Actions */
 .editorial-hero .actions {
   display: flex;

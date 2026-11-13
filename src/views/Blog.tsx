@@ -20,7 +20,7 @@ export default function Blog() {
 
           {featuredArticle ? (
             <div className="mb-12">
-              <ArticleCard article={featuredArticle} variant="featured" />
+              <ArticleCard article={featuredArticle} variant="featured" titleAs="h2" />
             </div>
           ) : (
             <EmptyState icon={Inbox} iconClassName="w-40 h-40" title={t('empty')} subtitle={t('checkBack')} />
@@ -29,7 +29,7 @@ export default function Blog() {
           {articles.length > 1 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {articles.slice(1).map((article) => (
-                <ArticleCard key={article.slug} article={article} variant="grid" />
+                <ArticleCard key={article.slug} article={article} variant="grid" titleAs="h2" />
               ))}
             </div>
           ) : null}

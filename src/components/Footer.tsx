@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Logo } from './Logo';
 import { SocialLinks } from '@/components/customUi/social-links';
 import { LocalLink } from '@/i18n/locale';
+import { NAV_ITEMS } from '@/lib/site-nav';
 import {
   CONTACT_ADDRESS,
   CONTACT_EMAIL,
@@ -14,14 +15,6 @@ import {
 export function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
-
-  const quickLinks = [
-    { key: 'home', path: '/' },
-    { key: 'movies', path: '/movies' },
-    { key: 'events', path: '/events' },
-    { key: 'blog', path: '/blog' },
-    { key: 'contact', path: '/contact' },
-  ];
 
   return (
     <footer className="relative mt-auto border-t border-border bg-secondary dark:bg-muted">
@@ -35,7 +28,7 @@ export function Footer() {
             <LocalLink to="/" className="flex items-center space-x-3 mb-4">
               <Logo size={40} className="drop-shadow-lg" />
               <div>
-                <h3 className="font-bold text-lg">{t('footer.clubName')}</h3>
+                <p className="font-bold text-lg font-[Nunito] tracking-[-0.045em] leading-tight">{t('footer.clubName')}</p>
                 <p className="text-sm text-muted-foreground">{t('footer.tagline')}</p>
               </div>
             </LocalLink>
@@ -47,9 +40,9 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.quickLinks')}</h4>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.quickLinks')}</h2>
             <ul className="space-y-2">
-              {quickLinks.map((link) => (
+              {NAV_ITEMS.map((link) => (
                 <li key={link.key}>
                   <LocalLink
                     to={link.path}
@@ -64,7 +57,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.contact')}</h4>
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">{t('footer.contact')}</h2>
             <div className="space-y-2">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}

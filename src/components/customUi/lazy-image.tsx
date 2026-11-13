@@ -41,8 +41,7 @@ export function LazyImage({
     return (
       <div
         className={cn("relative flex items-center justify-center bg-muted text-muted-foreground", className)}
-        role="img"
-        aria-label={alt}
+        {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
       >
         {fallback ?? <ImageOff className="h-1/4 w-1/4 opacity-40" aria-hidden />}
       </div>
@@ -53,7 +52,8 @@ export function LazyImage({
     <div className={cn("relative", className)}>
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <Loader size={loaderSize} text={alt} />
+          {/* No caption: the alt text usually repeats a title shown next to the image. */}
+          <Loader size={loaderSize} />
         </div>
       )}
 

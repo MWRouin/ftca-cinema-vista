@@ -36,7 +36,7 @@ function TeamSection({ teamMembers }: { teamMembers: TeamMember[] }) {
                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                   <LazyImage
                     src={member.image || DEFAULT_PERSON_IMAGE}
-                    alt={member.name}
+                    alt="" // the name is the link text right below
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>

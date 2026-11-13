@@ -11,7 +11,7 @@ interface LogoProps {
 export function Logo({
   className = "",
   size = 40,
-  alt = "FTCA Hammemlif logo",
+  alt = "FTCA Hammam-Lif logo",
   colorBack = "#3b4b44",
   colorMain = "#1f6b5c",
   colorFront = "#6a786d",

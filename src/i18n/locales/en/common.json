@@ -1,5 +1,6 @@
 {
   "nav": {
+    "back": "← Back",
     "home": "Home",
     "movies": "Movies",
     "events": "Events",
@@ -38,11 +39,14 @@
   },
   "a11y": {
     "toggleMenu": "Toggle menu",
+    "skipToContent": "Skip to content",
+    "homeLink": "FTCA Hammam-Lif, home",
     "close": "Close",
     "previousImage": "Previous image",
     "nextImage": "Next image",
     "galleryPhoto": "Event gallery photo {{number}}",
     "fullSizePreview": "Full size preview",
+    "viewFullSize": "View full size: {{name}}",
     "viewOnMaps": "View location on Google Maps"
   }
 }

@@ -74,42 +74,49 @@ function EventHeader({ event }: { event: EventCopy }) {
 /** Two-column alternating text/media rows; images and videos open in a shared lightbox. */
 function AlternatingMedia({ media, slug }: { media: EventMedia[]; slug: string }) {
   const { t } = useTranslation("eventDetail");
+  const { t: tCommon } = useTranslation();
   const lightbox = useLightbox();
 
   return (
     <section className="space-y-12">
-      {media.map((item, i) => (
-        <div key={i} className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Text */}
-          <div className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
-            <h3 className="text-xl font-semibold mb-3">{t(`${slug}.media.${i}.title`)}</h3>
-            <p className="whitespace-pre-line">{t(`${slug}.media.${i}.caption`)}</p>
-          </div>
+      {media.map((item, i) => {
+        const title = t(`${slug}.media.${i}.title`);
+        return (
+          <div key={i} className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Text */}
+            <div className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
+              <h2 className="text-xl font-semibold mb-3">{title}</h2>
+              <p className="whitespace-pre-line">{t(`${slug}.media.${i}.caption`)}</p>
+            </div>
 
-          {/* Media */}
-          <div className={`overflow-hidden rounded-lg ${i % 2 === 0 ? "md:order-1" : "md:order-2"}`}>
-            {item.type === "image" ? (
-              <div className="cursor-zoom-in" onClick={() => lightbox.open(item.src)}>
+            {/* Media: a button, so the lightbox opens from the keyboard too */}
+            <button
+              type="button"
+              onClick={() => lightbox.open(item.src, item.type, title)}
+              aria-label={tCommon("a11y.viewFullSize", { name: title })}
+              aria-haspopup="dialog"
+              className={`group block w-full overflow-hidden rounded-lg cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${i % 2 === 0 ? "md:order-1" : "md:order-2"}`}
+            >
+              {item.type === "image" ? (
                 <LazyImage
                   src={item.src}
-                  alt={t(`${slug}.media.${i}.title`)}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  alt=""
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-              </div>
-            ) : (
-              <video
-                src={item.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full rounded-lg cursor-zoom-in"
-                onClick={() => lightbox.open(item.src, "video")}
-              />
-            )}
+              ) : (
+                <video
+                  src={item.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="block w-full rounded-lg"
+                />
+              )}
+            </button>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <Lightbox state={lightbox} />
     </section>

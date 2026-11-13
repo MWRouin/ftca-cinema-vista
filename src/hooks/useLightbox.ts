@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 
-export type LightboxMedia = { type: "image" | "video"; src: string };
+/** `alt` names the media in the lightbox (dialog label and image alt). */
+export type LightboxMedia = { type: "image" | "video"; src: string; alt?: string };
 
 /**
  * Lightbox open/close state. Kept as a hook so a gallery can own one instance
@@ -9,7 +10,7 @@ export type LightboxMedia = { type: "image" | "video"; src: string };
 export function useLightbox() {
   const [media, setMedia] = useState<LightboxMedia | null>(null);
   const open = useCallback(
-    (src: string, type: LightboxMedia["type"] = "image") => setMedia({ type, src }),
+    (src: string, type: LightboxMedia["type"] = "image", alt?: string) => setMedia({ type, src, alt }),
     []
   );
   const close = useCallback(() => setMedia(null), []);
