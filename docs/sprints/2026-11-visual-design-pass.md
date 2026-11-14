@@ -32,7 +32,7 @@ Checked with typecheck, lint, build, axe on 13 pages in both themes, and screens
 
 - Hero experiments (open); page titles are solid green, the old gradient look was not restored.
 - The footer's plain neutral top border still sits above the wheat gradient line.
-- The map's zoom buttons and credit line keep Leaflet's white style in dark mode.
+- The map's credit line keeps Leaflet's white style in dark mode (the zoom buttons match the site's green button).
 - Team portraits are graded inconsistently (audit V15); `secondary` and `muted` are near-duplicates (V18).
 - `npm audit` reports a moderate `minimatch` advisory in the ESLint toolchain; not touched.
 - `docs/research/parity-baseline.json` predates the curly quotes, so a parity diff shows text differences.
