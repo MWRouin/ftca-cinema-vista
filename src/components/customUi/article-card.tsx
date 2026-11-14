@@ -6,7 +6,7 @@ import { LocalLink } from "@/i18n/locale";
 import { useLocalizedDate } from "@/hooks/useLocalizedDate";
 import type { BlogArticle } from "@/data/blog";
 
-/** The "Featured" badge takes the sand accent, the site's highlight colour (as on the hero's main button). */
+/** The "Featured" badge takes the wheat accent, the site's highlight colour (as on the hero's main button). */
 const FEATURED_BADGE = "border-transparent bg-accent text-accent-foreground hover:bg-accent";
 
 /**
@@ -40,7 +40,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
 
   if (variant === "featured") {
     return (
-      <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+      <Card className="group overflow-hidden">
         <LocalLink to={`/blog/${article.slug}`} className="grid grid-cols-1 lg:grid-cols-2 gap-0">
           <div className="aspect-[16/9] lg:aspect-auto overflow-hidden rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none">
             <LazyImage
@@ -53,7 +53,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
             <Badge className={`w-fit mb-4 ${FEATURED_BADGE}`}>
               {showCategory ? `${t("featured")} • ${article.category}` : t("featured")}
             </Badge>
-            <CardTitle as={titleAs} className="text-2xl md:text-3xl mb-4 group-hover:text-primary transition-colors text-left">
+            <CardTitle as={titleAs} className="text-2xl md:text-3xl mb-4 group-hover:text-brand transition-colors text-left">
               {article.title}
             </CardTitle>
             <CardDescription className="text-base mb-4">{article.excerpt}</CardDescription>
@@ -72,7 +72,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
 
   if (variant === "compact") {
     return (
-      <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
+      <Card className="group h-full overflow-hidden">
         <LocalLink to={`/blog/${article.slug}`} className="block">
           {article.image && (
             <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-muted">
@@ -84,7 +84,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
             </div>
           )}
           <CardHeader>
-            <CardTitle as={titleAs} className="text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+            <CardTitle as={titleAs} className="text-lg leading-tight line-clamp-2 group-hover:text-brand transition-colors">
               {article.title}
             </CardTitle>
             <CardDescription className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -102,7 +102,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
   // "grid"
   return (
     <LocalLink to={`/blog/${article.slug}`} className="block">
-      <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
+      <Card className="group h-full overflow-hidden">
         <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
           <LazyImage
             src={article.image}
@@ -114,7 +114,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
           {showCategory && (
             <Badge variant="secondary" className="w-fit mb-2">{article.category}</Badge>
           )}
-          <CardTitle as={titleAs} className="text-xl leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+          <CardTitle as={titleAs} className="text-xl leading-tight line-clamp-2 group-hover:text-brand transition-colors">
             {article.title}
           </CardTitle>
         </CardHeader>

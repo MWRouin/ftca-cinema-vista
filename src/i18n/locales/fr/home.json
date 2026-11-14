@@ -6,7 +6,7 @@
     "titleLine2": "Amateurs",
     "titleLine3": "de Hammam-Lif",
     "tagline": "Un lieu où le cinéma devient mémoire, pensée et imaginaire partagé.",
-    "description": "Fondé en <strong>1964</strong> et opérant sous l'égide de la <strong>Fédération Tunisienne des Cinéastes Amateurs (FTCA)</strong>, notre club « Club des Cinéastes Amateurs de Hammamlif » explore le cinéma non seulement comme un art, mais comme un moyen de questionner le réel, de réfléchir ensemble et de donner forme aux idées.",
+    "description": "Fondé en <strong>1964</strong> et opérant sous l’égide de la <strong>Fédération Tunisienne des Cinéastes Amateurs (FTCA)</strong>, notre club « Club des Cinéastes Amateurs de Hammamlif » explore le cinéma non seulement comme un art, mais comme un moyen de questionner le réel, de réfléchir ensemble et de donner forme aux idées.",
     "quote": "Nous nous servons du film pour observer le monde avec tendresse, curiosité et un profond désir de comprendre.",
     "ctaStory": "Découvrir notre histoire",
     "ctaFilms": "Explorer nos films",
@@ -15,7 +15,7 @@
     "creditYears": "Plus de 60 ans de cinéma indépendant"
   },
   "films": {
-    "title": "Films à l'affiche",
+    "title": "Films à l’affiche",
     "subtitle": "Découvrez nos films",
     "directedBy": "Réalisé par {{director}}",
     "viewAll": "Voir tous les films"
@@ -27,7 +27,7 @@
   },
   "cta": {
     "title": "Rejoignez notre communauté",
-    "subtitle": "Rencontrez d'autres passionnés de cinéma et vivez des expériences cinématographiques mémorables qui sortent de l'ordinaire",
+    "subtitle": "Rencontrez d’autres passionnés de cinéma et vivez des expériences cinématographiques mémorables qui sortent de l’ordinaire",
     "getInTouch": "Nous contacter",
     "learnMore": "En savoir plus sur nous"
   }

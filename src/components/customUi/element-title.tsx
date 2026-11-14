@@ -14,7 +14,7 @@ export function ElementTitle({
     return (
         <h1
             className={cn(
-                "text-3xl md:text-4xl 2xl:text-5xl mb-6 inline-block bg-gradient-to-br py-2 -my-2 px-[0.1em] -mx-[0.1em] from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent",
+                "font-display text-4xl md:text-5xl 2xl:text-6xl font-semibold leading-[1.05] tracking-[-0.015em] text-brand mb-6",
                 useInAnimation && "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3"
             )}
         >

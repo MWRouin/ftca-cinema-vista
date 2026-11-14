@@ -19,7 +19,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 /**
  * Presentation styles:
  *  - "brand"   — centered row of brand-colored icons (event CTA cards).
- *  - "chip"    — rounded primary-tinted chips (footer).
+ *  - "chip"    — plain green icons, no background (footer).
  *  - "labeled" — icon + label, primary colored (contact page).
  */
 type SocialVariant = "brand" | "chip" | "labeled";
@@ -27,19 +27,19 @@ type SocialVariant = "brand" | "chip" | "labeled";
 const VARIANTS: Record<SocialVariant, { container: string; anchor: string; icon: string }> = {
   brand: {
     container: "flex justify-center gap-6",
-    anchor: "hover:scale-125 w-10 h-10 transition-transform",
+    anchor: "flex items-center justify-center w-10 h-10 hover:scale-125 transition-transform",
     icon: "w-7 h-7",
   },
   chip: {
     container: "flex space-x-4",
     anchor:
-      "w-9 h-9 bg-primary/10 hover:bg-primary/20 dark:bg-primary/20 dark:hover:bg-primary/30 rounded-lg flex items-center justify-center transition-colors group",
-    icon: "w-5 h-5 text-primary group-hover:scale-110 transition-transform",
+      "w-9 h-9 rounded-lg flex items-center justify-center text-brand",
+    icon: "w-5 h-5",
   },
   labeled: {
     container: "flex flex-wrap gap-x-5 gap-y-2",
     anchor:
-      "flex items-center justify-center space-x-2 text-primary dark:text-accent hover:scale-110 transition-colors group",
+      "flex items-center justify-center space-x-2 text-brand hover:scale-110 transition-colors group",
     icon: "w-5 h-5 group-hover:scale-110",
   },
 };

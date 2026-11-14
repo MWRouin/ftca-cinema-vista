@@ -7,11 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { DEFAULT_PERSON_IMAGE, getMembers, getHonoraryMembers } from '@/data/people';
+import { getMembers, getHonoraryMembers } from '@/data/people';
 import { isPersonPublic } from '@/data/movies';
 import { LocalLink } from '@/i18n/locale';
-import { slugify } from '@/lib/utils';
+import { initials, slugify } from '@/lib/utils';
 import { publicUrl } from '@/lib/base-path';
+import { FEDERATION_URL } from '@/lib/contact';
 
 type TeamMember = { id: string; name: string; role: string; bio: string; image: string };
 type HonoraryMember = { id: string; name: string; hasPage: boolean };
@@ -27,7 +28,7 @@ function TeamSection({ teamMembers }: { teamMembers: TeamMember[] }) {
 
   return (
     <section>
-      <h2 className="text-3xl font-bold mb-8 text-center">{t('team.title')}</h2>
+      <h2 className="section-title mb-8 text-center">{t('team.title')}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-4 md:gap-6 lg:gap-8">
         {membersToShow.map((member) => (
           <Card key={member.id} className="text-center">
@@ -35,14 +36,15 @@ function TeamSection({ teamMembers }: { teamMembers: TeamMember[] }) {
               <LocalLink to={`/people/${member.id}`} className="block group">
                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden">
                   <LazyImage
-                    src={member.image || DEFAULT_PERSON_IMAGE}
+                    src={member.image}
                     alt="" // the name is the link text right below
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    fallback={<span className="font-display text-3xl font-semibold">{initials(member.name)}</span>}
                   />
                 </div>
-                <CardTitle className="text-xl transition-colors group-hover:text-primary">{member.name}</CardTitle>
+                <CardTitle className="text-xl transition-colors group-hover:text-brand">{member.name}</CardTitle>
               </LocalLink>
-              <CardDescription className="text-primary font-medium">
+              <CardDescription className="text-xs font-semibold uppercase tracking-[0.12em]">
                 {t(`roles.${slugify(member.role)}`, { defaultValue: member.role })}
               </CardDescription>
             </CardHeader>
@@ -75,7 +77,7 @@ function OldMembersSection({ oldMembers }: { oldMembers: HonoraryMember[] }) {
     <section className="py-12">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">{t('honorary.title')}</h2>
+          <h2 className="section-title mb-4">{t('honorary.title')}</h2>
           <div className="section-divider w-16 mx-auto"></div>
           <p className="text-muted-foreground mt-4">{t('honorary.subtitle')}</p>
         </div>
@@ -85,16 +87,16 @@ function OldMembersSection({ oldMembers }: { oldMembers: HonoraryMember[] }) {
             {oldMembers.map((member) => (
               <li key={member.id} className="group">
                 <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 w-1 h-6 bg-gradient-to-b from-primary to-primary/50 rounded-full mt-1"></div>
+                  <div className="flex-shrink-0 w-1 h-6 bg-accent rounded-full mt-1"></div>
                   {member.hasPage ? (
                     <LocalLink
                       to={`/people/${member.id}`}
-                      className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300"
+                      className="text-base font-medium text-foreground group-hover:text-brand transition-colors duration-300"
                     >
                       {member.name}
                     </LocalLink>
                   ) : (
-                    <span className="text-base font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                    <span className="text-base font-medium text-foreground group-hover:text-brand transition-colors duration-300">
                       {member.name}
                     </span>
                   )}
@@ -136,23 +138,21 @@ export default function About() {
         <section className="mb-16">
           <div className="max-w-4xl mx-auto">
             {/* Lead — sets the scene and anchors the section under the title */}
-            <p
-              className="text-2xl sm:text-3xl italic leading-snug text-foreground border-l-2 border-primary/60 pl-5 sm:pl-6 mb-10"
-              style={{ fontFamily: '"Cormorant Garamond", serif' }}
-            >
+            <p className="font-display text-2xl sm:text-3xl font-medium italic leading-snug text-foreground border-l-2 border-accent pl-5 sm:pl-6 mb-10">
               {t('history.lead')}
             </p>
 
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+            <div className="mx-auto max-w-[70ch] space-y-6 text-lg text-foreground/85 leading-relaxed">
               <p>
-                <Trans t={t} i18nKey="history.p1" components={{ hl: <span className="text-primary font-semibold" /> }} />
+                <Trans t={t} i18nKey="history.p1" components={{ hl: <span className="text-brand font-semibold" /> }} />
               </p>
 
               <p>{t('history.p2')}</p>
 
               <p>{t('history.p3')}</p>
 
-              <p className="text-foreground font-medium">
+              {/* The closing line answers the lead quote, in the same voice. */}
+              <p className="font-display text-2xl font-medium italic leading-snug text-foreground pt-2">
                 {t('history.p4')}
               </p>
             </div>
@@ -160,22 +160,37 @@ export default function About() {
         </section>
 
         {/* Mission Section */}
-        <section className="mb-16 bg-muted/50 rounded-lg p-8 lg:p-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section className="mb-16">
+          {/* Title above the box, centred like the other section titles. */}
+          <h2 className="section-title mb-8 text-center">{t('mission.title')}</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-muted/50 rounded-lg p-8 lg:p-12">
             <div>
-              <h2 className="text-3xl font-bold mb-6">{t('mission.title')}</h2>
-              <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+              <div className="space-y-4 text-lg text-foreground/85 leading-relaxed">
                 <p>
                   {t('mission.p1')}
                 </p>
                 <div className="mt-6 mb-2 text-foreground font-medium">{t('mission.through')}</div>
-                <ul className="list-disc pl-6 marker:text-primary/70 space-y-1">
+                <ul className="list-disc pl-6 marker:text-brand/70 space-y-1">
                   <li>{t('mission.screenings')}</li>
                   <li>{t('mission.debates')}</li>
                   <li>{t('mission.workshops')}</li>
                 </ul>
                 <p>
-                  {t('mission.p2')}
+                  <Trans
+                    t={t}
+                    i18nKey="mission.p2"
+                    components={{
+                      // The federation's site; underlined like the person links.
+                      fed: (
+                        <a
+                          href={FEDERATION_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-muted-foreground/40 decoration-1 underline-offset-4 hover:text-brand hover:decoration-current transition-colors"
+                        />
+                      ),
+                    }}
+                  />
                 </p>
               </div>
             </div>
@@ -196,7 +211,7 @@ export default function About() {
 
         {/* Values Section */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 text-center">{t('values.title')}</h2>
+          <h2 className="section-title mb-8 text-center">{t('values.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card>
               <CardHeader>

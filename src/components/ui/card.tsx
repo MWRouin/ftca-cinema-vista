@@ -8,8 +8,10 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
+    // Local change: cards are outlined in a faint wheat accent that turns full
+    // wheat on hover, instead of the neutral border, across the site.
     className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
+      "rounded-lg border border-accent/30 hover:border-accent transition-colors bg-card text-card-foreground shadow-sm",
       className
     )}
     {...props}

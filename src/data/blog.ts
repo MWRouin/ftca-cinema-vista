@@ -19,28 +19,28 @@ const articles: BlogArticle[] = [
     slug: "amateur-cinema-is-the-only-free-cinema",
     title: "Amateur Cinema is the only free cinema",
     excerpt:
-      "When I first joined Hammam-lif’s club back in 2013, I fell in love with everything about it: the humanity of the members, the energy, the creative ideas moving faster than the speed of sound, the rusty old clubhouse. But a couple of things bothered me: the cigarette smog, and the stigma of being an \"amateur.\" The smog is irrelevant now, but being viewed as a lesser artist just because I wasn't producing \"professional\" art was a real pain point.",
-    body: `When I first joined Hammam-lif’s club back in 2013, I fell in love with everything about it: the humanity of the members, the energy, the creative ideas moving faster than the speed of sound, the rusty old clubhouse. But a couple of things bothered me: the cigarette smog, and the stigma of being an "amateur." The smog is irrelevant now, but being viewed as a lesser artist just because I wasn't producing "professional" art was a real pain point.
+      "When I first joined Hammam-lif’s club back in 2013, I fell in love with everything about it: the humanity of the members, the energy, the creative ideas moving faster than the speed of sound, the rusty old clubhouse. But a couple of things bothered me: the cigarette smog, and the stigma of being an “amateur.” The smog is irrelevant now, but being viewed as a lesser artist just because I wasn’t producing “professional” art was a real pain point.",
+    body: `When I first joined Hammam-lif’s club back in 2013, I fell in love with everything about it: the humanity of the members, the energy, the creative ideas moving faster than the speed of sound, the rusty old clubhouse. But a couple of things bothered me: the cigarette smog, and the stigma of being an “amateur.” The smog is irrelevant now, but being viewed as a lesser artist just because I wasn’t producing “professional” art was a real pain point.
 
-My hatred for the word bothered me for years, even after taking on responsibilities in the club and actively defending the philosophy of the Tunisian Federation of Amateur Filmmakers. During debates with club friends, I often suggested we call ourselves "independents" to escape the pejorative baggage. Nobody disagreed. Some even tried justifying the name with a soft origin story: "Actually, it comes from the Latin amator, meaning lover : from amour." A nice fact, but it missed the point.
+My hatred for the word bothered me for years, even after taking on responsibilities in the club and actively defending the philosophy of the Tunisian Federation of Amateur Filmmakers. During debates with club friends, I often suggested we call ourselves “independents” to escape the pejorative baggage. Nobody disagreed. Some even tried justifying the name with a soft origin story: “Actually, it comes from the Latin amator, meaning lover : from amour.” A nice fact, but it missed the point.
 
 Now, with some distance and maturity, I realize how completely wrong I was. Being an amateur is the purest form of art. It is the only real way to achieve total artistic freedom, especially in cinema.
 
-When you stop looking at "amateur" through the lens of societal stigma and start seeing it simply as the opposite of "commercial," the term reveals its actual power. Amateurism doesn't mean you lack commitment. It doesn't mean you produce garbage and call it experimental art. Being an amateur simply means you are free. And cinema, as the most complex, dangerous and sophisticated of the arts, demands to be free.
+When you stop looking at “amateur” through the lens of societal stigma and start seeing it simply as the opposite of “commercial,” the term reveals its actual power. Amateurism doesn’t mean you lack commitment. It doesn’t mean you produce garbage and call it experimental art. Being an amateur simply means you are free. And cinema, as the most complex, dangerous and sophisticated of the arts, demands to be free.
 
-You owe nothing to anyone. You write what matters to you, convince your friends to join in, and make your movie. That’s it. You aren’t owned by a producer. You don’t care if the movie turns a profit. You don't force yourself to finish a compromised cut just to get paid. You make a movie because you fiercely believe in its message. You do it just to make art and to speak your own truth.
+You owe nothing to anyone. You write what matters to you, convince your friends to join in, and make your movie. That’s it. You aren’t owned by a producer. You don’t care if the movie turns a profit. You don’t force yourself to finish a compromised cut just to get paid. You make a movie because you fiercely believe in its message. You do it just to make art and to speak your own truth.
 
-With this comes a strange paradox: in its truest form, an amateur film cannot be bad. Why? Because an amateur will simply abandon the project if they aren't convinced by the result. You can pull the plug at any stage: writing, casting, shooting, editing, or even the morning of the projection. You can scrap your movie simply because it no longer resonates with you. You haven't sold your artistic soul. You are free.
+With this comes a strange paradox: in its truest form, an amateur film cannot be bad. Why? Because an amateur will simply abandon the project if they aren’t convinced by the result. You can pull the plug at any stage: writing, casting, shooting, editing, or even the morning of the projection. You can scrap your movie simply because it no longer resonates with you. You haven’t sold your artistic soul. You are free.
 
-And let's be clear: in its purest form, being an amateur also means you do not give a single damn about festival prizes or prestige. It also means you don’t care if the FIFAK deadline is approaching. It means rejecting the pathetic mentality of, "It’s a bummer our club didn't prepare a movie this year, let's just shoot something so we don't show up empty-handed." That isn’t amateurism. That’s acting like a childish football club supporter. In fact, it’s worse than commercial cinema. You aren't just making a movie to please a jury; you’re making a bad movie because you aren’t actually ready for cinema yet. An amateur filmmaker wants festivals because they are platforms to show and debate ideas and art, not a podium of fame and recognition.
+And let’s be clear: in its purest form, being an amateur also means you do not give a single damn about festival prizes or prestige. It also means you don’t care if the FIFAK deadline is approaching. It means rejecting the pathetic mentality of, “It’s a bummer our club didn’t prepare a movie this year, let’s just shoot something so we don’t show up empty-handed.” That isn’t amateurism. That’s acting like a childish football club supporter. In fact, it’s worse than commercial cinema. You aren’t just making a movie to please a jury; you’re making a bad movie because you aren’t actually ready for cinema yet. An amateur filmmaker wants festivals because they are platforms to show and debate ideas and art, not a podium of fame and recognition.
 
-A real amateur filmmaker doesn't sweat over finding ideas because there is zero deadline pressure. An engaged amateur will make a good, honest movie when they are completely ready. Because they actually have something to say.
+A real amateur filmmaker doesn’t sweat over finding ideas because there is zero deadline pressure. An engaged amateur will make a good, honest movie when they are completely ready. Because they actually have something to say.
 
-Achieving this absolute state of amateurism isn't obvious. But when it is achieved, it creates masterpieces, artistic manifestos, and monuments.
+Achieving this absolute state of amateurism isn’t obvious. But when it is achieved, it creates masterpieces, artistic manifestos, and monuments.
 
-And bear in mind: "independent" is not a synonym for "amateur." An independent filmmaker might be free from major studios, which gives them integrity, but they lack the Right to Abandon. An independent lives off their art. They owe themselves to the future revenue their movie has to generate, which brings inevitable concessions to appease the viewers.
+And bear in mind: “independent” is not a synonym for “amateur.” An independent filmmaker might be free from major studios, which gives them integrity, but they lack the Right to Abandon. An independent lives off their art. They owe themselves to the future revenue their movie has to generate, which brings inevitable concessions to appease the viewers.
 
-A true amateur doesn't care what the viewers think. A true amateur creates art in its purest form. And art in its purest form can only speak the truth.`,
+A true amateur doesn’t care what the viewers think. A true amateur creates art in its purest form. And art in its purest form can only speak the truth.`,
     author: "Youssef El Behi",
     date: "2026-02-21",
     category: "Blog",
@@ -53,12 +53,12 @@ A true amateur doesn't care what the viewers think. A true amateur creates art i
     title: "Club Hammam-Lif: A History of Engagement",
     excerpt: `Sixteen kilometers south of Tunis, in the heart of a seaside town, a small garage holds something extraordinary.
 
-This town has carried many names through the centuries: Naro, in Punic times, meaning "fire" for the hot springs at the foot of Djebel Boukornine. Aquae Persianae, or "the waters of Perseus," under Roman rule. Hammam al-Jazira, then Hammam Lif through the Islamic era. Always tied to water and warmth. Always a place of flow and transformation.
+This town has carried many names through the centuries: Naro, in Punic times, meaning “fire” for the hot springs at the foot of Djebel Boukornine. Aquae Persianae, or “the waters of Perseus,” under Roman rule. Hammam al-Jazira, then Hammam Lif through the Islamic era. Always tied to water and warmth. Always a place of flow and transformation.
 
 And in this place of ancient metamorphosis, a modern one continues.`,
     body: `Sixteen kilometers south of Tunis, in the heart of a seaside town, a small garage holds something extraordinary.
 
-This town has carried many names through the centuries: Naro, in Punic times, meaning "fire" for the hot springs at the foot of Djebel Boukornine. Aquae Persianae, or "the waters of Perseus," under Roman rule. Hammam al-Jazira, then Hammam Lif through the Islamic era. Always tied to water and warmth. Always a place of flow and transformation.
+This town has carried many names through the centuries: Naro, in Punic times, meaning “fire” for the hot springs at the foot of Djebel Boukornine. Aquae Persianae, or “the waters of Perseus,” under Roman rule. Hammam al-Jazira, then Hammam Lif through the Islamic era. Always tied to water and warmth. Always a place of flow and transformation.
 
 And in this place of ancient metamorphosis, a modern one continues.
 
@@ -74,7 +74,7 @@ Everything you find in this place was an unconditional gift from people who felt
 
 From 1965 to this present day, layers of memories from different eras keep building up over time.
 
-Take a tour and you'll see it. Pictures and posters hanging on the walls. Library shelves are heavy with books, film cassettes and DVDs. Prizes and costumes are everywhere. Even the names carved into the wooden table at the center of the room. All of it makes you hear something: echoes of stories in chorus. Stories of young, curious people who passed through. Friendships were forged through collaboration. Love stories have begun over a shared passion for film. Personalities were formed. Confidence was built frame by frame. Art militants raised with purpose. Dreams conceived in late-night discussions and realized on screen.
+Take a tour and you’ll see it. Pictures and posters hanging on the walls. Library shelves are heavy with books, film cassettes and DVDs. Prizes and costumes are everywhere. Even the names carved into the wooden table at the center of the room. All of it makes you hear something: echoes of stories in chorus. Stories of young, curious people who passed through. Friendships were forged through collaboration. Love stories have begun over a shared passion for film. Personalities were formed. Confidence was built frame by frame. Art militants raised with purpose. Dreams conceived in late-night discussions and realized on screen.
 
 Lives were being shaped here, and they still are.
 
@@ -92,11 +92,11 @@ This new generation carries the responsibility with “naro” in their souls: t
 
 Every Saturday evening at 4pm, they gather. Coffee and tea cups in hand, they discuss. Sometimes things heat up, voices rise and ideas clash. Other times, you can hear their laughter from outside the garage door.
 
-They plan photo outings. Writing workshops. They debate movie ideas and shoot films that represent them and the club's values. Playing with lights, frames, and DIY materials, their low-budget productions have made it to audiences, captured minds, and won prizes.
+They plan photo outings. Writing workshops. They debate movie ideas and shoot films that represent them and the club’s values. Playing with lights, frames, and DIY materials, their low-budget productions have made it to audiences, captured minds, and won prizes.
 
-But they're not content with that.
+But they’re not content with that.
 
-They launched Ydour (meaning "it moves around" or "recording" in movie sets), a new initiative built on a simple but powerful idea: bring movies to people in all regions instead of waiting for people to come to the movies. Screenings and debates now take place beyond the garage walls or during the International Festival of Amateur Film in Kelibia (FIFAK), reaching wider audiences, planting seeds in new communities.
+They launched Ydour (meaning “it moves around” or “recording” in movie sets), a new initiative built on a simple but powerful idea: bring movies to people in all regions instead of waiting for people to come to the movies. Screenings and debates now take place beyond the garage walls or during the International Festival of Amateur Film in Kelibia (FIFAK), reaching wider audiences, planting seeds in new communities.
 
 With the same innovative spirit, they built this website: to digitize the experience and make it accessible to all enthusiasts and curious minds, and to preserve this legacy for the generations that will come after them.
 

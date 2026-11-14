@@ -17,6 +17,7 @@ Presentational building blocks shared by the views: cards, page titles and conta
 
 ## Traps
 
+- `ClubMap` (contact page) imports Leaflet inside an effect because Leaflet reads `window` on load; the prerendered HTML is an empty box. It uses OpenStreetMap's standard tiles (no key; their usage policy requires the credit line, so keep the attribution), darkened in dark mode by a CSS filter in `src/index.css` (`.club-map`). CARTO's basemaps now need an API key.
 - Prerendered HTML must match the first client render. `LazyImage` reads `img.complete` in an effect because `onLoad`/`onError` have already fired before hydration. `ShareActions` reads `window.location` during render, which is safe only because its share links render after a click (`open`); keep it that way.
 - `BackButton` steps back in history when `src/lib/back-navigation.ts` (fed by `Layout`) knows an in-site previous page. Anything that adds a history entry without changing page (a hash link, a push to the same URL) makes that step land on the same page; avoid it, as the skip link does.
 - `Lightbox` renders through a portal into `document.body`, so it is client-only.

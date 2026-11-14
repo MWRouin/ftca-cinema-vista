@@ -41,7 +41,7 @@ export function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
     });
   };
 
-  const buttonClass = onDark ? "text-white" : "text-primary";
+  const buttonClass = onDark ? "text-white" : "text-brand";
 
   return (
     <button
@@ -50,7 +50,7 @@ export function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
       aria-label={t("language.switchTo", { language: t(`language.${next}`) })}
       title={t("language.switchTo", { language: t(`language.${next}`) })}
     >
-      <span className="text-sm font-semibold uppercase group-hover:scale-110 transition-transform">
+      <span className="text-base font-bold uppercase group-hover:scale-110 transition-transform">
         {locale}
       </span>
     </button>

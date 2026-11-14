@@ -5,7 +5,7 @@
   "by": "Par {{author}}",
   "empty": "Le blog est vide pour le moment.",
   "checkBack": "Revenez bientôt !",
-  "backToBlog": "← Retour au blog",
+  "backToBlog": "Retour au blog",
   "meta": "Par <author>{{author}}</author> • {{date}} • {{readTime}}",
   "writtenBy": "Écrit par"
 }

@@ -21,7 +21,7 @@ export function PersonLink({ personId, children, className }: PersonLinkProps) {
     return (
       <LocalLink
         to={`/people/${personId}`}
-        className={cn("underline-offset-2 hover:text-primary hover:underline transition-colors", className)}
+        className={cn("underline decoration-muted-foreground/40 decoration-1 underline-offset-4 hover:text-brand hover:decoration-current transition-colors", className)}
       >
         {children}
       </LocalLink>

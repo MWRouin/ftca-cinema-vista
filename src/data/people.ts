@@ -1,5 +1,5 @@
 import rawPeople from "./people.json";
-import { publicUrl, resolveAssetUrl } from "@/lib/base-path";
+import { resolveAssetUrl } from "@/lib/base-path";
 
 /** Per-locale text. */
 export type LocalizedText = { en?: string; fr?: string };
@@ -13,9 +13,6 @@ export type ClubMembership = {
 };
 
 export type Gender = "male" | "female";
-
-/** Portrait shown for a person without one. */
-export const DEFAULT_PERSON_IMAGE = publicUrl("Members/user.png");
 
 export type Person = {
     id: string; // slug, matches slugify(name)

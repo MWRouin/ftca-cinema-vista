@@ -42,7 +42,7 @@ export function EventGallerySlider({ images }: { images: string[] }) {
                       Green with a white inner line shows on dark and light photos. */}
                   <span
                     aria-hidden
-                    className="pointer-events-none absolute inset-0 rounded-lg group-focus-visible:shadow-[inset_0_0_0_4px_hsl(var(--primary)),inset_0_0_0_6px_white]"
+                    className="pointer-events-none absolute inset-0 rounded-lg group-focus-visible:shadow-[inset_0_0_0_4px_hsl(var(--ring)),inset_0_0_0_6px_white]"
                   />
                 </button>
               </div>

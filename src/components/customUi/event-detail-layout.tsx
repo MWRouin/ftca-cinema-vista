@@ -84,8 +84,8 @@ function AlternatingMedia({ media, slug }: { media: EventMedia[]; slug: string }
         return (
           <div key={i} className="grid md:grid-cols-2 gap-8 items-center">
             {/* Text */}
-            <div className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
-              <h2 className="text-xl font-semibold mb-3">{title}</h2>
+            <div className={`text-foreground/85 ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
+              <h2 className="text-2xl font-semibold text-foreground mb-3">{title}</h2>
               <p className="whitespace-pre-line">{t(`${slug}.media.${i}.caption`)}</p>
             </div>
 
@@ -131,7 +131,7 @@ function EventCtaCard({ event, className }: { event: EventCopy; className?: stri
         {/* Quote */}
         <div className="flex items-start justify-center gap-4">
           <Clock className="w-6 h-6 text-muted-foreground mt-1" />
-          <blockquote className="italic text-xl leading-relaxed text-foreground">
+          <blockquote className="font-display text-2xl font-medium italic leading-snug text-foreground">
             “{event.quoteText}”
           </blockquote>
         </div>
@@ -183,7 +183,7 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
         {/* Overview */}
         <Card className="mb-8">
           <CardContent className="pt-6">
-            <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="max-w-[70ch] text-lg leading-relaxed text-foreground/85 whitespace-pre-line">
               {event.overview}
             </p>
             {data.overviewExtra}
@@ -193,7 +193,7 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
         <AlternatingMedia media={data.media} slug={slug} />
 
         <section className="mt-16">
-          <h2 className="text-3xl font-bold mb-6">{t("gallery")}</h2>
+          <h2 className="section-title mb-6">{t("gallery")}</h2>
           <EventGallerySlider images={data.gallery} />
         </section>
 

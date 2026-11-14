@@ -76,7 +76,7 @@ export function MovieCard({ movie, to, badges, titleAs }: MovieCardProps) {
   const directorNames = getDirectorNames(movie);
 
   return (
-    <Card className="group transition-all duration-300 hover:shadow-lg hover:scale-[1.015]">
+    <Card className="group">
       <LocalLink to={to ?? `/movies/${movie.id}`} className="block">
         <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg bg-muted">
           <LazyImage
@@ -110,7 +110,7 @@ export function MovieCard({ movie, to, badges, titleAs }: MovieCardProps) {
           {badges && <CardBadges badges={badges} />}
         </div>
         <CardHeader>
-          <CardTitle as={titleAs} className="text-lg leading-tight transition-colors group-hover:text-primary">
+          <CardTitle as={titleAs} className="text-lg leading-tight transition-colors group-hover:text-brand">
             {movie.title}
           </CardTitle>
           <CardDescription>

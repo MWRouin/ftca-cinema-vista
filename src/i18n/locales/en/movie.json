@@ -1,12 +1,12 @@
 {
-  "backToMovies": "← Back to Movies",
+  "backToMovies": "Back to Movies",
   "director": "Director",
   "cast": "Actors",
   "crew": "Technical team",
   "watchNow": "Watch Now",
   "noVideo": "No video available",
   "moreFrom": "More from {{director}}",
-  "moreLike": "More like \"{{title}}\"",
+  "moreLike": "More like “{{title}}”",
   "directedBy": "Directed by {{director}}",
   "directedByLabel": "Directed by",
   "roles": {

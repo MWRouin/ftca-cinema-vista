@@ -1,6 +1,6 @@
 {
   "nav": {
-    "back": "← Back",
+    "back": "Back",
     "home": "Home",
     "movies": "Movies",
     "events": "Events",
@@ -14,6 +14,7 @@
     "tagline": "Where Cinema Comes Alive",
     "mission": "Our mission and goals are far beyond celebrating cinema as an art. We have a philosophical foundation. We use it as a medium to question, reflect, and share ideas.",
     "quickLinks": "Quick Links",
+    "federation": "FTCA federation",
     "contact": "Contact",
     "rights": "© {{year}} - Club des Cinéastes Amateurs de Hammamlif - All rights reserved.",
     "critique": "Beyond art, cinema as a voice for ideas and critique."

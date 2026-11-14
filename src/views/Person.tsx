@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
 import { PageContainer } from '@/components/customUi/page-container';
 import { Badge } from '@/components/ui/badge';
-import { DEFAULT_PERSON_IMAGE, getPersonById } from '@/data/people';
+import { getPersonById } from '@/data/people';
 import { getFilmography, isPersonPublic } from '@/data/movies';
 import { getArticlesByPerson } from '@/data/blog';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
 import { ArticleCard } from '@/components/customUi/article-card';
 import { ElementTitle } from '@/components/customUi/element-title';
-import { slugify } from '@/lib/utils';
+import { initials, slugify } from '@/lib/utils';
 import { decodeParam } from '@/lib/route-params';
 import NotFound from './NotFound';
 
@@ -42,9 +42,10 @@ export default function Person() {
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-12">
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden flex-shrink-0 bg-muted">
               <LazyImage
-                src={person.image || DEFAULT_PERSON_IMAGE}
+                src={person.image ?? ""}
                 alt={person.name}
                 className="w-full h-full object-cover"
+                fallback={<span className="font-display text-5xl font-semibold" aria-hidden>{initials(person.name)}</span>}
               />
             </div>
             <div className="text-center sm:text-start space-y-3">
@@ -60,7 +61,7 @@ export default function Person() {
 
           {/* Filmography */}
           <section>
-            <h2 className="text-3xl font-bold mb-8">{t('filmography')}</h2>
+            <h2 className="section-title mb-8">{t('filmography')}</h2>
             {filmography.length === 0 ? (
               <p className="text-muted-foreground">{t('noFilmography')}</p>
             ) : (
@@ -82,7 +83,7 @@ export default function Person() {
           {/* Articles written by this person (only when they have any) */}
           {articles.length > 0 && (
             <section className="mt-16">
-              <h2 className="text-3xl font-bold mb-8">{t('articles')}</h2>
+              <h2 className="section-title mb-8">{t('articles')}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {articles.map((article) => (
                   <ArticleCard key={article.slug} article={article} variant="compact" />

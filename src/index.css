@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Dark theme (root): mapped to the editorial hero palette
-       (deep teal-green + warm sand accent on a green-ink ground). */
+       (deep teal-green + warm wheat accent on a green-ink ground). */
     --background: 162 40% 4%;
     /* green-tinted ink, ~ hero --ink #07150f */
     --foreground: 40 30% 94%;
@@ -19,19 +19,24 @@
     --popover: 162 32% 7%;
     --popover-foreground: 40 30% 94%;
 
-    --primary: 167 58% 28%;
+    /* Fills (buttons, badges, progress bar): the hero green, as in light mode,
+       with cream text on it. */
+    --primary: 168 55% 27%;
     /* hero --green #1f6b5c */
     --primary-foreground: 40 35% 95%;
+    /* Green as text, links and icons. The fill green is too dark to read on
+       the ink ground, so text uses a lighter emerald (#2da986, 6.6:1 on the page). */
+    --primary-text: 163 58% 42%;
 
     --secondary: 167 55% 10%;
     /* deep green section bg */
     --secondary-foreground: 40 30% 94%;
 
     --muted: 162 18% 13%;
-    --muted-foreground: 150 12% 64%;
+    --muted-foreground: 150 13% 70%;
 
-    --accent: 41 45% 70%;
-    /* hero --sand #d9c8a2 */
+    --accent: 41 54% 63%;
+    /* wheat #d4b46e, also the hero's --sand */
     --accent-foreground: 162 40% 10%;
 
     --destructive: 0 62.8% 30.6%;
@@ -39,9 +44,17 @@
 
     --border: 162 20% 19%;
     --input: 162 20% 19%;
-    --ring: 167 58% 32%;
+    --ring: 163 58% 42%;
 
     --radius: 0.25rem;
+
+    /* Text on a darkened photo (home "Join" band), the same in both themes. */
+    --on-image: 40 30% 94%;
+
+    /* Logo layers (components/Logo): light enough to read on the ink ground. */
+    --logo-back: #6f8279;
+    --logo-main: #2da986;
+    --logo-front: #b4c2bb;
 
     --sidebar-background: 162 34% 6%;
     --sidebar-foreground: 40 30% 94%;
@@ -54,7 +67,7 @@
   }
 
   .light {
-    /* Light theme: warm cream ground + same green/sand from the hero */
+    /* Light theme: warm cream ground + the same green and wheat */
     --background: 42 44% 95%;
     /* warm cream, ~ hero --cream #f8f4ec */
     --foreground: 162 38% 10%;
@@ -69,16 +82,17 @@
     --primary: 167 60% 27%;
     /* hero --green #1f6b5c */
     --primary-foreground: 40 40% 96%;
+    --primary-text: 167 60% 27%;
 
     --secondary: 42 34% 89%;
     /* warm neutral section bg */
     --secondary-foreground: 162 38% 12%;
 
     --muted: 42 30% 90%;
-    --muted-foreground: 160 12% 38%;
+    --muted-foreground: 160 13% 35%;
 
-    --accent: 41 52% 62%;
-    /* deeper sand for contrast on cream */
+    --accent: 41 54% 63%;
+    /* wheat #d4b46e, as in dark mode */
     --accent-foreground: 162 40% 12%;
 
     --destructive: 0 72% 50%;
@@ -87,6 +101,10 @@
     --border: 42 26% 84%;
     --input: 42 26% 88%;
     --ring: 167 60% 30%;
+
+    --logo-back: #3b4b44;
+    --logo-main: #1f6b5c;
+    --logo-front: #6a786d;
 
     --sidebar-background: 42 44% 95%;
     --sidebar-foreground: 162 38% 10%;
@@ -98,12 +116,6 @@
     --sidebar-ring: 167 60% 30%;
   }
 
-  .dark {
-    /* Brighter green so it pops on the dark ground. Cream text on it falls
-       under 4.5:1, so text on green fills (buttons, badges, chips) is ink. */
-    --primary: 165 55% 38%;
-    --primary-foreground: 162 40% 3%;
-  }
 }
 
 @layer base {
@@ -113,22 +125,18 @@
 
   body {
     @apply bg-background text-foreground transition-colors duration-300;
-    background-image:
-      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.02) 0%, transparent 50%);
-    background-attachment: fixed;
   }
 
-  /* Cinematic typography */
+  /* Headings use Nunito (the body face; font-display is Nunito too), with
+     slightly tighter tracking as it grows. */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    font-family: 'Nunito', system-ui, sans-serif;
     font-weight: 600;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.011em;
     line-height: 1.2;
   }
 
@@ -173,64 +181,6 @@
     }
   }
 
-  /* Hover lifts are decoration; drop them when the visitor asks for less
-     motion. */
-  @media (prefers-reduced-motion: reduce) {
-    .hover-lift:hover,
-    .btn-cinema:hover {
-      transform: none;
-    }
-  }
-
-  /* Cinematic gradients */
-  .gradient-cinema {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 50%, hsl(var(--primary) / 0.8) 100%);
-    box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
-  }
-
-  .gradient-dark {
-    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.3) 100%);
-  }
-
-  /* Enhanced hover effects */
-  .hover-lift {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px hsl(var(--primary) / 0.15);
-  }
-
-  /* Button enhancements */
-  .btn-cinema {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 4px 15px hsl(var(--primary) / 0.3);
-  }
-
-  .btn-cinema:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px hsl(var(--primary) / 0.4);
-  }
-
-  .btn-cinema::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .btn-cinema:hover::before {
-    left: 100%;
-  }
-
   /* Navigation enhancements with better contrast */
   .nav-link {
     position: relative;
@@ -270,7 +220,7 @@
   /* Show focus ring only for keyboard users (focus-visible).
      Prevents persistent outline after mouse click while keeping accessibility. */
   .focus-cinema:focus-visible {
-    outline: 2px solid hsl(var(--primary));
+    outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
   }
 
@@ -279,16 +229,50 @@
     outline: none;
   }
 
-  /* Section dividers with better visibility */
-  .section-divider {
-    background: linear-gradient(90deg, transparent, hsl(var(--border) / 0.8), transparent);
-    height: 2px;
-    box-shadow: 0 1px 2px hsl(var(--foreground) / 0.1);
+  /* Contact map (components/customUi/club-map): in dark mode the standard
+     OpenStreetMap tiles are inverted and hue-shifted back, which gives a dark
+     map with roughly the right colours (water stays blue, parks green). */
+  :root:not(.light) .club-map .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.6);
   }
 
-  /* Light theme specific improvements */
-  .light .gradient-dark {
-    background: linear-gradient(135deg, hsl(var(--secondary) / 0.3) 0%, hsl(var(--muted) / 0.5) 100%);
+  /* Leaflet sets its own fonts (Helvetica/Arial for the credit line, a
+     monospace for the zoom buttons); use the site's. */
+  .club-map.leaflet-container,
+  .club-map .leaflet-bar a {
+    font-family: inherit;
+  }
+
+  /* Contact map pin (components/customUi/club-map): a teardrop in the
+     accent with a green centre. */
+  .club-map-pin {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    background: hsl(var(--accent));
+    border: 2px solid hsl(var(--background));
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+  }
+  .club-map-pin::after {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border-radius: 50%;
+    background: hsl(var(--primary));
+  }
+
+  /* Section headings inside a page (h2), in the page title's face
+     (font-display). */
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-semibold tracking-[-0.01em];
+  }
+
+  /* Short wheat hairline under section titles, like the hero's eyebrow rule. */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent)), transparent);
   }
 
   /* Page navigation progress bar (components/NavigationProgress). It creeps

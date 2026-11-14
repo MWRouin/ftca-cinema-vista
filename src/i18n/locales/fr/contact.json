@@ -3,20 +3,24 @@
   "subtitle": "Contactez notre équipe ou rejoignez notre communauté",
   "form": {
     "title": "Envoyez-nous un message",
-    "description": "Des questions sur nos événements, envie de suggérer un film ou de nous rejoindre ? Nous serions ravis d'avoir de vos nouvelles !",
+    "description": "Des questions sur nos événements, envie de suggérer un film ou de nous rejoindre ? Nous serions ravis d’avoir de vos nouvelles !",
     "nameLabel": "Nom complet",
     "namePlaceholder": "Votre nom complet",
     "subjectLabel": "Objet *",
-    "subjectPlaceholder": "De quoi s'agit-il ?",
+    "subjectPlaceholder": "De quoi s’agit-il ?",
     "messageLabel": "Message *",
-    "messagePlaceholder": "Dites-nous en plus...",
+    "messagePlaceholder": "Dites-nous en plus…",
     "submit": "Envoyer le message"
   },
   "details": {
     "title": "Entrer en contact",
     "email": "E-mail",
     "phone": "Téléphone",
-    "address": "Adresse"
+    "address": "Adresse",
+    "mapTitle": "Carte montrant le club au 80 RN1, Hammam-Lif",
+    "openOsm": "OpenStreetMap",
+    "openGoogleMaps": "Google Maps",
+    "recenter": "Revenir au club"
   },
   "meetings": {
     "title": "Réunions régulières",

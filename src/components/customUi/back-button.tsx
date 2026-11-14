@@ -1,5 +1,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LocalLink } from "@/i18n/locale";
 import { usePreviousPage } from "@/lib/back-navigation";
@@ -42,6 +43,7 @@ export function BackButton({ to, label, className }: BackButtonProps) {
             router.back();
           }}
         >
+          <ArrowLeft className="rtl:rotate-180" aria-hidden />
           {text}
         </LocalLink>
       </Button>
