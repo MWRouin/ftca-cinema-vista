@@ -2,13 +2,13 @@
 
 import { Button } from '@/components/ui/button';
 import { Trans, useTranslation } from 'react-i18next';
-import { ArrowRight } from 'lucide-react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { getMovies } from '@/data/movies';
 import { PageTitle } from '@/components/customUi/page-title';
 import { MovieCard } from '@/components/customUi/movie-card';
 import { LocalLink } from '@/i18n/locale';
 import './home-hero.css';
+import { FeaturedCarousel } from './home-hero-featured';
 import { publicUrl } from '@/lib/base-path';
 
 export default function Home() {
@@ -50,36 +50,12 @@ export default function Home() {
                 {t('hero.tagline')}
               </p>
 
-              <p className="description">
-                <Trans t={t} i18nKey="hero.description" components={{ strong: <strong /> }} />
-              </p>
-
-              <div className="quote">
-                {t('hero.quote')}
-              </div>
-
-              <div className="actions">
-                <LocalLink to="/about" className="btn btn-primary">
-                  {t('hero.ctaStory')} <ArrowRight className="arrow" aria-hidden />
-                </LocalLink>
-                <LocalLink to="/movies" className="btn btn-secondary">
-                  {t('hero.ctaFilms')} <ArrowRight className="arrow" aria-hidden />
-                </LocalLink>
-              </div>
+              {/* The club's description, then the items the club features. */}
+              <FeaturedCarousel
+                description={<Trans t={t} i18nKey="hero.description" components={{ strong: <strong /> }} />}
+              />
 
             </div>
-
-            <div className="side-note">
-              {t('hero.sideNote')}
-            </div>
-          </div>
-
-          <div className="credits">
-            <span className="key">1964</span>
-            <span>Hammam-Lif</span>
-            <span>{t('hero.creditTunisia')}</span>
-            <span>FTCA</span>
-            <span>{t('hero.creditYears')}</span>
           </div>
         </section>
 

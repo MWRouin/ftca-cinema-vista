@@ -56,6 +56,7 @@ Template:
 | [2026-11-launch-and-event-data](sprints/2026-11-launch-and-event-data.md) | Live site check, Event structured data for Search Console, self-hosted share image, CI checks, module docs |
 | [2026-11-ui-ux-audit-quick-wins](sprints/2026-11-ui-ux-audit-quick-wins.md) | UI/UX audit; quick wins: no-JS and reduced-motion content, article readability, dark contrast, card and heading accessibility, opaque nav |
 | [2026-11-visual-design-pass](sprints/2026-11-visual-design-pass.md) | Visual audit fixes, then revised on review: Nunito everywhere, emerald dark green, wheat accent and card outlines, cinema-photo home band, trophy in laurels, footer and Contact rework with an OpenStreetMap map |
+| [2026-11-home-hero-featured](sprints/2026-11-home-hero-featured.md) | Home hero rebuilt around a slider: the club slide (description and mission) and hand-picked featured items, images beside it on desktop and behind it on phones; old hero blocks removed |
 
 ## Module `AGENTS.md` files
 

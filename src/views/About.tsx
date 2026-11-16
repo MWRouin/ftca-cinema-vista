@@ -10,6 +10,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { getMembers, getHonoraryMembers } from '@/data/people';
 import { isPersonPublic } from '@/data/movies';
 import { LocalLink } from '@/i18n/locale';
+import { inlineLinkClass } from '@/components/customUi/person-link';
 import { initials, slugify } from '@/lib/utils';
 import { publicUrl } from '@/lib/base-path';
 import { FEDERATION_URL } from '@/lib/contact';
@@ -180,13 +181,12 @@ export default function About() {
                     t={t}
                     i18nKey="mission.p2"
                     components={{
-                      // The federation's site; underlined like the person links.
                       fed: (
                         <a
                           href={FEDERATION_URL}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="underline decoration-muted-foreground/40 decoration-1 underline-offset-4 hover:text-brand hover:decoration-current transition-colors"
+                          className={inlineLinkClass}
                         />
                       ),
                     }}

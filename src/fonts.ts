@@ -9,7 +9,7 @@
  * The Arabic files only download on pages with Arabic text (unicode-range).
  */
 
-// Nunito: the whole site, hero included (experiment, step 1)
+// Nunito: the whole site, hero included
 import "@fontsource/nunito/latin-400.css";
 import "@fontsource/nunito/latin-500.css";
 import "@fontsource/nunito/latin-600.css";
