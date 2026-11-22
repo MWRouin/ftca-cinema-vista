@@ -1,5 +1,6 @@
 {
   "nav": {
+    "back": "Retour",
     "home": "Accueil",
     "movies": "Films",
     "events": "Événements",
@@ -11,11 +12,12 @@
   "footer": {
     "clubName": "Club des Cinéastes Amateurs de Hammamlif",
     "tagline": "Là où le cinéma prend vie",
-    "mission": "Notre mission et nos objectifs vont bien au-delà de la célébration du cinéma en tant qu'art. Nous avons un fondement philosophique : nous l'utilisons comme un moyen de questionner, de réfléchir et de partager des idées.",
+    "mission": "Notre mission et nos objectifs vont bien au-delà de la célébration du cinéma en tant qu’art. Nous avons un fondement philosophique : nous l’utilisons comme un moyen de questionner, de réfléchir et de partager des idées.",
     "quickLinks": "Liens rapides",
+    "federation": "Fédération FTCA",
     "contact": "Contact",
     "rights": "© {{year}} - Club des Cinéastes Amateurs de Hammamlif - Tous droits réservés.",
-    "critique": "Au-delà de l'art, le cinéma comme voix pour les idées et la critique."
+    "critique": "Au-delà de l’art, le cinéma comme voix pour les idées et la critique."
   },
   "language": {
     "label": "Langue",
@@ -38,11 +40,14 @@
   },
   "a11y": {
     "toggleMenu": "Ouvrir ou fermer le menu",
+    "skipToContent": "Aller au contenu",
+    "homeLink": "FTCA Hammam-Lif, accueil",
     "close": "Fermer",
     "previousImage": "Image précédente",
     "nextImage": "Image suivante",
     "galleryPhoto": "Photo de l’événement {{number}}",
     "fullSizePreview": "Aperçu en taille réelle",
+    "viewFullSize": "Voir en grand : {{name}}",
     "viewOnMaps": "Voir l’emplacement sur Google Maps"
   }
 }

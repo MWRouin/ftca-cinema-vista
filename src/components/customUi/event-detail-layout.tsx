@@ -74,42 +74,49 @@ function EventHeader({ event }: { event: EventCopy }) {
 /** Two-column alternating text/media rows; images and videos open in a shared lightbox. */
 function AlternatingMedia({ media, slug }: { media: EventMedia[]; slug: string }) {
   const { t } = useTranslation("eventDetail");
+  const { t: tCommon } = useTranslation();
   const lightbox = useLightbox();
 
   return (
     <section className="space-y-12">
-      {media.map((item, i) => (
-        <div key={i} className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Text */}
-          <div className={`text-muted-foreground ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
-            <h3 className="text-xl font-semibold mb-3">{t(`${slug}.media.${i}.title`)}</h3>
-            <p className="whitespace-pre-line">{t(`${slug}.media.${i}.caption`)}</p>
-          </div>
+      {media.map((item, i) => {
+        const title = t(`${slug}.media.${i}.title`);
+        return (
+          <div key={i} className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Text */}
+            <div className={`text-foreground/85 ${i % 2 === 0 ? "md:order-2" : "md:order-1"}`}>
+              <h2 className="text-2xl font-semibold text-foreground mb-3">{title}</h2>
+              <p className="whitespace-pre-line">{t(`${slug}.media.${i}.caption`)}</p>
+            </div>
 
-          {/* Media */}
-          <div className={`overflow-hidden rounded-lg ${i % 2 === 0 ? "md:order-1" : "md:order-2"}`}>
-            {item.type === "image" ? (
-              <div className="cursor-zoom-in" onClick={() => lightbox.open(item.src)}>
+            {/* Media: a button, so the lightbox opens from the keyboard too */}
+            <button
+              type="button"
+              onClick={() => lightbox.open(item.src, item.type, title)}
+              aria-label={tCommon("a11y.viewFullSize", { name: title })}
+              aria-haspopup="dialog"
+              className={`group block w-full overflow-hidden rounded-lg cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${i % 2 === 0 ? "md:order-1" : "md:order-2"}`}
+            >
+              {item.type === "image" ? (
                 <LazyImage
                   src={item.src}
-                  alt={t(`${slug}.media.${i}.title`)}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  alt=""
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-              </div>
-            ) : (
-              <video
-                src={item.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full rounded-lg cursor-zoom-in"
-                onClick={() => lightbox.open(item.src, "video")}
-              />
-            )}
+              ) : (
+                <video
+                  src={item.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="block w-full rounded-lg"
+                />
+              )}
+            </button>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       <Lightbox state={lightbox} />
     </section>
@@ -124,7 +131,7 @@ function EventCtaCard({ event, className }: { event: EventCopy; className?: stri
         {/* Quote */}
         <div className="flex items-start justify-center gap-4">
           <Clock className="w-6 h-6 text-muted-foreground mt-1" />
-          <blockquote className="italic text-xl leading-relaxed text-foreground">
+          <blockquote className="font-display text-2xl font-medium italic leading-snug text-foreground">
             “{event.quoteText}”
           </blockquote>
         </div>
@@ -176,7 +183,7 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
         {/* Overview */}
         <Card className="mb-8">
           <CardContent className="pt-6">
-            <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-line">
+            <p className="max-w-[70ch] text-lg leading-relaxed text-foreground/85 whitespace-pre-line">
               {event.overview}
             </p>
             {data.overviewExtra}
@@ -186,7 +193,7 @@ export function EventDetailLayout({ data }: { data: EventDetailData }) {
         <AlternatingMedia media={data.media} slug={slug} />
 
         <section className="mt-16">
-          <h2 className="text-3xl font-bold mb-6">{t("gallery")}</h2>
+          <h2 className="section-title mb-6">{t("gallery")}</h2>
           <EventGallerySlider images={data.gallery} />
         </section>
 

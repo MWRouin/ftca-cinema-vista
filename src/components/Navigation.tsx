@@ -9,6 +9,7 @@ import { LanguageToggle } from './LanguageToggle';
 import { Logo } from './Logo';
 import { LocalLink } from '@/i18n/locale';
 import { stripLocale } from '@/i18n/config';
+import { NAV_ITEMS } from '@/lib/site-nav';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,16 +72,6 @@ export function Navigation() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen]);
 
-  const navItems = [
-    { key: 'home', path: '/' },
-    { key: 'movies', path: '/movies' },
-    { key: 'events', path: '/events' },
-    { key: 'blog', path: '/blog' },
-    { key: 'about', path: '/about' },
-    { key: 'palmares', path: '/palmares' },
-    { key: 'contact', path: '/contact' },
-  ];
-
   const normalize = (p: string) => (p.endsWith('/') && p !== '/' ? p.slice(0, -1) : p);
   const isActive = (target: string) => normalize(path) === normalize(target);
 
@@ -88,7 +79,7 @@ export function Navigation() {
     <>
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${overlay
       ? 'bg-transparent text-white border-transparent'
-      : `bg-background/85 border-border/30 ${scrolled ? 'shadow-lg' : ''}`
+      : `bg-background/90 border-border/30 ${scrolled ? 'shadow-lg' : ''}`
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
@@ -97,6 +88,7 @@ export function Navigation() {
             <LocalLink
               to="/"
               className="flex items-center space-x-3"
+              aria-label={t('a11y.homeLink')}
               onClick={() => {
                 setIsOpen(false);
                 window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -105,24 +97,24 @@ export function Navigation() {
               <Logo
                 size={50}
                 className="hover:scale-110 transition-transform drop-shadow-lg"
-                {...(overlay ? { colorMain: '#fff', colorBack: '#7b828d', colorFront: '#cbd1ce' } : {})}
+                {...(overlay ? { colorMain: '#fff', colorBack: '#8fa39a', colorFront: '#cbd1ce' } : {})}
               />
             </LocalLink>
           </div>
 
           {/* Desktop Navigation (centered on md+) */}
           <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-2">
-            {navItems.map((item, index) => (
+            {NAV_ITEMS.map((item, index) => (
               <LocalLink
                 key={item.key}
                 to={item.path}
-                className={`nav-link ${overlay ? 'nav-overlay ' : ''}text-sm font-medium whitespace-nowrap transition-all duration-300 focus-cinema ${isActive(item.path)
+                className={`nav-link ${overlay ? 'nav-overlay ' : ''}text-base font-semibold whitespace-nowrap transition-all duration-300 focus-cinema ${isActive(item.path)
                   ? overlay
                     ? 'text-white active' // active over hero: white stays legible
-                    : 'text-primary active' // keep underline via .active, remove bg/border
+                    : 'text-brand active' // keep underline via .active, remove bg/border
                   : overlay
                     ? 'text-white/90 hover:text-white'
-                    : 'text-foreground/80 hover:text-primary'
+                    : 'text-foreground/80 hover:text-brand'
                   }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -143,7 +135,7 @@ export function Navigation() {
               aria-controls="mobile-menu"
             >
               {/* Both icons are stacked and cross-fade, so the button turns into a close button. */}
-              <span className={`relative w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-primary'}`}>
+              <span className={`relative w-5 h-5 group-hover:scale-110 transition-transform duration-300 ${overlay ? 'text-white' : 'text-brand'}`}>
                 <Menu className={`absolute inset-0 w-5 h-5 transition-[transform,opacity] duration-300 ${isOpen ? 'opacity-0 rotate-90' : 'opacity-100 rotate-0'}`} />
                 <X className={`absolute inset-0 w-5 h-5 transition-[transform,opacity] duration-300 ${isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-90'}`} />
               </span>
@@ -178,9 +170,9 @@ export function Navigation() {
       >
         <div className="overflow-hidden rounded-md border border-border bg-card/95 shadow-xl backdrop-blur-md">
           {/* accent hairline */}
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
           <div className="p-2 max-h-[calc(100dvh-5rem)] overflow-y-auto overflow-x-hidden flex flex-col gap-0.5">
-            {navItems.map((item, index) => {
+            {NAV_ITEMS.map((item, index) => {
               const active = isActive(item.path);
               return (
                 <LocalLink
@@ -191,7 +183,7 @@ export function Navigation() {
                   aria-current={active ? 'page' : undefined}
                   className={`nav-link nav-menu-item group relative flex items-center justify-center rounded-sm px-6 py-2.5 text-base font-medium tracking-wide transition-all duration-300 focus-cinema
                     ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-3'}
-                    ${active ? 'text-primary active' : 'text-foreground/80 hover:text-primary'}`}
+                    ${active ? 'text-brand active' : 'text-foreground/80 hover:text-brand'}`}
                 >
                   <span>{t(`nav.${item.key}`)}</span>
                 </LocalLink>

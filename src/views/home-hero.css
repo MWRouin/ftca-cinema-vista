@@ -1,16 +1,15 @@
 /* ========================================
    Editorial hero — scoped styles for the Home hero section.
    Everything is namespaced under .editorial-hero so the generic
-   class names (.content, .btn, .quote, ...) can't collide with
+   class names (.content, .btn, .featured, ...) can't collide with
    global / Tailwind styles elsewhere in the app.
    Background image is injected via the --hero-bg-image custom
    property (set inline in Home.tsx so it respects BASE_URL).
 ======================================== */
 
 .editorial-hero {
-  --green: #1f6b5c;
-  --green-light: #5abf9c;
-  --sand: #d9c8a2;
+  --green-light: #2da986; /* the site's dark-mode text green (--primary-text) */
+  --sand: hsl(var(--accent)); /* the site's wheat accent; the name is historical */
   --cream: #f8f4ec;
   --white: #ffffff;
   --ink: #07150f;
@@ -21,12 +20,10 @@
   --hero-heading: var(--white);
   --hero-accent: var(--sand);
   --hero-tagline: var(--cream);
-  --hero-strong: var(--white);
 
   --text-soft: rgba(255, 255, 255, 0.78);
   --text-muted: rgba(255, 255, 255, 0.55);
   --text-faint: rgba(255, 255, 255, 0.34);
-
   --line: rgba(255, 255, 255, 0.14);
 
   /* Image overlay wash (darkens the photo so light text reads) */
@@ -43,16 +40,6 @@
       rgba(2, 8, 7, 0.10)
     );
 
-  /* Quote card */
-  --quote-bg: rgba(255, 255, 255, 0.04);
-  --quote-color: rgba(255, 255, 255, 0.82);
-  --quote-border: rgba(90, 191, 156, 0.45);
-
-  /* Secondary button */
-  --btn-sec-color: var(--white);
-  --btn-sec-border: rgba(255, 255, 255, 0.22);
-  --btn-sec-border-hover: rgba(90, 191, 156, 0.55);
-
   --pad-x: clamp(1.15rem, 5vw, 3rem);
 
   position: relative;
@@ -63,7 +50,11 @@
   align-items: center;
   overflow: hidden;
   padding-top: env(safe-area-inset-top);
-  font-family: "Inter", sans-serif;
+  /* Its own stacking context: the photo, glow and grain sit behind the
+     (unpositioned) content at z-index -1, and the slider's desktop image panel
+     is positioned against the hero itself. */
+  isolation: isolate;
+  font-family: "Nunito", sans-serif;
   color: var(--hero-text);
 }
 
@@ -75,18 +66,18 @@
   background:
     var(--hero-wash),
     var(--hero-bg-image) center center / cover no-repeat;
-  z-index: 0;
+  z-index: -1;
 }
 
-/* Warm green / sand glow */
+/* Warm green / wheat glow */
 .editorial-hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 22% 30%, rgba(90, 191, 156, 0.12), transparent 38%),
-    radial-gradient(circle at 78% 22%, rgba(217, 200, 162, 0.08), transparent 30%);
-  z-index: 1;
+    radial-gradient(circle at 22% 30%, rgba(45, 169, 134, 0.12), transparent 38%),
+    radial-gradient(circle at 78% 22%, hsl(var(--accent) / 0.08), transparent 30%);
+  z-index: -1;
 }
 
 /* ---- Light theme ----
@@ -109,11 +100,11 @@
     );
 }
 
-/* Warmer green/sand glow to reinforce the green-cream feel */
+/* Warmer green/wheat glow to reinforce the green-cream feel */
 .light .editorial-hero::after {
   background:
-    radial-gradient(circle at 22% 30%, rgba(90, 191, 156, 0.18), transparent 40%),
-    radial-gradient(circle at 78% 22%, rgba(217, 200, 162, 0.16), transparent 34%);
+    radial-gradient(circle at 22% 30%, rgba(45, 169, 134, 0.18), transparent 40%),
+    radial-gradient(circle at 78% 22%, hsl(var(--accent) / 0.16), transparent 34%);
 }
 
 /* The wash is lighter here, so anchor the text with a soft shadow */
@@ -133,19 +124,18 @@
      normal blending looks identical to `screen`) and no animation — the grain
      paints once instead of recompositing every frame. */
   pointer-events: none;
-  z-index: 2;
+  z-index: -1;
 }
 
 .editorial-hero .container {
-  position: relative;
   width: min(1200px, calc(100% - (2 * var(--pad-x))));
   margin: 0 auto;
-  z-index: 3;
 }
 
 .editorial-hero .content {
   max-width: 760px;
-  padding: 3.5rem 0 4.5rem;
+  /* The top padding clears the fixed 64px navbar that overlays the hero. */
+  padding: 6rem 0 5rem;
 }
 
 .editorial-hero .content > * {
@@ -157,9 +147,6 @@
 .editorial-hero .content > *:nth-child(2) { animation-delay: 0.15s; }
 .editorial-hero .content > *:nth-child(3) { animation-delay: 0.25s; }
 .editorial-hero .content > *:nth-child(4) { animation-delay: 0.35s; }
-.editorial-hero .content > *:nth-child(5) { animation-delay: 0.45s; }
-.editorial-hero .content > *:nth-child(6) { animation-delay: 0.55s; }
-.editorial-hero .content > *:nth-child(7) { animation-delay: 0.65s; }
 
 /* Small intro */
 .editorial-hero .eyebrow {
@@ -188,8 +175,7 @@
 
 /* Heading */
 .editorial-hero h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2.6rem, 5.5vw, 4.5rem);
   font-weight: 600;
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -204,7 +190,6 @@
 
 /* Tagline */
 .editorial-hero .tagline {
-  font-family: "Cormorant Garamond", serif;
   font-size: clamp(1.35rem, 2.5vw, 2.1rem);
   font-style: italic;
   color: var(--hero-tagline);
@@ -213,57 +198,13 @@
   max-width: 650px;
 }
 
-/* Description */
-.editorial-hero .description {
-  font-size: clamp(1rem, 1.4vw, 1.05rem);
-  line-height: 1.95;
-  color: var(--text-soft);
-  max-width: 620px;
-  margin-bottom: 2.5rem;
-}
-
-.editorial-hero .description strong { color: var(--hero-strong); font-weight: 600; }
-
-/* Quote card */
-.editorial-hero .quote {
-  max-width: 560px;
-  padding: 1.4rem 1.75rem;
-  margin-bottom: 2.75rem;
-  border-left: 2px solid var(--quote-border);
-  background: var(--quote-bg);
-  color: var(--quote-color);
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
-  font-style: italic;
-  line-height: 1.65;
-}
-
-/* Frosted blur only on pointer-fine devices (desktops/laptops), where it's
-   cheap. On touch screens the continuously-animating hero behind the quote
-   forced this blur to re-sample every frame — a big mobile cost for an effect
-   that's barely visible over the dark wash. */
-@media (hover: hover) and (pointer: fine) {
-  .editorial-hero .quote {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-}
-
-/* Actions */
-.editorial-hero .actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 1.25rem;
-}
-
+/* Button (the slides' call to action) */
 .editorial-hero .btn {
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
   padding: 1.05rem 1.9rem;
   text-decoration: none;
-  font-family: "Inter", sans-serif;
   font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -274,64 +215,236 @@
     border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* An icon (lucide ArrowRight): the "→" glyph isn't in the web font's latin subset. */
 .editorial-hero .btn .arrow {
-  font-family: "Inter", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .editorial-hero .btn:hover .arrow { transform: translateX(5px); }
 
-/* Primary — warm sand "stamp" */
+/* Primary — warm wheat "stamp" */
 .editorial-hero .btn-primary {
   background: var(--sand);
   color: var(--ink);
-  box-shadow: 0 14px 34px rgba(217, 200, 162, 0.16);
+  box-shadow: 0 14px 34px hsl(var(--accent) / 0.16);
 }
 .editorial-hero .btn-primary:hover {
   background: var(--cream);
   transform: translateY(-2px);
-  box-shadow: 0 20px 44px rgba(217, 200, 162, 0.26);
+  box-shadow: 0 20px 44px hsl(var(--accent) / 0.26);
 }
 
-/* Secondary — hairline ghost */
+/* Secondary — a dark, frosted fill with a hairline outline that turns wheat
+   on hover. Not transparent: on phones the slide image sits behind it. */
 .editorial-hero .btn-secondary {
-  color: var(--btn-sec-color);
-  background: transparent;
-  border: 1px solid var(--btn-sec-border);
-}
-.editorial-hero .btn-secondary::after {
-  content: "";
-  position: absolute;
-  left: 1.9rem;
-  bottom: 0.85rem;
-  width: 0;
-  height: 1px;
-  background: var(--green-light);
-  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  color: var(--white);
+  background: rgba(7, 21, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 .editorial-hero .btn-secondary:hover {
-  color: var(--btn-sec-color-hover, var(--green-light));
-  border-color: var(--btn-sec-border-hover);
+  color: var(--sand);
+  border-color: var(--sand);
   transform: translateY(-2px);
 }
-.editorial-hero .btn-secondary:hover::after { width: calc(100% - 3.8rem - 1.85rem); }
 
-/* Vertical side note */
-.editorial-hero .side-note {
+/* Featured slider (home-hero-featured.tsx): under the tagline, a slider whose
+   first slide is the club's description (with "Discover our story") and the
+   next ones the items the club features. Each slide carries its own call to
+   action, the hero's primary button. */
+
+.editorial-hero .featured { max-width: 650px; } /* the tagline's width */
+/* A fade-only entrance: the hero's rise animation leaves a transform on its
+   children, which would make the slider (not the hero) the positioning parent
+   of the desktop image panel. */
+.editorial-hero .content > .featured {
+  transform: none;
+  animation-name: featuredFade;
+}
+@keyframes featuredFade { from { opacity: 0; } to { opacity: 1; } }
+.editorial-hero .featured-track {
+  display: flex;
+  /* Space between slides, so a sub-pixel misalignment can't show a sliver of
+     the next slide (its button read as a thin wheat bar). */
+  gap: 3rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.editorial-hero .featured-track::-webkit-scrollbar { display: none; }
+/* No box: the text, with a wheat rule in the margin on its left so the
+   text itself lines up with the tagline. The rule sits
+   on the frame because the scrolling track would clip it. On phones it moves
+   closer, to stay inside the screen edge. */
+.editorial-hero .featured-frame { position: relative; }
+.editorial-hero .featured-frame::before {
+  content: "";
   position: absolute;
-  right: calc(var(--pad-x) * -0.15);
-  top: 50%;
-  transform: translateY(-50%) rotate(180deg);
-  writing-mode: vertical-rl;
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * min(1.25rem + 2px, var(--pad-x) - 0.4rem));
+  width: 2px;
+  background: hsl(var(--accent));
+}
+/* scroll-snap-stop keeps a fast swipe from skipping past the next slide. */
+.editorial-hero .featured-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  padding: 0.25rem 0;
+  color: var(--white);
+}
+.editorial-hero .featured-label {
   font-size: 0.7rem;
-  letter-spacing: 0.35em;
+  font-weight: 700;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--text-faint);
-  z-index: 2;
+  color: hsl(var(--accent));
+}
+.editorial-hero .featured-title { font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-weight: 700; line-height: 1.25; }
+.editorial-hero .featured-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+.editorial-hero .featured-text {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text-soft);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* The club slide's paragraph keeps the hero's old description type, and
+   is never cut: it's the club's own text, not a teaser. */
+.editorial-hero .featured-text--long {
+  display: block;
+  -webkit-line-clamp: none;
+  overflow: visible;
+  font-size: clamp(1rem, 1.4vw, 1.05rem);
+  line-height: 1.95;
+}
+.editorial-hero .featured-text strong { color: var(--white); font-weight: 600; }
+/* The slides' call to action is the hero's "Discover our story" button.
+   It sits at the bottom of every slide, so it doesn't move between slides. */
+.editorial-hero .featured-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+.editorial-hero .featured-slide > :nth-last-child(2) { margin-bottom: 1.25rem; }
+
+/* The current slide's image, cross-fading as the slides change. It fades
+   diagonally (clear in the bottom-right corner, dissolving towards the top
+   left), and its left and top edges fade out so they never show as lines; no
+   fade along the bottom. Desktop: the hero's empty right side, below the
+   navbar. Phones and tablets: behind the slider, as its background, across
+   the full width, dimmer so the text on top stays readable. */
+.editorial-hero .featured-visual {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.editorial-hero .featured-visual-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  -webkit-mask-image:
+    linear-gradient(to bottom right, transparent 0%, rgba(0, 0, 0, 0.35) 30%, #000 70%),
+    linear-gradient(90deg, transparent 0%, #000 30%),
+    linear-gradient(to bottom, transparent 0%, #000 15%);
+  -webkit-mask-composite: source-in, source-in;
+  mask-image:
+    linear-gradient(to bottom right, transparent 0%, rgba(0, 0, 0, 0.35) 30%, #000 70%),
+    linear-gradient(90deg, transparent 0%, #000 30%),
+    linear-gradient(to bottom, transparent 0%, #000 15%);
+  mask-composite: intersect, intersect;
+}
+.editorial-hero .featured-visual-image.is-active { opacity: 0.85; }
+@media (max-width: 1023px) {
+  /* The slider is the positioning parent here; the image spans it full
+     bleed (the text column is inset by --pad-x plus the 2rem padding of
+     Tailwind's .container). The hero's overflow clips any excess. */
+  .editorial-hero .featured { position: relative; }
+  .editorial-hero .featured-visual {
+    top: -1.5rem;
+    /* Past the content's bottom padding to the hero's bottom edge (clipped
+       there), so the image never ends in a line inside the hero. */
+    bottom: -8rem;
+    left: calc(-1 * (var(--pad-x) + 2rem));
+    width: 100vw;
+  }
+  .editorial-hero .featured-visual-image.is-active { opacity: 0.5; }
+}
+@media (min-width: 1024px) {
+  .editorial-hero .featured-visual {
+    /* Starts below the navbar (64px). */
+    top: 4rem;
+    right: 0;
+    bottom: 0;
+    width: 46%;
+  }
 }
 
-/* Bottom credits strip */
+/* Bullets (inside the slider, lined up with the text); prev/next beside
+   them on desktop only. */
+.editorial-hero .featured-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.editorial-hero .featured-arrow {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: var(--white);
+  transition: border-color 0.3s, color 0.3s;
+}
+.editorial-hero .featured-arrow:hover { border-color: hsl(var(--accent)); color: hsl(var(--accent)); }
+.editorial-hero .featured-arrow svg { width: 1rem; height: 1rem; }
+@media (min-width: 1024px) {
+  .editorial-hero .featured-arrow { display: inline-flex; }
+}
+.editorial-hero .featured-dots { display: flex; gap: 0.45rem; }
+.editorial-hero .featured-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  transition: width 0.3s, background-color 0.3s;
+}
+.editorial-hero .featured-dot:hover { background: rgba(255, 255, 255, 0.7); }
+.editorial-hero .featured-dot.is-active { width: 1.4rem; background: hsl(var(--accent)); }
+
+/* Animations */
+@keyframes editorialRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-hero .content > * { animation: none; opacity: 1; transform: none; }
+}
+
+/* Bottom credits strip, in the content's bottom padding */
 .editorial-hero .credits {
   position: absolute;
   left: 50%;
@@ -355,19 +468,9 @@
 .editorial-hero .credits span { white-space: nowrap; }
 .editorial-hero .credits .key { color: var(--hero-accent); }
 
-/* Animations */
-@keyframes editorialRise {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .editorial-hero .content > * { animation: none; opacity: 1; transform: none; }
-}
-
 /* Responsive */
 @media (max-width: 980px) {
-  .editorial-hero .side-note { display: none; }
-  .editorial-hero .content { padding: 5rem 0 8rem; }
+  .editorial-hero .content { padding: 5rem 0 4.5rem; }
 }
 
 @media (max-width: 680px) {
@@ -379,7 +482,8 @@
   }
 
   .editorial-hero .content {
-    padding: 3rem 0 8rem;
+    /* The bottom padding holds the credits strip, two lines here. */
+    padding: 5.5rem 0 6.5rem;
     max-width: 100%;
   }
 
@@ -406,25 +510,9 @@
   }
 
   .editorial-hero .tagline { margin-bottom: 1.4rem; }
+  .editorial-hero .featured-text--long { line-height: 1.85; }
 
-  .editorial-hero .description {
-    line-height: 1.85;
-    margin-bottom: 2rem;
-  }
-
-  .editorial-hero .quote {
-    padding: 1.15rem 1.25rem;
-    margin-bottom: 2.25rem;
-  }
-
-  .editorial-hero .actions { gap: 0.85rem; }
-  .editorial-hero .btn {
-    width: 100%;
-    justify-content: space-between;
-    padding: 1.1rem 1.5rem;
-  }
-  .editorial-hero .btn-secondary::after { left: 1.5rem; }
-  .editorial-hero .btn-secondary:hover::after { width: 0; }
+  .editorial-hero .btn { padding: 1.1rem 1.5rem; }
 
   .editorial-hero .credits {
     justify-content: center;

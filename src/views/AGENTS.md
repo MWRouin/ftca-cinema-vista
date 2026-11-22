@@ -13,6 +13,7 @@ The client UI of each page. Every route file in `src/app/` is a thin server comp
 - One PascalCase file per page (`Movies.tsx`, `MoviePlayer.tsx`). Page-specific CSS sits next to the view and is imported by it (`home-hero.css`, `movie-player.css`).
 - Each view uses its own i18n namespace (`useTranslation('movies')`); shared labels come from `common`.
 - Event pages are in `events/`, one component per event wired to `EventDetailLayout`, and listed by id in `events/index.ts` (`EVENT_VIEWS`). A new event needs an entry there and in `src/data/events.json`, plus its SEO entry (see `src/lib/metadata/AGENTS.md`).
+- Home hero: the first slide is the club (its description, from `home`); the items to feature (a film, an event, a blog article or a free note) are listed by hand in `FEATURED` in `home-hero-featured.tsx`. Each kind fills its title, text, image and link from the data; `label` and `text` override them.
 - Links use `LocalLink`; programmatic navigation runs in a transition and reports through `useReportNavigation` (see the root `AGENTS.md`).
 
 ## Traps

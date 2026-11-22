@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { Search, X, SlidersHorizontal } from 'lucide-react';
+import { Search, SearchX, X, SlidersHorizontal } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getMovies, creditName, type Movie } from '@/data/movies';
 import { PageHeader } from '@/components/customUi/page-header';
@@ -131,7 +131,7 @@ export default function Movies() {
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   placeholder={t('searchPlaceholder')}
-                  className="pl-9 pr-9 focus-cinema [&::-webkit-search-cancel-button]:hidden"
+                  className="pl-9 pr-9 border-accent/30 focus-cinema [&::-webkit-search-cancel-button]:hidden"
                 />
                 {searchQuery && (
                   <button
@@ -153,18 +153,18 @@ export default function Movies() {
                 aria-expanded={showFilters}
                 aria-label={t('filtersToggle')}
                 title={t('filtersToggle')}
-                className="relative shrink-0 focus-cinema"
+                className="relative shrink-0 border-accent/30 focus-cinema"
               >
                 <SlidersHorizontal className="h-4 w-4" />
                 {hasConfigFilters && (
-                  <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-primary ring-2 ring-background" />
+                  <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-brand ring-2 ring-background" />
                 )}
               </Button>
             </div>
 
             {/* Config card (toggled) */}
             {showFilters && (
-              <div className="mt-3 space-y-5 rounded-xl border border-border/70 bg-card/70 p-4 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-card/50 sm:p-5">
+              <div className="mt-3 space-y-5 rounded-lg border border-accent/30 bg-card/70 p-4 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-card/50 sm:p-5">
                 {/* Genre + Year range */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   {/* Genres (multi-select chips) */}
@@ -185,7 +185,7 @@ export default function Movies() {
                               'rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors focus-cinema',
                               active
                                 ? 'border-primary bg-primary text-primary-foreground'
-                                : 'border-border bg-background text-muted-foreground hover:border-primary/50 hover:text-foreground',
+                                : 'border-border bg-background text-muted-foreground hover:border-brand/50 hover:text-foreground',
                             )}
                           >
                             {genre}
@@ -238,7 +238,7 @@ export default function Movies() {
                       <button
                         type="button"
                         onClick={resetFilters}
-                        className="inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 focus-cinema"
+                        className="inline-flex items-center gap-1 text-sm font-medium text-brand transition-colors hover:text-brand/80 focus-cinema"
                       >
                         <X className="h-3.5 w-3.5" />
                         {t('clearFilters')}
@@ -254,16 +254,16 @@ export default function Movies() {
           {filteredMovies.length > 0 ? (
             <MovieGrid>
               {filteredMovies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard key={movie.id} movie={movie} titleAs="h2" />
               ))}
             </MovieGrid>
           ) : (
             <div className="text-center py-20">
-              <div className="w-24 h-24 gradient-cinema rounded-full flex items-center justify-center mx-auto mb-6 opacity-50">
-                <span className="text-white font-bold text-2xl">?</span>
+              <div className="w-24 h-24 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                <SearchX className="w-10 h-10 text-muted-foreground" aria-hidden />
               </div>
               <div className="text-xl text-muted-foreground">{t('emptyMessage')}</div>
-              <Button onClick={resetFilters} variant="outline" className="mt-4 hover-lift">
+              <Button onClick={resetFilters} variant="outline" className="mt-4">
                 {t('clearFilters')}
               </Button>
             </div>

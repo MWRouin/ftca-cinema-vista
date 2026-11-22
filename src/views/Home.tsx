@@ -8,6 +8,7 @@ import { PageTitle } from '@/components/customUi/page-title';
 import { MovieCard } from '@/components/customUi/movie-card';
 import { LocalLink } from '@/i18n/locale';
 import './home-hero.css';
+import { FeaturedCarousel } from './home-hero-featured';
 import { publicUrl } from '@/lib/base-path';
 
 export default function Home() {
@@ -49,27 +50,11 @@ export default function Home() {
                 {t('hero.tagline')}
               </p>
 
-              <p className="description">
-                <Trans t={t} i18nKey="hero.description" components={{ strong: <strong /> }} />
-              </p>
+              {/* The club's description, then the items the club features. */}
+              <FeaturedCarousel
+                description={<Trans t={t} i18nKey="hero.description" components={{ strong: <strong /> }} />}
+              />
 
-              <div className="quote">
-                {t('hero.quote')}
-              </div>
-
-              <div className="actions">
-                <LocalLink to="/about" className="btn btn-primary">
-                  {t('hero.ctaStory')} <span className="arrow">&rarr;</span>
-                </LocalLink>
-                <LocalLink to="/movies" className="btn btn-secondary">
-                  {t('hero.ctaFilms')} <span className="arrow">&rarr;</span>
-                </LocalLink>
-              </div>
-
-            </div>
-
-            <div className="side-note">
-              {t('hero.sideNote')}
             </div>
           </div>
 
@@ -101,33 +86,34 @@ export default function Home() {
             </div>
 
             <div className="text-center mt-16">
-              <Button asChild variant="outline" className="btn-cinema text-white border-primary/30 hover:bg-primary/10 hover-lift">
+              <Button asChild>
                 <LocalLink to="/movies">{t('films.viewAll')}</LocalLink>
               </Button>
             </div>
           </div>
         </section>
 
-        {/* Call to Action */}
+        {/* Call to Action: a club photo under a black wash, like a film still. */}
         <section
           ref={ctaRef}
-          className="py-20 lg:py-28 animate-on-scroll relative overflow-hidden"
+          className="py-24 lg:py-32 animate-on-scroll relative overflow-hidden bg-cover bg-center"
+          style={{ backgroundImage: `url(${publicUrl('About/ydour_web_optimized.jpg')})` }}
         >
-          <div className="absolute inset-0 gradient-dark"></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/80 to-black/65"></div>
 
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
-            <PageTitle as="h2" title={t('cta.title')} />
-            <div className="section-divider w-24 mx-auto mb-8"></div>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+            <h2 className="text-5xl md:text-6xl 2xl:text-7xl font-semibold italic leading-[1.05] text-accent mb-6">
+              {t('cta.title')}
+            </h2>
+            <p className="text-xl text-on-image/85 mb-12 leading-relaxed">
               {t('cta.subtitle')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button asChild size="lg" className="btn-cinema hover-lift text-lg px-8 py-4">
+              <Button asChild size="lg" className="text-base px-8 bg-accent text-accent-foreground hover:bg-accent/85">
                 <LocalLink to="/contact">{t('cta.getInTouch')}</LocalLink>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-primary/30 hover-lift text-lg px-8 py-4">
+              <Button asChild variant="outline" size="lg" className="text-base px-8 bg-transparent border-on-image/40 text-on-image hover:bg-on-image/10">
                 <LocalLink to="/about">{t('cta.learnMore')}</LocalLink>
               </Button>
             </div>

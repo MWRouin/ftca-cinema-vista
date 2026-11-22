@@ -28,13 +28,14 @@ interface PageContainerProps {
 }
 
 /**
- * The standard page shell: a full-height, vertically-padded outer band wrapping
- * a centered, horizontally-padded content column. Single source of truth so the
+ * The standard page shell: a vertically-padded outer band wrapping a centered,
+ * horizontally-padded content column. It is as tall as its content; on short
+ * pages the footer still sits at the bottom of the screen (Layout's flex column). Single source of truth so the
  * `max-w`/`py` don't drift page to page.
  */
 export function PageContainer({ children, width = "7xl", py = 12, className }: PageContainerProps) {
   return (
-    <div className={cn("min-h-screen", VERTICAL_PADDING[py])}>
+    <div className={VERTICAL_PADDING[py]}>
       <div className={cn(WIDTHS[width], "mx-auto px-4 sm:px-6 lg:px-8", className)}>{children}</div>
     </div>
   );

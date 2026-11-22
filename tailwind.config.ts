@@ -20,6 +20,13 @@ export default {
 			}
 		},
 		extend: {
+			// Nunito for everything. `display` (titles, .section-title) is kept as
+			// its own family so titles can take another face later. Noto Sans
+			// Arabic covers Arabic text through its unicode-range.
+			fontFamily: {
+				sans: ['Nunito', '"Noto Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				display: ['Nunito', '"Noto Sans Arabic"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -30,6 +37,11 @@ export default {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
+				// Green for text, links and icons (`text-brand`). `primary` is the
+				// fill; in dark mode the two differ (see src/index.css).
+				brand: 'hsl(var(--primary-text))',
+				// Text on a darkened photo (`text-on-image`), cream in both themes.
+				'on-image': 'hsl(var(--on-image))',
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -63,19 +75,6 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				emerald: {
-					50: '#ecfdf5',
-					100: '#d1fae5',
-					200: '#a7f3d0',
-					300: '#6ee7b7',
-					400: '#34d399',
-					500: '#10b981',
-					600: '#059669',
-					700: '#047857',
-					800: '#065f46',
-					900: '#064e3b',
-					950: '#022c22'
 				}
 			},
 			borderRadius: {

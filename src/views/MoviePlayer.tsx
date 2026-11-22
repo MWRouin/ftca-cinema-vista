@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { BackButton } from '@/components/customUi/back-button';
 import './movie-player.css';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   getMovieById,
   getRelatedMoviesByDirector,
@@ -22,6 +23,8 @@ import { LazyImage } from '@/components/customUi/lazy-image';
 import { MovieCard, MovieGrid } from '@/components/customUi/movie-card';
 import { PageContainer } from '@/components/customUi/page-container';
 import { PersonLink } from '@/components/customUi/person-link';
+import { SocialLinks } from '@/components/customUi/social-links';
+import { VideoEmbed } from '@/components/customUi/video-embed';
 import { useLocale } from '@/i18n/locale';
 import { decodeParam } from '@/lib/route-params';
 import NotFound from './NotFound';
@@ -108,7 +111,7 @@ export default function MoviePlayer() {
               <p
                 key={locale}
                 lang={locale}
-                className="text-lg text-muted-foreground whitespace-pre-line lang-fade-enter"
+                className="max-w-[70ch] text-lg text-foreground/85 whitespace-pre-line lang-fade-enter"
                 aria-live="polite"
               >
                 {description}
@@ -118,27 +121,27 @@ export default function MoviePlayer() {
             <div className="space-y-4">
               {directors.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-2">{t('director')}</h3>
-                  <p className="text-muted-foreground">
+                  <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-2">{t('director')}</h2>
+                  <p>
                     <CreditList credits={directors} separator=" & " />
                   </p>
                 </div>
               )}
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">{t('cast')}</h3>
-                <p className="text-muted-foreground">
+                <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-2">{t('cast')}</h2>
+                <p className="max-w-[70ch]">
                   {cast.length ? <CreditList credits={cast} /> : '—'}
                 </p>
               </div>
 
               {crewByRole.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">{t('crew')}</h3>
+                  <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-3">{t('crew')}</h2>
                   <dl className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
                     {crewByRole.map(([role, credits]) => (
                       <div key={role}>
-                        <dt className="text-xs uppercase tracking-wide text-muted-foreground/70">
+                        <dt className="text-xs text-muted-foreground">
                           {t(`roles.${role}`, { defaultValue: role })}
                         </dt>
                         <dd>
@@ -156,19 +159,21 @@ export default function MoviePlayer() {
         {/* Video Player — shown only when this movie is flagged playerVisible
             (independent of `public`, which controls listing). Minimal chrome so
             the player stands out: edge-to-edge on mobile, a clean rounded frame
-            on larger screens. */}
-        {movie.playerVisible && (
+            on larger screens. Otherwise, where to watch it: the club's next
+            screenings, announced on its social networks. */}
+        {movie.playerVisible ? (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-4">{t('watchNow')}</h2>
+            <h2 className="section-title mb-4">{t('watchNow')}</h2>
             {/* -mx-4 cancels the page's px-4 so the player goes full-bleed on phones */}
             <div className="-mx-4 sm:mx-0">
               <div className="aspect-video w-full overflow-hidden bg-black shadow-2xl sm:rounded-xl sm:ring-1 sm:ring-border">
                 {movie.movieUrl ? (
-                  <iframe
+                  <VideoEmbed
                     src={movie.movieUrl}
                     title={movie.title}
-                    className="w-full h-full"
-                    allowFullScreen
+                    poster={movie.image}
+                    lang={locale}
+                    playLabel={t('play')}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-muted-foreground">
@@ -178,12 +183,22 @@ export default function MoviePlayer() {
               </div>
             </div>
           </section>
+        ) : (
+          <section className="mb-12">
+            <h2 className="section-title mb-4">{t('whereToWatch')}</h2>
+            <Card>
+              <CardContent className="flex flex-col items-center gap-5 py-10 text-center">
+                <p className="max-w-[60ch] text-lg text-foreground/85">{t('whereToWatchText')}</p>
+                <SocialLinks variant="brand" />
+              </CardContent>
+            </Card>
+          </section>
         )}
 
         {/* Related movies: same director first, otherwise same genre */}
         {relatedMoviesByDirector.length > 0 && (
           <section>
-            <h2 className="text-3xl font-bold mb-8">{t('moreFrom', { director: directorNames })}</h2>
+            <h2 className="section-title mb-8">{t('moreFrom', { director: directorNames })}</h2>
             <MovieGrid>
               {relatedMoviesByDirector.map((relatedMovie) => (
                 <MovieCard key={relatedMovie.id} movie={relatedMovie} />
@@ -194,7 +209,7 @@ export default function MoviePlayer() {
 
         {relatedMoviesByDirector.length === 0 && relatedMoviesByGenre.length > 0 && (
           <section>
-            <h2 className="text-3xl font-bold mb-8">{t('moreLike', { title: movie.title })}</h2>
+            <h2 className="section-title mb-8">{t('moreLike', { title: movie.title })}</h2>
             <MovieGrid>
               {relatedMoviesByGenre.map((relatedMovie) => (
                 <MovieCard key={relatedMovie.id} movie={relatedMovie} />
