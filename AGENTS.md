@@ -26,7 +26,8 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 - **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`.
 - **Posters:** 2:3 portrait, 1000×1500 is the common size. Reduce dimensions rather than compressing further. Crop to 2:3.
 - **Person portraits:** square, saved in `public/Members/`.
-- **Fonts:** Inter, Cormorant Garamond and Nunito are self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. A cold-load flash of the wrong font is avoided by preloading the above-the-fold woff2 files listed in `src/lib/critical-fonts.ts`; if the hero's font family or weight changes, update that list. The fonts stay on `@fontsource` instead of `next/font` because the CSS refers to the literal family names.
+- **Fonts:** Nunito for all text, hero included (Tailwind `font-sans`; `font-display` and `.section-title` are Nunito too, kept separate so titles can change face later), plus Noto Sans Arabic for Arabic text, self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. Import only the subsets and weights in use. Fontsource's latin subset has no arrows (→ ←): use the lucide icons instead of the characters. A cold-load flash of the wrong font is avoided by preloading the above-the-fold woff2 files listed in `src/lib/critical-fonts.ts`; if the hero's font family or weight changes, update that list. The fonts stay on `@fontsource` instead of `next/font` because the CSS refers to the literal family names.
+- **Colour roles:** `primary` is the green *fill* (buttons, badges; cream text on it). Green *text*, links and icons use `brand` (`text-brand`, `--primary-text`), which is a lighter emerald in dark mode, where the fill green is too dark to read. `accent` is wheat (`#d4b46e`, both themes, also the hero's `--sand`): hairlines, quote bars, the "Join" buttons. Cards are outlined in `border-accent/30`, full wheat on hover (set in `components/ui/card.tsx`); the Movies search and filters and the contact form fields use the same faint outline. Muted text is for metadata; reading copy uses `text-foreground/85`. Keep to the tokens in `src/index.css`; no raw Tailwind palette colours.
 - **Server-rendered markup:** pages are prerendered, so client components must render the same HTML on the server and on first load. Don't read `window`, `localStorage` or the clock during render (read them in an effect, or through `useSyncExternalStore` with a server snapshot as `ThemeProvider` does), and don't rely on `onLoad`-style events for elements that are already in the HTML (see `LazyImage`).
 - **Language switch remounts the page:** `<html>` lives in `src/app/[locale]/layout.tsx`, so switching locale remounts the whole tree and React resets the attributes of `<html>`. State that must survive belongs outside React (see the theme store in `ThemeProvider`), and anything set on `<html>` by script must be reapplied in a layout effect.
 - **Shared strings and constants:** UI labels used by shared components (share buttons, lightbox, theme toggle, aria labels) live in the `common` i18n namespace; the club's email, phone, address and form links live in `src/lib/contact.ts`. Don't hard-code either in a component.
@@ -42,17 +43,17 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 
 ## Module map
 
-Each module gets its own `AGENTS.md` (read when you work in that folder), plus a one-line `CLAUDE.md` containing `@AGENTS.md` so Claude Code loads it too. Not all exist yet; they are added as modules are ported or refactored.
+Each module gets its own `AGENTS.md` (read when you work in that folder), plus a one-line `CLAUDE.md` containing `@AGENTS.md` so Claude Code loads it too.
 
 | Module | Purpose | AGENTS.md |
 |---|---|---|
 | `src/data/` | Movies, people, blog content and helpers | [done](src/data/AGENTS.md) |
 | `src/i18n/` | Locales, translation catalogs, locale routing helpers | [done](src/i18n/AGENTS.md) |
 | `src/lib/metadata/` | SEO constants, page metadata and JSON-LD | [done](src/lib/metadata/AGENTS.md) |
-| `src/components/customUi/` | Shared presentational components | to add |
-| `src/components/ui/` | shadcn primitives | to add |
+| `src/components/customUi/` | Shared presentational components | [done](src/components/customUi/AGENTS.md) |
+| `src/components/ui/` | shadcn primitives | [done](src/components/ui/AGENTS.md) |
 | `src/app/` | Next.js routes, layouts, 404 and root redirect | [done](src/app/AGENTS.md) |
-| `src/views/` | Page UI components (client) used by the routes | to add |
+| `src/views/` | Page UI components (client) used by the routes | [done](src/views/AGENTS.md) |
 
 ## Documentation workflow
 

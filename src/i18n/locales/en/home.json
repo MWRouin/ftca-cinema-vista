@@ -6,13 +6,11 @@
     "titleLine2": "Amateur",
     "titleLine3": "Filmmakers",
     "tagline": "A home where cinema becomes memory, thought, and shared imagination.",
+    "creditTunisia": "Tunisia",
+    "creditYears": "60+ Years of Independent Cinema",
     "description": "Founded in <strong>1964</strong> and operating under the <strong>Fédération Tunisienne des Cinéastes Amateurs (FTCA)</strong>, our club “Club des Cinéastes Amateurs de Hammamlif” explores cinema not only as an art form, but as a way to question reality, reflect together, and give shape to ideas.",
     "quote": "We use film to observe the world with tenderness, curiosity, and a deep desire to understand.",
-    "ctaStory": "Discover Our Story",
-    "ctaFilms": "Explore Our Films",
-    "sideNote": "Creation • Reflection • Resistance • Cinema",
-    "creditTunisia": "Tunisia",
-    "creditYears": "60+ Years of Independent Cinema"
+    "ctaStory": "Discover Our Story"
   },
   "films": {
     "title": "Featured Films",
@@ -30,5 +28,22 @@
     "subtitle": "Connect with fellow film enthusiasts and be part of memorable cinematic experiences that transcend the ordinary",
     "getInTouch": "Get in Touch",
     "learnMore": "Learn More About Us"
+  },
+  "featured": {
+    "featuredFilm": "Featured film",
+    "latestFilm": "Latest film",
+    "featuredEvent": "Event",
+    "featuredArticle": "From the blog",
+    "featuredNote": "Announcement",
+    "ctaFilm": "Discover",
+    "ctaMovies": "All films",
+    "ctaEvent": "See the event",
+    "ctaArticle": "Read",
+    "ctaBlog": "All articles",
+    "ctaNote": "Learn more",
+    "clubLabel": "The club",
+    "region": "Featured",
+    "previous": "Previous",
+    "next": "Next"
   }
 }

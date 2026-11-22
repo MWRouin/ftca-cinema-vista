@@ -10,13 +10,15 @@ Each plan starts with a status line: `Status: draft | active | done | dropped`, 
 
 | Plan | Status |
 |---|---|
-| [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done (pending merge) |
+| [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done and deployed |
 
 ## Research
 
 Background analysis that informs plans, in `docs/research/`. Not kept up to date.
 
 - [REPRODUCTION_REPORT.md](research/REPRODUCTION_REPORT.md): June 2026 audit of the site and the options for a rebuild (basis for the Next.js decision).
+- [ui-ux-audit-2026-11.md](research/ui-ux-audit-2026-11.md): November 2026 UI/UX audit of the Next.js site, 23 findings by priority; the quick wins are done.
+- [ui-visual-audit-2026-11.md](research/ui-visual-audit-2026-11.md): November 2026 visual design audit (palette, contrast with WCAG and APCA, typography, art direction), 18 findings and 6 recommendations, applied (and partly revised) in the visual design pass.
 
 ## Sprint logs
 
@@ -51,6 +53,11 @@ Template:
 | [2026-11-nextjs-cleanup-cutover](sprints/2026-11-nextjs-cleanup-cutover.md) | Vite removal (M11), deploy switch and final parity (M12) |
 | [2026-11-code-cleanup](sprints/2026-11-code-cleanup.md) | Post-migration scan: bug fixes, dead code, duplicated data and strings |
 | [2026-11-navigation-polish](sprints/2026-11-navigation-polish.md) | Theme flicker and scroll fixes, navigation progress bar, localized 404, unused CSS, mobile menu fixes |
+| [2026-11-launch-and-event-data](sprints/2026-11-launch-and-event-data.md) | Live site check, Event structured data for Search Console, self-hosted share image, CI checks, module docs |
+| [2026-11-ui-ux-audit-quick-wins](sprints/2026-11-ui-ux-audit-quick-wins.md) | UI/UX audit; quick wins: no-JS and reduced-motion content, article readability, dark contrast, card and heading accessibility, opaque nav |
+| [2026-11-visual-design-pass](sprints/2026-11-visual-design-pass.md) | Visual audit fixes, then revised on review: Nunito everywhere, emerald dark green, wheat accent and card outlines, cinema-photo home band, trophy in laurels, footer and Contact rework with an OpenStreetMap map |
+| [2026-11-home-hero-featured](sprints/2026-11-home-hero-featured.md) | Home hero rebuilt around a slider: the club slide (description and mission) and hand-picked featured items, images beside it on desktop and behind it on phones; old hero blocks removed |
+| [2026-11-hero-blog-film-page](sprints/2026-11-hero-blog-film-page.md) | Hero slides for the featured blog article and latest film with auto-advance, featured blog flag and Arabic text direction, click-to-play film cover and where-to-watch card, map pin, portrait |
 
 ## Module `AGENTS.md` files
 

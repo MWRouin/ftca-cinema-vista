@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
 import { EmptyState } from '@/components/customUi/empty-state';
-import { FolderX } from 'lucide-react';
+import { FolderX, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LazyImage } from '@/components/customUi/lazy-image';
 import { LocalLink } from '@/i18n/locale';
@@ -21,7 +21,7 @@ function EventCard({ event }: { event: EventMeta }) {
   const upcoming = event.status === 'upcoming';
 
   return (
-    <Card className="group relative hover:shadow-lg transition-all duration-300 hover:-translate-y-1 max-w-[720px]">
+    <Card className="group relative max-w-[720px]">
       <LocalLink to={`/events/${event.id}`} aria-label={t('openEvent', { title: event.title })}>
         <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
           <LazyImage
@@ -43,8 +43,9 @@ function EventCard({ event }: { event: EventMeta }) {
             <span className="block font-medium">
               {t('dateTime', { date: formatDate(event.date), time: event.time })}
             </span>
-            <span className="block text-sm text-amber-600 dark:text-amber-400">
-              📍 {event.location}
+            <span className="flex items-center gap-1.5 text-sm">
+              <MapPin className="h-4 w-4 shrink-0 text-brand" aria-hidden />
+              {event.location}
             </span>
           </CardDescription>
         </CardHeader>
@@ -72,7 +73,7 @@ export default function Events() {
       {/* Upcoming Events (the section is hidden when there are none) */}
       {upcomingEvents.length > 0 && (
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{t('upcoming')}</h2>
+          <h2 className="section-title mb-8">{t('upcoming')}</h2>
           <div className="grid grid-cols-1 gap-8">
             {upcomingEvents.map((event) => (
               <EventCard key={event.id} event={event} />
@@ -83,7 +84,7 @@ export default function Events() {
 
       {/* Past Events */}
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8">{t('past')}</h2>
+        <h2 className="section-title mb-8">{t('past')}</h2>
         {pastEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {pastEvents.map((event) => (

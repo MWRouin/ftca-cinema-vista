@@ -13,7 +13,8 @@ Everything that ends up in a page's `<head>` and structured data. The static HTM
 ## Rules
 
 - A new fixed page needs an entry in `PAGE_SEO` (and `PAGE_SEO_FR`), a line in `app/sitemap.ts`, and a legacy redirect route in `app/(root)/`.
-- Page URLs in metadata always come from `localizedPageUrl` (locale prefix, trailing slash). JSON-LD `url`/`mainEntityOfPage` are overwritten with it in `pageJsonLd`.
+- Page URLs in metadata always come from `localizedPageUrl` (locale prefix, trailing slash). JSON-LD `url`/`mainEntityOfPage` are overwritten with it in `pageJsonLd`, which also gives an `Event` node the page's `imageUrl` when it has no `image`.
+- A new event's `Event` node needs `startDate`, `endDate` (with a time, like `startDate`; a date alone can read as midnight, before the start), `offers: FREE_ENTRY` and `performer: CLUB_PERFORMER` (or real values when they differ), or Search Console flags it.
 - Open Graph types are limited to the ones Next accepts (`NEXT_OG_TYPES`); others fall back to `website`.
 - Don't set head tags from client components; there is no client-side head management any more.
 

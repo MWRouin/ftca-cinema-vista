@@ -3,7 +3,7 @@ import { PageTitle } from "@/components/customUi/page-title";
 import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
-  /** Page title (rendered as the gradient H1). */
+  /** Page title (rendered as the display H1). */
   title: string;
   /** Optional subtitle line under the divider. */
   subtitle?: ReactNode;
@@ -12,7 +12,7 @@ interface PageHeaderProps {
 }
 
 /**
- * The centered page header — gradient title, divider, optional subtitle — shared
+ * The centered page header — display title, wheat divider, optional subtitle — shared
  * by the top-level list/section pages (Movies, Blog, Events, Contact, About,
  * Palmares). Keeps title/divider/subtitle markup identical across pages.
  */

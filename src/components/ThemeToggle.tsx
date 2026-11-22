@@ -27,7 +27,7 @@ export function ThemeToggle({ onDark = false }: { onDark?: boolean }) {
             key={name}
             className={cn(
               'absolute w-5 h-5 group-hover:scale-110 transition-[transform,opacity] duration-200',
-              onDark ? 'text-white' : 'text-primary',
+              onDark ? 'text-white' : 'text-brand',
               theme === name ? 'opacity-100' : 'opacity-0'
             )}
           />

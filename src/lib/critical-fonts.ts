@@ -1,7 +1,7 @@
-import cormorant600 from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2";
-import cormorant600Italic from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2";
-import inter400 from "@fontsource/inter/files/inter-latin-400-normal.woff2";
-import inter600 from "@fontsource/inter/files/inter-latin-600-normal.woff2";
+import nunito400 from "@fontsource/nunito/files/nunito-latin-400-normal.woff2";
+import nunito400Italic from "@fontsource/nunito/files/nunito-latin-400-italic.woff2";
+import nunito600 from "@fontsource/nunito/files/nunito-latin-600-normal.woff2";
+import nunito600Italic from "@fontsource/nunito/files/nunito-latin-600-italic.woff2";
 
 const url = (asset: string | { src: string }) => (typeof asset === "string" ? asset : asset.src);
 
@@ -11,4 +11,4 @@ const url = (asset: string | { src: string }) => (typeof asset === "string" ? as
  * fallback-font flash on a cold load. If the hero's font family, weight or
  * style changes, update this list.
  */
-export const CRITICAL_FONT_URLS: string[] = [cormorant600, cormorant600Italic, inter400, inter600].map(url);
+export const CRITICAL_FONT_URLS: string[] = [nunito400, nunito400Italic, nunito600, nunito600Italic].map(url);

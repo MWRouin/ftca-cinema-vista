@@ -1,6 +1,6 @@
 # Plan: Migrate to Next.js
 
-Status: done (pending merge and a browser pass) · Issue: #84 · Branch: `84-migrate-to-nextjs`
+Status: done and deployed (merged in PR #86) · Issue: #84 · Branch: `84-migrate-to-nextjs`
 
 ## Context
 

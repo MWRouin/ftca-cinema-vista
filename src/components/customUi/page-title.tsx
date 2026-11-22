@@ -17,8 +17,8 @@ export function PageTitle({
     return (
         <Heading
             className={cn(
-                "text-5xl md:text-6xl 2xl:text-7xl mb-6 inline-block bg-gradient-to-br py-2 -my-2 from-primary via-primary/70 to-primary dark:from-primary/75 dark:via-primary dark:to-primary/75 bg-clip-text text-transparent",
-                useInAnimation && "animate-in fade-in slide-in-from-bottom-3"
+                "font-display text-5xl md:text-6xl 2xl:text-7xl font-semibold leading-[1.05] tracking-[-0.02em] text-brand mb-6",
+                useInAnimation && "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3"
             )}
         >
             {title}

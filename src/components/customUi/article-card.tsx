@@ -6,16 +6,8 @@ import { LocalLink } from "@/i18n/locale";
 import { useLocalizedDate } from "@/hooks/useLocalizedDate";
 import type { BlogArticle } from "@/data/blog";
 
-/** Category → badge color classes (shared so every article badge matches). */
-const CATEGORY_COLORS: Record<string, string> = {
-  Blog: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300",
-  Article: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300",
-  "Autre 1": "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300",
-  "Autre 2": "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300",
-  "Autre 3": "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300",
-};
-const categoryColor = (category: string) =>
-  CATEGORY_COLORS[category] ?? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
+/** The "Featured" badge takes the wheat accent, the site's highlight colour (as on the hero's main button). */
+const FEATURED_BADGE = "border-transparent bg-accent text-accent-foreground hover:bg-accent";
 
 /**
  * Presentation:
@@ -28,6 +20,8 @@ type ArticleVariant = "featured" | "grid" | "compact";
 interface ArticleCardProps {
   article: BlogArticle;
   variant?: ArticleVariant;
+  /** Heading level of the title: h2 when the cards sit right under the page h1. */
+  titleAs?: "h2" | "h3";
 }
 
 /**
@@ -36,7 +30,7 @@ interface ArticleCardProps {
  * image, category badge color and date formatting; callers just feed it an
  * article and pick a variant.
  */
-export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
+export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardProps) {
   const { t } = useTranslation("blog");
   const formatDate = useLocalizedDate();
 
@@ -44,9 +38,13 @@ export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
   // only surface a category when it's something more specific.
   const showCategory = article.category !== "Blog";
 
+  // An article in another language (Arabic) marks its title and excerpt, so
+  // they read in their own direction.
+  const textLang = article.lang ? { lang: article.lang, dir: "auto" as const } : {};
+
   if (variant === "featured") {
     return (
-      <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+      <Card className="group overflow-hidden">
         <LocalLink to={`/blog/${article.slug}`} className="grid grid-cols-1 lg:grid-cols-2 gap-0">
           <div className="aspect-[16/9] lg:aspect-auto overflow-hidden rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none">
             <LazyImage
@@ -56,13 +54,13 @@ export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
             />
           </div>
           <div className="p-8 flex flex-col justify-center">
-            <Badge className={`w-fit mb-4 ${categoryColor(article.category)}`}>
+            <Badge className={`w-fit mb-4 ${FEATURED_BADGE}`}>
               {showCategory ? `${t("featured")} • ${article.category}` : t("featured")}
             </Badge>
-            <CardTitle className="text-2xl md:text-3xl mb-4 group-hover:text-primary transition-colors text-left">
+            <CardTitle as={titleAs} className="text-2xl md:text-3xl mb-4 group-hover:text-brand transition-colors text-start" {...textLang}>
               {article.title}
             </CardTitle>
-            <CardDescription className="text-base mb-4">{article.excerpt}</CardDescription>
+            <CardDescription className="text-base mb-4" {...textLang}>{article.excerpt}</CardDescription>
             <div className="flex items-center text-sm text-muted-foreground">
               <span>{t("by", { author: article.author })}</span>
               <span className="mx-2">•</span>
@@ -78,7 +76,7 @@ export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
 
   if (variant === "compact") {
     return (
-      <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
+      <Card className="group h-full overflow-hidden">
         <LocalLink to={`/blog/${article.slug}`} className="block">
           {article.image && (
             <div className="aspect-[16/9] overflow-hidden rounded-t-lg bg-muted">
@@ -90,7 +88,7 @@ export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
             </div>
           )}
           <CardHeader>
-            <CardTitle className="text-lg leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+            <CardTitle as={titleAs} className="text-lg leading-tight line-clamp-2 group-hover:text-brand transition-colors" {...textLang}>
               {article.title}
             </CardTitle>
             <CardDescription className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -108,7 +106,7 @@ export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
   // "grid"
   return (
     <LocalLink to={`/blog/${article.slug}`} className="block">
-      <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full overflow-hidden">
+      <Card className="group h-full overflow-hidden">
         <div className="aspect-[16/9] overflow-hidden rounded-t-lg">
           <LazyImage
             src={article.image}
@@ -118,14 +116,14 @@ export function ArticleCard({ article, variant = "grid" }: ArticleCardProps) {
         </div>
         <CardHeader className="pb-2">
           {showCategory && (
-            <Badge className={`w-fit mb-2 ${categoryColor(article.category)}`}>{article.category}</Badge>
+            <Badge variant="secondary" className="w-fit mb-2">{article.category}</Badge>
           )}
-          <CardTitle className="text-xl leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+          <CardTitle as={titleAs} className="text-xl leading-tight line-clamp-2 group-hover:text-brand transition-colors" {...textLang}>
             {article.title}
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
-          <CardDescription className="mb-4 line-clamp-3">{article.excerpt}</CardDescription>
+          <CardDescription className="mb-4 line-clamp-3" {...textLang}>{article.excerpt}</CardDescription>
           <div className="flex items-center text-sm text-muted-foreground">
             <span>{t("by", { author: article.author })}</span>
             <span className="mx-2">•</span>

@@ -3,6 +3,11 @@ import { LocalLink } from "@/i18n/locale";
 import { isPersonPublic } from "@/data/movies";
 import { cn } from "@/lib/utils";
 
+/** The underlined style of links inside running text (credits, authors, the
+ *  federation link on About). */
+export const inlineLinkClass =
+  "underline decoration-muted-foreground/40 decoration-1 underline-offset-4 hover:text-brand hover:decoration-current transition-colors";
+
 interface PersonLinkProps {
   /** The resolved person id; when it maps to a public person, name becomes a link. */
   personId?: string | null;
@@ -21,7 +26,7 @@ export function PersonLink({ personId, children, className }: PersonLinkProps) {
     return (
       <LocalLink
         to={`/people/${personId}`}
-        className={cn("underline-offset-2 hover:text-primary hover:underline transition-colors", className)}
+        className={cn(inlineLinkClass, className)}
       >
         {children}
       </LocalLink>

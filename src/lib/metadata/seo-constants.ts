@@ -26,8 +26,7 @@ export const SITE_NAME_FULL = "Hammam-Lif Amateur Filmmakers Club";
 export const TWITTER_HANDLE = "@ftcahammemlif";
 export { CONTACT_EMAIL } from "../contact";
 
-export const DEFAULT_OG_IMAGE =
-  "https://opengraph.b-cdn.net/production/images/e889e93c-a333-49e9-bb70-4d0506d588ff.jpg?token=Fbd-173Wg4scri1OkZIVXQEUGc9atCOObfuZX-GRquE&height=1200&width=1200&expires=33286675221";
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-default.jpg`;
 export const DEFAULT_OG_IMAGE_ALT =
   "Hammam-Lif Amateur Filmmakers Club – FTCA Hammam-Lif";
 
@@ -72,9 +71,22 @@ export interface PageSeo {
   author?: string;
   authorLabel?: string;
   noindex?: boolean;
-  /** JSON-LD structured data (only used client-side) */
+  /** JSON-LD structured data, rendered in the page's static HTML */
   jsonLd?: Record<string, unknown>;
 }
+
+/** Event JSON-LD shared by the club's events: free entry, performed by the club. */
+const FREE_ENTRY = {
+  "@type": "Offer",
+  price: 0,
+  priceCurrency: "TND",
+  availability: "https://schema.org/InStock",
+};
+const CLUB_PERFORMER = {
+  "@type": "PerformingGroup",
+  name: SITE_NAME_FULL,
+  url: SITE_URL,
+};
 
 /**
  * Central registry of every page's SEO metadata.
@@ -137,6 +149,9 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       description:
         "Screening & discussion – a gathering for the amateur cinema community.",
       startDate: "2025-02-22T18:30:00+01:00",
+      endDate: "2025-02-22T22:30:00+01:00",
+      offers: FREE_ENTRY,
+      performer: CLUB_PERFORMER,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode:
         "https://schema.org/OfflineEventAttendanceMode",
@@ -171,6 +186,9 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       description:
         "Screening, discussion and more.. – a gathering for the amateur cinema community.",
       startDate: "2026-05-15T18:00:00+01:00",
+      endDate: "2026-05-17T22:30:00+01:00",
+      offers: FREE_ENTRY,
+      performer: CLUB_PERFORMER,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode:
         "https://schema.org/OfflineEventAttendanceMode",
@@ -205,6 +223,9 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       description:
         "an intimate film screening and discussion experience by the Hammam-Lif Amateur Filmmakers' Club at Day One. A space to explore the ideas and process behind each film.",
       startDate: "2026-01-28T19:00:00+01:00",
+      endDate: "2026-01-28T22:30:00+01:00",
+      offers: FREE_ENTRY,
+      performer: CLUB_PERFORMER,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode:
         "https://schema.org/OfflineEventAttendanceMode",
@@ -239,6 +260,9 @@ export const PAGE_SEO: Record<string, PageSeo> = {
       description:
         "Screening & exhibition – a tribute to Hammam-Lif's cinematic culture.",
       startDate: "2025-12-27T16:30:00+01:00",
+      endDate: "2025-12-27T20:00:00+01:00",
+      offers: FREE_ENTRY,
+      performer: CLUB_PERFORMER,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode:
         "https://schema.org/OfflineEventAttendanceMode",

@@ -166,7 +166,8 @@ export function personSeo(person: Person): Seo {
 /**
  * A page's structured data: its own nodes plus an auto-generated breadcrumb.
  * Each node's page-identity URLs (`url`, `mainEntityOfPage`) are forced to the
- * page's canonical (locale-prefixed, trailing-slash) URL.
+ * page's canonical (locale-prefixed, trailing-slash) URL. An Event without an
+ * `image` gets the page's share image, which Google expects on events.
  */
 export function pageJsonLd(pageKey: string, locale: Locale, seo: Seo): JsonLdNode[] {
   const pageUrl = localizedPageUrl(pageKey, locale);
@@ -175,6 +176,7 @@ export function pageJsonLd(pageKey: string, locale: Locale, seo: Seo): JsonLdNod
     const next = { ...node };
     if ("url" in node) next.url = pageUrl;
     if ("mainEntityOfPage" in node) next.mainEntityOfPage = pageUrl;
+    if (node["@type"] === "Event" && !("image" in node) && seo.imageUrl) next.image = [seo.imageUrl];
     return next;
   });
   const breadcrumb = buildBreadcrumbList(pageKey, seo.title, locale);
