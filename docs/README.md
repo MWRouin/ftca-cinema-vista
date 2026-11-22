@@ -57,6 +57,7 @@ Template:
 | [2026-11-ui-ux-audit-quick-wins](sprints/2026-11-ui-ux-audit-quick-wins.md) | UI/UX audit; quick wins: no-JS and reduced-motion content, article readability, dark contrast, card and heading accessibility, opaque nav |
 | [2026-11-visual-design-pass](sprints/2026-11-visual-design-pass.md) | Visual audit fixes, then revised on review: Nunito everywhere, emerald dark green, wheat accent and card outlines, cinema-photo home band, trophy in laurels, footer and Contact rework with an OpenStreetMap map |
 | [2026-11-home-hero-featured](sprints/2026-11-home-hero-featured.md) | Home hero rebuilt around a slider: the club slide (description and mission) and hand-picked featured items, images beside it on desktop and behind it on phones; old hero blocks removed |
+| [2026-11-hero-blog-film-page](sprints/2026-11-hero-blog-film-page.md) | Hero slides for the featured blog article and latest film with auto-advance, featured blog flag and Arabic text direction, click-to-play film cover and where-to-watch card, map pin, portrait |
 
 ## Module `AGENTS.md` files
 
