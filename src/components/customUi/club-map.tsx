@@ -43,7 +43,7 @@ export function ClubMap({ lat, lng, zoom = 16, label, recenterLabel, className }
       // Drop Leaflet's own "Leaflet" link (optional under its licence); the
       // OpenStreetMap credit stays, as the tile usage policy requires.
       map.attributionControl.setPrefix(false);
-      // A drawn pin (no image files): the wheat accent with a green centre.
+      // A drawn pin (no image files): green with a wheat centre.
       const pin = L.divIcon({
         className: "",
         html: '<span class="club-map-pin"></span>',
