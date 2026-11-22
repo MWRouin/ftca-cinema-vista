@@ -47,7 +47,7 @@ export default function BlogArticle() {
           ) : null}
 
           <header className="mb-10">
-            <ElementTitle title={article.title} useInAnimation={false} />
+            <ElementTitle title={article.title} useInAnimation={false} lang={article.lang} />
 
             <div className="flex flex-col gap-3 mt-2 sm:flex-row sm:items-center sm:justify-between">
 

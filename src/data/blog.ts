@@ -12,6 +12,8 @@ export type BlogArticle = {
   body?: string;
   lang?: string;
   public: boolean;
+  /** The Blog page's lead article (and the home hero's). Without one, the first article leads. */
+  featured?: boolean;
 };
 
 const articles: BlogArticle[] = [
@@ -146,10 +148,17 @@ The cycle continues. The fire still burns. And the garage door remains open.`,
     readTime: "5 min read",
     image: "/blogs/ghasen_blog.jpg",
     public: true,
+    featured: true,
   },
 ];
 
 export const getBlogArticles = () => articles.filter((article) => article.public);
+
+/** The lead article: the public one marked `featured`, else the first. */
+export const getFeaturedArticle = (): BlogArticle | undefined => {
+  const list = getBlogArticles();
+  return list.find((article) => article.featured) ?? list[0];
+};
 
 export const getBlogArticleBySlug = (slug?: string) =>
   articles.find((article) => article.public && article.slug === slug);

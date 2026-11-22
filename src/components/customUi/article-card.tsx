@@ -38,6 +38,10 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
   // only surface a category when it's something more specific.
   const showCategory = article.category !== "Blog";
 
+  // An article in another language (Arabic) marks its title and excerpt, so
+  // they read in their own direction.
+  const textLang = article.lang ? { lang: article.lang, dir: "auto" as const } : {};
+
   if (variant === "featured") {
     return (
       <Card className="group overflow-hidden">
@@ -53,10 +57,10 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
             <Badge className={`w-fit mb-4 ${FEATURED_BADGE}`}>
               {showCategory ? `${t("featured")} • ${article.category}` : t("featured")}
             </Badge>
-            <CardTitle as={titleAs} className="text-2xl md:text-3xl mb-4 group-hover:text-brand transition-colors text-left">
+            <CardTitle as={titleAs} className="text-2xl md:text-3xl mb-4 group-hover:text-brand transition-colors text-start" {...textLang}>
               {article.title}
             </CardTitle>
-            <CardDescription className="text-base mb-4">{article.excerpt}</CardDescription>
+            <CardDescription className="text-base mb-4" {...textLang}>{article.excerpt}</CardDescription>
             <div className="flex items-center text-sm text-muted-foreground">
               <span>{t("by", { author: article.author })}</span>
               <span className="mx-2">•</span>
@@ -84,7 +88,7 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
             </div>
           )}
           <CardHeader>
-            <CardTitle as={titleAs} className="text-lg leading-tight line-clamp-2 group-hover:text-brand transition-colors">
+            <CardTitle as={titleAs} className="text-lg leading-tight line-clamp-2 group-hover:text-brand transition-colors" {...textLang}>
               {article.title}
             </CardTitle>
             <CardDescription className="flex flex-wrap items-center gap-1.5 pt-1">
@@ -114,12 +118,12 @@ export function ArticleCard({ article, variant = "grid", titleAs }: ArticleCardP
           {showCategory && (
             <Badge variant="secondary" className="w-fit mb-2">{article.category}</Badge>
           )}
-          <CardTitle as={titleAs} className="text-xl leading-tight line-clamp-2 group-hover:text-brand transition-colors">
+          <CardTitle as={titleAs} className="text-xl leading-tight line-clamp-2 group-hover:text-brand transition-colors" {...textLang}>
             {article.title}
           </CardTitle>
         </CardHeader>
         <CardContent className="pt-0">
-          <CardDescription className="mb-4 line-clamp-3">{article.excerpt}</CardDescription>
+          <CardDescription className="mb-4 line-clamp-3" {...textLang}>{article.excerpt}</CardDescription>
           <div className="flex items-center text-sm text-muted-foreground">
             <span>{t("by", { author: article.author })}</span>
             <span className="mx-2">•</span>
