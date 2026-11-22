@@ -57,6 +57,14 @@ export default function Home() {
 
             </div>
           </div>
+
+          <div className="credits">
+            <span className="key">1964</span>
+            <span>Hammam-Lif</span>
+            <span>{t('hero.creditTunisia')}</span>
+            <span>FTCA</span>
+            <span>{t('hero.creditYears')}</span>
+          </div>
         </section>
 
         {/* Featured Movies */}

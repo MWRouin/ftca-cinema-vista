@@ -23,6 +23,8 @@
 
   --text-soft: rgba(255, 255, 255, 0.78);
   --text-muted: rgba(255, 255, 255, 0.55);
+  --text-faint: rgba(255, 255, 255, 0.34);
+  --line: rgba(255, 255, 255, 0.14);
 
   /* Image overlay wash (darkens the photo so light text reads) */
   --hero-wash:
@@ -234,6 +236,21 @@
   box-shadow: 0 20px 44px hsl(var(--accent) / 0.26);
 }
 
+/* Secondary — a dark, frosted fill with a hairline outline that turns wheat
+   on hover. Not transparent: on phones the slide image sits behind it. */
+.editorial-hero .btn-secondary {
+  color: var(--white);
+  background: rgba(7, 21, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.editorial-hero .btn-secondary:hover {
+  color: var(--sand);
+  border-color: var(--sand);
+  transform: translateY(-2px);
+}
+
 /* Featured slider (home-hero-featured.tsx): under the tagline, a slider whose
    first slide is the club's description (with "Discover our story") and the
    next ones the items the club features. Each slide carries its own call to
@@ -292,17 +309,23 @@
   color: hsl(var(--accent));
 }
 .editorial-hero .featured-title { font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-weight: 700; line-height: 1.25; }
+.editorial-hero .featured-meta {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
 .editorial-hero .featured-text {
   font-size: 0.98rem;
   line-height: 1.65;
   color: var(--text-soft);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-/* The club slide's paragraphs keep the hero's old description type, and are
-   never cut: it's the club's own text, not a teaser. */
+/* The club slide's paragraph keeps the hero's old description type, and
+   is never cut: it's the club's own text, not a teaser. */
 .editorial-hero .featured-text--long {
   display: block;
   -webkit-line-clamp: none;
@@ -313,10 +336,13 @@
 .editorial-hero .featured-text strong { color: var(--white); font-weight: 600; }
 /* The slides' call to action is the hero's "Discover our story" button.
    It sits at the bottom of every slide, so it doesn't move between slides. */
-.editorial-hero .featured-cta { align-self: flex-start; margin-top: auto; }
+.editorial-hero .featured-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+}
 .editorial-hero .featured-slide > :nth-last-child(2) { margin-bottom: 1.25rem; }
-/* The club slide's two paragraphs (description, then mission). */
-.editorial-hero .featured-text--long + .featured-text--long { margin-top: 0.6rem; }
 
 /* The current slide's image, cross-fading as the slides change. It fades
    diagonally (clear in the bottom-right corner, dissolving towards the top
@@ -358,7 +384,7 @@
     top: -1.5rem;
     /* Past the content's bottom padding to the hero's bottom edge (clipped
        there), so the image never ends in a line inside the hero. */
-    bottom: -6rem;
+    bottom: -8rem;
     left: calc(-1 * (var(--pad-x) + 2rem));
     width: 100vw;
   }
@@ -418,6 +444,30 @@
   .editorial-hero .content > * { animation: none; opacity: 1; transform: none; }
 }
 
+/* Bottom credits strip, in the content's bottom padding */
+.editorial-hero .credits {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(1200px, calc(100% - (2 * var(--pad-x))));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  z-index: 3;
+}
+.editorial-hero .credits span { white-space: nowrap; }
+.editorial-hero .credits .key { color: var(--hero-accent); }
+
 /* Responsive */
 @media (max-width: 980px) {
   .editorial-hero .content { padding: 5rem 0 4.5rem; }
@@ -432,7 +482,8 @@
   }
 
   .editorial-hero .content {
-    padding: 5.5rem 0 4rem;
+    /* The bottom padding holds the credits strip, two lines here. */
+    padding: 5.5rem 0 6.5rem;
     max-width: 100%;
   }
 
@@ -462,9 +513,19 @@
   .editorial-hero .featured-text--long { line-height: 1.85; }
 
   .editorial-hero .btn { padding: 1.1rem 1.5rem; }
+
+  .editorial-hero .credits {
+    justify-content: center;
+    gap: 0.35rem 0.9rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    padding-top: 0.85rem;
+  }
 }
 
 @media (max-width: 380px) {
   /* Slightly steeper drop so the title still fits on the narrowest phones */
   .editorial-hero h1 { font-size: clamp(1.95rem, 10vw, 2.9rem); }
+  .editorial-hero .credits span:nth-child(n+4) { display: none; }
 }

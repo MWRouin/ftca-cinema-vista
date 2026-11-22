@@ -6,9 +6,9 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getMovieById, getDirectorNames } from '@/data/movies';
+import { getMovieById, getMovies, getDirectorNames, getMovieDescription } from '@/data/movies';
 import { getEvents } from '@/data/events';
-import { getBlogArticleBySlug } from '@/data/blog';
+import { getBlogArticleBySlug, getFeaturedArticle } from '@/data/blog';
 import { LocalLink } from '@/i18n/locale';
 import { cn } from '@/lib/utils';
 
@@ -18,9 +18,11 @@ import { cn } from '@/lib/utils';
  * (for example "Award-winning film" and why it is featured).
  */
 export type Featured =
-  | { kind: 'film'; id: string; label?: string; text?: string }
+  // Without `id`: the club's latest film (the first in the catalog).
+  | { kind: 'film'; id?: string; label?: string; text?: string }
   | { kind: 'event'; id: string; label?: string; text?: string }
-  | { kind: 'article'; slug: string; label?: string; text?: string }
+  // Without `slug`: the blog's lead article (`featured` in blog.ts, as on the Blog page).
+  | { kind: 'article'; slug?: string; label?: string; text?: string }
   // `href` is a site path ("/contact"); it goes through LocalLink.
   | { kind: 'note'; label?: string; title: string; text?: string; href?: string; image?: string };
 
@@ -30,6 +32,8 @@ export type Featured =
  * lines are examples of each kind (their texts are placeholders).
  */
 const FEATURED: Featured[] = [
+  { kind: 'article' },
+  { kind: 'film' },
   // { kind: 'film', id: 'wed-trabelsia', label: 'Award-winning film (demo)', text: 'Demo text: one line on why the club features this film.' },
   // { kind: 'event', id: 'ydour-v2', label: 'Live event (demo)', text: 'Demo text: screenings, workshops, an exhibition and music.' },
   // { kind: 'article', slug: 'amateur-cinema-is-the-only-free-cinema' },
@@ -40,25 +44,34 @@ const FEATURED: Featured[] = [
 type Slide = {
   label: string;
   title?: string;
+  /** A short line under the title (a film's director and year). */
+  meta?: string;
   text?: string;
   body?: ReactNode;
   image?: string;
+  /** Language of the title and text when it isn't the page's (an Arabic article). */
+  lang?: string;
   href?: string;
   cta: string;
+  /** A second, quieter button beside the first. */
+  secondary?: { href: string; cta: string };
 };
 
-function resolve(item: Featured, t: (key: string) => string): Slide | null {
+function resolve(item: Featured, t: (key: string) => string, lang: string): Slide | null {
   switch (item.kind) {
     case 'film': {
-      const movie = getMovieById(item.id);
+      const movie = item.id ? getMovieById(item.id) : getMovies()[0];
       if (!movie) return null;
       return {
-        label: item.label ?? t('featured.featuredFilm'),
+        label: item.label ?? t(item.id ? 'featured.featuredFilm' : 'featured.latestFilm'),
         title: movie.title,
-        text: item.text ?? [getDirectorNames(movie), movie.year].filter(Boolean).join(' · '),
+        meta: [getDirectorNames(movie), movie.year].filter(Boolean).join(' · '),
+        // The synopsis's first paragraph, in the page's language.
+        text: item.text ?? getMovieDescription(movie, lang)?.split('\n\n')[0],
         image: movie.image,
         href: `/movies/${movie.id}`,
         cta: t('featured.ctaFilm'),
+        secondary: { href: '/movies', cta: t('featured.ctaMovies') },
       };
     }
     case 'event': {
@@ -74,15 +87,17 @@ function resolve(item: Featured, t: (key: string) => string): Slide | null {
       };
     }
     case 'article': {
-      const article = getBlogArticleBySlug(item.slug);
+      const article = item.slug ? getBlogArticleBySlug(item.slug) : getFeaturedArticle();
       if (!article) return null;
       return {
         label: item.label ?? t('featured.featuredArticle'),
         title: article.title,
         text: item.text ?? article.excerpt,
         image: article.image,
+        lang: article.lang,
         href: `/blog/${article.slug}`,
         cta: t('featured.ctaArticle'),
+        secondary: { href: '/blog', cta: t('featured.ctaBlog') },
       };
     }
     case 'note':
@@ -96,6 +111,9 @@ function resolve(item: Featured, t: (key: string) => string): Slide | null {
       };
   }
 }
+
+/** Time each slide stays before the slider moves on by itself. */
+const AUTOPLAY_MS = 10000;
 
 /** Distance from one slide to the next: the slide width plus the gap between
  *  slides (the gap keeps a sliver of the next slide from showing). */
@@ -114,33 +132,27 @@ const settle = (track: HTMLElement, count: number) => {
 };
 
 /**
- * The home hero's slider: the club slide first (description and mission, with
+ * The home hero's slider: the club slide first (its description, with
  * "Discover our story"), then the featured items. No box: it blends into the
  * hero. Swipe on touch screens (one slide per swipe), bullets under the text,
  * and prev/next buttons beside them on desktop. The current slide's image
  * fills the hero's empty right side on desktop and sits behind the slider on
- * phones and tablets. With nothing featured it is a single, static slide.
+ * phones and tablets. It moves on by itself every 10 s. With nothing featured
+ * it is a single, static slide.
  */
 export function FeaturedCarousel({ description }: { description: ReactNode }) {
-  const { t } = useTranslation('home');
-  const { t: tAbout } = useTranslation('about');
+  const { t, i18n } = useTranslation('home');
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
 
   const slides: Slide[] = [
     {
       label: t('featured.clubLabel'),
-      body: (
-        <>
-          <p className="featured-text featured-text--long">{description}</p>
-          {/* The mission, from About (its first paragraph). */}
-          <p className="featured-text featured-text--long">{tAbout('mission.p1')}</p>
-        </>
-      ),
+      body: <p className="featured-text featured-text--long">{description}</p>,
       href: '/about',
       cta: t('hero.ctaStory'),
     },
-    ...FEATURED.map((item) => resolve(item, t)).filter((slide): slide is Slide => slide !== null),
+    ...FEATURED.map((item) => resolve(item, t, i18n.language)).filter((slide): slide is Slide => slide !== null),
   ];
   const count = slides.length;
 
@@ -182,6 +194,24 @@ export function FeaturedCarousel({ description }: { description: ReactNode }) {
     }
   };
 
+  // Auto-advance every 10 s. Any slide change (a swipe, a click) restarts the
+  // wait; it holds while the pointer is over the slider, a finger is on it or
+  // focus is inside it, and is off for visitors who prefer reduced motion.
+  const [hovered, setHovered] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const held = hovered || touched || focused;
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || !looped || held) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = setTimeout(() => {
+      track.scrollTo({ left: (index + 1 + offset) * step(track), behavior: 'smooth' });
+    }, AUTOPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [index, looped, offset, held]);
+
   /** Scrolls to slide `target`; −1 and `count` land on the copies, then settle. */
   const go = (target: number) => {
     const track = trackRef.current;
@@ -203,20 +233,42 @@ export function FeaturedCarousel({ description }: { description: ReactNode }) {
       <span className="featured-label">{slide.label}</span>
       {slide.body ?? (
         <>
-          {slide.title && <span className="featured-title">{slide.title}</span>}
-          {slide.text && <span className="featured-text">{slide.text}</span>}
+          {slide.title && <span className="featured-title" lang={slide.lang} dir={slide.lang ? 'auto' : undefined}>{slide.title}</span>}
+          {slide.meta && <span className="featured-meta">{slide.meta}</span>}
+          {slide.text && <span className="featured-text" lang={slide.lang} dir={slide.lang ? 'auto' : undefined}>{slide.text}</span>}
         </>
       )}
       {slide.href && (
-        <LocalLink to={slide.href} className="btn btn-primary featured-cta">
-          {slide.cta} <ArrowRight className="arrow" aria-hidden />
-        </LocalLink>
+        <div className="featured-actions">
+          <LocalLink to={slide.href} className="btn btn-primary">
+            {slide.cta} <ArrowRight className="arrow" aria-hidden />
+          </LocalLink>
+          {slide.secondary && (
+            <LocalLink to={slide.secondary.href} className="btn btn-secondary">
+              {slide.secondary.cta}
+            </LocalLink>
+          )}
+        </div>
       )}
     </div>
   );
 
   return (
-    <div className="featured" role="region" aria-roledescription="carousel" aria-label={t('featured.region')}>
+    <div
+      className="featured"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={t('featured.region')}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onTouchStart={() => setTouched(true)}
+      onTouchEnd={() => setTouched(false)}
+      onTouchCancel={() => setTouched(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false);
+      }}
+    >
       {/* The frame carries the wheat rule, out in the left margin so the slide
           text lines up with the tagline above. */}
       <div className="featured-frame">
