@@ -6,7 +6,7 @@ type SocialLink = {
   icon: LucideIcon;
   href: string;
   label: string;
-  /** Brand color: always on in the "brand" variant, on hover in "chip". */
+  /** Brand color: always on in "brand", on hover in "chip". */
   color: string;
 };
 
@@ -20,10 +20,9 @@ const SOCIAL_LINKS: SocialLink[] = [
 /**
  * Presentation styles:
  *  - "brand"   — centered row of brand-colored icons (event CTA cards).
- *  - "chip"    — plain green icons that take their brand color on hover (footer).
- *  - "labeled" — icon + label, primary colored (contact page).
+ *  - "chip"    — plain green icons that take their brand color on hover (footer, contact page).
  */
-type SocialVariant = "brand" | "chip" | "labeled";
+type SocialVariant = "brand" | "chip";
 
 const VARIANTS: Record<SocialVariant, { container: string; anchor: string; icon: string }> = {
   brand: {
@@ -36,12 +35,6 @@ const VARIANTS: Record<SocialVariant, { container: string; anchor: string; icon:
     anchor:
       "w-9 h-9 rounded-lg flex items-center justify-center text-brand hover:text-[var(--social)] transition-colors",
     icon: "w-5 h-5",
-  },
-  labeled: {
-    container: "flex flex-wrap gap-x-5 gap-y-2",
-    anchor:
-      "flex items-center justify-center space-x-2 text-brand hover:scale-110 transition-colors group",
-    icon: "w-5 h-5 group-hover:scale-110",
   },
 };
 
@@ -68,7 +61,6 @@ export function SocialLinks({ variant = "brand", className }: SocialLinksProps) 
           style={{ "--social": color } as CSSProperties}
         >
           <Icon className={styles.icon} />
-          {variant === "labeled" && <span className="group-hover:scale-110">{label}</span>}
         </a>
       ))}
     </div>
