@@ -96,7 +96,7 @@ export function Navigation() {
             >
               <Logo
                 size={50}
-                className="hover:scale-110 transition-transform drop-shadow-lg"
+                className="drop-shadow-lg"
                 {...(overlay ? { colorMain: '#fff', colorBack: '#8fa39a', colorFront: '#cbd1ce' } : {})}
               />
             </LocalLink>

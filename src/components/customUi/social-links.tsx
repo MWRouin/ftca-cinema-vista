@@ -1,11 +1,12 @@
 import { Facebook, Instagram, Youtube, type LucideIcon } from "lucide-react";
+import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
 type SocialLink = {
   icon: LucideIcon;
   href: string;
   label: string;
-  /** Brand color, used by the "brand" variant. */
+  /** Brand color: always on in the "brand" variant, on hover in "chip". */
   color: string;
 };
 
@@ -19,7 +20,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 /**
  * Presentation styles:
  *  - "brand"   — centered row of brand-colored icons (event CTA cards).
- *  - "chip"    — plain green icons, no background (footer).
+ *  - "chip"    — plain green icons that take their brand color on hover (footer).
  *  - "labeled" — icon + label, primary colored (contact page).
  */
 type SocialVariant = "brand" | "chip" | "labeled";
@@ -28,12 +29,12 @@ const VARIANTS: Record<SocialVariant, { container: string; anchor: string; icon:
   brand: {
     container: "flex justify-center gap-6",
     anchor: "flex items-center justify-center w-10 h-10 hover:scale-125 transition-transform",
-    icon: "w-7 h-7",
+    icon: "w-7 h-7 text-[var(--social)]",
   },
   chip: {
     container: "flex space-x-4",
     anchor:
-      "w-9 h-9 rounded-lg flex items-center justify-center text-brand",
+      "w-9 h-9 rounded-lg flex items-center justify-center text-brand hover:text-[var(--social)] transition-colors",
     icon: "w-5 h-5",
   },
   labeled: {
@@ -64,8 +65,9 @@ export function SocialLinks({ variant = "brand", className }: SocialLinksProps) 
           rel="noopener noreferrer"
           aria-label={label}
           className={styles.anchor}
+          style={{ "--social": color } as CSSProperties}
         >
-          <Icon className={styles.icon} style={variant === "brand" ? { color } : undefined} />
+          <Icon className={styles.icon} />
           {variant === "labeled" && <span className="group-hover:scale-110">{label}</span>}
         </a>
       ))}
