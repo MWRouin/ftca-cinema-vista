@@ -31,7 +31,7 @@ The mobile menu becomes a right-side drawer with the settings in it; the navbar 
 
 ## Left over
 
-- The performance pass: all six items of [plans/perf-cleanup-todo.md](../plans/perf-cleanup-todo.md) are done; delete the file. Possible later: smaller poster copies for the grids (a poster is up to 418 KB at 1000×1500), `sharp` as an explicit dev dependency (the script uses the copy Next installs), `eventDetail` split per event, a small `t()` in place of i18next (27 KB gzipped).
+- The performance pass is done (its temporary checklist was deleted). Possible later: smaller poster copies for the grids (a poster is up to 418 KB at 1000×1500), `sharp` as an explicit dev dependency (the script uses the copy Next installs), `eventDetail` split per event, a small `t()` in place of i18next (27 KB gzipped).
 - A page's namespace list must follow its components (rule in `src/i18n/AGENTS.md`); the client-side language switch and the browser-rendered `404.html` weren't checked in a browser.
 - Swipe to close and pull down were checked in headless Chrome only, not on a real phone.
 - While hidden, the bar's 64px strip still catches the pointer over the page underneath (from the previous log).

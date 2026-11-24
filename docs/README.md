@@ -12,7 +12,6 @@ Each plan starts with a status line: `Status: draft | active | done | dropped`, 
 |---|---|
 | [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done and deployed |
 | [members-login](plans/members-login.md) | draft |
-| [perf-cleanup-todo](plans/perf-cleanup-todo.md) | active (temporary checklist, delete when done) |
 
 ## Research
 
