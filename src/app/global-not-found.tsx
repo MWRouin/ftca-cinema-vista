@@ -6,6 +6,7 @@ import { InlineScript } from "@/components/InlineScript";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SITE_NAME_FULL } from "@/lib/metadata/seo-constants";
 import { THEME_SCRIPT } from "@/lib/theme-script";
+import { bundlesByLocale } from "@/i18n/server";
 import GlobalNotFoundView from "@/views/GlobalNotFound";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function GlobalNotFound() {
       </head>
       <body className="bg-background text-foreground">
         <ThemeProvider>
-          <GlobalNotFoundView />
+          <GlobalNotFoundView bundles={bundlesByLocale(["common", "static"])} />
         </ThemeProvider>
         <noscript>
           <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-8 text-center">

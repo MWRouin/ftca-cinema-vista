@@ -1,6 +1,6 @@
 # Mobile drawer, navbar hidden by default, navbar refactor (2026-11-24)
 
-The mobile menu becomes a right-side drawer with the settings in it; the navbar is hidden by default, with the visitor's choice saved; then the navbar code is split up, unused media is archived, and a performance and code style review starts.
+The mobile menu becomes a right-side drawer with the settings in it; the navbar is hidden by default, with the visitor's choice saved; then the navbar code is split up, unused media is archived, and a performance pass starts (translations per page, font preloads).
 
 ## Shipped
 
@@ -10,7 +10,9 @@ The mobile menu becomes a right-side drawer with the settings in it; the navbar 
 - **Hidden by default, saved** (e8b39e7, 8d0e9fa, PR #94): the bar starts hidden and the choice is kept in `localStorage` (`navHidden`). It shows when the page loads and goes after 5 s on every device. Drawer settings rows are as wide as their content, and the drawer's × has a 32px target.
 - **Cleanup** (c259fa0): one shared drawer row style (`components/drawer-row.ts`) with a keyboard focus ring, the visible text as the rows' accessible name.
 - **Navbar split** (7ef4700): `Navigation.tsx` from 394 to 143 lines; the drawer in `MobileMenu.tsx`, the scroll logic in `hooks/useNavScroll.ts`, the swipe in `hooks/useSwipeToClose.ts` (reusable), the saved choice in `lib/nav-hidden.ts`. The prerendered navbar HTML is identical before and after.
-- **Unused media archived** (this commit): 19 files (~23 MB) that no page used moved from `public/` to `archive/public/`, same paths, so they are kept but no longer deployed (Ydour photos and videos, a member portrait, two posters, a blog image, the doodle set, the Cinema Sunday font). A check of the code found no unused page or component: the `(root)` routes are the legacy redirects, and all four event views are live.
+- **Unused media archived** (5ba98d1): 19 files (~23 MB) that no page used moved from `public/` to `archive/public/`, same paths, so they are kept but no longer deployed (Ydour photos and videos, a member portrait, two posters, a blog image, the doodle set, the Cinema Sunday font). A check of the code found no unused page or component: the `(root)` routes are the legacy redirects, and all four event views are live.
+- **Translations per page and locale** (this commit): the catalogs left the JS bundle; the server hands each page only its namespaces in its locale (`<Translations ns>` in `src/i18n/server.tsx`, a list per page). About 17 KB less gzipped JS per page for 1.5 KB more HTML; the text of all 253 built pages is identical. `getT` (unused) removed.
+- **Font preloads once** (this commit): React's `preload()` instead of hand-written `<link>` tags, which React emitted twice.
 
 ## Decisions
 
@@ -20,10 +22,13 @@ The mobile menu becomes a right-side drawer with the settings in it; the navbar 
 - **No aria-label on the drawer rows:** the visible text ("Language: English") is the accessible name, so voice control can use it.
 - **The navbar stays prerendered** (a client component, not `ssr: false`): its links stay in the HTML for crawlers and the bar never pops in late.
 - **Unused media archived, not deleted:** the owner wants to keep it; `archive/public/` mirrors `public/` so a file goes back with one `git mv`, and other archived material can sit beside it.
+- **No fallback language:** each page receives one locale only; en and fr have the same keys, so the fallback to English never applied.
+- **`<link rel="preconnect" href="/">` kept:** Next emits it itself (its font manifest lists every page with no fonts); harmless and not removable from app code.
 - **Tried and dropped:** a two-colour (wheat over green) loading bar; an active-page marker in the drawer (replaced by the underline); full-width and centred separators.
 
 ## Left over
 
-- The performance pass: items 1–4 in [plans/perf-cleanup-todo.md](../plans/perf-cleanup-todo.md) (image sizes, `LazyImage` loading, per-locale translations, head tags).
+- The performance pass: items 1–2 in [plans/perf-cleanup-todo.md](../plans/perf-cleanup-todo.md) (image sizes, `LazyImage` loading); possible later: `eventDetail` split per event, a small `t()` in place of i18next (27 KB gzipped).
+- A page's namespace list must follow its components (rule in `src/i18n/AGENTS.md`); the client-side language switch and the browser-rendered `404.html` weren't checked in a browser.
 - Swipe to close and pull down were checked in headless Chrome only, not on a real phone.
 - While hidden, the bar's 64px strip still catches the pointer over the page underneath (from the previous log).

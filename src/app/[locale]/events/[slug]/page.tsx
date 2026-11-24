@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageJsonLd } from "@/components/JsonLd";
+import { Translations } from "@/i18n/server";
 import { getEvents } from "@/data/events";
 import { buildMetadata } from "@/lib/metadata/next-metadata";
 import { decodeParam } from "@/lib/route-params";
@@ -39,7 +40,9 @@ export default async function EventPage({ params }: Props) {
   return (
     <>
       <PageJsonLd pageKey={`events/${page.slug}`} locale={locale} seo={page.seo} />
-      <View />
+      <Translations locale={locale} ns={["eventDetail"]}>
+        <View />
+      </Translations>
     </>
   );
 }

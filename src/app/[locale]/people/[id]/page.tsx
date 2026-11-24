@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageJsonLd } from "@/components/JsonLd";
+import { Translations } from "@/i18n/server";
 import { getPublicPeople } from "@/data/movies";
 import { buildMetadata } from "@/lib/metadata/next-metadata";
 import { decodeParam } from "@/lib/route-params";
@@ -36,7 +37,9 @@ export default async function PersonPage({ params }: Props) {
   return (
     <>
       <PageJsonLd pageKey={`people/${page.id}`} locale={locale} seo={page.seo} />
-      <Person />
+      <Translations locale={locale} ns={["person", "about", "movie", "blog", "static"]}>
+        <Person />
+      </Translations>
     </>
   );
 }

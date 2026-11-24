@@ -3,7 +3,7 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { Layout } from '@/components/Layout';
 import { dirForLocale, type Locale } from '@/i18n/config';
-import { I18nProvider } from '@/i18n/provider';
+import { I18nProvider, type BundlesByLocale } from '@/i18n/provider';
 import { localeForUrl } from '@/lib/locale-redirect';
 import NotFound from './NotFound';
 
@@ -17,7 +17,7 @@ const getServerLocale = (): Locale | null => null;
  * the site shell and the right message are rendered once the URL can be read
  * in the browser.
  */
-export default function GlobalNotFound() {
+export default function GlobalNotFound({ bundles }: { bundles: BundlesByLocale }) {
   const locale = useSyncExternalStore(subscribe, localeForUrl, getServerLocale);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function GlobalNotFound() {
 
   if (!locale) return null;
   return (
-    <I18nProvider locale={locale}>
+    <I18nProvider locale={locale} bundles={bundles[locale]}>
       <Layout>
         <NotFound />
       </Layout>
