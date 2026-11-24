@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { Menu, X } from 'lucide-react';
+import { Menu, PanelTopClose, PanelTopOpen, X } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { LanguageToggle } from './LanguageToggle';
 import { Logo } from './Logo';
@@ -11,8 +11,29 @@ import { LocalLink } from '@/i18n/locale';
 import { stripLocale } from '@/i18n/config';
 import { NAV_ITEMS } from '@/lib/site-nav';
 
+// Whether the visitor hid the navbar. Kept outside React so it survives the
+// remount of a language switch, and not saved: a reload brings the bar back,
+// so nobody lands on a page without navigation.
+let navHidden = false;
+const navHiddenListeners = new Set<() => void>();
+const subscribeNavHidden = (listener: () => void) => {
+  navHiddenListeners.add(listener);
+  return () => navHiddenListeners.delete(listener);
+};
+const setNavHidden = (hidden: boolean) => {
+  navHidden = hidden;
+  navHiddenListeners.forEach((listener) => listener());
+};
+
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const hidden = useSyncExternalStore(subscribeNavHidden, () => navHidden, () => false);
+  // Set when the visitor last scrolled up, cleared when they scroll down.
+  const [scrolledUp, setScrolledUp] = useState(false);
+  // Hidden, the bar slides up out of view and comes back while the visitor
+  // scrolls up, the pointer is on its strip (a tap on touch screens) or a
+  // keyboard user tabs into it; an open menu keeps it shown.
+  const tucked = hidden && !isOpen && !scrolledUp;
   const pathname = usePathname();
   const { t } = useTranslation();
   const path = stripLocale(pathname);
@@ -29,11 +50,27 @@ export function Navigation() {
 
   useEffect(() => {
     let rafId = 0;
+    let lastY = window.scrollY;
+    let hideTimer = 0;
 
     const measure = () => {
       rafId = 0;
       const y = window.scrollY;
       setScrolled(y > 20);
+      // A few pixels of slack, so a tremor or an overscroll bounce doesn't
+      // flip the direction.
+      if (Math.abs(y - lastY) > 8) {
+        const up = y < lastY;
+        setScrolledUp(up);
+        lastY = y;
+        // With a mouse, the bar a scroll up brought back goes again after 5 s
+        // (hovering its strip keeps it shown). Touch screens keep it until the
+        // next scroll down.
+        clearTimeout(hideTimer);
+        if (up && window.matchMedia('(hover: hover)').matches) {
+          hideTimer = window.setTimeout(() => setScrolledUp(false), 5000);
+        }
+      }
 
       if (!isHome) {
         setOverlay(false);
@@ -59,6 +96,7 @@ export function Navigation() {
     return () => {
       window.removeEventListener('scroll', onScroll);
       if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(hideTimer);
     };
   }, [isHome]);
 
@@ -77,10 +115,14 @@ export function Navigation() {
 
   return (
     <>
+    {/* The navbar's strip: the hover area that brings a hidden bar back. */}
+    <div className="group/nav fixed top-0 inset-x-0 z-50 h-16">
     <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 border-b ${overlay
       ? 'bg-transparent text-white border-transparent'
-      : `bg-background/90 border-border/30 ${scrolled ? 'shadow-lg' : ''}`
-      }`}>
+      : `bg-background/90 border-border/30 ${scrolled ? (tucked ? 'group-hover/nav:shadow-lg' : 'shadow-lg') : ''}`
+      } ${tucked
+      ? '-translate-y-full group-hover/nav:translate-y-0 group-has-[:focus-visible]/nav:translate-y-0'
+      : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative h-16 flex items-center">
           {/* Logo (left) */}
@@ -96,7 +138,7 @@ export function Navigation() {
             >
               <Logo
                 size={50}
-                className="hover:scale-110 transition-transform drop-shadow-lg"
+                className="drop-shadow-lg"
                 {...(overlay ? { colorMain: '#fff', colorBack: '#8fa39a', colorFront: '#cbd1ce' } : {})}
               />
             </LocalLink>
@@ -128,6 +170,20 @@ export function Navigation() {
             <LanguageToggle onDark={overlay} />
             <ThemeToggle onDark={overlay} />
             <button
+              onClick={() => {
+                // Hiding must take effect even if the last scroll was upwards.
+                if (!hidden) setScrolledUp(false);
+                setNavHidden(!hidden);
+              }}
+              className={`w-9 h-9 rounded-lg flex items-center justify-center bg-transparent group ${overlay ? 'text-white' : 'text-brand'}`}
+              aria-label={t(hidden ? 'a11y.showNav' : 'a11y.hideNav')}
+              title={t(hidden ? 'a11y.showNav' : 'a11y.hideNav')}
+            >
+              {hidden
+                ? <PanelTopOpen className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                : <PanelTopClose className="w-5 h-5 group-hover:scale-110 transition-transform" />}
+            </button>
+            <button
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden w-9 h-9 rounded-lg flex items-center justify-center transition-colors group bg-transparent"
               aria-label={t('a11y.toggleMenu')}
@@ -144,6 +200,7 @@ export function Navigation() {
         </div>
       </div>
     </nav>
+    </div>
 
       {/* Tap-outside backdrop: closes the mobile menu when tapping anywhere
           off it. Transparent (no visual change) and below the nav (z-50) so the

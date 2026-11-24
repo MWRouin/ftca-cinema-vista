@@ -40,6 +40,8 @@
   },
   "a11y": {
     "toggleMenu": "Ouvrir ou fermer le menu",
+    "hideNav": "Masquer la barre de navigation",
+    "showNav": "Garder la barre de navigation visible",
     "skipToContent": "Aller au contenu",
     "homeLink": "FTCA Hammam-Lif, accueil",
     "close": "Fermer",
