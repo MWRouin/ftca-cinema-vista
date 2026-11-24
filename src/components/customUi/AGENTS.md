@@ -12,7 +12,7 @@ Presentational building blocks shared by the views: cards, page titles and conta
 
 - Kebab-case file names (`movie-card.tsx`), named exports, except `ShareActions` (default export).
 - Internal links go through `LocalLink` (locale prefix, trailing slash). Asset paths are root-relative (`/Posters/x.jpg`) or resolved from JSON with `__BASE_URL__`.
-- Images go through `LazyImage`: it shows a placeholder, never a loader, when `src` is empty or fails.
+- Images go through `LazyImage`: it shows a placeholder, never a loader, when `src` is empty or fails. A prerendered image is visible in the HTML (the browser paints it before hydration); only images mounted later (client-side page change, filters) fade in. Pass `priority` for images above the fold (a page's main image, the first row of posters): eager, `fetchpriority="high"`. Everything else stays `loading="lazy"`.
 - Pass `alt=""` when a visible title already names the image (movie-card posters, team portraits); otherwise the name is read twice. `LazyImage` then hides its placeholder from screen readers too.
 
 ## Traps

@@ -15,7 +15,7 @@ import { getEvents, type EventMeta } from '@/data/events';
 const byDate = (event1: EventMeta, event2: EventMeta) =>
   new Date(event1.date).getTime() - new Date(event2.date).getTime();
 
-function EventCard({ event }: { event: EventMeta }) {
+function EventCard({ event, priority = false }: { event: EventMeta; priority?: boolean }) {
   const { t } = useTranslation('events');
   const formatDate = useLocalizedDate();
   const upcoming = event.status === 'upcoming';
@@ -27,6 +27,7 @@ function EventCard({ event }: { event: EventMeta }) {
           <LazyImage
             src={event.image}
             alt={event.title}
+            priority={priority}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </div>
@@ -75,8 +76,8 @@ export default function Events() {
         <section className="mb-16">
           <h2 className="section-title mb-8">{t('upcoming')}</h2>
           <div className="grid grid-cols-1 gap-8">
-            {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
+            {upcomingEvents.map((event, index) => (
+              <EventCard key={event.id} event={event} priority={index === 0} />
             ))}
           </div>
         </section>
@@ -87,8 +88,8 @@ export default function Events() {
         <h2 className="section-title mb-8">{t('past')}</h2>
         {pastEvents.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {pastEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
+            {pastEvents.map((event, index) => (
+              <EventCard key={event.id} event={event} priority={index === 0 && upcomingEvents.length === 0} />
             ))}
           </div>
         ) : (

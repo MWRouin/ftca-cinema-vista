@@ -11,6 +11,7 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 - `npm run dev`: dev server on `http://localhost:3000`
 - `npm run build`: static build into `out/` (pages, metadata, sitemap)
 - `npm run lint`: ESLint (clean; keep it that way)
+- `node tools/resize-images.mjs` (dry run) / `--write`: shrink oversized images in `public/` in place (posters 1000×1500, portraits 800×800, other photos 2000px), keeping the originals in `archive/originals/`. Run it after adding images.
 - `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare a build's pages and head data with `docs/research/parity-baseline.json`
 - No test suite. Verify with `npx tsc --noEmit` and `npm run build`, then check the HTML in `out/`.
 - Deploy: pushes to `Production` build and publish `out/` to GitHub Pages (`.github/workflows/deploy.yml`).
@@ -23,7 +24,7 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 - **Package manager:** npm only (`package-lock.json`). There is no bun/yarn lockfile.
 - **URLs:** every page is locale-prefixed with a trailing slash (`/en/movies/`, `/fr/movies/`). `/` and un-prefixed URLs (`/movies/trip/`) redirect to a locale. Use `LocalLink`/`localizePath`, not raw paths.
 - **Navigation progress:** a thin bar (`components/NavigationProgress`) shows while a page loads. `LocalLink` reports to it by itself; a navigation made with `router.push` must run in a transition and report through `useReportNavigation` (`src/lib/navigation-progress.ts`), as `LanguageToggle` does. There is deliberately no `loading.tsx`.
-- **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`.
+- **Asset URLs in JSON data:** write `__BASE_URL__/Posters/x.jpg`; it's resolved at load time. Files go in `public/`. Media kept but not published goes in `archive/public/`, full-size originals of resized images in `archive/originals/` (both with the same paths as under `public/`); only `public/` is deployed.
 - **Posters:** 2:3 portrait, 1000×1500 is the common size. Reduce dimensions rather than compressing further. Crop to 2:3.
 - **Person portraits:** square, saved in `public/Members/`.
 - **Fonts:** Nunito for all text, hero included (Tailwind `font-sans`; `font-display` and `.section-title` are Nunito too, kept separate so titles can change face later), plus Noto Sans Arabic for Arabic text, self-hosted via `@fontsource` (`src/fonts.ts`), not the Google Fonts CDN; don't suggest migrating them. Import only the subsets and weights in use. Fontsource's latin subset has no arrows (→ ←): use the lucide icons instead of the characters. A cold-load flash of the wrong font is avoided by preloading the above-the-fold woff2 files listed in `src/lib/critical-fonts.ts`; if the hero's font family or weight changes, update that list. The fonts stay on `@fontsource` instead of `next/font` because the CSS refers to the literal family names.

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageJsonLd } from "@/components/JsonLd";
+import { Translations } from "@/i18n/server";
 import { staticMetadata } from "@/lib/metadata/next-metadata";
 import Events from "@/views/Events";
 
@@ -11,10 +12,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function EventsPage({ params }: Props) {
+  const { locale } = await params;
   return (
     <>
-      <PageJsonLd pageKey="events" locale={(await params).locale} />
-      <Events />
+      <PageJsonLd pageKey="events" locale={locale} />
+      <Translations locale={locale} ns={["events"]}>
+        <Events />
+      </Translations>
     </>
   );
 }

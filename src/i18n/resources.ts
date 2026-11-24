@@ -1,3 +1,5 @@
+import type { Locale } from "./config";
+
 import enCommon from "./locales/en/common.json";
 import frCommon from "./locales/fr/common.json";
 import enHome from "./locales/en/home.json";
@@ -24,7 +26,11 @@ import frPerson from "./locales/fr/person.json";
 /**
  * Translation resources, grouped by locale then namespace. One namespace per
  * page keeps catalogs small; `common` holds shared chrome (nav, footer).
- * Register new namespaces here as pages are translated. Framework-agnostic.
+ * Register new namespaces here as pages are translated.
+ *
+ * Server only: import it from server components (see `server.tsx`), never from
+ * a client component, or every catalog of both locales lands in the browser
+ * bundle. Pages hand the client just the namespaces they use.
  */
 export const resources = {
   en: {
@@ -55,4 +61,12 @@ export const resources = {
   },
 } as const;
 
-export const NAMESPACES = Object.keys(resources.en) as (keyof typeof resources.en)[];
+export type Namespace = keyof typeof resources.en;
+export const NAMESPACES = Object.keys(resources.en) as Namespace[];
+
+/** Some namespaces of one locale, as handed to the client provider. */
+export type Bundles = Partial<Record<Namespace, unknown>>;
+
+export function pickBundles(locale: Locale, namespaces: readonly Namespace[]): Bundles {
+  return Object.fromEntries(namespaces.map((ns) => [ns, resources[locale][ns]]));
+}
