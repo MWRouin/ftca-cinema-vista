@@ -46,7 +46,7 @@ export function LanguageToggle({ onDark = false, labeled = false }: { onDark?: b
     return (
       <button
         onClick={switchLanguage}
-        className="flex h-10 w-full items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
+        className="flex h-10 w-fit items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
         aria-label={t("language.switchTo", { language: t(`language.${next}`) })}
       >
         <span className="w-5 text-center text-sm font-bold uppercase text-brand">{locale}</span>

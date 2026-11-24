@@ -16,8 +16,8 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/s
 
 // Whether the navbar is hidden. Hidden by default; the visitor's choice is
 // saved in localStorage. Kept outside React so it survives the remount of a
-// language switch. The prerendered HTML has the bar hidden, and a saved
-// "shown" takes effect right after load.
+// language switch. Either way the bar shows when the page loads (see
+// `scrolledUp`); a hidden one goes after 5 s.
 const NAV_HIDDEN_KEY = 'navHidden';
 let navHidden: boolean | null = null;
 const readNavHidden = () => {
@@ -56,7 +56,11 @@ export function Navigation() {
   const swipe = useRef<{ x: number; y: number; time: number; dragging: boolean | null } | null>(null);
   const hidden = useSyncExternalStore(subscribeNavHidden, readNavHidden, () => true);
   // Set when the visitor last scrolled up, cleared when they scroll down.
-  const [scrolledUp, setScrolledUp] = useState(false);
+  // Starts set: a hidden bar shows when the page loads, then goes after 5 s.
+  const [scrolledUp, setScrolledUp] = useState(true);
+  // The pending "hide again" timer. A ref, so a route change that re-runs the
+  // scroll effect doesn't drop it and leave the bar shown.
+  const hideTimer = useRef(0);
   // Hidden, the bar slides up out of view and comes back while the visitor
   // scrolls up, the pointer is on its strip (a tap on touch screens) or a
   // keyboard user tabs into it; an open menu keeps it shown.
@@ -78,7 +82,6 @@ export function Navigation() {
   useEffect(() => {
     let rafId = 0;
     let lastY = window.scrollY;
-    let hideTimer = 0;
     let touchStartY: number | null = null;
 
     // Brings a hidden bar back, as a scroll up does. With a mouse it goes
@@ -86,9 +89,9 @@ export function Navigation() {
     // it until the next scroll down.
     const reveal = () => {
       setScrolledUp(true);
-      clearTimeout(hideTimer);
+      clearTimeout(hideTimer.current);
       if (window.matchMedia('(hover: hover)').matches) {
-        hideTimer = window.setTimeout(() => setScrolledUp(false), 5000);
+        hideTimer.current = window.setTimeout(() => setScrolledUp(false), 5000);
       }
     };
 
@@ -103,7 +106,7 @@ export function Navigation() {
           reveal();
         } else {
           setScrolledUp(false);
-          clearTimeout(hideTimer);
+          clearTimeout(hideTimer.current);
         }
         lastY = y;
       }
@@ -153,9 +156,15 @@ export function Navigation() {
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
       if (rafId) cancelAnimationFrame(rafId);
-      clearTimeout(hideTimer);
     };
   }, [isHome]);
+
+  // Shown on load, the bar goes after 5 s on every device (touch included:
+  // no scroll down may come to hide it).
+  useEffect(() => {
+    hideTimer.current = window.setTimeout(() => setScrolledUp(false), 5000);
+    return () => clearTimeout(hideTimer.current);
+  }, []);
 
   // The drawer exists below lg only: widening the window past it closes the
   // drawer, or its backdrop would stay over the page.
@@ -321,7 +330,7 @@ export function Navigation() {
                 <SheetTitle className="sr-only">{t('a11y.menu')}</SheetTitle>
                 {/* The settings, in words; the × sits at the right of the first row,
                     whose label is short enough to leave it room. */}
-                <div className="px-4 py-3">
+                <div className="flex flex-col items-start px-4 py-3">
                   <LanguageToggle labeled />
                   <ThemeToggle labeled />
                   <button
@@ -329,7 +338,7 @@ export function Navigation() {
                       hidingFromDrawer.current = !hidden;
                       toggleNavHidden();
                     }}
-                    className="flex h-10 w-full items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
+                    className="flex h-10 w-fit items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
                   >
                     <HideIcon className="w-5 h-5 text-brand" />
                     <span>{t(hidden ? 'a11y.showNavShort' : 'a11y.hideNavShort')}</span>
