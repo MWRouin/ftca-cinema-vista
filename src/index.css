@@ -205,7 +205,7 @@
     background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--secondary) / 0.12));
   }
 
-  /* Links in the mobile menu take no hover background: on a touch screen it
+  /* Links in the mobile drawer take no hover background: on a touch screen it
      stays behind the item after a tap. */
   .nav-link.nav-menu-item:hover {
     background: none;
