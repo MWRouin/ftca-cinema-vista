@@ -253,8 +253,9 @@ export default function Movies() {
           {/* Movies grid */}
           {filteredMovies.length > 0 ? (
             <MovieGrid>
-              {filteredMovies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} titleAs="h2" />
+              {/* The first row (up to 4 posters) is above the fold. */}
+              {filteredMovies.map((movie, index) => (
+                <MovieCard key={movie.id} movie={movie} titleAs="h2" priority={index < 4} />
               ))}
             </MovieGrid>
           ) : (

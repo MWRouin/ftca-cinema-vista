@@ -21,6 +21,8 @@ interface MovieCardProps {
   badges?: CardBadge[];
   /** Heading level of the title: h2 when the grid sits right under the page h1. */
   titleAs?: "h2" | "h3";
+  /** Load the poster at once: for the first cards, above the fold. */
+  priority?: boolean;
 }
 
 /**
@@ -69,7 +71,7 @@ export function MovieGrid({ children }: { children: ReactNode }) {
  * (Movies, Home featured, MoviePlayer related, Person filmography). Callers just
  * feed it a Movie (and optional badges); the card owns the rest.
  */
-export function MovieCard({ movie, to, badges, titleAs }: MovieCardProps) {
+export function MovieCard({ movie, to, badges, titleAs, priority }: MovieCardProps) {
   const locale = useLocale();
   const { t } = useTranslation("movie");
   const description = getMovieDescription(movie, locale);
@@ -82,6 +84,7 @@ export function MovieCard({ movie, to, badges, titleAs }: MovieCardProps) {
           <LazyImage
             src={movie.image}
             alt="" // the link is named by the title below
+            priority={priority}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
           {/* Synopsis preview on hover (only on devices that can hover, so a

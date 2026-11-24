@@ -44,6 +44,7 @@ export default function Person() {
               <LazyImage
                 src={person.image ?? ""}
                 alt={person.name}
+                priority
                 className="w-full h-full object-cover"
                 fallback={<span className="font-display text-5xl font-semibold" aria-hidden>{initials(person.name)}</span>}
               />

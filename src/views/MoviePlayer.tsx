@@ -90,6 +90,7 @@ export default function MoviePlayer() {
               <LazyImage
                 src={movie.image}
                 alt={movie.title}
+                priority
                 className="w-full h-full object-cover"
               />
             </div>
