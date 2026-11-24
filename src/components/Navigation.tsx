@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useSyncExternalStore, type TouchEvent } from 'react';
+import { useState, useEffect, useRef, useSyncExternalStore, type TouchEvent as ReactTouchEvent } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { Menu, PanelTopClose, PanelTopOpen } from 'lucide-react';
@@ -13,6 +13,15 @@ import { NAV_ITEMS } from '@/lib/site-nav';
 import { cn } from '@/lib/utils';
 import { SocialLinks } from '@/components/customUi/social-links';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { DRAWER_ROW_CLASS } from './drawer-row';
+
+// How long a hidden bar stays after it was brought back (page load, scroll up).
+const HIDE_DELAY_MS = 5000;
+
+// The drawer's separators: wheat hairlines starting at the text's left edge and
+// fading out to the right. Full-width rules read as hard edges, and centred
+// ones look off against left-aligned text.
+const Hairline = () => <div className="ml-6 mr-4 h-px bg-gradient-to-r from-accent/60 to-transparent" />;
 
 // Whether the navbar is hidden. Hidden by default; the visitor's choice is
 // saved in localStorage. Kept outside React so it survives the remount of a
@@ -91,7 +100,7 @@ export function Navigation() {
       setScrolledUp(true);
       clearTimeout(hideTimer.current);
       if (window.matchMedia('(hover: hover)').matches) {
-        hideTimer.current = window.setTimeout(() => setScrolledUp(false), 5000);
+        hideTimer.current = window.setTimeout(() => setScrolledUp(false), HIDE_DELAY_MS);
       }
     };
 
@@ -135,10 +144,10 @@ export function Navigation() {
     const onWheel = (event: WheelEvent) => {
       if (event.deltaY < 0 && window.scrollY <= 0) reveal();
     };
-    const onTouchStart = (event: globalThis.TouchEvent) => {
+    const onTouchStart = (event: TouchEvent) => {
       touchStartY = window.scrollY <= 0 ? event.touches[0].clientY : null;
     };
-    const onTouchMove = (event: globalThis.TouchEvent) => {
+    const onTouchMove = (event: TouchEvent) => {
       if (touchStartY !== null && event.touches[0].clientY - touchStartY > 30) {
         touchStartY = null;
         reveal();
@@ -162,7 +171,7 @@ export function Navigation() {
   // Shown on load, the bar goes after 5 s on every device (touch included:
   // no scroll down may come to hide it).
   useEffect(() => {
-    hideTimer.current = window.setTimeout(() => setScrolledUp(false), 5000);
+    hideTimer.current = window.setTimeout(() => setScrolledUp(false), HIDE_DELAY_MS);
     return () => clearTimeout(hideTimer.current);
   }, []);
 
@@ -184,6 +193,7 @@ export function Navigation() {
     setIsOpen(false);
   };
   const HideIcon = hidden ? PanelTopOpen : PanelTopClose;
+  const iconButton = `w-9 h-9 rounded-lg flex items-center justify-center bg-transparent group ${overlay ? 'text-white' : 'text-brand'}`;
 
   const openDrawer = (open: boolean) => {
     if (open) setSwipedClosed(false);
@@ -193,11 +203,11 @@ export function Navigation() {
   // Swipe right to close the drawer: it follows the finger, then closes past
   // a third of its width or on a quick flick, and snaps back otherwise. A
   // mostly vertical move is left alone, so the link list can still scroll.
-  const onSwipeStart = (event: TouchEvent<HTMLDivElement>) => {
+  const onSwipeStart = (event: ReactTouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
     swipe.current = { x: touch.clientX, y: touch.clientY, time: event.timeStamp, dragging: null };
   };
-  const onSwipeMove = (event: TouchEvent<HTMLDivElement>) => {
+  const onSwipeMove = (event: ReactTouchEvent<HTMLDivElement>) => {
     const start = swipe.current;
     if (!start) return;
     const dx = event.touches[0].clientX - start.x;
@@ -211,7 +221,7 @@ export function Navigation() {
     drawer.style.transition = 'none';
     drawer.style.transform = `translateX(${Math.max(0, dx)}px)`;
   };
-  const onSwipeEnd = (event: TouchEvent<HTMLDivElement>) => {
+  const onSwipeEnd = (event: ReactTouchEvent<HTMLDivElement>) => {
     const start = swipe.current;
     swipe.current = null;
     if (!start?.dragging) return;
@@ -292,7 +302,7 @@ export function Navigation() {
               <ThemeToggle onDark={overlay} />
               <button
                 onClick={toggleNavHidden}
-                className={`w-9 h-9 rounded-lg flex items-center justify-center bg-transparent group ${overlay ? 'text-white' : 'text-brand'}`}
+                className={iconButton}
                 aria-label={t(hidden ? 'a11y.showNav' : 'a11y.hideNav')}
                 title={t(hidden ? 'a11y.showNav' : 'a11y.hideNav')}
               >
@@ -304,7 +314,7 @@ export function Navigation() {
             <Sheet open={isOpen} onOpenChange={openDrawer}>
               <SheetTrigger asChild>
                 <button
-                  className={`lg:hidden w-9 h-9 rounded-lg flex items-center justify-center bg-transparent group ${overlay ? 'text-white' : 'text-brand'}`}
+                  className={cn('lg:hidden', iconButton)}
                   aria-label={t('a11y.toggleMenu')}
                 >
                   <Menu className="w-5 h-5 group-hover:scale-110 transition-transform" />
@@ -328,8 +338,7 @@ export function Navigation() {
                 )}
               >
                 <SheetTitle className="sr-only">{t('a11y.menu')}</SheetTitle>
-                {/* The settings, in words; the × sits at the right of the first row,
-                    whose label is short enough to leave it room. */}
+                {/* The settings, in words; the × sits right of the first row. */}
                 <div className="flex flex-col items-start px-4 py-3">
                   <LanguageToggle labeled />
                   <ThemeToggle labeled />
@@ -338,16 +347,13 @@ export function Navigation() {
                       hidingFromDrawer.current = !hidden;
                       toggleNavHidden();
                     }}
-                    className="flex h-10 w-fit items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
+                    className={DRAWER_ROW_CLASS}
                   >
                     <HideIcon className="w-5 h-5 text-brand" />
                     <span>{t(hidden ? 'a11y.showNavShort' : 'a11y.hideNavShort')}</span>
                   </button>
                 </div>
-                {/* Separators are wheat hairlines starting at the text's left edge
-                    and fading out to the right: full-width rules read as hard
-                    edges, and centred ones look off against left-aligned text. */}
-                <div className="ml-6 mr-4 h-px bg-gradient-to-r from-accent/60 to-transparent" />
+                <Hairline />
                 {/* The pages, underlined like the bar's links */}
                 <nav className="flex flex-1 flex-col items-start overflow-y-auto py-3">
                   {NAV_ITEMS.map((item) => {
@@ -368,7 +374,7 @@ export function Navigation() {
                   })}
                 </nav>
                 {/* Sign-off: the social links and the club's logo (home) */}
-                <div className="ml-6 mr-4 h-px bg-gradient-to-r from-accent/60 to-transparent" />
+                <Hairline />
                 <div className="flex items-center justify-between py-3 pl-4 pr-5">
                   <SocialLinks variant="chip" className="space-x-1" />
                   <LocalLink to="/" onClick={() => setIsOpen(false)} aria-label={t('a11y.homeLink')}>

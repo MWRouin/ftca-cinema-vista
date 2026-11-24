@@ -4,13 +4,14 @@ import { Moon, Sun, SunMoon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { useTheme } from './ThemeProvider';
+import { DRAWER_ROW_CLASS } from './drawer-row';
 
 const ICONS = { light: Sun, dark: Moon, system: SunMoon } as const;
 
 // The toggle cycles light -> dark -> system (see ThemeProvider.toggleTheme).
 const NEXT_THEME = { light: 'dark', dark: 'system', system: 'light' } as const;
 
-/** `labeled`: a full-width row with the current theme in words (the mobile drawer). */
+/** `labeled`: a row with the current theme in words (the mobile drawer). */
 export function ThemeToggle({ onDark = false, labeled = false }: { onDark?: boolean; labeled?: boolean }) {
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
@@ -18,11 +19,7 @@ export function ThemeToggle({ onDark = false, labeled = false }: { onDark?: bool
   if (labeled) {
     const Icon = ICONS[theme];
     return (
-      <button
-        onClick={toggleTheme}
-        className="flex h-10 w-fit items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
-        aria-label={t('theme.switchTo', { mode: t(`theme.${NEXT_THEME[theme]}`) })}
-      >
+      <button onClick={toggleTheme} className={DRAWER_ROW_CLASS}>
         <Icon className="w-5 h-5 text-brand" />
         <span>{t('theme.current', { mode: t(`theme.${theme}`) })}</span>
       </button>
