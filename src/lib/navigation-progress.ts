@@ -3,9 +3,13 @@ import { useEffect, useSyncExternalStore } from "react";
 // Navigations in flight, counted outside React so that any link can report
 // one and the single progress bar (components/NavigationProgress) can show it.
 let pendingCount = 0;
+// Counts the times loading started (the count leaving zero), so the bar can
+// tell a new navigation from the one it is finishing.
+let runCount = 0;
 const listeners = new Set<() => void>();
 
 const setPendingCount = (count: number) => {
+  if (pendingCount === 0 && count > 0) runCount += 1;
   pendingCount = count;
   listeners.forEach((listener) => listener());
 };
@@ -32,3 +36,7 @@ export function useReportNavigation(pending: boolean) {
 /** True while any reported navigation is still loading. */
 export const useIsNavigating = () =>
   useSyncExternalStore(subscribe, isNavigating, isNavigatingOnServer);
+
+/** Goes up by one each time loading starts. */
+export const useNavigationRun = () =>
+  useSyncExternalStore(subscribe, () => runCount, () => 0);

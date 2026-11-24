@@ -22,6 +22,7 @@
   "language": {
     "label": "Language",
     "switchTo": "Switch to {{language}}",
+    "current": "Language: {{language}}",
     "en": "English",
     "fr": "Français"
   },
@@ -40,8 +41,11 @@
   },
   "a11y": {
     "toggleMenu": "Toggle menu",
+    "menu": "Menu",
     "hideNav": "Hide the navigation bar",
     "showNav": "Keep the navigation bar visible",
+    "hideNavShort": "Hide the bar",
+    "showNavShort": "Keep the bar visible",
     "skipToContent": "Skip to content",
     "homeLink": "FTCA Hammam-Lif, home",
     "close": "Close",
