@@ -10,7 +10,7 @@ shadcn/ui components generated from `components.json` (style `default`, Tailwind
 ## Conventions
 
 - Treat the files as vendored: change styling through the theme tokens in `src/index.css` and `tailwind.config.ts`, or through `className` at the call site, not by editing a primitive. If a primitive must change, keep the change small and note why at the edit.
-- Local edits: `card.tsx` outlines every card in the wheat accent (`border-accent/30`, full on hover) instead of the neutral border.
+- Local edits: `card.tsx` outlines every card in the wheat accent (`border-accent/30`, full on hover) instead of the neutral border. `dialog.tsx`'s `DialogContent` takes a `closeLabel` so the close button's screen-reader text can be translated (pass `t('a11y.close', { ns: 'common' })`). Its close button's focus ring is `focus-visible`, so it doesn't show when a click opens the dialog. `sheet.tsx` (the mobile menu drawer) has the same two edits.
 - Add new primitives with the shadcn CLI (`npx shadcn@latest add <name>`) so they match the config, then run lint.
 
 ## Traps

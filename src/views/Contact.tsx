@@ -4,6 +4,14 @@ import { PageHeader } from '@/components/customUi/page-header';
 import { PageContainer } from '@/components/customUi/page-container';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { SocialLinks } from '@/components/customUi/social-links';
 import { ClubMap } from '@/components/customUi/club-map';
@@ -21,7 +29,6 @@ import {
   CONTACT_OSM_URL,
   CONTACT_PHONE,
   CONTACT_PHONE_HREF,
-  JOIN_FORM_URL,
 } from '@/lib/contact';
 
 const EMPTY_FORM = { name: '', subject: '', message: '' };
@@ -92,22 +99,22 @@ export default function Contact() {
 
             <div className="flex flex-col gap-8">
             <Card>
+              <CardHeader className="pb-2">
+                <CardTitle as="h2" className="text-xl">{t('follow.title')}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-1">
+                <SocialLinks variant="chip" className="-ml-2 space-x-2" />
+                <p className="text-muted-foreground">{t('follow.subtitle')}</p>
+              </CardContent>
+            </Card>
+
+            <Card className="flex-1">
               <CardHeader>
                 <CardTitle as="h2" className="text-xl">{t('meetings.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <h3 className="font-semibold mb-1">{t('meetings.weekly')}</h3>
                 <p className="text-muted-foreground">{t('meetings.weeklyTime')}</p>
-              </CardContent>
-            </Card>
-
-            <Card className="flex-1">
-              <CardHeader>
-                <CardTitle as="h2" className="text-xl">{t('follow.title')}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-muted-foreground">{t('follow.subtitle')}</p>
-                <SocialLinks variant="labeled" />
               </CardContent>
             </Card>
             </div>
@@ -148,11 +155,33 @@ export default function Contact() {
               </CardHeader>
               <CardContent className="flex flex-1 flex-col justify-between gap-6">
                 <p className="text-muted-foreground">{t('join.text')}</p>
+                {/* Membership is closed for now: the button explains it in a
+                    popup. To reopen, restore the link to JOIN_FORM_URL:
                 <Button asChild size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/85">
                   <a href={JOIN_FORM_URL} target="_blank" rel="noopener noreferrer">
                     {t('join.cta')}
                   </a>
                 </Button>
+                */}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/85">
+                      {t('join.cta')}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent
+                    closeLabel={t('a11y.close', { ns: 'common' })}
+                    className="max-w-md border-accent/30 bg-card"
+                  >
+                    {/* The same wheat hairline as the footer's top edge. */}
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
+                    <DialogHeader className="items-center space-y-3 text-center sm:text-center">
+                      <DialogTitle className="font-display text-2xl">{t('join.closedTitle')}</DialogTitle>
+                      <DialogDescription className="text-foreground/85">{t('join.closedText')}</DialogDescription>
+                    </DialogHeader>
+                    <SocialLinks variant="chip" className="justify-center space-x-2" />
+                  </DialogContent>
+                </Dialog>
               </CardContent>
             </Card>
 
