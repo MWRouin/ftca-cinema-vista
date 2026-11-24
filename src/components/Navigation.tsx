@@ -14,10 +14,22 @@ import { cn } from '@/lib/utils';
 import { SocialLinks } from '@/components/customUi/social-links';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
-// Whether the visitor hid the navbar. Kept outside React so it survives the
-// remount of a language switch, and not saved: a reload brings the bar back,
-// so nobody lands on a page without navigation.
-let navHidden = false;
+// Whether the navbar is hidden. Hidden by default; the visitor's choice is
+// saved in localStorage. Kept outside React so it survives the remount of a
+// language switch. The prerendered HTML has the bar hidden, and a saved
+// "shown" takes effect right after load.
+const NAV_HIDDEN_KEY = 'navHidden';
+let navHidden: boolean | null = null;
+const readNavHidden = () => {
+  if (navHidden === null) {
+    try {
+      navHidden = localStorage.getItem(NAV_HIDDEN_KEY) !== 'false';
+    } catch {
+      navHidden = true;
+    }
+  }
+  return navHidden;
+};
 const navHiddenListeners = new Set<() => void>();
 const subscribeNavHidden = (listener: () => void) => {
   navHiddenListeners.add(listener);
@@ -25,6 +37,11 @@ const subscribeNavHidden = (listener: () => void) => {
 };
 const setNavHidden = (hidden: boolean) => {
   navHidden = hidden;
+  try {
+    localStorage.setItem(NAV_HIDDEN_KEY, String(hidden));
+  } catch {
+    // Storage blocked: the choice lasts until the page is reloaded.
+  }
   navHiddenListeners.forEach((listener) => listener());
 };
 
@@ -37,7 +54,7 @@ export function Navigation() {
   // menu button, inside the bar, or the bar would stay shown for it.
   const hidingFromDrawer = useRef(false);
   const swipe = useRef<{ x: number; y: number; time: number; dragging: boolean | null } | null>(null);
-  const hidden = useSyncExternalStore(subscribeNavHidden, () => navHidden, () => false);
+  const hidden = useSyncExternalStore(subscribeNavHidden, readNavHidden, () => true);
   // Set when the visitor last scrolled up, cleared when they scroll down.
   const [scrolledUp, setScrolledUp] = useState(false);
   // Hidden, the bar slides up out of view and comes back while the visitor
