@@ -12,6 +12,7 @@ Each plan starts with a status line: `Status: draft | active | done | dropped`, 
 |---|---|
 | [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done and deployed |
 | [members-login](plans/members-login.md) | draft |
+| [perf-cleanup-todo](plans/perf-cleanup-todo.md) | active (temporary checklist, delete when done) |
 
 ## Research
 
@@ -60,6 +61,7 @@ Template:
 | [2026-11-home-hero-featured](sprints/2026-11-home-hero-featured.md) | Home hero rebuilt around a slider: the club slide (description and mission) and hand-picked featured items, images beside it on desktop and behind it on phones; old hero blocks removed |
 | [2026-11-hero-blog-film-page](sprints/2026-11-hero-blog-film-page.md) | Hero slides for the featured blog article and latest film with auto-advance, featured blog flag and Arabic text direction, click-to-play film cover and where-to-watch card, map pin, portrait |
 | [2026-11-social-hover-and-hiding-navbar](sprints/2026-11-social-hover-and-hiding-navbar.md) | Brand-colour hovers on social icons, Contact page rework, membership closed behind a popup, screen-tall hero capped at 1080px, hideable navbar that returns on scroll up |
+| [2026-11-mobile-drawer-and-nav-refactor](sprints/2026-11-mobile-drawer-and-nav-refactor.md) | Mobile menu as a right drawer with the settings and swipe to close, navbar hidden by default with the choice saved, loading bar never runs backwards, navbar code split into hooks and a drawer component |
 
 ## Module `AGENTS.md` files
 
