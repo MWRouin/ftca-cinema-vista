@@ -12,6 +12,7 @@ Each plan starts with a status line: `Status: draft | active | done | dropped`, 
 |---|---|
 | [84-migrate-to-nextjs](plans/84-migrate-to-nextjs.md) | done and deployed |
 | [members-login](plans/members-login.md) | draft |
+| [dynamic-backend-ideas](plans/dynamic-backend-ideas.md) | draft (ideas only, not a plan) |
 
 ## Research
 
