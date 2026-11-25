@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageJsonLd } from "@/components/JsonLd";
+import { Translations } from "@/i18n/server";
 import { getBlogArticleBySlug, getBlogArticles } from "@/data/blog";
 import { buildMetadata } from "@/lib/metadata/next-metadata";
 import { decodeParam } from "@/lib/route-params";
@@ -36,7 +37,9 @@ export default async function BlogArticlePage({ params }: Props) {
   return (
     <>
       <PageJsonLd pageKey={`blog/${page.slug}`} locale={locale} seo={page.seo} />
-      <BlogArticle />
+      <Translations locale={locale} ns={["blog", "static"]}>
+        <BlogArticle />
+      </Translations>
     </>
   );
 }

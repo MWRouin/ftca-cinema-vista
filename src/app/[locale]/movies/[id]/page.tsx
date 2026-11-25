@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageJsonLd } from "@/components/JsonLd";
+import { Translations } from "@/i18n/server";
 import { getMovieById, getMovies } from "@/data/movies";
 import { buildMetadata } from "@/lib/metadata/next-metadata";
 import { decodeParam } from "@/lib/route-params";
@@ -36,7 +37,9 @@ export default async function MoviePage({ params }: Props) {
   return (
     <>
       <PageJsonLd pageKey={`movies/${page.id}`} locale={locale} seo={page.seo} />
-      <MoviePlayer />
+      <Translations locale={locale} ns={["movie", "static"]}>
+        <MoviePlayer />
+      </Translations>
     </>
   );
 }

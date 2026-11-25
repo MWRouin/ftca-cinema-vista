@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { PageJsonLd } from "@/components/JsonLd";
+import { Translations } from "@/i18n/server";
 import { staticMetadata } from "@/lib/metadata/next-metadata";
 import Home from "@/views/Home";
 
@@ -11,10 +12,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
   return (
     <>
-      <PageJsonLd pageKey="" locale={(await params).locale} />
-      <Home />
+      <PageJsonLd pageKey="" locale={locale} />
+      <Translations locale={locale} ns={["home", "movie"]}>
+        <Home />
+      </Translations>
     </>
   );
 }

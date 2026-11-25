@@ -7,13 +7,14 @@ import { useTranslation } from "react-i18next";
 import { useLocale } from "@/i18n/locale";
 import { localizePath, stripLocale, LOCALE_STORAGE_KEY, type Locale } from "@/i18n/config";
 import { useReportNavigation } from "@/lib/navigation-progress";
+import { DRAWER_ROW_CLASS } from "./drawer-row";
 
 /**
  * Switches between EN and FR while preserving the current page. The button
  * shows the *current* language's code; clicking it switches to the
  * other. With only two locales a single toggle is clearest; this generalises
- * to a menu if more are added later. `labeled` is a full-width row with the
- * same code and the current language in words (the mobile drawer).
+ * to a menu if more are added later. `labeled` is a row with the same code
+ * and the current language in words (the mobile drawer).
  */
 export function LanguageToggle({ onDark = false, labeled = false }: { onDark?: boolean; labeled?: boolean }) {
   const locale = useLocale();
@@ -44,11 +45,7 @@ export function LanguageToggle({ onDark = false, labeled = false }: { onDark?: b
 
   if (labeled) {
     return (
-      <button
-        onClick={switchLanguage}
-        className="flex h-10 w-full items-center gap-3 rounded-md px-2 text-left text-sm font-medium text-foreground/80 transition-colors hover:text-brand"
-        aria-label={t("language.switchTo", { language: t(`language.${next}`) })}
-      >
+      <button onClick={switchLanguage} className={DRAWER_ROW_CLASS}>
         <span className="w-5 text-center text-sm font-bold uppercase text-brand">{locale}</span>
         <span>{t("language.current", { language: t(`language.${locale}`) })}</span>
       </button>

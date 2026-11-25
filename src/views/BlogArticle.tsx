@@ -41,6 +41,7 @@ export default function BlogArticle() {
               <LazyImage
                 src={article.image}
                 alt={article.title}
+                priority
                 className="w-full h-full object-cover"
               />
             </div>
