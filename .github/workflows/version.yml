@@ -1,7 +1,8 @@
 name: Version
 
-# Tags every pull request merged into main with the next version and publishes
-# a GitHub Release for it. MAJOR.MINOR.PATCH:
+# Tags every pull request merged into main with the next version. Only a tag:
+# the GitHub Release is written by deploy.yml, once per deploy, covering every
+# version since the previous Release. MAJOR.MINOR.PATCH:
 #   - patch: every merge (fixes, content, docs, refactors)
 #   - minor: merges of a PR labelled `minor` (something new visitors can see)
 #   - major: never automatic; push a vX.0.0 tag by hand and the next merge
@@ -47,8 +48,8 @@ jobs:
           echo "$latest -> $next"
           echo "version=$next" >> "$GITHUB_OUTPUT"
 
-      - name: Create tag and release
+      - name: Create tag
         env:
           VERSION: ${{ steps.next.outputs.version }}
           SHA: ${{ github.event.pull_request.merge_commit_sha }}
-        run: gh release create "$VERSION" --target "$SHA" --title "$VERSION" --generate-notes
+        run: gh api "repos/$GH_REPO/git/refs" -f ref="refs/tags/$VERSION" -f sha="$SHA" --silent
