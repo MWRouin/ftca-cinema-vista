@@ -61,6 +61,7 @@ Template:
 | [2026-11-hero-blog-film-page](sprints/2026-11-hero-blog-film-page.md) | Hero slides for the featured blog article and latest film with auto-advance, featured blog flag and Arabic text direction, click-to-play film cover and where-to-watch card, map pin, portrait |
 | [2026-11-social-hover-and-hiding-navbar](sprints/2026-11-social-hover-and-hiding-navbar.md) | Brand-colour hovers on social icons, Contact page rework, membership closed behind a popup, screen-tall hero capped at 1080px, hideable navbar that returns on scroll up |
 | [2026-11-mobile-drawer-and-nav-refactor](sprints/2026-11-mobile-drawer-and-nav-refactor.md) | Mobile menu as a right drawer with the settings and swipe to close, navbar hidden by default with the choice saved, loading bar never runs backwards, navbar code split into hooks and a drawer component, unused media moved to `archive/public/`, translations sent per page and locale, font preloads once, images visible before hydration and resized (site 141 → 44 MB) |
+| [2026-11-versioning-and-release-flow](sprints/2026-11-versioning-and-release-flow.md) | Automatic `vX.Y.Z` tag and Release on each merge into `main` (`minor` label, major by hand), Production only takes PRs from `main`, CI on PRs only |
 
 ## Module `AGENTS.md` files
 
