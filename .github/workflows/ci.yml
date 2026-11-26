@@ -1,11 +1,10 @@
 name: CI
 
-# Lint, type-check and build every pull request and every push to main, so a
-# broken change is caught before it reaches Production (which deploy.yml builds).
+# Lint, type-check and build every pull request, so a broken change is caught
+# before it is merged. Merges into main aren't re-checked (the PR already was),
+# and deploy.yml runs the same checks again before publishing Production.
 on:
   pull_request:
-  push:
-    branches: ['main']
 
 permissions:
   contents: read

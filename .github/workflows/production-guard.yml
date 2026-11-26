@@ -1,0 +1,26 @@
+name: Production guard
+
+# Production only takes pull requests from main (of this repository), so what
+# is deployed is always something already merged and versioned on main.
+# Enforced by making the `from-main` check required in Production's branch rule.
+on:
+  pull_request:
+    branches: ['Production']
+    types: [opened, reopened, synchronize, edited]
+
+permissions: {}
+
+jobs:
+  from-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the source branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ "$HEAD_REF" != "main" ] || [ "$HEAD_REPO" != "$REPO" ]; then
+            echo "::error::Production only accepts pull requests from main (got $HEAD_REPO:$HEAD_REF)."
+            exit 1
+          fi

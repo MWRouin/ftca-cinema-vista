@@ -1,0 +1,54 @@
+name: Version
+
+# Tags every pull request merged into main with the next version and publishes
+# a GitHub Release for it. MAJOR.MINOR.PATCH:
+#   - patch: every merge (fixes, content, docs, refactors)
+#   - minor: merges of a PR labelled `minor` (something new visitors can see)
+#   - major: never automatic; push a vX.0.0 tag by hand and the next merge
+#     continues from it
+on:
+  pull_request:
+    types: [closed]
+    branches: ['main']
+
+permissions:
+  contents: write
+
+# Merges are versioned one at a time, in order, so two never get the same tag.
+concurrency:
+  group: version
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Compute next version
+        id: next
+        env:
+          MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'minor') }}
+        run: |
+          latest=$(gh api "repos/$GH_REPO/tags" --paginate --jq '.[].name' \
+            | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
+          if [ -z "$latest" ]; then
+            echo "::error::No vX.Y.Z tag found. Tag the starting version by hand first (e.g. v1.0.0)."
+            exit 1
+          fi
+          IFS=. read -r major minor patch <<< "${latest#v}"
+          if [ "$MINOR" = "true" ]; then
+            next="v$major.$((minor + 1)).0"
+          else
+            next="v$major.$minor.$((patch + 1))"
+          fi
+          echo "$latest -> $next"
+          echo "version=$next" >> "$GITHUB_OUTPUT"
+
+      - name: Create tag and release
+        env:
+          VERSION: ${{ steps.next.outputs.version }}
+          SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: gh release create "$VERSION" --target "$SHA" --title "$VERSION" --generate-notes
