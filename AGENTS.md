@@ -14,7 +14,8 @@ Next.js App Router with static export (`output: 'export'`), React 19, TypeScript
 - `node tools/resize-images.mjs` (dry run) / `--write`: shrink oversized images in `public/` in place (posters 1000×1500, portraits 800×800, other photos 2000px), keeping the originals in `archive/originals/`. Run it after adding images.
 - `node tools/parity.mjs snapshot <dir> <out.json>` / `diff <a> <b>`: compare a build's pages and head data with `docs/research/parity-baseline.json`
 - No test suite. Verify with `npx tsc --noEmit` and `npm run build`, then check the HTML in `out/`.
-- Deploy: pushes to `Production` build and publish `out/` to GitHub Pages (`.github/workflows/deploy.yml`).
+- Deploy: pushes to `Production` build and publish `out/` to GitHub Pages (`.github/workflows/deploy.yml`). `Production` only takes pull requests from `main` (`.github/workflows/production-guard.yml`, a required check).
+- Versioning: each PR merged into `main` is tagged `vX.Y.Z` (`.github/workflows/version.yml`). GitHub Releases are written per deploy, not per version: `deploy.yml` releases the newest version in `Production`, with notes covering everything since the previous Release. The patch number goes up on every merge, the minor number on PRs labelled `minor` (a change visitors can see: a new page, feature or language). The major number changes only when someone pushes a `vX.0.0` tag by hand.
 
 ## Conventions
 

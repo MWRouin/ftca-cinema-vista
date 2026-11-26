@@ -60,3 +60,41 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Write the GitHub Release for what was just deployed: the newest version tag
+  # (made by version.yml on merges into main) included in this deploy, with
+  # notes covering every pull request since the previous Release. A deploy with
+  # no new version (e.g. a manual re-run) writes nothing.
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Create the release
+        run: |
+          versions() { git tag --merged HEAD | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V; }
+          version=$(versions | tail -n 1)
+          if [ -z "$version" ]; then
+            echo "::warning::No version tag in this deploy, so no Release was written."
+            exit 0
+          fi
+          if gh release view "$version" > /dev/null 2>&1; then
+            echo "$version already has a Release."
+            exit 0
+          fi
+          # Notes start after the previous Release, or after the first version
+          # if there has been no Release yet.
+          previous=$(gh release list --exclude-drafts --limit 1 --json tagName --jq '.[0].tagName // empty')
+          [ -n "$previous" ] || previous=$(versions | head -n 1)
+          args=(--verify-tag --title "$version" --generate-notes --latest)
+          [ "$previous" = "$version" ] || args+=(--notes-start-tag "$previous")
+          echo "Release $version (changes since $previous)"
+          gh release create "$version" "${args[@]}"
